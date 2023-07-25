@@ -1,0 +1,90 @@
+@import "src/assets/styles/index";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*body {*/
+/*    font-family: 'Museo';*/
+/*}*/
+.main-layout {
+  background-image: url('./assets/images/backgroundImg.jpg');
+  background-size: cover;
+  min-height: 100vh;
+  overflow-y: hidden;
+  background-repeat: no-repeat;
+}
+
+.sidebar-nav {
+  position:relative;
+  background-color: #ffffff;
+  margin-top: 64px; /* Adjust this value according to the header's height */
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid;
+  border-image: @primary-color; /* Replace these colors with your desired gradient */
+  border-image-slice: 1;
+}
+
+
+.sidebar-nav::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  width: 5px;
+  background: @primary-color;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+
+.sidebar-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -2px; /* Adjust the distance of the border from the right */
+  width: 2px; /* Adjust the width of the border */
+  background: @primary-color;
+}
+
+.submenu {
+  width: 100%;
+  position: relative;
+}
+.submenu:hover {
+  background: transparent;
+}
+.submenu::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;/* Adjust the distance of the border from the right */
+  height: 2px; /* Adjust the width of the border */
+  background: @primary-color;
+  width: 100%;
+  /*content: '';*/
+  /*position: absolute,*/
+  /*bottom: 0,*/
+  /*left: 0,*/
+  /*right: 0,*/
+  /*height: 2px,*/
+  /*background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%),*/
+}
+
+.layout-content {
+  padding: 74px 13px; /* Adjust this value according to the header's height */
+}
+
+.titleGradient {
+  background-image: @primary-color;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}

@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('/fonts/MuseoSansCyrl_500.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  font-weight: 700;
+  src: url('/fonts/MuseoSansCyrl_700.otf') format('opentype');
+}
+
+/* Use the custom fonts in your styles */
+.my-heading {
+  .text-mixin();
+  font-family: 'MuseoSansCyrl', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.my-heading-2 {
+  .text-mixin();
+  font-family: 'MuseoSansCyrl', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.my-paragraph {
+  font-family: 'MuseoSansCyrl', sans-serif;
+  font-size: 15px;
+}
