@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router';
-import Main from './layouts/Main/Main.jsx';
-import Home from './pages/Home/Home.jsx';
-import SignIn from './pages/Auth/SignIn/SignIn.jsx';
-import NewRequest from './pages/NewRequest/NewRequest.jsx';
-
+import { Route, Switch, useLocation } from "react-router";
+import Main from "./layouts/Main/Main.jsx";
+import Home from "./pages/Home/Home.jsx";
+import SignIn from "./pages/Auth/SignIn/SignIn.jsx";
+import NewRequest from './pages/NewRequest/NewRequest.jsx'
+import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
 function RouteWithLayout({
   layout,
   component,
@@ -41,6 +41,12 @@ const Routes = (props) => {
           layout={Main}
           component={NewRequest}
           path={'/new-request'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={DetailedQuestion}
+          path={'/detailedQuestion'}
         />
       </Switch>
     </React.Fragment>
