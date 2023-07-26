@@ -82,6 +82,7 @@
 }
 
 .layout-content {
+    background: var(--background-color)!important;
     padding: 74px 13px; /* Adjust this value according to the header's height */
 }
 
