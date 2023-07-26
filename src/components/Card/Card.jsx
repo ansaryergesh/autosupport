@@ -13,7 +13,7 @@ const CardComponent = (props) => {
                 </div>
                 <div className={styles.content}>
                     {questions?.map(q=> (
-                        <p>{q}</p>
+                        <p style={{marginBottom:"11px"}}>{q}</p>
                     ))}
                 </div>
             </Card>
