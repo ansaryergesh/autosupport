@@ -1,8 +1,13 @@
-import React from 'react';
-import { forwardRef } from 'react';
-import {Input} from "antd";
+import { Input } from 'antd';
 import classNames from 'classnames';
+import { forwardRef } from 'react';
 
+
+import Group from './group';
+import styles from './input.module.less';
+import Search from './search';
+import TextArea from './textArea';
+import Password from './password';
 const InputComponent = forwardRef((props, ref) => {
     const { readOnly = false, disabled = false, placeholder, className } = props;
 
@@ -29,5 +34,9 @@ const InputComponent = forwardRef((props, ref) => {
     );
 });
 
+InputComponent.Group = Group;
+InputComponent.Search = Search;
+InputComponent.TextArea = TextArea;
+InputComponent.Password = Password;
 
 export default InputComponent;
