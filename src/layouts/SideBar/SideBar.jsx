@@ -1,59 +1,10 @@
-// import React from 'react';
-// import { Layout, Menu } from 'antd';
-//
-// const { Sider } = Layout;
-// const SidebarNav = () => {
-//     return (
-//         <Sider width={200} className="site-layout-background">
-//             <Menu
-//                 mode="inline"
-//                 defaultSelectedKeys={['1']}
-//                 defaultOpenKeys={['sub1']}
-//                 style={{ height: '100%', borderRight: 0 }}
-//             >
-//                 <Menu.Item key="1">Option 1</Menu.Item>
-//                 <Menu.Item key="2">Option 2</Menu.Item>
-//                 <Menu.Item key="3">Option 3</Menu.Item>
-//             </Menu>
-//         </Sider>
-//     );
-// };
-//
-// export default SidebarNav;
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import {Button, Col, Input, Layout, Menu, Row} from 'antd';
-import {AppstoreAddOutlined, DownOutlined, MailOutlined, SearchOutlined} from "@ant-design/icons";
+import {Col, Input, Layout, Menu, Row, Space} from 'antd';
+import Button from "components/Button/Button.jsx";
 
 const { Sider } = Layout;
-const MenuItemTypes = {
-    MENU_ITEM: "menu_item",
-};
 
-const DraggableMenuItem = ({ id, index, moveMenuItem, children }) => {
-    const [, drag] = useDrag({
-        type: MenuItemTypes.MENU_ITEM,
-        item: { id, index },
-    });
 
-    const [, drop] = useDrop({
-        accept: MenuItemTypes.MENU_ITEM,
-        hover: (draggedItem) => {
-            if (draggedItem.index !== index) {
-                moveMenuItem(draggedItem.index, index);
-                draggedItem.index = index;
-            }
-        },
-    });
-
-    return (
-        <div ref={(node) => drag(drop(node))} style={{ cursor: "move" }}>
-            {children}
-        </div>
-    );
-};
 
 const SearchInput = () => {
     return (
@@ -82,13 +33,14 @@ const SearchInput = () => {
 };
 
 const SideBarButtons = () => {
+    const rowStyle = { background: 'transparent' }; // Set the background of the Row to transparent
     return (
-        <Row gutter={[16, 16]} align="middle">
+        <Row gutter={[16, 16]} style={rowStyle}>
             <Col span={12}>
-                <Button type="primary" block>Все темы</Button>
+                <Button type={"primary"} block>Все темы</Button>
             </Col>
             <Col span={12}>
-                <Button block>Популярный темы</Button>
+                <Button type={"default"} block>Популярный темы</Button>
             </Col>
         </Row>
     )
@@ -120,7 +72,9 @@ const SidebarNav = () => {
     return (
             <Sider width={300} className="site-layout-background">
                 <SearchInput />
-                <SideBarButtons />
+                <div style={{margin: '30px 0', background:"transparent"}}>
+                    <SideBarButtons />
+                </div>
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['home']}

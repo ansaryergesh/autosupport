@@ -4,14 +4,18 @@ import {Col, Row} from "antd";
 import JHeader from "components/JHeader/JHeader.jsx";
 
 const data = [
-    {title: "titl1", questions: ["question1","question2","question3"]},
-    {title: "titl1", questions: ["question1","question2","question3"]},
-    {title: "titl1", questions: ["question1","question2","question3"]},]
+    {title: "titl1", questions: ["Question1","Question2","Question3"]},
+    {title: "titl1", questions: ["Question1","Question2","Question3"]},
+    {title: "titl1", questions: ["Question1","Question2","Question3"]}, {title: "titl1", questions: ["Question1","Question2","Question3"]},
+    {title: "titl1", questions: ["Question1","Question2","Question3"]},
+    {title: "titl1", questions: ["Question1","Question2","Question3"]}, {title: "titl1", questions: ["Question1","Question2","Question3"]},
+    {title: "titl1", questions: ["Question1","Question2","Question3"]},
+    {title: "titl1", questions: ["Question1","Question2","Question3"]},]
 const Home = () => {
     return (
         <div>
             <JHeader />
-            <Row gutter={24}>
+            <Row gutter={[24,24]}>
                 {data.map((item) => (
                     <Col span={8}>
                         <CardComponent data={item}/>

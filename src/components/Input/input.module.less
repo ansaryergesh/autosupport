@@ -1,14 +1,11 @@
-.input {
-  min-width: 150px;
-  height: 48px;
-  margin: 0;
-  padding-left: 16px;
-  color: var(--font-color);
-  font-size: var(--font-size);
-  background-color: var(--input-color);
-  border-color: var(--input-border-color);
-  border-radius: 6px;
+@import url('src/assets/styles/variables');
 
+.input {
+  background: linear-gradient(#fff, #fff) padding-box,
+  @primary-color border-box;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  font-size: var(--font-size);
 
   &:focus,
   &:hover {
@@ -39,7 +36,6 @@
   opacity: 0.5 !important;
 }
 
-
 .readOnly,
 .readOnly input,
 .readOnly span {
@@ -50,17 +46,30 @@
   opacity: 1 !important;
 }
 
-.group:global(.ant-input-group) {
-  display: flex;
+.password {
+  background: linear-gradient(#fff, #fff) padding-box,
+  @primary-color border-box!important;
+  border: 1px solid transparent!important;
+  border-radius: 20px!important;
+  font-size: var(--font-size) !important;
 
-  .input:first-child {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+  &:focus,
+  &:hover {
+    background-color: var(--input-color);
+    border-color: var(--input-border-focus-color);
+    outline: none;
   }
 
-  .input:last-child {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+  :global(.ant-input) {
+    color: var(--font-color);
+    font-size: var(--font-size);
+    background-color: var(--input-color);
+  }
+
+  :global(.ant-input-group) {
+    :global(.ant-input) {
+      height: 48px;
+    }
   }
 }
 
@@ -97,6 +106,7 @@
   }
 }
 
+
 :global(.ant-input-affix-wrapper) {
   padding-top: 0;
   padding-bottom: 0;
@@ -128,3 +138,4 @@
     content: "";
   }
 }
+
