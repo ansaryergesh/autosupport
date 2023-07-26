@@ -1,14 +1,15 @@
 import React from 'react';
-import {Route, Switch, useLocation} from "react-router";
+import { Route, Switch, useLocation } from "react-router";
 import Main from "./layouts/Main/Main.jsx";
 import Home from "./pages/Home/Home.jsx";
 import SignIn from "./pages/Auth/SignIn/SignIn.jsx";
+import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
 function RouteWithLayout({
-                             layout,
-                             component,
-                             isAuthLoading = false,
-                             ...rest
-                         }) {
+    layout,
+    component,
+    isAuthLoading = false,
+    ...rest
+}) {
     // if (isAuthLoading) {
     //     return <LazyLoading />;
     // }
@@ -43,6 +44,12 @@ const Routes = (props) => {
                     exact
                     component={SignIn}
                     path={"/sign-in"}
+                />
+                <RouteWithLayout
+                    exact
+                    layout={Main}
+                    component={DetailedQuestion}
+                    path={"/detailedquestion"}
                 />
             </Switch>
         </React.Fragment>
