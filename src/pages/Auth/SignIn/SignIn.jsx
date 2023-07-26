@@ -1,7 +1,9 @@
-import {Button, Col, Form, Image, Input, Row} from "antd";
+import { Col, Form, Image, Row} from "antd";
 import styles from '../index.module.less';
 import Logo from 'images/logoFreedom.svg';
 import Title from "antd/lib/typography/Title.js";
+import Button from "components/Button/Button.jsx";
+import Input from "components/Input/Input.jsx";
 const SignIn = () => {
 
     const onFinish = (values) => {
@@ -41,7 +43,7 @@ const SignIn = () => {
                                 name="password"
                                 rules={[{ required: true, message: 'Please input your password!' }]}
                             >
-                                <Input.Password size={"large"} rootClassName={styles.inputItem} />
+                                <Input size={"large"} className={styles.inputItem} />
                             </Form.Item>
                         </Col>
 
