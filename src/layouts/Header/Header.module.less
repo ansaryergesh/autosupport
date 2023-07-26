@@ -6,8 +6,8 @@
   top: 0;
   right: 0;
   z-index: 9;
-  background: transparent;
-  border-bottom: 1px solid #51AF3D;
+  background: var(--background-color);
+  border-bottom: 1px solid var(--green-color);
   width: 100%;
   transition: width 0.2s;
 }
@@ -23,4 +23,24 @@
 .langMenu {
   box-shadow: none;
   transition: all 0.3s ease;
+}
+
+.languageBar {
+  font-family: 'MuseoSansCyrl', sans-serif;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: #FFF;
+  padding: 0px 14px;
+  line-height: normal!important;
+  display: flex;
+  align-items: center;
+}
+.lang {
+  padding: 5px 10px;
+  cursor: pointer;
+  height: auto;
+  color: var(--grey-color)!important;
+}
+.lang:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
 }
