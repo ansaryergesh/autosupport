@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Col, Rate, Row, Space } from 'antd';
+import { Card, Col, Input, Rate, Row, Space } from 'antd';
 import styles from './index.module.less';
 import TestImage from 'images/freedomSm.jpg';
 import Button from '../../components/Button/Button';
@@ -88,7 +88,7 @@ const DetailedQuestion = () => {
                     </Col>
                     <Col span={7}>
                         <div className={styles.content}>
-                            <Space direction='vertical' size={15} className={styles.rate}>
+                            <Space direction='vertical' size={23.3} className={styles.rate}>
                                 <p className="my-heading-2">Полезен ли был ответ ?</p>
                                 <p className={`{my-paragraph ${styles.rateSubtitel}`}>Просьба оценить насколько был полезен ответ по 5-и больной шкале, это поможет нам стать лучше </p>
                                 <Rate />
@@ -106,7 +106,11 @@ const DetailedQuestion = () => {
                                 </Row>
                                 <Button type='primary'>Быстрый ответ</Button>
                                 <p className={`{my-paragraph ${styles.rateSubtitel}`}>Напишите полный отзыв, ваше мнение поможет стать нам лучше</p>
-
+                                <Input.TextArea
+                                    rows={7}
+                                    className={styles.quickAnswerInput}
+                                    placeholder='Введите текст'
+                                />
                                 <Button type='primary'>Оставить отзыв</Button>
                             </Space>
                         </div>

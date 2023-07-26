@@ -15,7 +15,10 @@
 }
 
 .similarQuestions{
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid transparent; /* Start with a transparent border */
+    background-clip: padding-box; /* Ensure the background doesn't extend into the border area */
+    border-image: @primary-color-reverse;
+    border-image-slice: 1;
     padding-bottom: 20px;
 }
 
@@ -45,6 +48,12 @@
 
 .youtubeVideoWrapper {
     border: 3px #000;
-    border-radius: 10px;
+    border-radius: 20px;
 
   }
+
+
+.quickAnswerInput{
+    width: 288px;
+    border-radius: 20px;
+}
