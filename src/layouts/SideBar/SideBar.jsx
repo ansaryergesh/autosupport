@@ -56,16 +56,6 @@ const SidebarNav = () => {
         { id: "about2", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
         { id: "home3", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
         { id: "about3", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home1", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about1", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home2", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about2", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home3", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about3", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
         /* Add more menu items as needed */
     ]);
 

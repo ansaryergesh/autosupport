@@ -95,7 +95,7 @@ const DetailedQuestion = () => {
                                 </Space>
                             </div>
                         </Col>
-                        <Col span={7}>
+                        <Col span={8}>
                             <div className={styles.content}>
                                 <Space direction='vertical' size={23} className={styles.similar}>
                                     <p className="my-heading-2">Похожие вопросы</p>
@@ -152,7 +152,7 @@ const DetailedQuestion = () => {
                                 </Space>
                             </div>
                         </Col>
-                        <Col span={7}>
+                        <Col span={8}>
                             <div className={styles.content}>
                                 <Space direction='vertical' size={23.3} className={styles.rate}>
                                     <p className="my-heading-2">Полезен ли был ответ ?</p>
