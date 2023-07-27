@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Col, Input, Rate, Row, Space } from 'antd';
 import styles from './index.module.less';
 import TestImage from 'images/freedomSm.jpg';
+import phone from 'images/phone.jpg';
 import Button from '../../components/Button/Button';
 
 const dataStep = [
@@ -23,16 +24,56 @@ const dataQuestions = [
     "Сколько занимает открытие счета?",
 ]
 
+
+
 const DetailedQuestion = () => {
+    const [showVideo, setShowVideo] = useState(true);
+    const [selectedVideoButton, setSelectedVideoButton] = useState("Видео инструкция");
+    const [paragraphText, setParagraphText] = useState("Как открыть брокерский счёт в мобильном приложении Tradernet.Global | Freedom Broker");
+
+    const handleVideoButtonClick = () => {
+        setShowVideo(true);
+        setSelectedVideoButton("Видео инструкция");
+        setParagraphText("Как открыть брокерский счёт в мобильном приложении Tradernet.Global | Freedom Broker");
+    };
+
+    const handleVisualButtonClick = () => {
+        setShowVideo(false);
+        setSelectedVideoButton("Визуальная инструкция");
+        setParagraphText("Зайдите в раздел Категории");
+    };
+
+    const [selectedAppButton, setSelectedAppButton] = useState("В приложении");
+
     return (
         <div>
             <Space direction='vertical' size={30}>
                 <Row>
                     <Space size={10}>
-                        <Button type='primary'>В приложении</Button>
-                        <Button>На сайте</Button>
-                        <Button>Freedom Finance PLC</Button>
-                        <Button>АО Фридом Финанас</Button>
+                        <Button
+                            type={selectedAppButton === "В приложении" ? "primary" : undefined}
+                            onClick={() => setSelectedAppButton("В приложении")}
+                        >
+                            В приложении
+                        </Button>
+                        <Button
+                            type={selectedAppButton === "На сайте" ? "primary" : undefined}
+                            onClick={() => setSelectedAppButton("На сайте")}
+                        >
+                            На сайте
+                        </Button>
+                        <Button
+                            type={selectedAppButton === "Freedom Finance PLC" ? "primary" : undefined}
+                            onClick={() => setSelectedAppButton("Freedom Finance PLC")}
+                        >
+                            Freedom Finance PLC
+                        </Button>
+                        <Button
+                            type={selectedAppButton === "АО Фридом Финанас" ? "primary" : undefined}
+                            onClick={() => setSelectedAppButton("АО Фридом Финанас")}
+                        >
+                            АО Фридом Финанас
+                        </Button>
                     </Space>
                 </Row>
                 <Row gutter={[0, 24]}>
@@ -79,19 +120,35 @@ const DetailedQuestion = () => {
                                     </Space>
                                     <Row>
                                         <Space size={15}>
-                                            <Button type='primary' className='my-paragraph'>Видео инструкция</Button>
-                                            <Button className='my-paragraph'>Визуальная инструкция</Button>
+                                            <Button
+                                                type={selectedVideoButton === "Видео инструкция" ? 'primary' : undefined}
+                                                className='my-paragraph'
+                                                onClick={handleVideoButtonClick}
+                                            >
+                                                Видео инструкция
+                                            </Button>
+                                            <Button
+                                                type={selectedVideoButton === "Визуальная инструкция" ? 'primary' : undefined}
+                                                className='my-paragraph'
+                                                onClick={handleVisualButtonClick}
+                                            >
+                                                Визуальная инструкция
+                                            </Button>
                                         </Space>
                                     </Row>
-                                    <iframe
-                                        className={styles.youtubeVideoWrapper}
-                                        title="Random YouTube Video"
-                                        width="560"
-                                        height="315"
-                                        src="https://www.youtube.com/embed/pSY3i5XHHXo"
-                                        allowFullScreen
-                                    ></iframe>
-                                    <p className='my-paragraph'>Как открыть брокерский счёт в мобильном приложении Tradernet.Global | Freedom Broker</p>
+                                    {showVideo ? (
+                                        <iframe
+                                            className={styles.youtubeVideoWrapper}
+                                            title="Random YouTube Video"
+                                            width="560"
+                                            height="315"
+                                            src="https://www.youtube.com/embed/pSY3i5XHHXo"
+                                            allowFullScreen
+                                        ></iframe>
+                                    ) : (
+                                        <img className={styles.phoneImage} src={phone} alt="phone" />
+                                    )}
+                                    <p className='my-paragraph'>{paragraphText}</p>
                                 </Space>
                             </div>
                         </Col>
@@ -127,8 +184,8 @@ const DetailedQuestion = () => {
                     </Row>
                 </Row>
             </Space>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default DetailedQuestion;    
+export default DetailedQuestion;
