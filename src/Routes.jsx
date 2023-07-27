@@ -1,10 +1,15 @@
 import React from 'react';
-import { Route, Switch, useLocation } from "react-router";
-import Main from "./layouts/Main/Main.jsx";
-import Home from "./pages/Home/Home.jsx";
-import SignIn from "./pages/Auth/SignIn/SignIn.jsx";
-import NewRequest from './pages/NewRequest/NewRequest.jsx'
+import { Route, Switch, useLocation } from 'react-router';
+import Main from './layouts/Main/Main.jsx';
+import Home from './pages/Home/Home.jsx';
+import SignIn from './pages/Auth/SignIn/SignIn.jsx';
 import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
+import PasswordRecovery from './pages/Auth/PasswordRecovery/PasswordRecovery.jsx';
+import CodeVerify from './pages/Auth/CodeVerify/CodeVerify.jsx';
+import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
+
+import NewRequest from './pages/NewRequest/NewRequest.jsx';
+
 function RouteWithLayout({
   layout,
   component,
@@ -36,6 +41,9 @@ const Routes = (props) => {
       <Switch>
         <RouteWithLayout exact layout={Main} component={Home} path="/" />
         <Route exact component={SignIn} path={'/sign-in'} />
+        <Route exact component={PasswordRecovery} path={'/password-recovery'} />
+        <Route exact component={NewPassword} path={'/new-password'} />
+        <Route exact component={CodeVerify} path={'/code-verify'} />
         <RouteWithLayout
           exact
           layout={Main}

@@ -1,12 +1,12 @@
 import { Col, Form, Image, Row } from 'antd';
 import styles from '../index.module.less';
 import Logo from 'images/logoFreedom.svg';
-import ArrowLeft from 'images/ArrowLeft.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
+import ArrowLeft from 'images/ArrowLeft.svg';
 
-const PasswordRecovery = () => {
+const NewPassword = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
   };
@@ -20,6 +20,7 @@ const PasswordRecovery = () => {
       <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />
     );
   };
+
   return (
     <div className={styles.authBlock}>
       <Col span={24}>
@@ -35,8 +36,9 @@ const PasswordRecovery = () => {
             <Image src={Logo} preview={false} />
           </div>
         </div>
-        <Title level={2}>Восстановление пароля</Title>
-        <span>Введите почту для восстановления пароля</span>
+
+        <Title level={2}>Смена пароля</Title>
+        <span>Введите новый пароль и подтвердите</span>
         <Form
           name="basic"
           style={{ maxWidth: 550 }}
@@ -53,8 +55,22 @@ const PasswordRecovery = () => {
                 ]}>
                 <Input
                   size={'large'}
-                  placeholder="Почта"
+                  placeholder="Придумайте новый пароль"
                   className={styles.inputItem}
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={24}>
+              <Form.Item
+                name="password"
+                rules={[
+                  { required: true, message: 'Please input your password!' }
+                ]}>
+                <Input
+                  size={'large'}
+                  className={styles.inputItem}
+                  placeholder="Подтвердите новый пароль"
                 />
               </Form.Item>
             </Col>
@@ -65,7 +81,7 @@ const PasswordRecovery = () => {
                   className={styles.inputButton}
                   type="primary"
                   htmlType="submit">
-                  Отправить код
+                  Сохранить
                 </Button>
               </Form.Item>
             </Col>
@@ -76,4 +92,4 @@ const PasswordRecovery = () => {
   );
 };
 
-export default PasswordRecovery;
+export default NewPassword;

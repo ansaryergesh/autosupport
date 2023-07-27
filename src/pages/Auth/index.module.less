@@ -1,19 +1,19 @@
 @import url('src/assets/styles/variables');
 
 .authBlock {
-    text-align: center;
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    background: #F3F8FF;
-    margin: auto;
-    width: 550px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background: #f3f8ff;
+  margin: auto;
+  width: 550px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .authBlock form {
@@ -21,10 +21,18 @@
 }
 
 .inputItem {
-  border-radius: 12px!important;
+  width: 376px;
+  height: 44px;
+  border-radius: 12px !important;
 }
 
 .inputButton {
+  line-height: normal;
+  height: auto;
+  color: white !important;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 10px 27px 10px 27px !important;
   text-align: center;
   border-radius: 12px;
 }
@@ -33,5 +41,49 @@
   background: @primary-color-disabled;
 }
 
+.logoBox {
+  position: relative;
+  padding: 25px;
+}
 
+.logo {
+  position: absolute;
+  top: -40%;
+  left: 30%;
+}
 
+.btnBack {
+  position: absolute;
+  top: -40%;
+  left: -8%;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.btnBackIcon {
+  margin-right: 8px;
+}
+
+.codeInputsBox {
+  display: flex;
+}
+
+.verifyInput {
+  text-align: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px !important;
+}
+
+.verifyInput::-webkit-outer-spin-button,
+.verifyInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.resend {
+  margin-bottom: 10px;
+  background: -webkit-linear-gradient(180deg, #accfe6 0%, #8ee6c4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
