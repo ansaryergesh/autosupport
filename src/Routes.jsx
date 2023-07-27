@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, useLocation } from 'react-router';
 import Main from './layouts/Main/Main.jsx';
 import Home from './pages/Home/Home.jsx';
 import SignIn from './pages/Auth/SignIn/SignIn.jsx';
