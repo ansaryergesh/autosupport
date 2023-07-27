@@ -1,12 +1,12 @@
-import { Col, Form, Image, Row } from 'antd';
+import { Col, Form, Image, Row, Space } from 'antd';
 import styles from '../index.module.less';
 import Logo from 'images/logoFreedom.svg';
-import ArrowLeft from 'images/ArrowLeft.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
+import ArrowLeft from 'images/ArrowLeft.svg';
 
-const PasswordRecovery = () => {
+const CodeVerify = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
   };
@@ -20,6 +20,7 @@ const PasswordRecovery = () => {
       <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />
     );
   };
+
   return (
     <div className={styles.authBlock}>
       <Col span={24}>
@@ -35,8 +36,9 @@ const PasswordRecovery = () => {
             <Image src={Logo} preview={false} />
           </div>
         </div>
-        <Title level={2}>Восстановление пароля</Title>
-        <span>Введите почту для восстановления пароля</span>
+
+        <Title level={2}>Код подтверждения</Title>
+        <span>Введите код подтверждения</span>
         <Form
           name="basic"
           style={{ maxWidth: 550 }}
@@ -46,17 +48,21 @@ const PasswordRecovery = () => {
           autoComplete="off">
           <Row gutter={[16]}>
             <Col span={24}>
-              <Form.Item
-                name="username"
-                rules={[
-                  { required: true, message: 'Please input your username!' }
-                ]}>
-                <Input
-                  size={'large'}
-                  placeholder="Почта"
-                  className={styles.inputItem}
-                />
+              <Form.Item>
+                <Space size="large">
+                  <Input type="number" className={styles.verifyInput} />
+                  <Input type="number" className={styles.verifyInput} />
+                  <Input type="number" className={styles.verifyInput} />
+                  <Input type="number" className={styles.verifyInput} />
+                </Space>
               </Form.Item>
+            </Col>
+
+            <Col span={24}>
+              <p>
+                Можете отправить повторный код через 00:38, если код не пришел.
+              </p>
+              <p className={styles.resend}>Отправить повторно</p>
             </Col>
 
             <Col span={24}>
@@ -65,7 +71,7 @@ const PasswordRecovery = () => {
                   className={styles.inputButton}
                   type="primary"
                   htmlType="submit">
-                  Отправить код
+                  Далее
                 </Button>
               </Form.Item>
             </Col>
@@ -76,4 +82,4 @@ const PasswordRecovery = () => {
   );
 };
 
-export default PasswordRecovery;
+export default CodeVerify;
