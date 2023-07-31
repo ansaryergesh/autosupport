@@ -63,12 +63,11 @@ const SignIn = () => {
             <Col span={24}>
               <Form.Item>
                 <Button
-                  color="white"
                   className={styles.inputButton}
                   type="primary"
                   iconButton={<IconSend />}
                   htmlType="submit">
-                  <span>Войти</span>{' '}
+                  <span>Войти</span>
                 </Button>
               </Form.Item>
               <span>Забыли пароль?</span>
