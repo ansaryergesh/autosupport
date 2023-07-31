@@ -26,7 +26,7 @@ export default function css() {
       less: {
         javascriptEnabled: true,
         modifyVars: {
-          'primary-color': '#2F54EB',
+          'primary-color': 'linear-gradient(90deg, #6F95E3 0%, #5DA1D3 15.63%, #4EABC7 33.85%, #38B9B5 47.40%, #23C7A4 61.46%, #1CCE9A 79.17%, #1BD788 100%)',
         },
       },
     },

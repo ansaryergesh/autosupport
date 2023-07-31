@@ -18,6 +18,7 @@
     min-height: 100vh;
     overflow-y: hidden;
     background-repeat: no-repeat;
+    border-bottom: 1px solid black;
 }
 
 .sidebar-nav {

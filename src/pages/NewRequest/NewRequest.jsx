@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.less';
-import { Col, Row, Form } from 'antd';
+import { Form } from 'antd';
 import Input from 'components/Input/Input.jsx';
 import PopularQuestionslist from 'components/PopularQuestionslist/PopularQuestionslist';
 import Button from 'components/Button/Button.jsx';

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import {Col, Input, Layout, Menu, Row, Space} from 'antd';
+import {Col, Input, Layout, Menu, Row } from 'antd';
 import Button from "components/Button/Button.jsx";
+import {i18n} from 'utils/i18next.js';
 
 const { Sider } = Layout;
-
-
 
 const SearchInput = () => {
     return (
@@ -37,17 +36,17 @@ const SideBarButtons = () => {
     return (
         <Row gutter={[16, 16]} style={rowStyle}>
             <Col span={12}>
-                <Button type={"primary"} block>Все темы</Button>
+                <Button type={"primary"} block>{i18n.t("allTheme")}</Button>
             </Col>
             <Col span={12}>
-                <Button type={"default"} block>Популярный темы</Button>
+                <Button type={"default"} block>{i18n.t('popularTheme')}</Button>
             </Col>
         </Row>
     )
 }
 
 const SidebarNav = () => {
-    const [menuItems, setMenuItems] = useState([
+    const [menuItems] = useState([
         { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
         { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
         { id: "home1", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
