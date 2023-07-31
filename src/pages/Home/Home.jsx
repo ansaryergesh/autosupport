@@ -16,8 +16,8 @@ const Home = () => {
         <div>
             <JHeader />
             <Row gutter={[24,24]}>
-                {data.map((item) => (
-                    <Col span={8}>
+                {data.map((item,index) => (
+                    <Col key={index} span={8}>
                         <CardComponent data={item}/>
                     </Col>
                 ))}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router';
+import { Route, Switch } from 'react-router';
 import Main from './layouts/Main/Main.jsx';
 import Home from './pages/Home/Home.jsx';
 import SignIn from './pages/Auth/SignIn/SignIn.jsx';
@@ -7,6 +7,7 @@ import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
 import PasswordRecovery from './pages/Auth/PasswordRecovery/PasswordRecovery.jsx';
 import CodeVerify from './pages/Auth/CodeVerify/CodeVerify.jsx';
 import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
+import PropTypes from 'prop-types';
 
 import NewRequest from './pages/NewRequest/NewRequest.jsx';
 
@@ -16,9 +17,9 @@ function RouteWithLayout({
   isAuthLoading = false,
   ...rest
 }) {
-  // if (isAuthLoading) {
-  //     return <LazyLoading />;
-  // }
+  if (isAuthLoading) {
+      return <div>Loading</div>;
+  }
   return (
     <Route
       {...rest}
@@ -33,9 +34,7 @@ function RouteWithLayout({
   );
 }
 
-const Routes = (props) => {
-  const location = useLocation();
-
+const Routes = () => {
   return (
     <React.Fragment>
       <Switch>
@@ -60,5 +59,9 @@ const Routes = (props) => {
     </React.Fragment>
   );
 };
-
+RouteWithLayout.propTypes = {
+  layout: PropTypes.any,
+  component: PropTypes.any,
+  isAuthLoading: PropTypes.any
+}
 export default Routes;

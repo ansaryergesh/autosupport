@@ -8,7 +8,9 @@ import styles from './input.module.less';
 import Search from './search';
 import TextArea from './textArea';
 import Password from './password';
+// eslint-disable-next-line react/display-name
 const InputComponent = forwardRef((props, ref) => {
+    // eslint-disable-next-line react/prop-types
     const { readOnly = false, disabled = false, placeholder, className } = props;
 
     const handleWheel = (e) => {

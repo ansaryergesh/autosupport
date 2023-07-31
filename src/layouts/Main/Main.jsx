@@ -3,6 +3,7 @@ import Header from "../Header/Header.jsx";
 import PropTypes from "prop-types";
 import { Layout } from 'antd';
 import SidebarNav from "../SideBar/SideBar";
+import Footer from "../Footer/Footer.jsx";
 
 const Main = (props) => {
     const {children} = props;
@@ -19,6 +20,7 @@ const Main = (props) => {
                     </Layout.Content>
                 </Layout>
             </Layout>
+            <Footer />
         </div>
     )
 }

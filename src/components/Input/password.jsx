@@ -1,10 +1,9 @@
 import { Input } from 'antd';
-import classNames from 'classnames';
 
 import styles from './input.module.less';
 
 function InputPassword(props) {
-    const { readOnly, placeholder, className } = props;
+    const { placeholder } = props;
 
     return (
         <Input.Password

@@ -1,21 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
-import { css } from './config';
-
+import{ plugins,css } from './config'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), viteTsconfigPaths()],
+  plugins: [react(), ...plugins.dev, ...plugins.common ],
   server: {
     port: 3000
   },
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true
-      }
-    }
-  },
+  css: css(),
   resolve: {
     alias: {
       '@': '/src',
