@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import {Col, Input, Layout, Menu, Row } from 'antd';
+import {Col, Dropdown, Image, Input, Layout, Menu, Row, Typography, Popconfirm} from 'antd';
 import Button from "components/Button/Button.jsx";
 import {i18n} from 'utils/i18next.js';
-
+import {adminNavItems} from "./constants.js";
+import {Link} from "react-router-dom";
+import DotsSvg from 'images/dots.svg'
 const { Sider } = Layout;
 
 const SearchInput = () => {
@@ -45,7 +47,62 @@ const SideBarButtons = () => {
     )
 }
 
-const SidebarNav = () => {
+const SideBarEdit = () => {
+    return (
+        <Dropdown
+            overlay={
+                <Menu>
+                        <Menu.Item
+                            key="0"
+                            className="administration"
+                        >
+                        <span className="administration__text-warning">
+                          {i18n.t('administration.action.edit')}
+                        </span>
+                        </Menu.Item>
+                        <Menu.Item
+                            key="1"
+                            className="administration administration__text-error"
+                            onClick={(e) => {
+                                e.domEvent.stopPropagation();
+                            }}
+                        >
+                            <Popconfirm
+                                cancelButtonProps={{
+                                    size: 'middle',
+                                    className: 'administration__button-white-small',
+                                }}
+                                cancelText={i18n.t('administration.action.cancel')}
+                                okButtonProps={{
+                                    size: 'middle',
+                                    className: 'administration__button-gold-small',
+                                }}
+                                okText={i18n.t('administration.action.yes')}
+                                overlayClassName="administration"
+                                title={i18n.t('administration.alertManagers.notification.delete')}
+                            >
+                          <span className="administration__text-error">
+                            {i18n.t('administration.action.delete')}
+                          </span>
+                            </Popconfirm>
+                        </Menu.Item>
+                </Menu>
+            }
+            trigger={['click']}
+            onClick={(e) => {
+                e.stopPropagation();
+            }}
+        >
+            <div className="administration__action">
+                <Image src={DotsSvg} preview={false} />
+            </div>
+        </Dropdown>
+        )
+
+}
+
+
+const SidebarNav = ({isAdmin = true}) => {
     const [menuItems] = useState([
         { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
         { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
@@ -67,26 +124,50 @@ const SidebarNav = () => {
         { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
         /* Add more menu items as needed */
     ]);
+    const [openKeys, setOpenKeys] = useState([]); // State to manage open submenus
+
+    const handleMenuOpenChange = (keys) => {
+
+        setOpenKeys(keys);
+    };
 
     return (
             <Sider width={300} className="site-layout-background">
                 <SearchInput />
-                <div style={{margin: '30px 0', background:"transparent"}}>
+                <Layout className={"navAdmin"}>
+                    {isAdmin && adminNavItems.map((item,index) =>
+                        <Link to={item.path} className={"navAdminItem"} key={index}>
+                            <Image src={item.icon} preview={false} />
+                            <Typography>{i18n.t(item.name)}</Typography>
+                        </Link>
+                    )}
+
+                </Layout>
+
+
+                <div style={{marginTop: '10px', marginBottom: '20px', background:"transparent"}}>
                     <SideBarButtons />
                 </div>
                 <Menu
                     mode="inline"
-                    defaultSelectedKeys={['home']}
+                    defaultSelectedKeys={[]}
                     defaultOpenKeys={['subMenu1']}
-                    className="custom-menu"
+                    className="custom-menu administration"
+                    openKeys={openKeys} // Pass the state to manage open submenus
+                    onOpenChange={(keys) => handleMenuOpenChange(keys)} // Use a callback function to handle the open and close events
                     style={{ maxHeight: '100vh', borderRight: 0, width: '100%!important' }}
                 >
-                    {menuItems.map((m,index)=> (
-                        <Menu.SubMenu className="submenu" key={index} title={m.label}>
-                            {m.questions.map((q,index) => (
-                                <Menu.Item key={index}>{q.name}</Menu.Item>
-                            ))}
-                        </Menu.SubMenu>
+                    {menuItems.map((m, index) => (
+                        <div style={{ position: 'relative' }} key={`submenu_${index}`}>
+                            <Menu.SubMenu className="submenu" key={`submenu_${index}_1`} title={m.label}>
+                                {m.questions.map((q, qIndex) => (
+                                    <Menu.Item key={`question_${index}_${qIndex}`}>{q.name}</Menu.Item>
+                                ))}
+                            </Menu.SubMenu>
+                            <div style={{ position: 'absolute', right: 0, zIndex: 1, top:10 }} >
+                                <SideBarEdit />
+                            </div>
+                        </div>
                     ))}
                 </Menu>
             </Sider>

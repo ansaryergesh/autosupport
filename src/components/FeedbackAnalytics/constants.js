@@ -26,17 +26,24 @@ export const UserData = [
   }
 ];
 
-
 export const options = {
   plugins: {
     legend: {
-      position:'right'
+      labels: {
+        textAlign: 'right',
+        font: {
+          size: 16
+        },
+        padding: 16,
+        usePointStyle: true
+      },
+      position: 'right'
     },
     title: {
-      fontSize:'24px',
+      fontSize: '24px',
       display: true,
-      text: "Pie chart",
+      text: 'Средний балл: 3.5',
       position: 'bottom'
-    },
+    }
   }
-}
+};

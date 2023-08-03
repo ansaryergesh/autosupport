@@ -13,7 +13,10 @@ body {
 /*body {*/
 /*    font-family: 'Museo';*/
 /*}*/
+.ant-layout {
+  background: transparent !important;
 
+}
 .ant-layout-sider {
   background: transparent !important;
 }
@@ -158,4 +161,50 @@ body {
 .flex-center {
   display: flex;
   align-items: center;
+}
+
+.navAdmin {
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.navAdminItem {
+  font-size: 20px;
+  display: flex;
+  padding: 10px 0;
+  gap: 25px;
+  align-items: center;
+}
+
+.centerAbsolute {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.administration {
+  .administration__action {
+    float: right;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    &:hover {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
+      cursor: pointer;
+
+      svg {
+        filter:
+                invert(4%) sepia(18%) saturate(2093%) hue-rotate(182deg) brightness(98%)
+                contrast(94%);
+      }
+    }
+
+    svg {
+      margin: -2px;
+    }
+  }
+
+  .ant-menu-submenu-arrow {
+    display: none;
+  }
 }
