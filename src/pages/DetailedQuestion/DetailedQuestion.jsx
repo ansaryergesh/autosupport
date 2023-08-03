@@ -3,7 +3,7 @@ import { Col, Input, Rate, Row, Space } from 'antd';
 import styles from './index.module.less';
 import TestImage from 'images/freedomSm.jpg';
 import phone from 'images/phone.jpg';
-import Button from 'components/Button/Button';
+import Button from '../../components/Button/Button';
 
 const dataStep = [
     "1. Зайдите в раздел “Категории”",
@@ -47,6 +47,7 @@ const DetailedQuestion = () => {
 
 
     return (
+        <div>
             <Space direction='vertical' size={30}>
                 <Row>
                     <Space size={10}>
@@ -83,11 +84,11 @@ const DetailedQuestion = () => {
                             <Space direction='vertical' size={16}>
                                 <p className="my-heading-2  ">Описание шагов</p>
                                 <Space direction='vertical' size="small">
-                                    {dataStep.map((item,index) => (
+                                    {dataStep.map((item, index) => (
                                         <p key={index} className='my-paragraph'>{item}</p>
                                     ))}
                                     <img src={TestImage} />
-                                    {dataStep2.map((item,index) => (
+                                    {dataStep2.map((item, index) => (
                                         <p key={index} className='my-paragraph'>{item}</p>
                                     ))}
                                     <img src={TestImage} />
@@ -100,7 +101,7 @@ const DetailedQuestion = () => {
                             <Space direction='vertical' size={23} className={styles.similar}>
                                 <p className="my-heading-2">Похожие вопросы</p>
                                 <Space direction='vertical' size={19.6}>
-                                    {dataQuestions.map((item,index) => (
+                                    {dataQuestions.map((item, index) => (
                                         <p key={index} className={`my-paragraph ${styles.similarQuestions}`}> {item} </p>
                                     ))}
                                     <p className='my-paragraph'>Сколько занимает открытие счета?</p>
@@ -154,7 +155,7 @@ const DetailedQuestion = () => {
                     </Col>
                     <Col span={8}>
                         <div className={styles.content}>
-                            <Space direction='vertical' size={24.8} className={styles.rate}>
+                            <Space direction='vertical' size={23.3} className={styles.rate}>
                                 <p className="my-heading-2">Полезен ли был ответ ?</p>
                                 <p className={`{my-paragraph ${styles.rateSubtitel}`}>Просьба оценить насколько был полезен ответ по 5-и больной шкале, это поможет нам стать лучше </p>
                                 <Rate />
@@ -184,6 +185,7 @@ const DetailedQuestion = () => {
                 </Row>
 
             </Space>
+        </div>
     );
 }
 

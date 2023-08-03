@@ -1,4 +1,7 @@
 export default {
   "allTheme": 'Все темы',
-  'popularTheme': 'Популярные КЗ'
+  'popularTheme': 'Популярные КЗ',
+  'employee': 'Сотрудники',
+  'reviews': 'Отзывы',
+  'categories': 'Категории'
 }

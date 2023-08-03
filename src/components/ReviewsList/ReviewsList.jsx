@@ -64,8 +64,8 @@ const rangePresets = [
 const ReviewsList = () => {
   return (
     <div className={styles.box}>
-      <Row align="middle" justify="space-between" gutter={[0, 16]}>
-        <Col push={9}>
+      <Row gutter={[0, 16]}>
+        <Col style={{ marginLeft: 'auto' }}>
           <Title level={3}>Список всех отзывов</Title>
         </Col>
 
@@ -76,7 +76,9 @@ const ReviewsList = () => {
           </div>
         </Col> */}
 
-        <RangePicker className={styles.datePicker} presets={rangePresets} />
+        <Col style={{ marginLeft: 'auto' }}>
+          <RangePicker className={styles.datePicker} presets={rangePresets} />
+        </Col>
 
         {data.map((q) => (
           <Col span={24} className={styles.questionBox} key={q.id}>
@@ -84,7 +86,7 @@ const ReviewsList = () => {
           </Col>
         ))}
 
-        <Col>
+        <Col style={{ marginLeft: 'auto' }}>
           <Button type="primary" className={styles.btnDownload}>
             Скачать отзывы
           </Button>

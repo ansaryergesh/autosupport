@@ -49,7 +49,7 @@ const PasswordRecovery = () => {
               <Form.Item
                 name="username"
                 rules={[
-                  { required: true, message: 'Please input your username!' }
+                  { required: true, message: 'Please input your email!' }
                 ]}>
                 <Input
                   size={'large'}

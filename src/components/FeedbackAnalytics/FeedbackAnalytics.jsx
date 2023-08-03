@@ -4,7 +4,7 @@ import Title from 'antd/lib/typography/Title.js';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 import { useState } from 'react';
-import {UserData, options} from "./constants.js";
+import { UserData, options } from './constants.js';
 
 const FeedbackAnalytics = () => {
   const [userData] = useState({
@@ -19,10 +19,8 @@ const FeedbackAnalytics = () => {
   return (
     <div>
       <Title level={3}>Аналитика ответов</Title>
-      <div style={{ width: '500px', height: '500px', margin:"auto" }}>
-        <Pie data={userData}
-             options={options}
-        />
+      <div style={{ width: '500px', height: '500px', margin: 'auto' }}>
+        <Pie data={userData} options={options} />
       </div>
     </div>
   );

@@ -4,13 +4,16 @@ import Main from './layouts/Main/Main.jsx';
 import Home from './pages/Home/Home.jsx';
 import SignIn from './pages/Auth/SignIn/SignIn.jsx';
 import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
+import DetailedQuestionAdmin from './pages/DetailedQuestionAdmin/DetailedQuestionAdmin.jsx';
 import PasswordRecovery from './pages/Auth/PasswordRecovery/PasswordRecovery.jsx';
 import CodeVerify from './pages/Auth/CodeVerify/CodeVerify.jsx';
 import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
 import Feedback from './pages/Feedback/Feedback.jsx';
 import PropTypes from 'prop-types';
-
 import NewRequest from './pages/NewRequest/NewRequest.jsx';
+import InstructionForm from './pages/InstructionForm/InstructionForm.jsx';
+import NewAnswer from './pages/NewAnswer/NewAnswer.jsx';
+import Employees from './pages/Employees/Employees.jsx';
 
 function RouteWithLayout({
   layout,
@@ -19,7 +22,7 @@ function RouteWithLayout({
   ...rest
 }) {
   if (isAuthLoading) {
-      return <div>Loading</div>;
+    return <div>Loading</div>;
   }
   return (
     <Route
@@ -62,6 +65,30 @@ const Routes = () => {
           component={DetailedQuestion}
           path={'/detailedQuestion'}
         />
+        <RouteWithLayout
+            exact
+            layout={Main}
+            component={DetailedQuestionAdmin}
+            path={'/detailedQuestionAdmin'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={InstructionForm}
+          path={'/instruction-form'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={NewAnswer}
+          path={'/new-answer'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Employees}
+          path={'/employees'}
+        />
       </Switch>
     </React.Fragment>
   );
@@ -70,5 +97,5 @@ RouteWithLayout.propTypes = {
   layout: PropTypes.any,
   component: PropTypes.any,
   isAuthLoading: PropTypes.any
-}
+};
 export default Routes;
