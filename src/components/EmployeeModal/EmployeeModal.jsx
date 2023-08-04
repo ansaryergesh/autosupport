@@ -20,7 +20,7 @@ const optionsRole = [
 
 const optionsComp = [{ value: 'Freedom', label: 'Freedom' }];
 
-const EmployeeModal = ({ btnName, margin = 0 }) => {
+const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -35,25 +35,31 @@ const EmployeeModal = ({ btnName, margin = 0 }) => {
     <>
       <Button
         style={{ marginBottom: `${margin}px` }}
-        type="primary"
+        type={btnType ? `${btnType}` : 'primary'}
         onClick={showModal}>
         {btnName}
       </Button>
+
       <Modal
         title="Add new employee"
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}>
+        onCancel={handleCancel}
+        okButtonProps={{ className: 'button-primary' }}
+        cancelButtonProps={{ className: 'button-default' }}>
         <Form layout="vertical">
           <Form.Item required label="Full Name">
             <Input placeholder="Full name of the employee" />
           </Form.Item>
+
           <Form.Item required label="Email">
             <Input placeholder="Email of the employee" />
           </Form.Item>
+
           <Form.Item required label="Role">
             <Select options={optionsRole} placeholder="Select a role" />
           </Form.Item>
+
           <Form.Item required label="Company">
             <Select options={optionsComp} placeholder="Select a company" />
           </Form.Item>

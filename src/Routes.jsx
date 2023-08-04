@@ -14,6 +14,7 @@ import NewRequest from './pages/NewRequest/NewRequest.jsx';
 import InstructionForm from './pages/InstructionForm/InstructionForm.jsx';
 import NewAnswer from './pages/NewAnswer/NewAnswer.jsx';
 import Employees from './pages/Employees/Employees.jsx';
+import Keywords from './pages/Keywords/Keywords.jsx';
 
 function RouteWithLayout({
   layout,
@@ -74,6 +75,18 @@ const Routes = () => {
         <RouteWithLayout
           exact
           layout={Main}
+          component={NewAnswer}
+          path={'/new-answer'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Employees}
+          path={'/employees'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
           component={InstructionForm}
           path={'/instruction-form'}
         />
@@ -88,6 +101,12 @@ const Routes = () => {
           layout={Main}
           component={Employees}
           path={'/employees'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Keywords}
+          path={'/keywords'}
         />
       </Switch>
     </React.Fragment>
