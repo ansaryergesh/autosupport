@@ -8,16 +8,35 @@ import {Link} from "react-router-dom";
 const { Sider } = Layout;
 
 const SearchInput = () => {
+    const [searchValue, setSearchValue] = useState('');
+
+    const handleSearch = () => {
+        console.log("searchValue:", searchValue);
+    };
+
+    const handleInputChange = (e) => {
+        setSearchValue(e.target.value);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+            window.location.href = '/detailedQuestion';
+        }
+    };
     return (
         <div style={{ position: 'relative' }}>
             <Input
                 placeholder="Что вы ищите"
                 style={{
                     border: 'none',
-                    borderBottom: '2px solid transparent',
+                    borderBottom: '1px solid transparent',
                     borderRadius: 0,
                     width:'100%',
                 }}
+                value={searchValue}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
             />
             <div
                 style={{
@@ -102,26 +121,27 @@ const SideBarButtons = () => {
 // }
 
 
+
 const SidebarNav = ({isAdmin = true}) => {
     const [menuItems] = useState([
-        { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home1", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about1", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home2", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about2", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home3", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about3", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home1", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about1", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home2", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about2", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home3", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about3", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "home", label: "Home" , questions: [{name: "q1"}, {name: 'q2'}] },
-        { id: "about", label: "About", questions: [{name: "q1"}, {name: 'q2'}] },
+        { id: "home", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home1", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about1", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home2", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about2", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home3", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about3", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home1", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about1", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home2", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about2", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home3", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about3", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
         /* Add more menu items as needed */
     ]);
     const [openKeys, setOpenKeys] = useState([]); // State to manage open submenus
@@ -161,7 +181,12 @@ const SidebarNav = ({isAdmin = true}) => {
                         // <div style={{ position: 'relative' }} key={`submenu_${index}`}>
                             <Menu.SubMenu className="submenu" key={`submenu_${index}_1`} title={m.label}>
                                 {m.questions.map((q, qIndex) => (
-                                    <Menu.Item key={`question_${index}_${qIndex}`}>{q.name}</Menu.Item>
+                                    <Menu.Item key={`question_${index}_${qIndex}`}>
+                                        <Link to={'/detailedQuestion'}>
+                                        {q.name}
+                                        </Link>
+                                     
+                                        </Menu.Item>
                                 ))}
                             </Menu.SubMenu>
                         //     <div style={{ position: 'absolute', right: 0, zIndex: 1, top:10 }} >

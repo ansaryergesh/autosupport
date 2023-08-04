@@ -21,7 +21,7 @@ const KeywordsModal = () => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Edit
+        Редактировать
       </Button>
       <Modal
         title="Edit keyword"

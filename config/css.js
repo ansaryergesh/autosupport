@@ -26,7 +26,7 @@ export default function css() {
       less: {
         javascriptEnabled: true,
         modifyVars: {
-          'primary-color': 'linear-gradient(90deg, #6F95E3 0%, #5DA1D3 15.63%, #4EABC7 33.85%, #38B9B5 47.40%, #23C7A4 61.46%, #1CCE9A 79.17%, #1BD788 100%)',
+          'primary-color': 'linear-gradient(98deg, rgba(153,166,249,0.7820378151260504) 0%, rgba(28,204,158,0.6027661064425771) 26%, rgba(27,216,137,0.375875350140056) 51%, rgba(26,226,118,0.644782913165266) 74%, rgba(128,255,97,0.8576680672268908) 100%);',
         },
       },
     },

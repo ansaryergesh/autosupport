@@ -5,6 +5,7 @@ import Send from 'images/Send.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
+import { Link } from 'react-router-dom';
 const SignIn = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -62,15 +63,19 @@ const SignIn = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Button
-                  className={styles.inputButton}
-                  type="primary"
-                  iconButton={<IconSend />}
-                  htmlType="submit">
-                  <span>Войти</span>
-                </Button>
+                <Link to={"/"}>
+                  <Button
+                    className={styles.inputButton}
+                    type="primary"
+                    iconButton={<IconSend />}
+                    htmlType="submit">
+                    <span>Войти</span>
+                  </Button>
+                </Link>
               </Form.Item>
-              <span>Забыли пароль?</span>
+              <Link to={'/password-recovery'}>
+                <span>Забыли пароль?</span>
+              </Link>
             </Col>
           </Row>
         </Form>

@@ -5,6 +5,7 @@ import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
 import ArrowLeft from 'images/ArrowLeft.svg';
+import { Link } from 'react-router-dom';
 
 const CodeVerify = () => {
   const onFinish = (values) => {
@@ -67,12 +68,14 @@ const CodeVerify = () => {
 
             <Col span={24}>
               <Form.Item>
+                <Link to={'/new-password'} >
                 <Button
                   className={styles.inputButton}
                   type="primary"
                   htmlType="submit">
                   Далее
                 </Button>
+                </Link>
               </Form.Item>
             </Col>
           </Row>
