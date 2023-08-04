@@ -70,7 +70,7 @@
     bottom: 0;
     left: 0;
     right: 0;/* Adjust the distance of the border from the right */
-    height: 2px; /* Adjust the width of the border */
+    height: 1px; /* Adjust the width of the border */
     background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%);
     width: 100%;
     /*content: '';*/

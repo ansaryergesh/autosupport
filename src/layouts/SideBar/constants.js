@@ -14,7 +14,7 @@ export const adminNavItems = [
   },
   {
     name: 'categories',
-    path: '/categories',
+    path: '/detailedQuestion',
     icon: categories
   },
   {

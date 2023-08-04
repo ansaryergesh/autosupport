@@ -32,7 +32,7 @@ const Keywords = () => {
       dataIndex: 'key'
     },
     {
-      title: 'Name',
+      title: 'Наименование',
       dataIndex: 'name'
     },
 
@@ -41,11 +41,11 @@ const Keywords = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <KeywordsModal>Edit</KeywordsModal>
+          <KeywordsModal>Редактировать</KeywordsModal>
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.key)}>
-            <Button>Delete</Button>
+            <Button>Удалить</Button>
           </Popconfirm>
         </Space>
       )
@@ -63,7 +63,7 @@ const Keywords = () => {
             type="primary"
             onClick={handleDeleteSelected}
             disabled={!hasSelected}>
-            Delete selected
+            Удалить выбранное
           </Button>
           <span
             style={{

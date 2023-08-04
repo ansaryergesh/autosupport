@@ -4,13 +4,15 @@ import {Col, Row} from "antd";
 import JHeader from "components/JHeader/JHeader.jsx";
 
 const data = [
-    {title: "titl1", questions: ["Question1","Question2","Question3"]},
-    {title: "titl1", questions: ["Question1","Question2","Question3"]},
-    {title: "titl1", questions: ["Question1","Question2","Question3"]}, {title: "titl1", questions: ["Question1","Question2","Question3"]},
-    {title: "titl1", questions: ["Question1","Question2","Question3"]},
-    {title: "titl1", questions: ["Question1","Question2","Question3"]}, {title: "titl1", questions: ["Question1","Question2","Question3"]},
-    {title: "titl1", questions: ["Question1","Question2","Question3"]},
-    {title: "titl1", questions: ["Question1","Question2","Question3"]},]
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]}, 
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
+    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},]
 const Home = () => {
     return (
         <div>

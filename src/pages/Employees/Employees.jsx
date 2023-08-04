@@ -14,36 +14,36 @@ const Employees = () => {
 
   const columns = [
     {
-      title: 'Name',
+      title: 'Ф.И.О.',
       dataIndex: 'name',
       key: 'name'
     },
     {
-      title: 'Email',
+      title: 'Почтовый адрес',
       dataIndex: 'email',
       key: 'email'
     },
     {
-      title: 'Role',
+      title: 'Роль',
       dataIndex: 'role',
       key: 'role'
     },
     {
-      title: 'Company',
+      title: 'Компания',
       dataIndex: 'company',
       key: 'company'
     },
 
     {
-      title: 'Action',
+      title: 'Действия',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EmployeeModal btnType="default" btnName="Edit" />
+          <EmployeeModal btnType="default" btnName="Редактировать" />
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.key)}>
-            <Button>Delete</Button>
+            <Button>Удалить</Button>
           </Popconfirm>
         </Space>
       )
@@ -51,7 +51,7 @@ const Employees = () => {
   ];
   return (
     <div style={{ margin: '68px auto 0 auto' }}>
-      <EmployeeModal btnName="Add Employee" margin={10} />
+      <EmployeeModal btnName="Добавить сотрудника" margin={10} />
       <Table pagination={false} columns={columns} dataSource={data} />
     </div>
   );

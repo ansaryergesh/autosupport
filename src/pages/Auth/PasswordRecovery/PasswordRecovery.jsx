@@ -5,6 +5,7 @@ import ArrowLeft from 'images/ArrowLeft.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
+import { Link } from 'react-router-dom';
 
 const PasswordRecovery = () => {
   const onFinish = (values) => {
@@ -61,12 +62,14 @@ const PasswordRecovery = () => {
 
             <Col span={24}>
               <Form.Item>
+                <Link to={'/code-verify'} >
                 <Button
                   className={styles.inputButton}
                   type="primary"
                   htmlType="submit">
                   Отправить код
                 </Button>
+                </Link>
               </Form.Item>
             </Col>
           </Row>

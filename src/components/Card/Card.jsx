@@ -1,12 +1,12 @@
 import {Card} from "antd";
 import React from 'react'
 import styles from './index.module.less';
-
+import { Link } from 'react-router-dom';
 const CardComponent = (props) => {
     // const title = props.data?.title;
     const questions = props.data?.questions;
     return (
-        <div>
+        <Link to={'/detailedQuestion'}>
             <Card className={styles.card} bordered={false}>
                 <div className={"my-heading-2"}>
                     <div className={styles.title}>Как открыть счет?</div>
@@ -17,7 +17,7 @@ const CardComponent = (props) => {
                     ))}
                 </div>
             </Card>
-        </div>
+        </Link>
     )
 }
 
