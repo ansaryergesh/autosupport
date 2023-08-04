@@ -39,11 +39,11 @@ const Employees = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EmployeeModal btnName="Edit" />
+          <EmployeeModal btnType="default" btnName="Edit" />
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.key)}>
-            <Button type="primary">Delete</Button>
+            <Button>Delete</Button>
           </Popconfirm>
         </Space>
       )
