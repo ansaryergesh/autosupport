@@ -2,22 +2,22 @@ export const UserData = [
   {
     id: 1,
     review: 'Отзывы с оценкой 5',
-    reviewsNum: 5000
+    reviewsNum: 4500
   },
   {
     id: 2,
     review: 'Отзывы с оценкой 4',
-    reviewsNum: 4000
+    reviewsNum: 2000
   },
   {
     id: 3,
     review: 'Отзывы с оценкой 3',
-    reviewsNum: 2300
+    reviewsNum: 3000
   },
   {
     id: 4,
     review: 'Отзывы с оценкой 2',
-    reviewsNum: 1000
+    reviewsNum: 2000
   },
   {
     id: 5,
@@ -26,24 +26,10 @@ export const UserData = [
   }
 ];
 
-export const options = {
-  plugins: {
-    legend: {
-      labels: {
-        textAlign: 'right',
-        font: {
-          size: 16
-        },
-        padding: 16,
-        usePointStyle: true
-      },
-      position: 'right'
-    },
-    title: {
-      fontSize: '24px',
-      display: true,
-      text: 'Средний балл: 3.5',
-      position: 'bottom'
-    }
-  }
-};
+export const dataList = [
+  'Отзывы с оценкой 5',
+  'Отзывы с оценкой 4',
+  'Отзывы с оценкой 3',
+  'Отзывы с оценкой 2',
+  'Отзывы с оценкой 1'
+];

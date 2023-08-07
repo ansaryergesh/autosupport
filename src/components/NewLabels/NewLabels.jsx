@@ -8,7 +8,10 @@ const NewLabels = ({ num }) => {
   const [inputValues, setInputValues] = useState([]);
 
   const handleAddInput = () => {
-    setInputValues(prevState => [...prevState, {value: '', edit: false, id: '1'}]);
+    setInputValues((prevState) => [
+      ...prevState,
+      { value: '', edit: false, id: '1' }
+    ]);
   };
 
   const handleInputChange = (index, value) => {
@@ -22,21 +25,20 @@ const NewLabels = ({ num }) => {
       <div className={styles.number}>{num}</div>
       {inputValues.map((item, index) => {
         return (
-            <Input
-                key={index}
-                readOnly
-                value={item.value}
-                maxLength={50}
-                onChange={(e) => handleInputChange(index, e.target.value)}
-                type="text"
-                className={styles.inputItem}
-                placeholder="Введите метку"
-            />
-        )
+          <Input
+            key={index}
+            value={item.value}
+            maxLength={50}
+            onChange={(e) => handleInputChange(index, e.target.value)}
+            type="text"
+            className={styles.inputItem}
+            placeholder="Введите метку"
+          />
+        );
       })}
-        {inputValues.length > 4 ? null : (
-          <PlusCircleFilled className={styles.icon} onClick={handleAddInput} />
-        )}
+      {inputValues.length > 4 ? null : (
+        <PlusCircleFilled className={styles.icon} onClick={handleAddInput} />
+      )}
     </div>
   );
 };
