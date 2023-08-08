@@ -1,39 +1,47 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { Modal } from 'antd';
-import Button from '../Button/Button';
 import Input from '../Input/Input';
+import PropTypes from "prop-types";
+import {addKeyword} from "../../service/Keywords/index.js";
 
-const KeywordsModal = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const KeywordsModal = ({
+   editPage,
+   isModalOpen=false,
+   handleModal = () => {}
+  }) => {
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  const [text,setText] = useState("");
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
+  const handleSubmit = () => {
+      addKeyword({text})
+          .then(res => {
+              console.log(res)
+          })
+  }
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Редактировать
-      </Button>
+        {editPage}
       <Modal
         title="Edit keyword"
         open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={handleSubmit}
+        onCancel={handleModal}
         okButtonProps={{ className: 'button-primary' }}
         cancelButtonProps={{ className: 'button-default' }}>
-        <Input />
+        <Input
+            value={text}
+            onChange={(e)=> setText(e.target.value)}
+        />
       </Modal>
     </>
   );
 };
+
+KeywordsModal.propTypes = {
+    editPage: PropTypes.bool,
+    isModalOpen: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    handleModal: PropTypes.func,
+}
 
 export default KeywordsModal;
