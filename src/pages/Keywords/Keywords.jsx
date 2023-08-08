@@ -8,6 +8,11 @@ const Keywords = () => {
   const [data, setData] = useState(tempData);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  }
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -24,6 +29,7 @@ const Keywords = () => {
     selectedRowKeys,
     onChange: onSelectChange
   };
+
   const hasSelected = selectedRowKeys.length > 0;
 
   const columns = [
@@ -32,7 +38,7 @@ const Keywords = () => {
       dataIndex: 'key'
     },
     {
-      title: 'Наименование',
+      title: 'Name',
       dataIndex: 'name'
     },
 
@@ -41,11 +47,13 @@ const Keywords = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <KeywordsModal>Редактировать</KeywordsModal>
+          <Button type="primary" onClick={handleModal}>
+            {'Edit'}
+          </Button>
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.key)}>
-            <Button>Удалить</Button>
+            <Button>Delete</Button>
           </Popconfirm>
         </Space>
       )
@@ -57,13 +65,20 @@ const Keywords = () => {
       <div>
         <div
           style={{
+            display: 'flex',
+            justifyContent: 'space-between',
             marginBottom: 16
           }}>
           <Button
             type="primary"
             onClick={handleDeleteSelected}
             disabled={!hasSelected}>
-            Удалить выбранное
+            Delete selected
+          </Button>
+          <Button
+              type="primary"
+              onClick={handleModal}>
+            Add item
           </Button>
           <span
             style={{
@@ -79,6 +94,12 @@ const Keywords = () => {
           dataSource={data}
         />
       </div>
+
+      <KeywordsModal
+          editPage={true}
+          handleModal={handleModal}
+          isModalOpen={isModalOpen}
+      />
     </div>
   );
 };

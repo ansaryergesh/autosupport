@@ -1,15 +1,43 @@
-import { Col, Form, Image, Row } from 'antd';
+import {Col, Form, Image, notification, Row} from 'antd';
 import styles from '../index.module.less';
 import Logo from 'images/logoFreedom.svg';
 import Send from 'images/Send.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
-import { Link } from 'react-router-dom';
+import {onLogin} from "../../../service/Auth/index.js";
+import {LocalStorageKeys} from "../../../storage/localStorageKey.js";
+import {useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
+import {i18n} from "../../../utils/i18next.js";
 const SignIn = () => {
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
   const onFinish = (values) => {
-    console.log('Success:', values);
+    setLoading(true);
+    onLogin(values).then((res) => {
+      console.log("success");
+      if(res) {
+        console.log(res);
+        localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
+        notification.success({message: 'welcome'})
+      }
+    }).catch((err) => {
+      notification.error({message: err})
+      console.error(err);
+    })
+    .finally(() => {
+      setLoading(false)
+      console.log("finally")
+    })
   };
+
+  useEffect(() => {
+    if(localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)) {
+      history.push('/');
+    }
+  },[localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)])
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -23,8 +51,8 @@ const SignIn = () => {
     <div className={styles.authBlock}>
       <Col span={24}>
         <Image src={Logo} preview={false} />
-        <Title level={2}>Вход</Title>
-        <span>С возвращением!</span>
+        <Title level={2}>{i18n.t('commons.signIn')}</Title>
+        <span>{i18n.t('commons.comeBack')}</span>
         <Form
           name="basic"
           style={{ maxWidth: 550 }}
@@ -63,19 +91,16 @@ const SignIn = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Link to={"/"}>
-                  <Button
-                    className={styles.inputButton}
-                    type="primary"
-                    iconButton={<IconSend />}
-                    htmlType="submit">
-                    <span>Войти</span>
-                  </Button>
-                </Link>
+                <Button
+                  className={styles.inputButton}
+                  type="primary"
+                  loading={loading}
+                  iconButton={<IconSend />}
+                  htmlType="submit">
+                  <span>Войти</span>
+                </Button>
               </Form.Item>
-              <Link to={'/password-recovery'}>
-                <span>Забыли пароль?</span>
-              </Link>
+              <span>Забыли пароль?</span>
             </Col>
           </Row>
         </Form>
