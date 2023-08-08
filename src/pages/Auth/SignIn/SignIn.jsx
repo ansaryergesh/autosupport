@@ -17,9 +17,7 @@ const SignIn = () => {
   const onFinish = (values) => {
     setLoading(true);
     onLogin(values).then((res) => {
-      console.log("success");
       if(res) {
-        console.log(res);
         localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
         notification.success({message: 'welcome'})
       }

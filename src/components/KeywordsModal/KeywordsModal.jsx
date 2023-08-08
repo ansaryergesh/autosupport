@@ -1,36 +1,54 @@
 import React, {useState} from 'react';
-import { Modal } from 'antd';
+import {Modal, notification} from 'antd';
 import Input from '../Input/Input';
 import PropTypes from "prop-types";
-import {addKeyword} from "../../service/Keywords/index.js";
+import {manageKeyword} from "../../service/Keywords/index.js";
+import {initialValues} from "../../pages/Keywords/constants.js";
 
 const KeywordsModal = ({
-   editPage,
    isModalOpen=false,
-   handleModal = () => {}
+   handleModal = () => {},
+   getList = () => {},
+   record=initialValues,
+   setRecord=() => {},
   }) => {
 
-  const [text,setText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const editPage = record.id;
+
+
 
   const handleSubmit = () => {
-      addKeyword({text})
-          .then(res => {
-              console.log(res)
+      setLoading(true);
+      manageKeyword(record)
+          .then((res) => {
+              handleModal();
+              getList();
+              if(res.data) {
+                  notification.success({message: "Запись добавлена"});
+              }
           })
+          .finally(() => {
+              setLoading(false)
+          })
+
   }
   return (
     <>
-        {editPage}
       <Modal
-        title="Edit keyword"
+        title={editPage ? "Edit keyword" : 'Add keyword'}
+        confirmLoading={loading}
         open={isModalOpen}
         onOk={handleSubmit}
         onCancel={handleModal}
         okButtonProps={{ className: 'button-primary' }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Input
-            value={text}
-            onChange={(e)=> setText(e.target.value)}
+            value={record.text}
+            onChange={(e)=>
+                setRecord({...record,
+                    text: e.target.value}
+                )}
         />
       </Modal>
     </>
@@ -38,10 +56,11 @@ const KeywordsModal = ({
 };
 
 KeywordsModal.propTypes = {
-    editPage: PropTypes.bool,
     isModalOpen: PropTypes.bool,
-    handleSubmit: PropTypes.func,
     handleModal: PropTypes.func,
+    getList: PropTypes.func,
+    record: PropTypes.object,
+    setRecord: PropTypes.func,
 }
 
 export default KeywordsModal;

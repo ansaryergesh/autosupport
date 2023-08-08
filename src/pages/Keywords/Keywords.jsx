@@ -1,26 +1,46 @@
-import React, { useState } from 'react';
-import { Table, Space, Popconfirm } from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Table, Space, Popconfirm, notification} from 'antd';
 import Button from 'components/Button/Button';
-import { tempData } from './constants';
+// import { tempData } from './constants';
 import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
+import {getKeywords,deleteKeyWord} from "../../service/Keywords/index.js";
+import {initialValues} from "./constants.js";
 
 const Keywords = () => {
-  const [data, setData] = useState(tempData);
+  const [data, setData] = useState([]);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [record,setRecord] = useState(initialValues);
 
   const handleModal = () => {
+    if(isModalOpen) {
+      setRecord(initialValues)
+    }
     setIsModalOpen(!isModalOpen);
   }
+
+  const getKeywordsList = () => {
+    getKeywords().then(res=> {
+      setData(res.data)
+    })
+  }
+  useEffect(() => {
+    getKeywordsList()
+  },[])
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const handleDelete = (key) => {
-    const newData = data.filter((item) => item.key !== key);
-    setData(newData);
+  const handleDelete = (id) => {
+    console.log(id)
+    deleteKeyWord(id).then(res=> {
+      if(res.status === 204) {
+        notification.success({message: 'Deleted'})
+        getKeywordsList();
+      }
+    })
   };
 
   const handleDeleteSelected = () => {};
@@ -35,11 +55,11 @@ const Keywords = () => {
   const columns = [
     {
       title: 'Id',
-      dataIndex: 'key'
+      dataIndex: 'id'
     },
     {
       title: 'Name',
-      dataIndex: 'name'
+      dataIndex: 'text'
     },
 
     {
@@ -47,12 +67,17 @@ const Keywords = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button type="primary" onClick={handleModal}>
+          <Button type="primary" onClick={
+            () => {
+              setRecord(record)
+              handleModal()
+            }
+          }>
             {'Edit'}
           </Button>
           <Popconfirm
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.key)}>
+            onConfirm={() => handleDelete(record.id)}>
             <Button>Delete</Button>
           </Popconfirm>
         </Space>
@@ -96,9 +121,11 @@ const Keywords = () => {
       </div>
 
       <KeywordsModal
-          editPage={true}
+          record={record}
+          setRecord={setRecord}
           handleModal={handleModal}
           isModalOpen={isModalOpen}
+          getList={getKeywordsList}
       />
     </div>
   );
