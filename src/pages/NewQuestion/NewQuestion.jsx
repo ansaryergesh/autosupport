@@ -1,22 +1,34 @@
 import { Form, Upload, Select, Row, Col, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from 'components/Input/Input.jsx';
 import InputTextArea from 'components/Input/textArea.jsx';
 import Button from 'components/Button/Button.jsx';
 import styles from './index.module.less';
-import {
-  selectPropsKeywords,
-  selectPropsSimilar,
-  selectPropsTags,
-  selectPropsAnswers
-} from './constants';
+import { selectPropsKeywords, selectPropsSimilar } from './constants';
+import { getTags } from '../../service/NewQuestion';
 
-const InstructionForm = () => {
+const NewQuestion = () => {
   const [similarQuestions, setSimilarQuestions] = useState([]);
   const [tags, setTags] = useState([]);
   const [keywords, setKeywords] = useState([]);
-  const [answers, setAnswers] = useState([]);
+
+  const getTagsList = () => {
+    getTags().then((res) => {
+      console.log(res.data);
+    });
+  };
+
+  const selectPropsTags = {
+    mode: 'multiple',
+    // options: optionsTags,
+    placeholder: 'Выберите теги',
+    maxTagCount: 'responsive'
+  };
+
+  useEffect(() => {
+    getTagsList();
+  }, []);
 
   return (
     <div>
@@ -24,6 +36,19 @@ const InstructionForm = () => {
 
       <Form layout="vertical">
         <Row gutter={[24, 24]}>
+          <Col span={12}>
+            <Form.Item
+              name="Заголовок"
+              label="Заголовок"
+              rules={[{ required: true }]}>
+              <InputTextArea
+                className={styles.inputItems}
+                autoSize={{ minRows: 1, maxRows: 15 }}
+                placeholder="Заголовок"
+              />
+            </Form.Item>
+          </Col>
+
           <Col span={12}>
             <Form.Item
               name="Описание шагов"
@@ -44,10 +69,7 @@ const InstructionForm = () => {
           </Col>
 
           <Col span={24}>
-            <Form.Item
-              label="Визуальная инструкция"
-              // getValueFromEvent={normFile}
-            >
+            <Form.Item label="Визуальная инструкция">
               <Upload
                 action="/upload.do"
                 multiple={true}
@@ -89,18 +111,6 @@ const InstructionForm = () => {
           </Col>
 
           <Col span={12}>
-            <Form.Item label="Связать с ответом">
-              <Select
-                value={answers}
-                {...selectPropsAnswers}
-                onChange={(newValue) => {
-                  setAnswers(newValue);
-                }}
-              />
-            </Form.Item>
-          </Col>
-
-          <Col span={12}>
             <Form.Item label="Добавить ключевые слова">
               <Select
                 value={keywords}
@@ -114,7 +124,9 @@ const InstructionForm = () => {
 
           <Col span={24}>
             <Form.Item>
-              <Button type="primary">Подтвердить</Button>
+              <Button type="primary" htmlType="submit">
+                Подтвердить
+              </Button>
             </Form.Item>
           </Col>
         </Row>
@@ -123,4 +135,4 @@ const InstructionForm = () => {
   );
 };
 
-export default InstructionForm;
+export default NewQuestion;

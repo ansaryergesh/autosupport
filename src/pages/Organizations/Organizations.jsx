@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
-// import { tempData } from './constants';
-import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
-import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
+import OrganizationsModal from 'components/OrganizationsModal/OrganizationsModal.jsx';
+import {
+  getOrganizations,
+  deleteOrganization
+} from '../../service/Organizations/index.js';
 import { initialValues } from './constants.js';
 
-const Keywords = () => {
+const Organizations = () => {
   const [data, setData] = useState([]);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -20,13 +22,13 @@ const Keywords = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const getKeywordsList = () => {
-    getKeywords().then((res) => {
+  const getOrganizationsList = () => {
+    getOrganizations().then((res) => {
       setData(res.data);
     });
   };
   useEffect(() => {
-    getKeywordsList();
+    getOrganizationsList();
   }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -35,10 +37,10 @@ const Keywords = () => {
 
   const handleDelete = (id) => {
     console.log(id);
-    deleteKeyWord(id).then((res) => {
+    deleteOrganization(id).then((res) => {
       if (res.status === 204) {
         notification.success({ message: 'Deleted' });
-        getKeywordsList();
+        getOrganizationsList();
       }
     });
   };
@@ -59,7 +61,7 @@ const Keywords = () => {
     },
     {
       title: 'Name',
-      dataIndex: 'text'
+      dataIndex: 'name'
     },
 
     {
@@ -118,15 +120,15 @@ const Keywords = () => {
         />
       </div>
 
-      <KeywordsModal
+      <OrganizationsModal
         record={record}
         setRecord={setRecord}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
-        getList={getKeywordsList}
+        getList={getOrganizationsList}
       />
     </div>
   );
 };
 
-export default Keywords;
+export default Organizations;
