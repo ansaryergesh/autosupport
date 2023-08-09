@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
-// import { tempData } from './constants';
-import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
-import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
+import TagsModal from 'components/TagsModal/TagsModal.jsx';
+import { getTags, deleteTag } from '../../service/Tags/index.js';
 import { initialValues } from './constants.js';
 
-const Keywords = () => {
+const Tags = () => {
   const [data, setData] = useState([]);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -20,13 +19,14 @@ const Keywords = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const getKeywordsList = () => {
-    getKeywords().then((res) => {
+  const getTagsList = () => {
+    getTags().then((res) => {
       setData(res.data);
     });
   };
+
   useEffect(() => {
-    getKeywordsList();
+    getTagsList();
   }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -35,10 +35,10 @@ const Keywords = () => {
 
   const handleDelete = (id) => {
     console.log(id);
-    deleteKeyWord(id).then((res) => {
+    deleteTag(id).then((res) => {
       if (res.status === 204) {
         notification.success({ message: 'Deleted' });
-        getKeywordsList();
+        getTagsList();
       }
     });
   };
@@ -118,15 +118,15 @@ const Keywords = () => {
         />
       </div>
 
-      <KeywordsModal
+      <TagsModal
         record={record}
         setRecord={setRecord}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
-        getList={getKeywordsList}
+        getList={getTagsList}
       />
     </div>
   );
 };
 
-export default Keywords;
+export default Tags;
