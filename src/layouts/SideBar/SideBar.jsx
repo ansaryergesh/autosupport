@@ -4,8 +4,9 @@ import Button from "components/Button/Button.jsx";
 import {i18n} from 'utils/i18next.js';
 import {adminNavItems} from "./constants.js";
 import {Link} from "react-router-dom";
-// import DotsSvg from 'images/dots.svg'
 const { Sider } = Layout;
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const SearchInput = () => {
     const [searchValue, setSearchValue] = useState('');
@@ -119,16 +120,42 @@ const SideBarButtons = () => {
 //         )
 //
 // }
+const MenuItemTypes = {
+    MENU_ITEM: "menu_item",
+};
 
+const DraggableMenuItem = ({ id, index, moveMenuItem, children }) => {
+    const [, drag] = useDrag({
+        type: MenuItemTypes.MENU_ITEM,
+        item: { id, index },
+    });
 
+    const [, drop] = useDrop({
+        accept: MenuItemTypes.MENU_ITEM,
+        hover: (draggedItem) => {
+            console.log(draggedItem)
+            console.log(id)
+            if (draggedItem.index !== index) {
+                moveMenuItem(draggedItem.index, index);
+                draggedItem.index = index;
+            }
+        },
+    });
+
+    return (
+        <div ref={(node) => drag(drop(node))} style={{ cursor: "move" }}>
+            {children}
+        </div>
+    );
+};
 
 const SidebarNav = ({isAdmin = true}) => {
-    const [menuItems] = useState([
-        { id: "home", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
-        { id: "about", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
-        { id: "home1", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
-        { id: "about1", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
-        { id: "home2", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+    const [menuItems, setMenuItems] = useState([
+        { id: "home", label: "Сколько занимает открытие счета1" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}], order:1, },
+        { id: "about", label: "Сколько занимает открытие счета2", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}], order:2, },
+        { id: "home1", label: "Сколько занимает открытие счета3" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "about1", label: "Сколько занимает открытие счета4", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
+        { id: "home2", label: "Сколько занимает открытие счета5" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
         { id: "about2", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
         { id: "home3", label: "Сколько занимает открытие счета" , questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
         { id: "about3", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
@@ -144,6 +171,14 @@ const SidebarNav = ({isAdmin = true}) => {
         { id: "about", label: "Сколько занимает открытие счета", questions: [{name: "Продвинутые функции"}, {name: 'Веб версия и мобильная'}, {name: 'Основные фуниции'}, {name: 'Проблемы с платформой'}, {name: 'Веб версия и мобильная'}] },
         /* Add more menu items as needed */
     ]);
+
+    const moveMenuItem = (fromIndex, toIndex) => {
+        const newMenuItems = [...menuItems];
+        const [movedItem] = newMenuItems.splice(fromIndex, 1);
+        newMenuItems.splice(toIndex, 0, movedItem);
+        setMenuItems(newMenuItems);
+    };
+
     const [openKeys, setOpenKeys] = useState([]); // State to manage open submenus
 
     const handleMenuOpenChange = (keys) => {
@@ -152,6 +187,7 @@ const SidebarNav = ({isAdmin = true}) => {
     };
 
     return (
+        <DndProvider backend={HTML5Backend}>
             <Sider width={300} className="site-layout-background">
                 <SearchInput />
                 <Layout className={"navAdmin"}>
@@ -161,24 +197,25 @@ const SidebarNav = ({isAdmin = true}) => {
                             <Typography>{i18n.t(item.name)}</Typography>
                         </Link>
                     )}
-
                 </Layout>
-
-
                 <div style={{marginTop: '10px', marginBottom: '20px', background:"transparent"}}>
                     <SideBarButtons />
                 </div>
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={[]}
-                    defaultOpenKeys={['subMenu1']}
-                    className="custom-menu administration"
+                    className="custom-menu"
                     openKeys={openKeys} // Pass the state to manage open submenus
                     onOpenChange={(keys) => handleMenuOpenChange(keys)} // Use a callback function to handle the open and close events
                     style={{ maxHeight: '100vh', borderRight: 0, width: '100%!important' }}
                 >
                     {menuItems.map((m, index) => (
-                        // <div style={{ position: 'relative' }} key={`submenu_${index}`}>
+                        <DraggableMenuItem
+                                key={m.id}
+                                id={m.id}
+                                index={index}
+                                moveMenuItem={moveMenuItem}
+                            >
                             <Menu.SubMenu className="submenu" key={`submenu_${index}_1`} title={m.label}>
                                 {m.questions.map((q, qIndex) => (
                                     <Menu.Item key={`question_${index}_${qIndex}`}>
@@ -189,13 +226,10 @@ const SidebarNav = ({isAdmin = true}) => {
                                         </Menu.Item>
                                 ))}
                             </Menu.SubMenu>
-                        //     <div style={{ position: 'absolute', right: 0, zIndex: 1, top:10 }} >
-                        //         <SideBarEdit />
-                        //     </div>
-                        // </div>
-                    ))}
+                        </DraggableMenuItem>))}
                 </Menu>
             </Sider>
+        </DndProvider>
     );
 };
 

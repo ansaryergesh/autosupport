@@ -31,21 +31,20 @@ body {
 
 .sidebar-nav {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   margin-top: 64px; /* Adjust this value according to the header's height */
-  padding: 16px;
+  padding: 16px 40px;
+  padding-right: 15px;
+  margin-right: 25px;
   overflow-y: auto;
   overflow-x: hidden;
-  border-right: 1px solid;
-  border-image: @primary-color; /* Replace these colors with your desired gradient */
-  border-image-slice: 1;
 }
 
 .sidebar-nav::-webkit-scrollbar {
   position: absolute;
   left: 0;
-  width: 1px;
-  background: @primary-color;
+  width: 2px;
+  background: #DEE0E3;
 
 }
 
@@ -66,32 +65,24 @@ body {
 
 .submenu {
   width: 100%;
+  background: transparent!important;
+  padding: 12px 0;
   position: relative;
 }
 .submenu:hover {
   background: transparent;
 }
-.submenu::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0; /* Adjust the distance of the border from the right */
-  height: 1px; /* Adjust the width of the border */
-  background: @primary-color;
-  width: 100%;
-  /*content: '';*/
-  /*position: absolute,*/
-  /*bottom: 0,*/
-  /*left: 0,*/
-  /*right: 0,*/
-  /*height: 2px,*/
-  /*background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%),*/
-}
 
 .layout-content {
   background: var(--background-color);
   padding: 74px 13px; /* Adjust this value according to the header's height */
+}
+
+.layout-content::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: #DEE0E3;
 }
 
 .titleGradient {
@@ -204,8 +195,8 @@ body {
       margin: -2px;
     }
   }
+}
 
-  .ant-menu-submenu-arrow {
-    display: none;
-  }
+.custom-menu {
+  background: transparent!important;
 }
