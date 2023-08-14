@@ -6,7 +6,7 @@ import CategoryItem from 'components/CategoryItem/CategoryItem';
 const data = [
   {
     title: 'Что это',
-    questions: ['Что такое торговая платформа, почему другое название?']
+    questions: ['Для чего нужен брокерский счет?']
   },
   {
     title: 'Зачем она нужна',
@@ -42,7 +42,7 @@ function Сategory() {
   const [editableData, setEditableData] = useState(data);
 
   return (
-    <div style={{ backgroundColor: '#f3f8ff' }}>
+    <div>
       <Title style={{ marginBottom: '48px' }}>
         Торговая площадка-Tradernet global{' '}
       </Title>
