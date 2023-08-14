@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Layout } from "antd";
 import styles from './Header.module.less';
 import { Link } from 'react-router-dom';
-import Logo from 'images/logoFreedom.svg';
+import Logo from 'images/logoHeader.svg';
 import Languages from "./Languages.jsx";
 
 const Header = () => {
