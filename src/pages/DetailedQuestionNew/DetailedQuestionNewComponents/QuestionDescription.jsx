@@ -29,7 +29,7 @@ const QuestionDescription = () => {
                     <div>
                         <Space direction='vertical'>
                             <h4>Нашел ошибку в тексте?</h4>
-                            <p>Выдели и нажми CTRL+Enter</p>
+                            <p>Выдели и нажми CTRL+Enterrr</p>
                         </Space>
                     </div>
                     <div>
