@@ -8,7 +8,7 @@ import { UserData, dataList } from './constants.js';
 import styles from './index.module.less';
 import { List, Typography } from 'antd';
 
-const backgroundColor = ['#51AF3D', '#0D99FF', '#FF900D', '#120DFF', '#FF0000'];
+const backgroundColor = ['#13AD64', '#0D99FF', '#FF900D', '#120DFF', '#FF0000'];
 const FeedbackAnalytics = () => {
   const [userData] = useState({
     labels: UserData.map((data) => data.review),
