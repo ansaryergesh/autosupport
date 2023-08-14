@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
-import { manageTag } from '../../service/Tags/index.js';
-import { initialValues } from '../../pages/Tags/constants.js';
+import { manageResources } from '../../service/Resources/index.js';
+import { initialValues } from '../../pages/Resources/constants.js';
 
-const TagsModal = ({
+const ResourcesModal = ({
   isModalOpen = false,
   handleModal = () => {},
   getList = () => {},
@@ -17,7 +17,7 @@ const TagsModal = ({
 
   const handleSubmit = () => {
     setLoading(true);
-    manageTag(record)
+    manageResources(record)
       .then((res) => {
         handleModal();
         getList();
@@ -32,7 +32,7 @@ const TagsModal = ({
   return (
     <>
       <Modal
-        title={editPage ? 'Edit tag' : 'Add tag'}
+        title={editPage ? 'Edit resource' : 'Add resource'}
         confirmLoading={loading}
         open={isModalOpen}
         onOk={handleSubmit}
@@ -40,15 +40,15 @@ const TagsModal = ({
         okButtonProps={{ className: 'button-primary' }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Input
-          value={record.text}
-          onChange={(e) => setRecord({ ...record, text: e.target.value })}
+          value={record.name}
+          onChange={(e) => setRecord({ ...record, name: e.target.value })}
         />
       </Modal>
     </>
   );
 };
 
-TagsModal.propTypes = {
+ResourcesModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   getList: PropTypes.func,
@@ -56,4 +56,4 @@ TagsModal.propTypes = {
   setRecord: PropTypes.func
 };
 
-export default TagsModal;
+export default ResourcesModal;

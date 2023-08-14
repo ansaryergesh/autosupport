@@ -1,6 +1,6 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 
-export const manageTags = (data) => {
+export const manageTag = (data) => {
   if (data.id) {
     return axiosInstanceWithHeader.put(`/api/admin/tags/${data.id}`, data);
   } else {
