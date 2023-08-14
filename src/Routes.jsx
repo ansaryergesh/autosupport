@@ -15,6 +15,7 @@ import InstructionForm from './pages/InstructionForm/InstructionForm.jsx';
 import NewAnswer from './pages/NewAnswer/NewAnswer.jsx';
 import Employees from './pages/Employees/Employees.jsx';
 import Keywords from './pages/Keywords/Keywords.jsx';
+import DetailedQuestionNew from './pages/DetailedQuestionNew/DetailedQuestionNew.jsx';
 
 function RouteWithLayout({
   layout,
@@ -67,10 +68,16 @@ const Routes = () => {
           path={'/detailedQuestion'}
         />
         <RouteWithLayout
-            exact
-            layout={Main}
-            component={DetailedQuestionAdmin}
-            path={'/detailedQuestionAdmin'}
+          exact
+          layout={Main}
+          component={DetailedQuestionAdmin}
+          path={'/detailedQuestionAdmin'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={DetailedQuestionNew}
+          path={'/detailedQuestionNew'}
         />
         <RouteWithLayout
           exact

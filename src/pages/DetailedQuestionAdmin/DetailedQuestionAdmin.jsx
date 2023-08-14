@@ -232,88 +232,56 @@ const DetailedQuestionAdmin = () => {
                         </div>
                     </Col>
                 </Row>
-                <Row gutter={[24, 24]}>
-                    <Col span={16}>
-                        <div className={styles.content}>
-                            <Space direction='vertical' size={35} className={styles.instructions}>
-                                <p className="my-heading-2">Выбрать вид инструкции </p>
-                                <Space direction='vertical' size={13} className={styles.instructionsTypes}>
-                                    <p className='my-paragraph'> 1. Визуальная инструкция(вам будут показаны фотографии с дальнейщими шагами)</p>
-                                    <p className='my-paragraph'> 2. Видео инструкция(полная видео инструкция как получить ответ)</p>
-                                </Space>
-                                <Row>
-                                    <Space size={15}>
-                                        <Button
-                                            type={selectedVideoButton === "Видео инструкция" ? 'primary' : undefined}
-                                            className='my-paragraph'
-                                            onClick={handleVideoButtonClick}
-                                        >
-                                            Видео инструкция
-                                        </Button>
-                                        <Button
-                                            type={selectedVideoButton === "Визуальная инструкция" ? 'primary' : undefined}
-                                            className='my-paragraph'
-                                            onClick={handleVisualButtonClick}
-                                        >
-                                            Визуальная инструкция
-                                        </Button>
-                                    </Space>
-                                </Row>
-                                {showVideo ? (
-                                    <Row>
-                                        <Space direction="vertical" size={15}>
-                                            <Input className={styles.inputs} placeholder="URL видео" />
-                                            <Input className={styles.inputs} placeholder="Описание к видео" />
-                                        </Space>
-                                    </Row>
-                                ) : (
-                                    <Row>
-                                        <Space direction="vertical" size={15}>
-                                            <Upload className={styles.upload}
-                                                accept="image/*,video/*"
-                                                showUploadList={false}
-                                                beforeUpload={() => false} // To prevent immediate upload
-                                            >
-                                                <Button className={styles.uploadButton}>
-                                                    <img src={plus} alt="plus" />
-                                                </Button>
-                                            </Upload>
-                                            <Input className={styles.inputs} placeholder="Введите описание к картинке" />
-                                        </Space>
-                                    </Row>
-                                )}
+                <div className={styles.content}>
+                    <Space direction='vertical' size={35} className={styles.instructions}>
+                        <p className="my-heading-2">Выбрать вид инструкции </p>
+                        <Space direction='vertical' size={13} className={styles.instructionsTypes}>
+                            <p className='my-paragraph'> 1. Визуальная инструкция(вам будут показаны фотографии с дальнейщими шагами)</p>
+                            <p className='my-paragraph'> 2. Видео инструкция(полная видео инструкция как получить ответ)</p>
+                        </Space>
+                        <Row>
+                            <Space size={15}>
+                                <Button
+                                    type={selectedVideoButton === "Видео инструкция" ? 'primary' : undefined}
+                                    className='my-paragraph'
+                                    onClick={handleVideoButtonClick}
+                                >
+                                    Видео инструкция
+                                </Button>
+                                <Button
+                                    type={selectedVideoButton === "Визуальная инструкция" ? 'primary' : undefined}
+                                    className='my-paragraph'
+                                    onClick={handleVisualButtonClick}
+                                >
+                                    Визуальная инструкция
+                                </Button>
                             </Space>
-                        </div>
-                    </Col>
-                    <Col span={8}>
-                        <div className={styles.content}>
-                            <div className={styles.sameQuestionContainer}>
-                                <p className="my-heading-2">Похожие вопроcы</p>
-                                <button className={styles.button}><img src={trash} alt="" /></button>
-                            </div>
-                            <div className={styles.sameQuestionInputContainer}>
-                                <Input className={styles.sameQuestionInput} placeholder="Поиск похожих вопросов" />
-                                <button className={styles.button} onClick={() => handlePlusButtonClick(1)}>
-                                    <img src={plus} alt="Add" />
-                                </button>
-
-                            </div>
+                        </Row>
+                        {showVideo ? (
                             <Row>
-                                {Array.from({ length: inputCounts[1] }).map((_, index) => (
-                                    <div key={index} className={styles.sameQuestionInputContainer}>
-                                        <Input className={styles.newQuestionAdd} type="text" placeholder={`Введите вопрос`} />
-                                        <button
-                                            className={styles.button}
-                                            onClick={() => handleDeleteInput(1, index)}
-                                        >
-                                            <img src={deleteX} alt="Delete" />
-                                        </button>
-                                    </div>
-                                ))}
+                                <Space direction="vertical" size={15}>
+                                    <Input className={styles.inputs} placeholder="URL видео" />
+                                    <Input className={styles.inputs} placeholder="Описание к видео" />
+                                </Space>
                             </Row>
-                        </div>
-                    </Col>
-                </Row>
+                        ) : (
+                            <Row>
+                                <Space direction="vertical" size={15}>
+                                    <Upload className={styles.upload}
+                                        accept="image/*,video/*"
+                                        showUploadList={false}
+                                        beforeUpload={() => false} // To prevent immediate upload
+                                    >
+                                        <Button className={styles.uploadButton}>
+                                            <img src={plus} alt="plus" />
+                                        </Button>
+                                    </Upload>
+                                    <Input className={styles.inputs} placeholder="Введите описание к картинке" />
+                                </Space>
+                            </Row>
+                        )}
+                    </Space>
+                </div>
                 <Row gutter={[24, 24]}>
                     <Col span={12}>
                         <div className={styles.content}>
