@@ -27,7 +27,7 @@ const SearchInput = () => {
   };
   return (
     <Input
-      placeholder="Что вы ищите"
+      placeholder={i18n.t('SearchQuestion')}
       style={{
         border: 'none',
         width: '100%'
