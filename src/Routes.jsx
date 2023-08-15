@@ -11,10 +11,14 @@ import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
 import Feedback from './pages/Feedback/Feedback.jsx';
 import PropTypes from 'prop-types';
 import NewRequest from './pages/NewRequest/NewRequest.jsx';
-import InstructionForm from './pages/InstructionForm/InstructionForm.jsx';
+import AddNewAnswer from './pages/AddNewAnswer/AddNewAnswer.jsx';
 import NewAnswer from './pages/NewAnswer/NewAnswer.jsx';
 import Employees from './pages/Employees/Employees.jsx';
 import Keywords from './pages/Keywords/Keywords.jsx';
+import Tags from './pages/Tags/Tags.jsx';
+import Organizations from './pages/Organizations/Organizations.jsx';
+import Resources from './pages/Resources/Resources.jsx';
+import Сategory from './pages/Сategory/Сategory.jsx';
 import DetailedQuestionNew from './pages/DetailedQuestionNew/DetailedQuestionNew.jsx';
 
 function RouteWithLayout({
@@ -94,8 +98,8 @@ const Routes = () => {
         <RouteWithLayout
           exact
           layout={Main}
-          component={InstructionForm}
-          path={'/instruction-form'}
+          component={AddNewAnswer}
+          path={'/add-new-answer'}
         />
         <RouteWithLayout
           exact
@@ -114,6 +118,25 @@ const Routes = () => {
           layout={Main}
           component={Keywords}
           path={'/keywords'}
+        />
+        <RouteWithLayout exact layout={Main} component={Tags} path={'/tags'} />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Organizations}
+          path={'/organizations'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Resources}
+          path={'/resources'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Сategory}
+          path={'/category'}
         />
       </Switch>
     </React.Fragment>

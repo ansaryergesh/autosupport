@@ -68,13 +68,10 @@ const CodeVerify = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Link to={'/new-password'} >
-                <Button
-                  className={styles.inputButton}
-                  type="primary"
-                  htmlType="submit">
-                  Далее
-                </Button>
+                <Link to={'/new-password'}>
+                  <Button className={styles.inputButton} htmlType="submit">
+                    Далее
+                  </Button>
                 </Link>
               </Form.Item>
             </Col>

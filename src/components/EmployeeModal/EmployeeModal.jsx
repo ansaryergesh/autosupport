@@ -45,7 +45,7 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okButtonProps={{ className: 'button-primary' }}
+        okButtonProps={{ className: 'button-modal' }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Form layout="vertical">
           <Form.Item required label="Full Name">

@@ -79,12 +79,9 @@ const NewPassword = () => {
             <Col span={24}>
               <Form.Item>
                 <Link to={'/sign-in'}>
-                <Button
-                  className={styles.inputButton}
-                  type="primary"
-                  htmlType="submit">
-                  Сохранить
-                </Button>
+                  <Button className={styles.inputButton} htmlType="submit">
+                    Сохранить
+                  </Button>
                 </Link>
               </Form.Item>
             </Col>

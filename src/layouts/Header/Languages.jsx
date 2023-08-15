@@ -1,28 +1,40 @@
-import React, {useState} from 'react';
-import styles from './Header.module.less'
-import Link from "antd/es/typography/Link.js";
-import {i18n, getLocale} from "utils/i18next.js";
-
+import React from 'react';
+import styles from './Header.module.less';
+import { i18n } from 'utils/i18next.js';
+import { Select } from 'antd';
+import LanguageIcon from 'images/LanguageIcon.svg';
+import { getLocale } from '../../utils/i18next';
 
 const Languages = () => {
-    const languages = ["Ru", "Kz", "En"]
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+    localStorage.setItem('locale', language);
+    window.location.reload();
+  };
 
-    const [selectedLanguage, setSelectedLanguage] = useState(getLocale() || languages[0].toLowerCase());
+  const getCurrentLanguage = getLocale() || 'ru';
 
-    const changeLanguage = (language) => {
-        i18n.changeLanguage(language);
-        localStorage.setItem('locale', language)
-        setSelectedLanguage(language);
-        window.location.reload();
-    };
-
-    return (
-        <div className={styles.languageBar}>
-            {languages.map((item,index) => (
-                <Link className={`${styles.lang} ${selectedLanguage === item.toLowerCase() ? styles.active : ''}`} key={index} onClick={() => changeLanguage(item.toLowerCase())}>{item}</Link>
-            ))}
-        </div>
-    )
-}
+  return (
+    <div className={styles.languageBar}>
+      <img src={LanguageIcon} alt="Languages icon" />
+      <Select
+        style={{ width: '77px' }}
+        dropdownStyle={{
+          textAlign: 'center',
+          borderRadius: '16px'
+        }}
+        suffixIcon={null}
+        value={getCurrentLanguage}
+        bordered={false}
+        onChange={(value) => changeLanguage(value.toLowerCase())}
+        options={[
+          { value: 'ru', label: 'RU' },
+          { value: 'kz', label: 'KZ' },
+          { value: 'en', label: 'ENG' }
+        ]}
+      />
+    </div>
+  );
+};
 
 export default Languages;
