@@ -32,11 +32,11 @@ const Feedback = () => {
           <NewLabelsList />
         </Col>
 
-        <Col span={24}>
+        <Col style={{ margin: '0 auto' }}>
           <FeedbackAnalytics />
         </Col>
 
-        <Col span={24}>
+        <Col style={{ margin: '0 auto' }}>
           <ReviewsList />
         </Col>
       </Row>

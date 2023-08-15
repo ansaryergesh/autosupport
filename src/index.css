@@ -48,13 +48,6 @@
 
 
 .sidebar-nav::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: -2px; /* Adjust the distance of the border from the right */
-    width: 2px; /* Adjust the width of the border */
-    background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%);
 }
 
 .submenu {
@@ -84,7 +77,16 @@
 
 .layout-content {
     background: var(--background-color)!important;
+    overflow-x: scroll;
     padding: 74px 13px; /* Adjust this value according to the header's height */
+}
+
+.layout-content::-webkit-scrollbar {
+    position: absolute;
+    left: 0;
+    width: 2px;
+    background: #DEE0E3;
+
 }
 
 .titleGradient {

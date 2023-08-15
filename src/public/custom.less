@@ -15,7 +15,6 @@ body {
 /*}*/
 .ant-layout {
   background: transparent !important;
-
 }
 .ant-layout-sider {
   background: transparent !important;
@@ -31,22 +30,20 @@ body {
 
 .sidebar-nav {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   margin-top: 64px; /* Adjust this value according to the header's height */
-  padding: 16px;
+  padding: 16px 40px;
+  padding-right: 15px;
+  margin-right: 25px;
   overflow-y: auto;
   overflow-x: hidden;
-  border-right: 1px solid;
-  border-image: @primary-color; /* Replace these colors with your desired gradient */
-  border-image-slice: 1;
 }
 
 .sidebar-nav::-webkit-scrollbar {
   position: absolute;
   left: 0;
-  width: 1px;
-  background: @primary-color;
-
+  width: 2px;
+  background: #dee0e3;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
@@ -66,32 +63,24 @@ body {
 
 .submenu {
   width: 100%;
+  background: transparent !important;
+  padding: 12px 0;
   position: relative;
 }
 .submenu:hover {
   background: transparent;
 }
-.submenu::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0; /* Adjust the distance of the border from the right */
-  height: 1px; /* Adjust the width of the border */
-  background: @primary-color;
-  width: 100%;
-  /*content: '';*/
-  /*position: absolute,*/
-  /*bottom: 0,*/
-  /*left: 0,*/
-  /*right: 0,*/
-  /*height: 2px,*/
-  /*background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%),*/
-}
 
 .layout-content {
   background: var(--background-color);
   padding: 74px 13px; /* Adjust this value according to the header's height */
+}
+
+.layout-content::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: #dee0e3;
 }
 
 .titleGradient {
@@ -102,31 +91,30 @@ body {
 }
 
 .button-primary {
-  background: @primary-color!important;
-  border: none;
-  border-radius: 10px;
-  color: black;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid #9debb0;
+  border-radius: 8px;
+  color: #00b323;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: black;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+    border: 1px solid #9debb0 !important;
+    color: #00b323 !important;
   }
 }
 
 .button-default {
-  border: none;
+  border: 1px solid #d4f1db;
+  color: black;
   outline: none;
   position: relative;
-  border-radius: 10px;
-  background: @primary-color;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   z-index: 1;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: black;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+    color: #00b323 !important;
+    border: 1px solid #9debb0 !important;
   }
 }
 
@@ -137,9 +125,61 @@ body {
   right: 1px;
   top: 1px;
   bottom: 1px;
-  border-radius: 10px;
-  background-color: white;
+  border-radius: 8px;
+  background-color: #fff;
   z-index: -1;
+}
+
+.button-secondary-active {
+  background: #13ad64;
+  color: #fff;
+  border-radius: 100px;
+  border-color: #13ad64;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: #13ad64 !important;
+    color: #fff !important;
+    border-color: #13ad64 !important;
+  }
+}
+
+.button-secondary {
+  border-radius: 100px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: #13ad64 !important;
+    color: #fff !important;
+    border-color: #13ad64 !important;
+  }
+}
+
+.button-modal {
+  color: #fff;
+  background: #13ad64;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: none !important;
+
+  &:hover {
+    color: #13ad64 !important;
+    background-color: #fff !important;
+    outline: 0.5px solid #13ad64 !important;
+  }
+}
+
+.button-third {
+  color: #13ad64;
+  border: 1px solid #13ad64;
+  border-radius: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #fff !important;
+    background: #13ad64;
+    border: 1px solid #13ad64 !important;
+  }
 }
 
 .buttonComponent-right {
@@ -194,9 +234,8 @@ body {
       cursor: pointer;
 
       svg {
-        filter:
-                invert(4%) sepia(18%) saturate(2093%) hue-rotate(182deg) brightness(98%)
-                contrast(94%);
+        filter: invert(4%) sepia(18%) saturate(2093%) hue-rotate(182deg)
+          brightness(98%) contrast(94%);
       }
     }
 
@@ -204,8 +243,8 @@ body {
       margin: -2px;
     }
   }
+}
 
-  .ant-menu-submenu-arrow {
-    display: none;
-  }
+.custom-menu {
+  background: transparent !important;
 }

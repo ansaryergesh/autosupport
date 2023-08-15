@@ -94,7 +94,7 @@ const NewRequest = () => {
               </Col>
             </Row>
             <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button type="primary" shape="round" htmlType="submit">
+              <Button type="default" htmlType="submit">
                 Отправить
               </Button>
             </Form.Item>

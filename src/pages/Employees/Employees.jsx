@@ -51,7 +51,11 @@ const Employees = () => {
   ];
   return (
     <div style={{ margin: '68px auto 0 auto' }}>
-      <EmployeeModal btnName="Добавить сотрудника" margin={10} />
+      <EmployeeModal
+        btnType="modal"
+        btnName="Добавить сотрудника"
+        margin={10}
+      />
       <Table pagination={false} columns={columns} dataSource={data} />
     </div>
   );

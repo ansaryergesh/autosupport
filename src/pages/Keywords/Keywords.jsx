@@ -1,46 +1,46 @@
-import React, {useEffect, useState} from 'react';
-import {Table, Space, Popconfirm, notification} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
 // import { tempData } from './constants';
 import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
-import {getKeywords,deleteKeyWord} from "../../service/Keywords/index.js";
-import {initialValues} from "./constants.js";
+import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
+import { initialValues } from './constants.js';
 
 const Keywords = () => {
   const [data, setData] = useState([]);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [record,setRecord] = useState(initialValues);
+  const [record, setRecord] = useState(initialValues);
 
   const handleModal = () => {
-    if(isModalOpen) {
-      setRecord(initialValues)
+    if (isModalOpen) {
+      setRecord(initialValues);
     }
     setIsModalOpen(!isModalOpen);
-  }
+  };
 
   const getKeywordsList = () => {
-    getKeywords().then(res=> {
-      setData(res.data)
-    })
-  }
+    getKeywords().then((res) => {
+      setData(res.data);
+    });
+  };
   useEffect(() => {
-    getKeywordsList()
-  },[])
+    getKeywordsList();
+  }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
   const handleDelete = (id) => {
-    console.log(id)
-    deleteKeyWord(id).then(res=> {
-      if(res.status === 204) {
-        notification.success({message: 'Deleted'})
+    console.log(id);
+    deleteKeyWord(id).then((res) => {
+      if (res.status === 204) {
+        notification.success({ message: 'Deleted' });
         getKeywordsList();
       }
-    })
+    });
   };
 
   const handleDeleteSelected = () => {};
@@ -67,12 +67,11 @@ const Keywords = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button type="primary" onClick={
-            () => {
-              setRecord(record)
-              handleModal()
-            }
-          }>
+          <Button
+            onClick={() => {
+              setRecord(record);
+              handleModal();
+            }}>
             {'Edit'}
           </Button>
           <Popconfirm
@@ -94,23 +93,20 @@ const Keywords = () => {
             justifyContent: 'space-between',
             marginBottom: 16
           }}>
-          <Button
-            type="primary"
-            onClick={handleDeleteSelected}
-            disabled={!hasSelected}>
-            Delete selected
-          </Button>
-          <Button
-              type="primary"
-              onClick={handleModal}>
+          <div>
+            <Button onClick={handleDeleteSelected} disabled={!hasSelected}>
+              Delete selected
+            </Button>
+            <span
+              style={{
+                marginLeft: 8
+              }}>
+              {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+            </span>
+          </div>
+          <Button type="modal" onClick={handleModal}>
             Add item
           </Button>
-          <span
-            style={{
-              marginLeft: 8
-            }}>
-            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-          </span>
         </div>
         <Table
           pagination={false}
@@ -121,11 +117,11 @@ const Keywords = () => {
       </div>
 
       <KeywordsModal
-          record={record}
-          setRecord={setRecord}
-          handleModal={handleModal}
-          isModalOpen={isModalOpen}
-          getList={getKeywordsList}
+        record={record}
+        setRecord={setRecord}
+        handleModal={handleModal}
+        isModalOpen={isModalOpen}
+        getList={getKeywordsList}
       />
     </div>
   );
