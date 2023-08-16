@@ -111,6 +111,7 @@ const Organizations = () => {
           </Button>
         </div>
         <Table
+          rowKey={(record) => record.id}
           pagination={false}
           rowSelection={rowSelection}
           columns={columns}

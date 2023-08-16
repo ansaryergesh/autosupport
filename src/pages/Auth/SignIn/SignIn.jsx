@@ -95,6 +95,7 @@ const SignIn = () => {
             <Col span={24}>
               <Form.Item>
                 <Button
+                  type="modal"
                   className={styles.inputButton}
                   loading={loading}
                   iconButton={<IconSend />}

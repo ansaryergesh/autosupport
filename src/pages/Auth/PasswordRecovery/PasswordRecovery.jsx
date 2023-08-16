@@ -62,13 +62,10 @@ const PasswordRecovery = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Link to={'/code-verify'} >
-                <Button
-                  className={styles.inputButton}
-                  type="primary"
-                  htmlType="submit">
-                  Отправить код
-                </Button>
+                <Link to={'/code-verify'}>
+                  <Button className={styles.inputButton} htmlType="submit">
+                    Отправить код
+                  </Button>
                 </Link>
               </Form.Item>
             </Col>
