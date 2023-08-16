@@ -96,7 +96,6 @@ const SignIn = () => {
               <Form.Item>
                 <Button
                   className={styles.inputButton}
-                  type="primary"
                   loading={loading}
                   iconButton={<IconSend />}
                   htmlType="submit">

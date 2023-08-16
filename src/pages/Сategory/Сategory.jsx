@@ -44,7 +44,7 @@ function Сategory() {
   return (
     <div>
       <Title style={{ marginBottom: '48px' }}>
-        Торговая площадка-Tradernet global{' '}
+        Торговая площадка-Tradernet global
       </Title>
       <Row gutter={[16, 16]}>
         {editableData.map((item, index) => (

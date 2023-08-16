@@ -68,7 +68,6 @@ const Tags = () => {
       render: (_, record) => (
         <Space size="middle">
           <Button
-            type="primary"
             onClick={() => {
               setRecord(record);
               handleModal();
@@ -94,21 +93,21 @@ const Tags = () => {
             justifyContent: 'space-between',
             marginBottom: 16
           }}>
-          <Button
-            type="primary"
-            onClick={handleDeleteSelected}
-            disabled={!hasSelected}>
-            Delete selected
-          </Button>
-          <Button type="primary" onClick={handleModal}>
+          <div>
+            <Button onClick={handleDeleteSelected} disabled={!hasSelected}>
+              Delete selected
+            </Button>
+            <span
+              style={{
+                marginLeft: 8
+              }}>
+              {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+            </span>
+          </div>
+
+          <Button type="modal" onClick={handleModal}>
             Add item
           </Button>
-          <span
-            style={{
-              marginLeft: 8
-            }}>
-            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-          </span>
         </div>
         <Table
           pagination={false}

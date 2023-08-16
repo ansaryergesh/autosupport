@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import styles from './index.module.less';
 
 const data = {
@@ -17,9 +17,7 @@ const PopularQuestionslist = () => {
       {data.questions.map((item, index) => (
         <p
           key={index}
-          className={`${
-            index > 1 ? '' : styles.gradientBorder
-          } my-paragraph popularText`}>
+          className={`${index > 1 ? '' : styles.border} my-paragraph `}>
           {item}
         </p>
       ))}

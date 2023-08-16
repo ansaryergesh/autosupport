@@ -37,7 +37,7 @@ const ResourcesModal = ({
         open={isModalOpen}
         onOk={handleSubmit}
         onCancel={handleModal}
-        okButtonProps={{ className: 'button-primary' }}
+        okButtonProps={{ className: 'button-modal' }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Input
           value={record.name}

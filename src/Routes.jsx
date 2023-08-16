@@ -19,6 +19,7 @@ import Tags from './pages/Tags/Tags.jsx';
 import Organizations from './pages/Organizations/Organizations.jsx';
 import Resources from './pages/Resources/Resources.jsx';
 import Сategory from './pages/Сategory/Сategory.jsx';
+import DetailedQuestionNew from './pages/DetailedQuestionNew/DetailedQuestionNew.jsx';
 
 function RouteWithLayout({
   layout,
@@ -75,6 +76,12 @@ const Routes = () => {
           layout={Main}
           component={DetailedQuestionAdmin}
           path={'/detailedQuestionAdmin'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={DetailedQuestionNew}
+          path={'/detailedQuestionNew'}
         />
         <RouteWithLayout
           exact

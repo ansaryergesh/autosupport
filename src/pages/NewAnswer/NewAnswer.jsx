@@ -3,7 +3,6 @@ import styles from './index.module.less';
 import { Form, Row, Col } from 'antd';
 import Input from 'components/Input/Input.jsx';
 import Button from 'components/Button/Button.jsx';
-import InputSearch from 'components/Input/search';
 import Title from 'antd/lib/typography/Title.js';
 
 const NewAnswer = () => {
@@ -26,10 +25,6 @@ const NewAnswer = () => {
               <br />
               Важно: не забывать внести перевод на казахский и английский языки.
             </p>
-          </Col>
-
-          <Col style={{ marginLeft: 'auto' }} span={6}>
-            <InputSearch placeholder="Поиск" />
           </Col>
 
           <Col span={24}>
@@ -84,7 +79,7 @@ const NewAnswer = () => {
                 </Col>
               </Row>
               <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button type="primary" shape="round" htmlType="submit">
+                <Button type="default" htmlType="submit">
                   Обработан
                 </Button>
               </Form.Item>

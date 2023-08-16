@@ -91,27 +91,30 @@ body {
 }
 
 .button-primary {
-  background: @primary-color!important;
-  border: none;
-  border-radius: 10px;
-  color: black;
+  border: 1px solid #9debb0;
+  border-radius: 8px;
+  color: #00b323;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: white !important;
+    border: 1px solid #9debb0 !important;
+    color: #00b323 !important;
   }
 }
 
 .button-default {
-  border: none;
+  border: 1px solid #d4f1db;
+  color: black;
   outline: none;
   position: relative;
-  border-radius: 10px;
-  background: @primary-color;
+  border-radius: 8px;
   cursor: pointer;
   z-index: 1;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: black;
+    color: #00b323 !important;
+    border: 1px solid #9debb0 !important;
   }
 }
 
@@ -122,9 +125,61 @@ body {
   right: 1px;
   top: 1px;
   bottom: 1px;
-  border-radius: 10px;
-  background-color: white;
+  border-radius: 8px;
+  background-color: #fff;
   z-index: -1;
+}
+
+.button-secondary-active {
+  background: #13ad64;
+  color: #fff;
+  border-radius: 100px;
+  border-color: #13ad64;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: #13ad64 !important;
+    color: #fff !important;
+    border-color: #13ad64 !important;
+  }
+}
+
+.button-secondary {
+  border-radius: 100px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: #13ad64 !important;
+    color: #fff !important;
+    border-color: #13ad64 !important;
+  }
+}
+
+.button-modal {
+  color: #fff;
+  background: #13ad64;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: none !important;
+
+  &:hover {
+    color: #13ad64 !important;
+    background-color: #fff !important;
+    outline: 0.5px solid #13ad64 !important;
+  }
+}
+
+.button-third {
+  color: #13ad64;
+  border: 1px solid #13ad64;
+  border-radius: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #fff !important;
+    background: #13ad64;
+    border: 1px solid #13ad64 !important;
+  }
 }
 
 .buttonComponent-right {
