@@ -109,6 +109,7 @@ const Keywords = () => {
           </Button>
         </div>
         <Table
+          rowKey={(record) => record.id}
           pagination={false}
           rowSelection={rowSelection}
           columns={columns}
