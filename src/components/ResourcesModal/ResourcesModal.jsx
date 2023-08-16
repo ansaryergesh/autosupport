@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, notification } from 'antd';
+import { Form, Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageResources } from '../../service/Resources/index.js';
@@ -35,14 +35,19 @@ const ResourcesModal = ({
         title={editPage ? 'Edit resource' : 'Add resource'}
         confirmLoading={loading}
         open={isModalOpen}
-        onOk={handleSubmit}
         onCancel={handleModal}
-        okButtonProps={{ className: 'button-modal' }}
+        okButtonProps={{ className: 'button-primary' }}
         cancelButtonProps={{ className: 'button-default' }}>
-        <Input
-          value={record.name}
-          onChange={(e) => setRecord({ ...record, name: e.target.value })}
-        />
+        <Form id="form" layout="vertical" onFinish={handleSubmit}>
+          <Form.Item
+            name="text"
+            rules={[{ required: true, message: 'Resource is required!' }]}>
+            <Input
+              value={record.name}
+              onChange={(e) => setRecord({ ...record, name: e.target.value })}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );

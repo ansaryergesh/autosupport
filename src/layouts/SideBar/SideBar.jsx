@@ -4,10 +4,6 @@ import { i18n } from 'utils/i18next.js';
 import {adminNavItems, initialMenuItems} from './constants.js';
 import { Link } from 'react-router-dom';
 const { Sider } = Layout;
-import Footer from "../Footer/Footer.jsx";
-import SideBarButtons from "./SideBarButtons.jsx";
-import DraggableMenuItem from "./DraggableMenuItem.jsx";
-import ActionsModal from "./ActionsModal";
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');

@@ -43,7 +43,24 @@ const Tags = () => {
     });
   };
 
-  const handleDeleteSelected = () => {};
+  const handleDeleteSelected = async () => {
+    try {
+      await Promise.all(
+        selectedRowKeys.map((rowId) =>
+          deleteTag(rowId).then((res) => {
+            if (res.status === 204) {
+              notification.success({ message: 'Deleted' });
+              getTagsList();
+            }
+          })
+        )
+      );
+      setSelectedRowKeys([]);
+      console.log('Selected rows deleted successfully.');
+    } catch (error) {
+      console.error('Error deleting rows:', error);
+    }
+  };
 
   const rowSelection = {
     selectedRowKeys,
@@ -75,6 +92,8 @@ const Tags = () => {
             {'Edit'}
           </Button>
           <Popconfirm
+            cancelButtonProps={{ className: 'button-default' }}
+            okButtonProps={{ className: 'button-modal' }}
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.id)}>
             <Button>Delete</Button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, notification } from 'antd';
+import { Form, Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageOrganization } from '../../service/Organizations/index.js';
@@ -35,14 +35,23 @@ const OrganizationsModal = ({
         title={editPage ? 'Edit organization' : 'Add organization'}
         confirmLoading={loading}
         open={isModalOpen}
-        onOk={handleSubmit}
         onCancel={handleModal}
-        okButtonProps={{ className: 'button-modal' }}
+        okButtonProps={{
+          className: 'button-modal',
+          htmlType: 'submit',
+          form: 'form'
+        }}
         cancelButtonProps={{ className: 'button-default' }}>
-        <Input
-          value={record.name}
-          onChange={(e) => setRecord({ ...record, name: e.target.value })}
-        />
+        <Form id="form" layout="vertical" onFinish={handleSubmit}>
+          <Form.Item
+            name="text"
+            rules={[{ required: true, message: 'Organization is required!' }]}>
+            <Input
+              value={record.name}
+              onChange={(e) => setRecord({ ...record, name: e.target.value })}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );
