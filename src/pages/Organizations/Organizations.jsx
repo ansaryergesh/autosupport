@@ -56,8 +56,8 @@ const Organizations = () => {
 
   const columns = [
     {
-      title: 'Id',
-      dataIndex: 'id'
+      title: 'code',
+      dataIndex: 'code'
     },
     {
       title: 'Name',
@@ -78,7 +78,7 @@ const Organizations = () => {
           </Button>
           <Popconfirm
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.id)}>
+            onConfirm={() => handleDelete(record.code)}>
             <Button>Delete</Button>
           </Popconfirm>
         </Space>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Col, Image, Input, Layout, Menu, Row, Typography } from 'antd';
-import Button from 'components/Button/Button.jsx';
+import { Image, Input, Layout, Menu, Typography} from 'antd';
 import { i18n } from 'utils/i18next.js';
-import { adminNavItems } from './constants.js';
+import {adminNavItems, initialMenuItems} from './constants.js';
 import { Link } from 'react-router-dom';
 const { Sider } = Layout;
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import Footer from "../Footer/Footer.jsx";
+import SideBarButtons from "./SideBarButtons.jsx";
+import DraggableMenuItem from "./DraggableMenuItem.jsx";
+import ActionsModal from "./ActionsModal";
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -27,7 +28,7 @@ const SearchInput = () => {
   };
   return (
     <Input
-      placeholder="Что вы ищите"
+      placeholder={i18n.t('SearchQuestion')}
       style={{
         border: 'none',
         width: '100%'
@@ -39,310 +40,10 @@ const SearchInput = () => {
   );
 };
 
-const SideBarButtons = () => {
-  const rowStyle = { background: 'transparent' }; // Set the background of the Row to transparent
-  return (
-    <Row gutter={[16, 16]} style={rowStyle}>
-      <Col span={12}>
-        <Button type={'primary'} block>
-          {i18n.t('allTheme')}
-        </Button>
-      </Col>
-      <Col span={12}>
-        <Button type={'default'} block>
-          {i18n.t('popularTheme')}
-        </Button>
-      </Col>
-    </Row>
-  );
-};
 
-// const SideBarEdit = () => {
-//     return (
-//         <Dropdown
-//             overlay={
-//                 <Menu>
-//                         <Menu.Item
-//                             key="0"
-//                             className="administration"
-//                         >
-//                         <span className="administration__text-warning">
-//                           {i18n.t('administration.action.edit')}
-//                         </span>
-//                         </Menu.Item>
-//                         <Menu.Item
-//                             key="1"
-//                             className="administration administration__text-error"
-//                             onClick={(e) => {
-//                                 e.domEvent.stopPropagation();
-//                             }}
-//                         >
-//                             <Popconfirm
-//                                 cancelButtonProps={{
-//                                     size: 'middle',
-//                                     className: 'administration__button-white-small',
-//                                 }}
-//                                 cancelText={i18n.t('administration.action.cancel')}
-//                                 okButtonProps={{
-//                                     size: 'middle',
-//                                     className: 'administration__button-gold-small',
-//                                 }}
-//                                 okText={i18n.t('administration.action.yes')}
-//                                 overlayClassName="administration"
-//                                 title={i18n.t('administration.alertManagers.notification.delete')}
-//                             >
-//                           <span className="administration__text-error">
-//                             {i18n.t('administration.action.delete')}
-//                           </span>
-//                             </Popconfirm>
-//                         </Menu.Item>
-//                 </Menu>
-//             }
-//             trigger={['click']}
-//             onClick={(e) => {
-//                 e.stopPropagation();
-//             }}
-//         >
-//             <div className="administration__action">
-//                 <Image src={DotsSvg} preview={false} />
-//             </div>
-//         </Dropdown>
-//         )
-//
-// }
-const MenuItemTypes = {
-  MENU_ITEM: 'menu_item'
-};
-
-const DraggableMenuItem = ({ id, index, moveMenuItem, children }) => {
-  const [, drag] = useDrag({
-    type: MenuItemTypes.MENU_ITEM,
-    item: { id, index }
-  });
-
-  const [, drop] = useDrop({
-    accept: MenuItemTypes.MENU_ITEM,
-    hover: (draggedItem) => {
-      console.log(draggedItem);
-      console.log(id);
-      if (draggedItem.index !== index) {
-        moveMenuItem(draggedItem.index, index);
-        draggedItem.index = index;
-      }
-    }
-  });
-
-  return (
-    <div ref={(node) => drag(drop(node))} style={{ cursor: 'move' }}>
-      {children}
-    </div>
-  );
-};
 
 const SidebarNav = ({ isAdmin = true }) => {
-  const [menuItems, setMenuItems] = useState([
-    {
-      id: 'home',
-      label: 'Сколько занимает открытие счета1',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ],
-      order: 1
-    },
-    {
-      id: 'about',
-      label: 'Сколько занимает открытие счета2',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ],
-      order: 2
-    },
-    {
-      id: 'home1',
-      label: 'Сколько занимает открытие счета3',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about1',
-      label: 'Сколько занимает открытие счета4',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home2',
-      label: 'Сколько занимает открытие счета5',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about2',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home3',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about3',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home1',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about1',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home2',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about2',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home3',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about3',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'home',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    },
-    {
-      id: 'about',
-      label: 'Сколько занимает открытие счета',
-      questions: [
-        { name: 'Продвинутые функции' },
-        { name: 'Веб версия и мобильная' },
-        { name: 'Основные фуниции' },
-        { name: 'Проблемы с платформой' },
-        { name: 'Веб версия и мобильная' }
-      ]
-    }
-    /* Add more menu items as needed */
-  ]);
+  const [menuItems, setMenuItems] = useState(initialMenuItems);
 
   const moveMenuItem = (fromIndex, toIndex) => {
     const newMenuItems = [...menuItems];
@@ -352,14 +53,22 @@ const SidebarNav = ({ isAdmin = true }) => {
   };
 
   const [openKeys, setOpenKeys] = useState([]); // State to manage open submenus
+  const [categoryModal,setCategoryModal] = useState(false);
+  const [categoryEditModal,setCategoryEditModal] = useState(false);
+
+  const [questionModal,setQuestionModal] = useState(false);
+  const [orderModal,setOrderModal] = useState(false);
 
   const handleMenuOpenChange = (keys) => {
     setOpenKeys(keys);
   };
 
+  const handleAddCategory = () => {
+      setCategoryModal(true)
+  }
+
   return (
-    <DndProvider backend={HTML5Backend}>
-      <Sider width={300} className="site-layout-background">
+      <Sider width={300} className="site-layout-background" >
         <SearchInput />
         <Layout className={'navAdmin'}>
           {isAdmin &&
@@ -394,6 +103,11 @@ const SidebarNav = ({ isAdmin = true }) => {
               key={m.id}
               id={m.id}
               index={index}
+              handleAdd={handleAddCategory}
+              handleDelete={() => {}}
+              handleEdit={() => {setCategoryEditModal(true)}}
+              handleAddQuestion={() => {setQuestionModal(true)}}
+              handleOrderChange={() => {setOrderModal(true)}}
               moveMenuItem={moveMenuItem}>
               <Menu.SubMenu
                 className="submenu"
@@ -408,8 +122,20 @@ const SidebarNav = ({ isAdmin = true }) => {
             </DraggableMenuItem>
           ))}
         </Menu>
+          <ActionsModal
+              categoryModal={categoryModal}
+              setCategoryModal={setCategoryModal}
+              categoryEditModal={categoryEditModal}
+              setCategoryEditModal={setCategoryEditModal}
+              questionModal={questionModal}
+              setQuestionModal={setQuestionModal}
+              orderModal={orderModal}
+              setOrderModal={setOrderModal}
+          />
+        <div>
+          <Footer />
+        </div>
       </Sider>
-    </DndProvider>
   );
 };
 

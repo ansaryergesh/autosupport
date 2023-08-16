@@ -1,5 +1,5 @@
 export const initialValues = {
   id: '',
-  code: '',
+  code: '1',
   name: ''
 };

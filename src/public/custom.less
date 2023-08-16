@@ -35,20 +35,7 @@ body {
   padding: 16px 40px;
   padding-right: 15px;
   margin-right: 25px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.sidebar-nav::-webkit-scrollbar {
-  position: absolute;
-  left: 0;
-  width: 2px;
-  background: #dee0e3;
-}
-
-.sidebar-nav::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  overflow: hidden;
 }
 
 .sidebar-nav::before {
@@ -245,6 +232,32 @@ body {
   }
 }
 
-.custom-menu {
-  background: transparent !important;
+ .custom-menu {
+   background: transparent !important;
+   overflow-y: auto;
+   overflow-x: hidden;
+ }
+
+.switch-container .ant-radio-button-wrapper-checked {
+  background-color: transparent!important;
+}
+
+.switch-container .ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: transparent!important;
+
+}
+.switch-container .ant-radio-button-wrapper:last-child {
+  background-color: transparent!important;
+}
+
+.custom-menu::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: #dee0e3;
+}
+
+.custom-menu::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
