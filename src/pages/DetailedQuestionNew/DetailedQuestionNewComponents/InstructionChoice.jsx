@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from './index.module.less';
 import phone from 'images/phone.jpg';
 import Button from 'components/Button/Button';
+import { i18n } from '../../../utils/i18next.js';
 
 const InstructionChoice = () => {
   const [showVideo, setShowVideo] = useState(true);
@@ -36,7 +37,7 @@ const InstructionChoice = () => {
                 }
                 className="my-paragraph"
                 onClick={handleVisualButtonClick}>
-                Визуальная инструкция
+                {i18n.t('DetailedQuestion.VisualInstruction')}
               </Button>
               <Button
                 type={
@@ -46,7 +47,7 @@ const InstructionChoice = () => {
                 }
                 className="my-paragraph"
                 onClick={handleVideoButtonClick}>
-                Видео инструкция
+                {i18n.t('DetailedQuestion.VideoInstruction')}
               </Button>
             </Space>
           </Row>

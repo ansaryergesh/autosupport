@@ -5,6 +5,7 @@ import Title from 'antd/lib/typography/Title.js';
 import NewLabelsList from 'components/NewLabelsList/NewLabelsList.jsx';
 import ReviewsList from 'components/ReviewsList/ReviewsList';
 import FeedbackAnalytics from 'components/FeedbackAnalytics/FeedbackAnalytics';
+import { i18n } from '../../utils/i18next';
 
 const Feedback = () => {
   return (
@@ -13,8 +14,10 @@ const Feedback = () => {
         <Col span={24}>
           <div className={styles.textBox}>
             <Title level={3}>
-              Вы находитесь в административной панели Freedom Broker <br />
-              Инструкция по работе с тикетами:
+              {i18n.t('Feedback.MainTitle1')}
+            </Title>
+            <Title level={3}>
+              {i18n.t('Feedback.MainTitle2')}
             </Title>
             <p style={{ fontSize: '16px' }}>
               Если ответ на вопрос есть в системе, ответить клиенту по почте со

@@ -3,6 +3,7 @@ import styles from './index.module.less';
 import { Col, Row, DatePicker } from 'antd';
 import Title from 'antd/lib/typography/Title.js';
 import Button from '../Button/Button.jsx';
+import { i18n } from '../../utils/i18next';
 
 const { RangePicker } = DatePicker;
 
@@ -66,7 +67,7 @@ const ReviewsList = () => {
     <div className={styles.box}>
       <Row gutter={[0, 16]}>
         <Col style={{ marginLeft: 'auto' }}>
-          <Title level={3}>Список всех отзывов</Title>
+          <Title level={3}>{i18n.t('Feedback.ListTitle')}</Title>
         </Col>
 
         {/* <Col>

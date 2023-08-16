@@ -1,12 +1,12 @@
 import React from 'react';
 import Title from 'antd/lib/typography/Title.js';
 // eslint-disable-next-line no-unused-vars
-import { Chart as ChartJS } from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 import { useState } from 'react';
 import { UserData, dataList } from './constants.js';
 import styles from './index.module.less';
 import { List, Typography } from 'antd';
+import { i18n } from '../../utils/i18next.js';
 
 const backgroundColor = ['#13AD64', '#0D99FF', '#FF900D', '#120DFF', '#FF0000'];
 const FeedbackAnalytics = () => {
@@ -46,7 +46,7 @@ const FeedbackAnalytics = () => {
 
   return (
     <div>
-      <Title level={3}>Аналитика ответов</Title>
+      <Title level={3}>{i18n.t('Feedback.ResponseAnalytics')}</Title>
 
       <div className={styles.analyticsBox}>
         <div style={{ width: '250px', height: '250px' }}>
