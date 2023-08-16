@@ -12,13 +12,13 @@ import ActionsModal from "./ActionsModal";
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');
 
-  const handleSearch = () => {
-    console.log('searchValue:', searchValue);
-  };
+    const handleSearch = () => {
+        console.log("searchValue:", searchValue);
+    };
 
-  const handleInputChange = (e) => {
-    setSearchValue(e.target.value);
-  };
+    const handleInputChange = (e) => {
+        setSearchValue(e.target.value);
+    };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
