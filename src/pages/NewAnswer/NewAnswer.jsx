@@ -32,7 +32,10 @@ const NewAnswer = () => {
               <Row gutter={16}>
                 <Col span={12}>
                   <Form.Item
-                    rules={[{ required: true, message: `${''} is required` }]}
+                    name="question"
+                    rules={[
+                      { required: true, message: `Question is required` }
+                    ]}
                     className={styles.labelText}
                     label="Тема вопроса:">
                     <Input
@@ -45,7 +48,8 @@ const NewAnswer = () => {
 
                 <Col span={12}>
                   <Form.Item
-                    rules={[{ required: true, message: `${''} is required` }]}
+                    name="email"
+                    rules={[{ required: true, message: `Email is required` }]}
                     className={styles.labelText}
                     label="Почта:">
                     <Input
@@ -58,13 +62,14 @@ const NewAnswer = () => {
 
                 <Col span={24}>
                   <Form.Item
-                    rules={[{ required: true, message: `${''} is required` }]}
+                    name="answer"
+                    rules={[{ required: true, message: `Answer is required` }]}
                     className={styles.labelText}
                     label="Текст вопроса:">
                     <Input.TextArea
                       rows={6}
                       className={styles.inputItem}
-                      placeholder="Введите текст вашего запроса"
+                      placeholder="Введите текст вашего ответа"
                       maxLength={2000}
                     />
                   </Form.Item>

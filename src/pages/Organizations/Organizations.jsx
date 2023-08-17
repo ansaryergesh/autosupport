@@ -45,7 +45,24 @@ const Organizations = () => {
     });
   };
 
-  const handleDeleteSelected = () => {};
+  const handleDeleteSelected = async () => {
+    try {
+      await Promise.all(
+        selectedRowKeys.map((rowId) =>
+          deleteOrganization(rowId).then((res) => {
+            if (res.status === 204) {
+              notification.success({ message: 'Deleted' });
+              getOrganizationsList();
+            }
+          })
+        )
+      );
+      setSelectedRowKeys([]);
+      console.log('Selected rows deleted successfully.');
+    } catch (error) {
+      console.error('Error deleting rows:', error);
+    }
+  };
 
   const rowSelection = {
     selectedRowKeys,
@@ -77,6 +94,8 @@ const Organizations = () => {
             {'Edit'}
           </Button>
           <Popconfirm
+            cancelButtonProps={{ className: 'button-default' }}
+            okButtonProps={{ className: 'button-modal' }}
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.code)}>
             <Button>Delete</Button>

@@ -36,6 +36,20 @@ body {
   padding-right: 15px;
   margin-right: 25px;
   overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: #dee0e3;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .sidebar-nav::before {
@@ -67,7 +81,7 @@ body {
   position: absolute;
   left: 0;
   width: 2px;
-  background: #DEE0E3;
+  background: #dee0e3;
 }
 
 .titleGradient {

@@ -1,6 +1,11 @@
 import users from 'images/users.svg';
 import reviews from 'images/message-square-lines.svg';
 import categories from 'images/edit-2.svg';
+import keywords from 'images/keywords.svg';
+import tags from 'images/tags.svg';
+import organizations from 'images/organizations.svg';
+import resources from 'images/resources.svg';
+
 export const adminNavItems = [
   {
     name: 'employee',
@@ -14,28 +19,28 @@ export const adminNavItems = [
   },
   {
     name: 'categories',
-    path: '/category',
+    path: '/detailedQuestionNew',
     icon: categories
   },
   {
     name: 'keywords',
     path: '/keywords',
-    icon: reviews
+    icon: keywords
   },
   {
     name: 'tags',
     path: '/tags',
-    icon: reviews
+    icon: tags
   },
   {
     name: 'resources',
     path: '/resources',
-    icon: reviews
+    icon: resources
   },
   {
     name: 'organizations',
     path: '/organizations',
-    icon: reviews
+    icon: organizations
   }
 ];
 

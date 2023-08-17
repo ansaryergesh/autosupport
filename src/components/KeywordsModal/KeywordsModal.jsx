@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, notification } from 'antd';
+import { Form, Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageKeyword } from '../../service/Keywords/index.js';
@@ -35,14 +35,27 @@ const KeywordsModal = ({
         title={editPage ? 'Edit keyword' : 'Add keyword'}
         confirmLoading={loading}
         open={isModalOpen}
-        onOk={handleSubmit}
         onCancel={handleModal}
-        okButtonProps={{ className: 'button-modal' }}
+        okButtonProps={{
+          className: 'button-modal',
+          htmlType: 'submit',
+          form: 'form'
+        }}
         cancelButtonProps={{ className: 'button-default' }}>
-        <Input
-          value={record.text}
-          onChange={(e) => setRecord({ ...record, text: e.target.value })}
-        />
+        <Form
+          id="form"
+          layout="vertical"
+          onFinish={handleSubmit}
+          initialValues={record}>
+          <Form.Item
+            name="text"
+            rules={[{ required: true, message: 'Keyword is required!' }]}>
+            <Input
+              value={record.text}
+              onChange={(e) => setRecord({ ...record, text: e.target.value })}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );
