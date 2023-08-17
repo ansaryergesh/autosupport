@@ -1,14 +1,16 @@
+import {LANG_KEY} from "../../constants/index.js";
+
 export const initialCategoryContents = [
   {
     name: '',
-    langKey: 'ru',
+    langKey: LANG_KEY.RU,
   },
   {
     name: '',
-    langKey: 'kz',
+    langKey: LANG_KEY.KZ,
   },
   {
     name: '',
-    langKey: 'en',
+    langKey: LANG_KEY.EN,
   },
 ];
