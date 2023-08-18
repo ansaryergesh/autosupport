@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
-// import { tempData } from './constants';
 import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
 import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
 import { initialValues } from './constants.js';
@@ -43,7 +42,25 @@ const Keywords = () => {
     });
   };
 
-  const handleDeleteSelected = () => {};
+  const handleDeleteSelected = async () => {
+    try {
+      await Promise.all(
+        selectedRowKeys.map((rowId) =>
+          deleteKeyWord(rowId).then((res) => {
+            if (res.status === 204) {
+              notification.success({ message: 'Deleted' });
+              getKeywordsList();
+            }
+          })
+        )
+      );
+
+      setSelectedRowKeys([]);
+      console.log('Selected rows deleted successfully.');
+    } catch (error) {
+      console.error('Error deleting rows:', error);
+    }
+  };
 
   const rowSelection = {
     selectedRowKeys,
@@ -75,6 +92,8 @@ const Keywords = () => {
             {'Edit'}
           </Button>
           <Popconfirm
+            cancelButtonProps={{ className: 'button-default' }}
+            okButtonProps={{ className: 'button-modal' }}
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.id)}>
             <Button>Delete</Button>

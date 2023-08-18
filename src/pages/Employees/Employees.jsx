@@ -41,6 +41,8 @@ const Employees = () => {
         <Space size="middle">
           <EmployeeModal btnType="default" btnName="Редактировать" />
           <Popconfirm
+            cancelButtonProps={{ className: 'button-default' }}
+            okButtonProps={{ className: 'button-modal' }}
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.key)}>
             <Button>Удалить</Button>

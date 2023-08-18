@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, notification } from 'antd';
+import { Form, Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageTag } from '../../service/Tags/index.js';
@@ -35,14 +35,28 @@ const TagsModal = ({
         title={editPage ? 'Edit tag' : 'Add tag'}
         confirmLoading={loading}
         open={isModalOpen}
-        onOk={handleSubmit}
         onCancel={handleModal}
-        okButtonProps={{ className: 'button-modal' }}
+        okButtonProps={{
+          className: 'button-modal',
+          htmlType: 'submit',
+          form: 'form'
+        }}
         cancelButtonProps={{ className: 'button-default' }}>
-        <Input
-          value={record.text}
-          onChange={(e) => setRecord({ ...record, text: e.target.value })}
-        />
+        <Form id="form" layout="vertical" onFinish={handleSubmit}>
+          <Form.Item
+            name="text"
+            rules={[
+              {
+                required: true,
+                message: 'Tag is required'
+              }
+            ]}>
+            <Input
+              value={record.text}
+              onChange={(e) => setRecord({ ...record, text: e.target.value })}
+            />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );

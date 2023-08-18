@@ -3,11 +3,11 @@ import { Image, Input, Layout, Menu, Typography} from 'antd';
 import { i18n } from 'utils/i18next.js';
 import {adminNavItems, initialMenuItems} from './constants.js';
 import { Link } from 'react-router-dom';
-const { Sider } = Layout;
-import Footer from "../Footer/Footer.jsx";
-import SideBarButtons from "./SideBarButtons.jsx";
-import DraggableMenuItem from "./DraggableMenuItem.jsx";
 import ActionsModal from "./ActionsModal";
+import DraggableMenuItem from "./DraggableMenuItem.jsx";
+import SideBarButtons from "./SideBarButtons.jsx";
+import Footer from "../Footer/Footer.jsx";
+const { Sider } = Layout;
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -51,6 +51,10 @@ const SidebarNav = ({ isAdmin = true }) => {
     newMenuItems.splice(toIndex, 0, movedItem);
     setMenuItems(newMenuItems);
   };
+
+    const moveMenuItemQuestion = (fromIndex, toIndex) => {
+        console.log(fromIndex, toIndex)
+    }
 
   const [openKeys, setOpenKeys] = useState([]); // State to manage open submenus
   const [categoryModal,setCategoryModal] = useState(false);
@@ -109,14 +113,21 @@ const SidebarNav = ({ isAdmin = true }) => {
               handleAddQuestion={() => {setQuestionModal(true)}}
               handleOrderChange={() => {setOrderModal(true)}}
               moveMenuItem={moveMenuItem}>
+
               <Menu.SubMenu
                 className="submenu"
                 key={`submenu_${index}_1`}
                 title={m.label}>
                 {m.questions.map((q, qIndex) => (
-                  <Menu.Item key={`question_${index}_${qIndex}`}>
-                    <Link to={'/detailedQuestion'}>{q.name}</Link>
-                  </Menu.Item>
+                    <DraggableMenuItem
+                        key={`question_${index}_${qIndex}`}
+                        moveMenuItem={moveMenuItemQuestion}
+                        index={`question_${index}_i${qIndex}`}>
+                        <Menu.Item key={`question_${index}_${qIndex}`}>
+                            <Link to={'/detailedQuestion'}>{q.name}</Link>
+                        </Menu.Item>
+                    </DraggableMenuItem>
+
                 ))}
               </Menu.SubMenu>
             </DraggableMenuItem>
