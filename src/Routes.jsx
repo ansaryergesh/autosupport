@@ -4,7 +4,7 @@ import Main from './layouts/Main/Main.jsx';
 import Home from './pages/Home/Home.jsx';
 import SignIn from './pages/Auth/SignIn/SignIn.jsx';
 import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
-import DetailedQuestionAdmin from './pages/DetailedQuestionAdmin/DetailedQuestionAdmin.jsx';
+import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
 import PasswordRecovery from './pages/Auth/PasswordRecovery/PasswordRecovery.jsx';
 import CodeVerify from './pages/Auth/CodeVerify/CodeVerify.jsx';
 import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
@@ -76,8 +76,8 @@ const Routes = () => {
         <RouteWithLayout
           exact
           layout={Main}
-          component={DetailedQuestionAdmin}
-          path={'/detailedQuestionAdmin'}
+          component={QuestionAnswerContent}
+          path={`/detailedQuestionAdmin/:id`}
         />
         <RouteWithLayout
           exact
@@ -89,7 +89,7 @@ const Routes = () => {
           exact
           layout={Main}
           component={DetailedQuestionNewAdmin}
-          path={'/detailedQuestionNewAdmin'}
+          path={'/detailedQuestionNewAdmin/:id'}
         />
         <RouteWithLayout
           exact

@@ -1,60 +1,75 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from "prop-types";
 import Input from "../../Input/index.js";
 import {Form, Modal, notification} from "antd";
 import Button from "../../Button/Button.jsx";
 import {initialQuestion} from "../constants.js";
-import {createCategoryQuestion} from "../../../service/Category/index.js";
-const QuestionCreateModal = ({
+import {editCategoryQuestion} from "../../../service/Category/index.js";
+const QuestionEditModal = ({
                                  isModalOpen = false,
                                  handleModal,
-                                 categoryId,
-    getCategoryAll,
+                                 questionInfo,
+                                 getCategoryAll,
                              }) => {
     const [loading, setLoading] = useState(false);
-    const [form] = Form.useForm();
-
     const handleSubmit = (values) => {
-        console.log(categoryId)
-
-        createCategoryQuestion({categorie:{id: categoryId}, ...values}).then(res=> {
+        setLoading(true)
+        editCategoryQuestion({...questionInfo, ...values}).then(res=> {
             console.log(res)
-            notification.success({message: 'question created'})
-            form.resetFields();
-            getCategoryAll();
+            notification.success({message: "Edited category"});
             handleModal();
-        }).finally(() => {
-            setLoading(false);
-        })
+            getCategoryAll();
+
+        }).finally(() => setLoading(false));
+
     }
 
+    const {questionContents} = questionInfo;
+    console.log(questionContents)
+    const mergedCategories = initialQuestion?.map((initialCategory) => {
+        const existingCategory = questionContents?.find(
+            (item) => item.langKey === initialCategory.langKey
+        );
+
+        if (existingCategory) {
+            return {
+                ...initialCategory,
+                title: existingCategory.title,
+                stepDescription: existingCategory.stepDescription,
+                id: existingCategory.id,
+
+            };
+        }
+
+        return initialCategory;
+    });
+    const finalContent = questionInfo !== {} ? mergedCategories : initialQuestion;
+    console.log(questionInfo)
     return (
         <Modal
-            title={'Add question'}
+            title={'Edit category'}
             confirmLoading={loading}
             open={isModalOpen}
             footer={null}
-            onCancel={() => {
-                handleModal();
-                form.resetFields()
-            }}>
+            onCancel={handleModal}>
 
             <Form
-                form={form}
                 layout="vertical"
-                initialValues={{initialQuestion}}
+                initialValues={{finalContent}}
                 onFinish={handleSubmit}
                 autoComplete="off"
             >
-                {initialQuestion.map((question, index) => (
+                {finalContent.map((question, index) => (
                     <Form.Item key={index} label={`Title ${question.langKey}`}>
                         <Form.Item
+                            initialValue={question?.title}
                             name={['questionContents', index, 'title']}
                             rules={[{ required: true, message: 'title is required' }]}
                         >
                             <Input placeholder={`Enter name in ${question.langKey}`} />
                         </Form.Item>
                         <Form.Item
+                            initialValue={question?.stepDescription}
                             name={['questionContents', index, 'stepDescription']}
                             rules={[{ required: true, message: 'description is required' }]}
                         >
@@ -63,6 +78,13 @@ const QuestionCreateModal = ({
                         <Form.Item
                             name={['questionContents', index, 'langKey']}
                             initialValue={question.langKey}
+                            style={{ display: 'none' }}
+                        >
+                            <Input type="hidden" />
+                        </Form.Item>
+                        <Form.Item
+                            name={['questionContents', index, 'id']}
+                            initialValue={question.id}
                             style={{ display: 'none' }}
                         >
                             <Input type="hidden" />
@@ -79,11 +101,10 @@ const QuestionCreateModal = ({
         </Modal>
     );
 };
-QuestionCreateModal.propTypes = {
+QuestionEditModal.propTypes = {
     isModalOpen: PropTypes.bool,
     handleModal: PropTypes.func,
-    categoryId: PropTypes.number,
+    questionInfo: PropTypes.object,
     getCategoryAll: PropTypes.func,
-
 }
-export default QuestionCreateModal;
+export default QuestionEditModal;

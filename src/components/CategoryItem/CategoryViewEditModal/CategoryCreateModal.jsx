@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from "prop-types";
 import Input from "../../Input/index.js";
-import {Form, Modal} from "antd";
+import {Form, Modal, notification} from "antd";
 import Button from "../../Button/Button.jsx";
 import {initialCategoryContents} from "../constants.js";
 import {createCategory} from "../../../service/Category/index.js";
 const CategoryCreateModal = ({
     isModalOpen = false,
     handleModal,
+    getCategoryAll,
 }) => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -16,6 +17,10 @@ const CategoryCreateModal = ({
         createCategory({...values})
             .then(res=> {
                 console.log(res)
+                notification.success({message: 'category created'})
+                handleModal();
+                getCategoryAll();
+                form.resetFields()
             })
             .finally(() => {
                 setLoading(false)
@@ -71,5 +76,6 @@ const CategoryCreateModal = ({
 CategoryCreateModal.propTypes = {
     isModalOpen: PropTypes.bool,
     handleModal: PropTypes.func,
+    getCategoryAll: PropTypes.func,
 }
 export default CategoryCreateModal;

@@ -44,6 +44,8 @@ axiosInstanceWithHeader.interceptors.response.use(
     if (error.response?.status === 401) {
       // logout();
       notification.error({message:"Не авторизован"})
+      // localStorage.removeItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
+      // location.href='/sign-in'
     } else if (error.response?.status === 403) {
       notification.error({
         message: 'Нет доступа',
