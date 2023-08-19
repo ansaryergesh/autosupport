@@ -1,4 +1,4 @@
-import {Card, Typography} from "antd";
+import {Typography} from "antd";
 import React from 'react'
 import styles from './index.module.less';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ const CardComponent = (props) => {
 
     return (
         <Link to={'/detailedQuestionNewAdmin'}>
-            <Card className={styles.card} bordered={false}>
+            <div className={styles.card}>
                 <div className={"my-heading-2"}>
                     <div className={styles.title}>
                         <Text ellipsis={{ rows: 2, expandable: false }}>
@@ -31,9 +31,9 @@ const CardComponent = (props) => {
                         </Text>
                     )}
                 </div>
-            </Card>
+            </div>
         </Link>
     )
 }
 
-export default CardComponent
+export default CardComponent;

@@ -19,15 +19,14 @@ const QuestionDescription = () => {
         <div className={styles.content}>
             <Space direction="vertical" size={15}>
                 <div>
-                    <Space direction='vertical' size={20}>
                         <p className='my-heading-2'>{i18n.t('DetailedQuestion.DescriptionTitle')}</p>
+
                         <Space direction="vertical" size="small">
                             {dataStep.map((item, index) => (
                                 <p key={index} className="my-paragraph">
                                     {item}
                                 </p>
                             ))}
-                        </Space>
                     </Space>
                 </div>
                 <Space direction="vertical" size={25}>
