@@ -90,14 +90,17 @@ body {
 }
 
 .button-primary {
-  border: 1px solid #9debb0;
-  border-radius: 8px;
-  color: #00b323;
+  background: @primary-color;
+  border: none;
+  border-radius: 16px;
+  color: black;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    border: 1px solid #9debb0 !important;
-    color: #00b323 !important;
+    background: #fff;
+    border: none !important;
+    color: black !important;
+    box-shadow: none !important;
   }
 }
 
@@ -130,16 +133,14 @@ body {
 }
 
 .button-secondary-active {
-  background: #13ad64;
-  color: #fff;
+  background: rgba(19, 173, 100, 0.1);
+  color: #13ad64;
+  border: none;
   border-radius: 100px;
-  border-color: #13ad64;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background: #13ad64 !important;
-    color: #fff !important;
-    border-color: #13ad64 !important;
+    color: #13ad64 !important;
   }
 }
 
@@ -148,9 +149,8 @@ body {
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background: #13ad64 !important;
-    color: #fff !important;
-    border-color: #13ad64 !important;
+    background: rgba(19, 173, 100, 0.1) !important;
+    color: #13ad64 !important;
   }
 }
 
@@ -244,22 +244,21 @@ body {
   }
 }
 
- .custom-menu {
-   background: transparent !important;
-   overflow-y: auto;
-   overflow-x: hidden;
- }
+.custom-menu {
+  background: transparent !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .switch-container .ant-radio-button-wrapper-checked {
-  background-color: transparent!important;
+  background-color: transparent !important;
 }
 
 .switch-container .ant-radio-button-wrapper:not(:first-child)::before {
-  background-color: transparent!important;
-
+  background-color: transparent !important;
 }
 .switch-container .ant-radio-button-wrapper:last-child {
-  background-color: transparent!important;
+  background-color: transparent !important;
 }
 
 .custom-menu::-webkit-scrollbar {
@@ -273,6 +272,25 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
+
+.ant-checkbox-checked .ant-checkbox-inner,
+.ant-checkbox-checked .ant-checkbox-input:focus + .ant-checkbox-inner,
+.ant-checkbox:hover {
+  background-color: #13ad64 !important;
+  border-color: #13ad64 !important;
+}
+
+.ant-checkbox-input:hover + .ant-checkbox-inner {
+  border-color: #13ad64 !important;
+}
+
+.ant-select-selector {
+  &:hover,
+  :focus {
+    border-color: #4ec202 !important;
+  }
+}
+
 
 .constMenu .ant-menu-submenu-arrow {
   display: none;

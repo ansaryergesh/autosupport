@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
-// import { tempData } from './constants';
 import ResourcesModal from 'components/ResourcesModal/ResourcesModal.jsx';
 import { getResources, deleteResource } from '../../service/Resources/index.js';
 import { initialValues } from './constants.js';
 
 const Resources = () => {
   const [data, setData] = useState([]);
-
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [record, setRecord] = useState(initialValues);
@@ -75,6 +73,10 @@ const Resources = () => {
       dataIndex: 'id'
     },
     {
+      title: 'Code',
+      dataIndex: 'code'
+    },
+    {
       title: 'Name',
       dataIndex: 'name'
     },
@@ -139,7 +141,6 @@ const Resources = () => {
 
       <ResourcesModal
         record={record}
-        setRecord={setRecord}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
         getList={getResourcesList}

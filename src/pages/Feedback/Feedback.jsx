@@ -13,12 +13,8 @@ const Feedback = () => {
       <Row gutter={[0, 24]}>
         <Col span={24}>
           <div className={styles.textBox}>
-            <Title level={3}>
-              {i18n.t('Feedback.MainTitle1')}
-            </Title>
-            <Title level={3}>
-              {i18n.t('Feedback.MainTitle2')}
-            </Title>
+            <Title level={3}>{i18n.t('Feedback.MainTitle1')}</Title>
+            <Title level={3}>{i18n.t('Feedback.MainTitle2')}</Title>
             <p style={{ fontSize: '16px' }}>
               Если ответ на вопрос есть в системе, ответить клиенту по почте со
               ссылкой на ответ <br />

@@ -7,7 +7,6 @@ import { initialValues } from './constants.js';
 
 const Keywords = () => {
   const [data, setData] = useState([]);
-
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [record, setRecord] = useState(initialValues);
@@ -123,7 +122,12 @@ const Keywords = () => {
               {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
             </span>
           </div>
-          <Button type="modal" onClick={handleModal}>
+          <Button
+            type="modal"
+            onClick={() => {
+              setRecord(initialValues);
+              handleModal();
+            }}>
             Add item
           </Button>
         </div>
@@ -138,7 +142,6 @@ const Keywords = () => {
 
       <KeywordsModal
         record={record}
-        setRecord={setRecord}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
         getList={getKeywordsList}

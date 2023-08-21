@@ -28,12 +28,12 @@ const NewRequest = () => {
     <div>
       <Row gutter={16}>
         <Col style={{ margin: '0 auto' }}>
-          <Image src={notFound} alt="Illustrationw" preview={false} />
+          <Image src={notFound} alt="Illustration" preview={false} />
         </Col>
         <Col span={24} className={styles.textContainer}>
-          <h3 className={styles.heading}>
+          <h2 className={styles.heading}>
             К сожалению, мы ничего не нашли по Вашему запросу
-          </h3>
+          </h2>
 
           <p className={styles.paragraph}>
             Вы можете оставить заявку со своим вопросом, мы обязательно вам
@@ -46,7 +46,6 @@ const NewRequest = () => {
           <Form
             requiredMark={false}
             name="basic"
-            initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -59,7 +58,7 @@ const NewRequest = () => {
                     { required: true, message: 'Please input your question!' }
                   ]}>
                   <Input
-                    className={styles.inputStyle}
+                    className={styles.inputItem}
                     placeholder="Тема вопроса"
                     maxLength={150}
                   />
@@ -73,7 +72,7 @@ const NewRequest = () => {
                     { required: true, message: 'Please input your email!' }
                   ]}>
                   <Input
-                    className={styles.inputStyle}
+                    className={styles.inputItem}
                     placeholder="Введите почту"
                     maxLength={150}
                   />
@@ -105,7 +104,7 @@ const NewRequest = () => {
               </Col>
             </Row>
             <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button type="default" htmlType="submit">
+              <Button type="primary" htmlType="submit">
                 Отправить
               </Button>
             </Form.Item>
