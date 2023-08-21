@@ -7,7 +7,6 @@ import { initialValues } from './constants.js';
 
 const Tags = () => {
   const [data, setData] = useState([]);
-
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [record, setRecord] = useState(initialValues);
@@ -139,7 +138,6 @@ const Tags = () => {
 
       <TagsModal
         record={record}
-        setRecord={setRecord}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
         getList={getTagsList}

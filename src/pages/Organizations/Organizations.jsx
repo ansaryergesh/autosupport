@@ -10,7 +10,6 @@ import { initialValues } from './constants.js';
 
 const Organizations = () => {
   const [data, setData] = useState([]);
-
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [record, setRecord] = useState(initialValues);
@@ -73,7 +72,11 @@ const Organizations = () => {
 
   const columns = [
     {
-      title: 'code',
+      title: 'Id',
+      dataIndex: 'id'
+    },
+    {
+      title: 'Code',
       dataIndex: 'code'
     },
     {
@@ -97,7 +100,7 @@ const Organizations = () => {
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.code)}>
+            onConfirm={() => handleDelete(record.id)}>
             <Button>Delete</Button>
           </Popconfirm>
         </Space>
@@ -140,7 +143,6 @@ const Organizations = () => {
 
       <OrganizationsModal
         record={record}
-        setRecord={setRecord}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
         getList={getOrganizationsList}

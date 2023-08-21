@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
@@ -9,15 +9,19 @@ const ResourcesModal = ({
   isModalOpen = false,
   handleModal = () => {},
   getList = () => {},
-  record = initialValues,
-  setRecord = () => {}
+  record = initialValues
 }) => {
   const [loading, setLoading] = useState(false);
   const editPage = record.id;
+  const [form] = Form.useForm();
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    form.setFieldsValue(record);
+  }, [record, form]);
+
+  const handleSubmit = (values) => {
     setLoading(true);
-    manageResources(record)
+    manageResources(values)
       .then((res) => {
         handleModal();
         getList();
@@ -27,6 +31,7 @@ const ResourcesModal = ({
       })
       .finally(() => {
         setLoading(false);
+        form.resetFields();
       });
   };
   return (
@@ -35,17 +40,36 @@ const ResourcesModal = ({
         title={editPage ? 'Edit resource' : 'Add resource'}
         confirmLoading={loading}
         open={isModalOpen}
-        onCancel={handleModal}
-        okButtonProps={{ className: 'button-primary' }}
+        onCancel={() => {
+          form.resetFields();
+          handleModal();
+        }}
+        okButtonProps={{
+          className: 'button-modal',
+          htmlType: 'submit',
+          form: 'form'
+        }}
         cancelButtonProps={{ className: 'button-default' }}>
-        <Form id="form" layout="vertical" onFinish={handleSubmit}>
+        <Form
+          form={form}
+          id="form"
+          layout="vertical"
+          onFinish={(values) => {
+            handleSubmit(values);
+          }}
+          initialValues={record}>
+          <Form.Item name="id" style={{ display: 'none' }}>
+            <Input />
+          </Form.Item>
           <Form.Item
-            name="text"
+            name="code"
+            rules={[{ required: true, message: 'Code is required!' }]}>
+            <Input placeholder="Code" />
+          </Form.Item>
+          <Form.Item
+            name="name"
             rules={[{ required: true, message: 'Resource is required!' }]}>
-            <Input
-              value={record.name}
-              onChange={(e) => setRecord({ ...record, name: e.target.value })}
-            />
+            <Input placeholder="Resource name" />
           </Form.Item>
         </Form>
       </Modal>
@@ -57,8 +81,7 @@ ResourcesModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   getList: PropTypes.func,
-  record: PropTypes.object,
-  setRecord: PropTypes.func
+  record: PropTypes.object
 };
 
 export default ResourcesModal;

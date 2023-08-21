@@ -3,19 +3,18 @@ import styles from './index.module.less';
 import { Form, Row, Col } from 'antd';
 import Input from 'components/Input/Input.jsx';
 import Button from 'components/Button/Button.jsx';
-import Title from 'antd/lib/typography/Title.js';
 
 const NewAnswer = () => {
   return (
     <div>
       <div>
-        <Row gutter={[16, 16]}>
+        <Row gutter={16}>
           <Col span={24} className={styles.textBox}>
-            <Title level={3}>
+            <h2 className={styles.heading}>
               Вы находитесь в административной панели Freedom Broker <br />
               Инструкция по работе с тикетами:
-            </Title>
-            <p style={{ fontSize: '16px' }}>
+            </h2>
+            <p className={styles.paragraph} style={{ fontSize: '16px' }}>
               Если ответ на вопрос есть в системе, ответить клиенту по почте со
               ссылкой на ответ <br />
               Если ответа нет в системе можно создать такой вопрос-ответ в
@@ -28,30 +27,31 @@ const NewAnswer = () => {
           </Col>
 
           <Col span={24}>
-            <Form className={styles.formBox} layout="vertical">
+            <Form
+              requiredMark={false}
+              className={styles.formBox}
+              layout="vertical">
               <Row gutter={16}>
-                <Col span={12}>
+                <Col style={{ marginLeft: 'auto' }} span={9}>
                   <Form.Item
                     name="question"
                     rules={[
                       { required: true, message: `Question is required` }
                     ]}
-                    className={styles.labelText}
-                    label="Тема вопроса:">
+                    className={styles.labelText}>
                     <Input
                       className={styles.inputItem}
-                      placeholder="Введите тему вопроса"
+                      placeholder="Тема вопроса"
                       maxLength={150}
                     />
                   </Form.Item>
                 </Col>
 
-                <Col span={12}>
+                <Col style={{ marginRight: 'auto' }} span={9}>
                   <Form.Item
                     name="email"
                     rules={[{ required: true, message: `Email is required` }]}
-                    className={styles.labelText}
-                    label="Почта:">
+                    className={styles.labelText}>
                     <Input
                       className={styles.inputItem}
                       placeholder="Введите почту"
@@ -60,22 +60,22 @@ const NewAnswer = () => {
                   </Form.Item>
                 </Col>
 
-                <Col span={24}>
+                <Col style={{ margin: 'auto' }} span={18}>
                   <Form.Item
                     name="answer"
                     rules={[{ required: true, message: `Answer is required` }]}
                     className={styles.labelText}
-                    label="Текст вопроса:">
+                    label="Ответ">
                     <Input.TextArea
                       rows={6}
                       className={styles.inputItem}
-                      placeholder="Введите текст вашего ответа"
+                      placeholder="Начните вводить..."
                       maxLength={2000}
                     />
                   </Form.Item>
                 </Col>
 
-                <Col style={{ marginLeft: 'auto' }}>
+                <Col style={{ margin: 'auto' }}>
                   <Form.Item>
                     <p className={styles.handler}>
                       Обработан менеджером Жунисхан Аружан 10.07.2023 г в 11:23
@@ -84,7 +84,7 @@ const NewAnswer = () => {
                 </Col>
               </Row>
               <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button type="default" htmlType="submit">
+                <Button type="primary" htmlType="submit">
                   Обработан
                 </Button>
               </Form.Item>

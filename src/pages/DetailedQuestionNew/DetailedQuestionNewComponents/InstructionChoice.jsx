@@ -32,7 +32,7 @@ const InstructionChoice = () => {
               <Button
                 type={
                   selectedVideoButton === 'Визуальная инструкция'
-                    ? 'primary'
+                    ? 'default-active'
                     : 'default'
                 }
                 className="my-paragraph"
@@ -42,7 +42,7 @@ const InstructionChoice = () => {
               <Button
                 type={
                   selectedVideoButton === 'Видео инструкция'
-                    ? 'primary'
+                    ? 'default-active'
                     : 'default'
                 }
                 className="my-paragraph"

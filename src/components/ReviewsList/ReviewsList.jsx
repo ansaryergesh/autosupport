@@ -88,7 +88,9 @@ const ReviewsList = () => {
         ))}
 
         <Col style={{ marginLeft: 'auto' }}>
-          <Button className={styles.btnDownload}>Скачать отзывы</Button>
+          <Button type="primary" className={styles.btnDownload}>
+            Скачать отзывы
+          </Button>
         </Col>
       </Row>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Modal, notification } from 'antd';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
@@ -9,15 +9,19 @@ const KeywordsModal = ({
   isModalOpen = false,
   handleModal = () => {},
   getList = () => {},
-  record = initialValues,
-  setRecord = () => {}
+  record = initialValues
 }) => {
   const [loading, setLoading] = useState(false);
   const editPage = record.id;
+  const [form] = Form.useForm();
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    form.setFieldsValue(record);
+  }, [record, form]);
+
+  const handleSubmit = (values) => {
     setLoading(true);
-    manageKeyword(record)
+    manageKeyword(values)
       .then((res) => {
         handleModal();
         getList();
@@ -27,6 +31,7 @@ const KeywordsModal = ({
       })
       .finally(() => {
         setLoading(false);
+        form.resetFields();
       });
   };
   return (
@@ -35,7 +40,10 @@ const KeywordsModal = ({
         title={editPage ? 'Edit keyword' : 'Add keyword'}
         confirmLoading={loading}
         open={isModalOpen}
-        onCancel={handleModal}
+        onCancel={() => {
+          form.resetFields();
+          handleModal();
+        }}
         okButtonProps={{
           className: 'button-modal',
           htmlType: 'submit',
@@ -43,17 +51,20 @@ const KeywordsModal = ({
         }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Form
+          form={form}
           id="form"
           layout="vertical"
-          onFinish={handleSubmit}
+          onFinish={(values) => {
+            handleSubmit(values);
+          }}
           initialValues={record}>
           <Form.Item
             name="text"
             rules={[{ required: true, message: 'Keyword is required!' }]}>
-            <Input
-              value={record.text}
-              onChange={(e) => setRecord({ ...record, text: e.target.value })}
-            />
+            <Input placeholder="Keyword" />
+          </Form.Item>
+          <Form.Item name="id" style={{ display: 'none' }}>
+            <Input />
           </Form.Item>
         </Form>
       </Modal>
@@ -65,8 +76,7 @@ KeywordsModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   getList: PropTypes.func,
-  record: PropTypes.object,
-  setRecord: PropTypes.func
+  record: PropTypes.object
 };
 
 export default KeywordsModal;
