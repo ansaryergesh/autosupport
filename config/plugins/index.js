@@ -32,8 +32,7 @@ const dev = [
         'react/prop-types': 'off',
         'no-unused-vars': [
           'error',
-          { varsIgnorePattern: 'React' },
-          { varsIgnorePattern: 'ChartJS' }
+          { "varsIgnorePattern": "React|ChartJS" }
         ]
       }
     }

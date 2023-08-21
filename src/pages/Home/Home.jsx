@@ -18,7 +18,7 @@ const Home = () => {
     }
     return (
         <div>
-            <JHeader />
+            <JHeader isQuestion={false}/>
             <Row gutter={[24,24]}>
                 {allCategories.map((item,index) => (
                     <Col key={index} span={8}>

@@ -23,19 +23,6 @@ export const getCategoryById = (id) => {
   return axiosInstanceWithHeader.get(`/api/admin/categories/${id}`);
 };
 
-export const createCategoryQuestion = (data) => {
-  return axiosInstanceWithHeader.post('/api/admin/questions',data);
-};
-
-export const getQuestionById = (id) => {
-  return axiosInstanceWithHeader.get(`/api/admin/questions/${id}`);
-};
-
-
-export const editCategoryQuestion = (data) => {
-  return axiosInstanceWithHeader.put(`/api/admin/questions/${data.id}`,data);
-};
-
-export const deleteQuestion = (id) => {
-  return axiosInstanceWithHeader.delete(`/api/admin/questions/${id}`);
-};
+export const changeOrderCategory = (categoryId,orderNumber) => {
+  return axiosInstanceWithHeader.patch(`/api/admin/categories/${categoryId}/orders/${orderNumber}`)
+}

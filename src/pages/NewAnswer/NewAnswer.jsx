@@ -75,7 +75,7 @@ const NewAnswer = () => {
                   </Form.Item>
                 </Col>
 
-                <Col style={{ margin: 'auto' }}>
+                <Col style={{ margin: 'auto', textAlign:'center' }} span={24}>
                   <Form.Item>
                     <p className={styles.handler}>
                       Обработан менеджером Жунисхан Аружан 10.07.2023 г в 11:23

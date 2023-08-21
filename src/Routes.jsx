@@ -4,7 +4,6 @@ import Main from './layouts/Main/Main.jsx';
 import Home from './pages/Home/Home.jsx';
 import SignIn from './pages/Auth/SignIn/SignIn.jsx';
 import DetailedQuestion from './pages/DetailedQuestion/DetailedQuestion.jsx';
-import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
 import PasswordRecovery from './pages/Auth/PasswordRecovery/PasswordRecovery.jsx';
 import CodeVerify from './pages/Auth/CodeVerify/CodeVerify.jsx';
 import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
@@ -19,8 +18,8 @@ import Tags from './pages/Tags/Tags.jsx';
 import Organizations from './pages/Organizations/Organizations.jsx';
 import Resources from './pages/Resources/Resources.jsx';
 import Сategory from './pages/Сategory/Сategory.jsx';
-import DetailedQuestionNew from './pages/DetailedQuestionNew/DetailedQuestionNew.jsx';
-import DetailedQuestionNewAdmin from './pages/DetailedQuestionNewAdmin/DetailedQuestionNewAdmin.jsx';
+import DetailedQuestionNewAdmin from './pages/DetailedQuestionAdmin/DetailedQuestionAdmin.jsx';
+import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
 
 
 function RouteWithLayout({
@@ -82,13 +81,13 @@ const Routes = () => {
         <RouteWithLayout
           exact
           layout={Main}
-          component={DetailedQuestionNew}
+          component={DetailedQuestionNewAdmin}
           path={'/detailedQuestionNew'}
         />
         <RouteWithLayout
           exact
           layout={Main}
-          component={DetailedQuestionNewAdmin}
+          component={QuestionAnswerContent}
           path={'/detailedQuestionNewAdmin/:id'}
         />
         <RouteWithLayout
@@ -144,7 +143,7 @@ const Routes = () => {
           exact
           layout={Main}
           component={Сategory}
-          path={'/category'}
+          path={'/category/:id'}
         />
       </Switch>
     </React.Fragment>

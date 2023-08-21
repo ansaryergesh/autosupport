@@ -1,55 +1,46 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Col, Row } from 'antd';
 import Title from 'antd/lib/typography/Title.js';
 import CategoryItem from 'components/CategoryItem/CategoryItem';
-
-const data = [
-  {
-    title: 'Что это',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'Зачем она нужна',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'titl1',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'titl1',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'titl1',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'titl1',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'titl1',
-    questions: ['Для чего нужен брокерский счет?']
-  },
-  {
-    title: 'titl1',
-    questions: ['Для чего нужен брокерский счет?']
-  }
-];
+import {useParams} from "react-router";
+import {editCategoryQuestionPatch, getQuestions} from "../../service/Question/index.js";
+import {getLocale} from "../../utils/i18next.js";
 
 function Сategory() {
-  const [editableData, setEditableData] = useState(data);
+  const {id} = useParams();
+  const [questions, setQuestions] = useState([]);
 
+  useEffect(() => {
+    getAllQuestion();
+  },[id])
+
+  const getAllQuestion = () => {
+    const params = {
+      langKey: getLocale().toUpperCase(),
+      categorieId: id,
+      pageSize: 10,
+    }
+    getQuestions(params).then(res=> {
+      setQuestions(res.data)
+    })
+  }
+
+  const editQuestion = (question) => {
+    return editCategoryQuestionPatch(question)
+  }
   return (
     <div>
       <Title style={{ marginBottom: '48px' }}>
         Торговая площадка-Tradernet global
       </Title>
       <Row gutter={[16, 16]}>
-        {editableData.map((item, index) => (
+        {questions?.map((item, index) => (
           <Col key={index} span={12}>
-            <CategoryItem setEditableData={setEditableData} data={item} />
+            <CategoryItem
+                editQuestion={editQuestion}
+                getAllQuestion={getAllQuestion}
+                data={item}
+            />
           </Col>
         ))}
       </Row>

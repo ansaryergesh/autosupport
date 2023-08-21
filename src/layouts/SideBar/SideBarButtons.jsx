@@ -1,12 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 import {Radio} from "antd";
+import PropTypes from "prop-types";
+import {SIDEBAR_BUTTON} from "../../constants/index.js";
+import {LocalStorageKeys} from "../../storage/localStorageKey.js";
 
-const SideBarButtons = () => {
-    const [activeButton, setActiveButton] = useState('All');
-
+const SideBarButtons = ({
+                            activeButton,
+                            setActiveButton
+}) => {
     const handleRadioChange = (e) => {
-        setActiveButton(e.target.value);
+        const value = e.target.value;
+        localStorage.setItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON, value);
+        setActiveButton(value);
     };
+
     const activeStyle = {
         background: 'linear-gradient(90deg, #00F260 0%, #04D4C8 100%)',
         borderRadius: '10px',
@@ -53,10 +60,10 @@ const SideBarButtons = () => {
                 value={activeButton}
                 onChange={handleRadioChange}
             >
-                <Radio.Button value="All" style={activeButton === 'All' ? activeStyle : inactiveStyle}>
+                <Radio.Button value={SIDEBAR_BUTTON.ALL} style={activeButton === SIDEBAR_BUTTON.ALL ? activeStyle : inactiveStyle}>
                     All
                 </Radio.Button>
-                <Radio.Button value="Popular" style={activeButton === 'Popular' ? activeStyle : inactiveStyle}>
+                <Radio.Button value={SIDEBAR_BUTTON.POPULAR} style={activeButton === SIDEBAR_BUTTON.POPULAR ? activeStyle : inactiveStyle}>
                     Popular
                 </Radio.Button>
             </Radio.Group>
@@ -64,4 +71,8 @@ const SideBarButtons = () => {
     );
 };
 
+SideBarButtons.prototype = {
+    activeButton: PropTypes.string,
+    setActiveButton: PropTypes.func,
+}
 export default SideBarButtons;

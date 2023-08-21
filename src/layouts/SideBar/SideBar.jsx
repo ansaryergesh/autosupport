@@ -4,16 +4,24 @@ import { i18n } from 'utils/i18next.js';
 import {adminNavItems} from './constants.js';
 import { Link } from 'react-router-dom';
 import ActionsModal from "./ActionsModal";
-import DraggableMenuItem from "./DraggableMenuItem.jsx";
 import SideBarButtons from "./SideBarButtons.jsx";
 import Footer from "../Footer/Footer.jsx";
 import {
+    changeOrderCategory,
     deleteCategory,
-    deleteQuestion, editCategory, editCategoryQuestion,
     getCategories,
     getCategoryById,
-    getQuestionById
+
 } from "../../service/Category/index.js";
+import {
+    changeQuestionOrder,
+    deleteQuestion,
+    getQuestionById, getQuestions
+} from "../../service/Question/index.js";
+import MenuItem from "./Menu/MenuItem.jsx";
+import {LocalStorageKeys} from "../../storage/localStorageKey.js";
+import {SIDEBAR_BUTTON} from "../../constants/index.js";
+import {getLocale} from "../../utils/i18next.js";
 import ConstDropDownMenuItem from "./ConstDropDownMenuItem";
 const { Sider } = Layout;
 
@@ -47,63 +55,70 @@ const SearchInput = () => {
   );
 };
 
-
-
 const SidebarNav = ({ isAdmin = true }) => {
     const [allCategories, setAllCategories] = useState([]);
-    const [openKeys,setOpenKeys] = useState('')
+    const [allQuestions, setAllQuestions] = useState([]);
 
+    const [openKeys,setOpenKeys] = useState('');
+    const [categoryModal,setCategoryModal] = useState(false);
+    const [categoryEditModal,setCategoryEditModal] = useState(false);
+
+    const [questionModal,setQuestionModal] = useState(false);
+    const [questionEditModal, setQuestionEditModal] = useState(false);
+    const [orderModal,setOrderModal] = useState(false);
+    const [categoryId, setCategoryId] = useState(0);
+    const [categoryInfo,setCategoryInfo] = useState({});
+    const [questionInfo,setQuestionInfo] = useState({});
+
+    const [activeButton,setActiveButton] = useState(localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) || SIDEBAR_BUTTON.ALL);
 
     useEffect(() => {
-       getCategoryAll();
-    },[])
+        setOpenKeys([])
+        if(activeButton === SIDEBAR_BUTTON.ALL) {
+            getCategoryAll();
+        } else {
+            getAllQuestions();
+        }
+    },[activeButton])
 
     const getCategoryAll = () => {
         getCategories().then(res=> {
             setAllCategories(res.data)
         })
     }
-    // eslint-disable-next-line no-unused-vars
+
+    const getAllQuestions = () => {
+        console.log(allQuestions)
+        const params = {
+            langKey: getLocale().toUpperCase(),
+            pageSize: 20
+        }
+        getQuestions(params).then(res=> {
+            setAllQuestions(res.data)
+        })
+    }
+
+  // eslint-disable-next-line no-unused-vars
   const moveMenuItem = (draggedItemId, orderNumber) => {
       if(orderNumber) {
-            getCategoryById(draggedItemId).then(res => {
-                console.log(res)
-                const dataToChange = {...res.data, orderNumber};
-                editCategory(dataToChange).then(res=> {
-                    console.log(res)
-                    getCategoryAll()
-                })
-            })
+          changeOrderCategory(draggedItemId,orderNumber).then(res=> {
+              console.log(res)
+              getCategoryAll();
+          })
+
       }
   };
 
-    const moveMenuItemQuestion = (draggedItemId, orderNumber) => {
-        console.log(orderNumber)
-        if(orderNumber) {
-            getQuestionById(draggedItemId).then(res => {
-                console.log("before")
-                console.log(res.data.orderNumber)
-                const dataToChange = {...res.data, orderNumber};
-                console.log("after")
-                console.log(dataToChange.orderNumber)
-                editCategoryQuestion(dataToChange).then(res=> {
-                    console.log("at the end")
-                    console.log(res.data.orderNumber)
-                    getCategoryAll()
-                })
-            })
-        }
+  const moveMenuItemQuestion = (draggedItemId, orderNumber) => {
+    console.log(orderNumber)
+    if(orderNumber) {
+      changeQuestionOrder(draggedItemId,orderNumber).then(res=> {
+        console.log(res);
+           getCategoryAll()
+        })
     }
+  }
 
-  const [categoryModal,setCategoryModal] = useState(false);
-  const [categoryEditModal,setCategoryEditModal] = useState(false);
-
-  const [questionModal,setQuestionModal] = useState(false);
-  const [questionEditModal, setQuestionEditModal] = useState(false);
-  const [orderModal,setOrderModal] = useState(false);
-  const [categoryId, setCategoryId] = useState(0);
-  const [categoryInfo,setCategoryInfo] = useState({});
-  const [questionInfo,setQuestionInfo] = useState({});
 
   const handleAddCategory = () => {
       setCategoryModal(true)
@@ -173,60 +188,56 @@ const SidebarNav = ({ isAdmin = true }) => {
             marginBottom: '20px',
             background: 'transparent'
           }}>
-          <SideBarButtons />
+          <SideBarButtons activeButton={activeButton} setActiveButton={setActiveButton}/>
         </div>
-        <Menu
-            openKeys={[openKeys]}
-          mode="inline"
+        <div
           className="custom-menu"
-          onOpenChange={newOpenKeys => {
-              setOpenKeys(newOpenKeys)
-          }}
-
             style={{
             maxHeight: '100vh',
             borderRight: 0,
             width: '100%!important'
           }}>
-            <ConstDropDownMenuItem handleAdd={handleAddCategory} />
-          {allCategories.map((m, index) => (
-            <DraggableMenuItem
-                item={m}
-              key={`category_${m.id}`}
-              id={m.id}
-              index={index}
-              handleAdd={handleAddCategory}
-              handleDelete={() => handleDeleteCategory(m.id)}
-              handleEdit={() => {handleEditCategory(m.id)}}
-              handleAddQuestion={() => handleAddQuestion(m.id)}
-              handleOrderChange={() => {setOrderModal(true)}}
-              moveMenuItem={moveMenuItem}>
-              <Menu.SubMenu
-                  key={`submenu_${m.id}`}
-                  onTitleClick={() => handleSubMenuClick(`submenu_${m.id}`)} // Set the clicked submenu's key
-                  className="submenu"
-                  title={m.categorieContents?.name}>
-                {m.questions.map((q, qIndex) => (
-                    <DraggableMenuItem
-                        item={q}
-                        handleDelete={() => handleDeleteQuestion(q.id)}
-                        handleAdd={handleAddCategory}
-                        isCategory={false}
-                        key={q.id}
-                        id={q.id}
-                        handleEdit={() => handleEditQuestion(q.id)}
-                        moveMenuItem={moveMenuItemQuestion}
-                        index={index}>
-                        <Menu.Item key={`question_${qIndex}_${q.id}`}>
-                            <Link to={'/detailedQuestion'}>{q.questionContents?.title}</Link>
-                        </Menu.Item>
-                    </DraggableMenuItem>
 
-                ))}
-              </Menu.SubMenu>
-            </DraggableMenuItem>
+          {allCategories?.map((m, index) => (
+              <MenuItem
+                  activeButton={activeButton}
+                  key={m.id}
+                  category={m}
+                  index={index}
+                  handleAddCategory={handleAddCategory}
+                  handleDeleteCategory={() => handleDeleteCategory(m.id)}
+                  handleEditCategory={() => {handleEditCategory(m.id)}}
+                  handleAddQuestion={() => handleAddQuestion(m.id)}
+                  setOrderModal={() => {setOrderModal(true)}}
+                  moveMenuItem={moveMenuItem}
+                  activeOpenedKeys={openKeys}
+                  handleDeleteQuestion={handleDeleteQuestion}
+                  onMenuClick={handleSubMenuClick}
+                  handleEditQuestion={handleEditQuestion}
+                  moveMenuItemQuestion={moveMenuItemQuestion}/>
           ))}
-        </Menu>
+            {allQuestions?.map((question, index) => (
+                <MenuItem
+                    activeButton={activeButton}
+                    key={question.id}
+                    question={question}
+                    index={index}
+                    handleAddCategory={handleAddCategory}
+                    handleDeleteCategory={() => handleDeleteCategory(question.id)}
+                    handleEditCategory={() => {handleEditCategory(question.id)}}
+                    handleAddQuestion={() => handleAddQuestion(question.id)}
+                    setOrderModal={() => {setOrderModal(true)}}
+                    moveMenuItem={() => {}}
+                    activeOpenedKeys={openKeys}
+                    handleDeleteQuestion={handleDeleteQuestion}
+                    onMenuClick={handleSubMenuClick}
+                    handleEditQuestion={handleEditQuestion}
+                    moveMenuItemQuestion={()=> {}}/>
+            ))}
+        </div>
+          <Menu>
+              <ConstDropDownMenuItem handleAdd={handleAddCategory}/>
+          </Menu>
           <ActionsModal
               getCategoryAll={getCategoryAll}
               categoryId={categoryId}

@@ -16,6 +16,7 @@ const DraggableMenuItem = ({
                                isCategory=true,
                                moveMenuItem,
                                children,
+                                draggable=true,
                                handleEdit,
                                handleAdd,
                                handleDelete,
@@ -23,10 +24,10 @@ const DraggableMenuItem = ({
                                handleAddQuestion
 }) => {
     const menu = (
-        <Menu style={{display: !isCategory ? 'none': ''}}>
-            <Menu.Item key="addCategory" onClick={() => handleAdd(id)}>Добавить новая категория</Menu.Item>
+        <Menu>
+            {draggable && <Menu.Item key="addCategory" onClick={() => handleAdd(id)}>Добавить новая категория</Menu.Item>}
             <Menu.Item key="edit" onClick={() => handleEdit(id)}>Редактировать категория</Menu.Item>
-            <Menu.Item key="add" onClick={() => handleOrderChange(id)}>Изменить порядок</Menu.Item>
+            {draggable && <Menu.Item key="add" onClick={() => handleOrderChange(id)}>Изменить порядок</Menu.Item>}
             <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>Добавить вопрос</Menu.Item>
             <Menu.Item key="remove"><Popconfirm
                 title="Title"
@@ -40,10 +41,10 @@ const DraggableMenuItem = ({
     );
     const menuQuestion = (
         <Menu>
-            <Menu.Item key="addCategory" onClick={() => handleAdd(id)}>Добавить новая категория</Menu.Item>
+            {draggable && <Menu.Item key="addCategory" onClick={() => handleAdd(id)}>Добавить новая категория</Menu.Item>}
             <Menu.Item key="open" onClick={() => handleAdd(id)}>Открыть вопрос</Menu.Item>
             <Menu.Item key="edit" onClick={() => handleEdit(id)}>Редактировать вопрос</Menu.Item>
-            <Menu.Item key="add" onClick={() => handleOrderChange(id)}>Изменить порядок</Menu.Item>
+            {draggable && <Menu.Item key="add" onClick={() => handleOrderChange(id)}>Изменить порядок</Menu.Item>}
             <Menu.Item key="remove"><Popconfirm
                 title="Title"
                 description="Open Popconfirm with Promise"
@@ -70,11 +71,9 @@ const DraggableMenuItem = ({
             }
         }
     });
-
     return (
-
         <div ref={(node) => drag(drop(node))} style={{ cursor: 'move' }}>
-            <Dropdown overlay={isCategory ? menu: menuQuestion} trigger={['contextMenu']}>
+            <Dropdown overlay={isCategory ? menu : menuQuestion} menu={isCategory ? menu : menuQuestion} trigger={['contextMenu']}>
                     {children}
             </Dropdown>
             {/*{children}*/}
@@ -93,6 +92,7 @@ DraggableMenuItem.propTypes = {
     handleAddQuestion: PropTypes.func,
     isCategory: PropTypes.bool,
     item: PropTypes.object,
+    draggable: PropTypes.bool,
 };
 
 export default DraggableMenuItem;

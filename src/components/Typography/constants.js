@@ -50,7 +50,7 @@ export const paddingSize = (type) => {
   switch (type) {
     case TypoGraphyType.SECONDARY_HEAD:
       return 'var(--padding-secondary-head)!important';
-    default:
+    case TypoGraphyType.SUB_HEAD:
       return 'var(--padding-secondary-head)!important';
   }
 };

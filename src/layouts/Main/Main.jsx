@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Header from "../Header/Header.jsx";
 import PropTypes from "prop-types";
 import { Layout } from 'antd';
 import SidebarNav from "../SideBar/SideBar";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
+import {useLocation} from "react-router";
 
 const Main = (props) => {
     const {children} = props;
+    const { pathname } = useLocation();
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
     return (
         <DndProvider backend={HTML5Backend}>
             <div className={"main-layout"}>
