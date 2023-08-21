@@ -1,24 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CardComponent from "components/Card/Card";
 import {Col, Row} from "antd";
 import JHeader from "components/JHeader/JHeader.jsx";
+import {getCategories} from "../../service/Category/index.js";
 
-const data = [
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]}, 
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},
-    {title: "titl1", questions: ["Для чего нужен брокерский счет?","Как открыть брокерский счет?","Для чего  счет?","Как открыть  счет?","Для чего нужен брокерский счет?"]},]
 const Home = () => {
+    const [allCategories, setAllCategories] = useState([]);
+
+    useEffect(() => {
+        getCategoryAll();
+    },[])
+
+    const getCategoryAll = () => {
+        getCategories().then(res=> {
+            setAllCategories(res.data)
+        })
+    }
     return (
         <div>
             <JHeader />
             <Row gutter={[24,24]}>
-                {data.map((item,index) => (
+                {allCategories.map((item,index) => (
                     <Col key={index} span={8}>
                         <CardComponent data={item}/>
                     </Col>

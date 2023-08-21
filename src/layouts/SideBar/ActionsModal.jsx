@@ -4,6 +4,7 @@ import QuestionCreateModal from "../../components/Question/QuestionEditCreate/Qu
 import CategoryOrderEditModal from "../../components/CategoryItem/CategoryViewEditModal/CategoryOrderEditModal.jsx";
 import React from "react";
 import PropTypes from "prop-types";
+import QuestionEditModal from "../../components/Question/QuestionEditCreate/QuestionEditModal.jsx";
 
 const ActionsSideBarModals = ({
     categoryModal,
@@ -14,27 +15,48 @@ const ActionsSideBarModals = ({
     setQuestionModal,
     orderModal,
     setOrderModal,
-    }) => {
+    categoryId,
+    categoryInfo,
+    questionInfo,
+    questionEditModal,
+    setQuestionEditModal,
+    getCategoryAll,
+                              }) => {
     return (
         <>
-            <CategoryCreateModal
+            {categoryModal && <CategoryCreateModal
                 isModalOpen={categoryModal}
+                getCategoryAll={getCategoryAll}
                 handleModal={() => setCategoryModal(false)}
-            />
-            <CategoryEditModal
-                isModalOpen={categoryEditModal}
-                handleModal={() => setCategoryEditModal(false)}
-            />
+            />}
+
+            {categoryEditModal &&
+                <CategoryEditModal
+                    isModalOpen={categoryEditModal}
+                    getCategoryAll={getCategoryAll}
+                    handleModal={() => setCategoryEditModal(false)}
+                    categoryInfo={categoryInfo}
+                />}
+
             <QuestionCreateModal
+                getCategoryAll={getCategoryAll}
+                categoryId={categoryId}
                 isModalOpen={questionModal}
                 handleModal={() => setQuestionModal(false)}
             />
             <CategoryOrderEditModal
+                getCategoryAll={getCategoryAll}
                 isModalOpen={orderModal}
                 handleModal={() => setOrderModal(false)}
             />
-        </>
+            {questionEditModal && <QuestionEditModal
+                getCategoryAll={getCategoryAll}
+                isModalOpen={questionEditModal}
+                questionInfo={questionInfo}
+                handleModal={() => setQuestionEditModal(false)}
+            />}
 
+            </>
     )
 }
 
@@ -44,9 +66,16 @@ ActionsSideBarModals.propTypes= {
     categoryEditModal: PropTypes.bool,
     setCategoryEditModal: PropTypes.func,
     questionModal: PropTypes.bool,
+    questionEditModal: PropTypes.bool,
+    setQuestionEditModal: PropTypes.func,
+
     setQuestionModal: PropTypes.func,
     orderModal: PropTypes.bool,
     setOrderModal: PropTypes.func,
+    categoryId: PropTypes.number,
+    categoryInfo: PropTypes.object,
+    questionInfo: PropTypes.object,
+    getCategoryAll: PropTypes.func,
 }
 
 export default ActionsSideBarModals;
