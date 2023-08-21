@@ -28,12 +28,12 @@ const NewRequest = () => {
     <div>
       <Row gutter={16}>
         <Col style={{ margin: '0 auto' }}>
-          <Image src={notFound} alt="Illustration" preview={false} />
+          <Image src={notFound} alt="Illustrationw" preview={false} />
         </Col>
         <Col span={24} className={styles.textContainer}>
-          <h2 className={styles.heading}>
+          <h3 className={styles.heading}>
             К сожалению, мы ничего не нашли по Вашему запросу
-          </h2>
+          </h3>
 
           <p className={styles.paragraph}>
             Вы можете оставить заявку со своим вопросом, мы обязательно вам

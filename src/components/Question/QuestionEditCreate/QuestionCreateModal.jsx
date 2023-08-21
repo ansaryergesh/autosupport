@@ -30,7 +30,7 @@ const QuestionCreateModal = ({
 
     return (
         <Modal
-            title={'Add question'}
+            title={'Add category'}
             confirmLoading={loading}
             open={isModalOpen}
             footer={null}
