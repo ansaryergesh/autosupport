@@ -3,7 +3,6 @@ import Input from "../Input/Input.jsx";
 import ReactPlayer from "react-player";
 export const VideoInstruction = ({answerFormData, setAnswerFormData, selectedLanguage}) => {
     const selectedLanguageItem = answerFormData.answerContents?.find(item => item.langKey === selectedLanguage);
-
     const handleChangeInput = (name,value) => {
         const updatedAnswerContent = { ...answerFormData };
         const index = answerFormData?.answerContents.findIndex(content => content.langKey === selectedLanguage);

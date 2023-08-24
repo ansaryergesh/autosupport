@@ -6,7 +6,7 @@ import {editCategoryQuestion, getQuestionById, getQuestions} from "../../service
 import JHeader from "../../components/JHeader/JHeader.jsx";
 import {initialQuestionDto} from "../../components/JHeader/constants.js";
 import Plus from 'images/plus.svg'
-import {Col, Dropdown, Menu, Row} from "antd";
+import {Col, Dropdown, Menu, notification, Row} from "antd";
 import SunEditor from "../DetailedQuestionAdmin/SunEditor.jsx";
 import styles from './index.module.less'
 import TypographyHead from "../../components/Typography/TypographyHead.jsx";
@@ -55,6 +55,7 @@ const QuestionAnswerContent = () => {
 
     useEffect(() => {
         console.log('activeresource');
+        setAnswerFormData(initialQuestionAnswerContent)
         if(activeResource) {
             answerByQuestionAndResource(id, activeResource.id)
                 .then(res=> {
@@ -62,33 +63,35 @@ const QuestionAnswerContent = () => {
                 })
                 .catch(err=> {
                     console.error(err)
+                    setAnswerFormData(initialQuestionAnswerContent)
                 })
                 .finally(()=> {
                 getQuestionById(id).then(res=> {
                     setQuestionInfo(res.data);
-                    setAnswerFormData({...answerFormData, question: res.data, resource: activeResource})
                 })
                 })
         }
     },[activeResource])
 
-    useEffect(() => {
-        console.log(answerFormData)
-    },[answerFormData])
+    // useEffect(() => {
+    //     console.log(answerFormData)
+    // },[answerFormData])
 
     const handleSubmit = () => {
         // addAnswerToQuestion
         const finalDataAnswer ={...answerFormData, question: {id: questionInfo.id}, resource: {id: activeResource.id}}
-        delete finalDataAnswer['id'];
         editCategoryQuestion(questionInfo).then(res=> {
             console.log(res)
             if(answerFormData.id) {
                 editAnswerQuestion(finalDataAnswer, answerFormData.id).then(res=> {
                     console.log(res)
+                    notification.info('Answer added')
                 })
             } else {
+                delete finalDataAnswer['id'];
                 addAnswerToQuestion(finalDataAnswer).then(res=> {
-                    console.log(res)
+                    console.log(res);
+                    notification.info('Answer edited')
                 })
             }
 

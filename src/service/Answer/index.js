@@ -9,5 +9,5 @@ export const addAnswerToQuestion = (data) => {
 }
 
 export const editAnswerQuestion = (data,id) => {
-  return axiosInstanceWithHeader.put(`/api/admin/answers${id}`,data)
+  return axiosInstanceWithHeader.put(`/api/admin/answers/${id}`,data)
 }
