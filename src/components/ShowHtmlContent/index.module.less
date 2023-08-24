@@ -1,0 +1,51 @@
+@import url('src/assets/styles/variables');
+
+.htmlContent p,
+li {
+  color: @gray-color-1;
+  list-style-position: inside;
+  font-size: 18px;
+  overflow-wrap: break-word;
+}
+
+.htmlContent p {
+  margin-bottom: 32px;
+}
+
+.htmlContent h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  margin-bottom: 16px;
+  color: @black-color;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.htmlContent blockquote p {
+  overflow-wrap: break-word;
+  color: @gray-color-1;
+  font-size: 14px;
+  margin: 32px 0;
+  border-radius: 16px;
+  padding: 24px 24px 24px 72px;
+  background-color: rgba(57, 156, 98, 0.08);
+  position: relative;
+
+  &::before {
+    content: url('../../assets/images/blockquoteIcon.svg');
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.htmlContent strong {
+  font-size: 18px;
+  font-weight: 700;
+  color: @gray-color-1;
+}

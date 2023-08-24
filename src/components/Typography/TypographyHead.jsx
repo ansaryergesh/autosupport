@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.module.less';
-import { fontSize, fontWeight, paddingSize } from './constants.js';
+import { fontSize, fontWeight, paddingSize, color } from './constants.js';
 const TypographyHead = ({ content, type, className }) => {
   return (
     <>
-      <span
-          className={className}
+      <p
+        className={className}
         style={{
-            paddingBottom: paddingSize(type),
-            fontSize: fontSize(type),
+          fontSize: fontSize(type),
+          color: color(type),
           fontWeight: fontWeight(type),
+          paddingBottom: paddingSize(type)
         }}>
         {content}
-      </span>
+      </p>
     </>
   );
 };
@@ -21,6 +22,6 @@ const TypographyHead = ({ content, type, className }) => {
 TypographyHead.propTypes = {
   content: PropTypes.string,
   type: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 export default TypographyHead;

@@ -1,4 +1,5 @@
 @import 'src/assets/styles/index';
+@import url('src/assets/styles/variables');
 
 * {
   margin: 0;
@@ -111,17 +112,8 @@ body {
   }
 }
 
-.button-default-active {
-  color: #00b323;
-  border: 1px solid #9debb0;
-
-  &:hover {
-    color: #00b323 !important;
-    border: 1px solid #9debb0 !important;
-  }
-}
-
 .button-default {
+  font-weight: 500;
   border: 1px solid #d4f1db;
   color: black;
   outline: none;
@@ -130,6 +122,15 @@ body {
   cursor: pointer;
   z-index: 1;
   transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #00b323 !important;
+    border: 1px solid #9debb0 !important;
+  }
+}
+.button-default-active {
+  color: #00b323;
+  border: 1px solid #9debb0;
 
   &:hover {
     color: #00b323 !important;
@@ -163,6 +164,8 @@ body {
 
 .button-secondary {
   border-radius: 100px;
+  border: none;
+  outline: 1px solid #dee0e3;
   transition: all 0.3s ease-in-out;
 
   &:hover {
@@ -189,7 +192,8 @@ body {
 .button-third {
   color: #13ad64;
   border: 1px solid #13ad64;
-  border-radius: 16px;
+  font-weight: 500;
+  border-radius: 14px;
   transition: all 0.3s ease-in-out;
 
   &:hover {
@@ -321,7 +325,7 @@ body {
 .ant-select-item-option-content:hover,
 .ant-select-selection-item:hover {
   background: none !important;
-  border:none!important;
+  border: none !important;
   background: @primary-color !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -349,4 +353,3 @@ body {
     font-weight: 700;
   }
 }
-

@@ -20,7 +20,7 @@ import Resources from './pages/Resources/Resources.jsx';
 import Сategory from './pages/Сategory/Сategory.jsx';
 import DetailedQuestionNewAdmin from './pages/DetailedQuestionAdmin/DetailedQuestionAdmin.jsx';
 import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
-
+import QuestionAnswerUser from './pages/QuestionAnswerUser/QuestionAnswerUser.jsx';
 
 function RouteWithLayout({
   layout,
@@ -89,6 +89,12 @@ const Routes = () => {
           layout={Main}
           component={QuestionAnswerContent}
           path={'/detailedQuestionNewAdmin/:id'}
+        />
+        <RouteWithLayout
+            exact
+            layout={Main}
+            component={QuestionAnswerUser}
+            path={'/questionPreview/:id'}
         />
         <RouteWithLayout
           exact
