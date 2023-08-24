@@ -1,0 +1,81 @@
+@import url('src/assets/styles/variables');
+
+.card {
+  background: var(--block-color) !important;
+  padding: 20px 20px 32px 20px;
+  border-radius: 32px;
+}
+
+.mediaBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 550px;
+  border: 1px solid #dee0e3;
+  border-radius: 10px;
+}
+
+.rate li {
+  font-size: 40px;
+  color: @green-color-1 !important;
+}
+
+.reviewHead {
+  padding-bottom: 16px !important;
+}
+
+.quick {
+  display: flex;
+}
+
+.textArea {
+  position: relative;
+}
+
+.characterCount {
+  position: absolute;
+  bottom: 15%;
+  right: 3%;
+  font-size: 14px;
+  color: #b2bcc8;
+}
+
+.characterLimitMessage {
+  color: #e55;
+  position: absolute;
+  bottom: -25%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.textAreaLimit {
+  border-color: #e55 !important;
+}
+
+.similarCard {
+  position: fixed;
+  top: 70px;
+  right: 4%;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.similarTextBox {
+  padding: 32px;
+}
+
+.similarHead {
+  margin-bottom: 24px;
+}
+.similarParagraph {
+  margin-bottom: 12px;
+
+  &:hover {
+    background: @primary-color !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    cursor: pointer;
+  }
+}

@@ -11,3 +11,7 @@ export const addAnswerToQuestion = (data) => {
 export const editAnswerQuestion = (data,id) => {
   return axiosInstanceWithHeader.put(`/api/admin/answers/${id}`,data)
 }
+
+export const getAnswerById = (qId, rId) => {
+  return axiosInstanceWithHeader.get(`/api/admin/answer/${qId}/${rId}`);
+};
