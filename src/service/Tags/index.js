@@ -15,3 +15,7 @@ export const deleteTag = (id) => {
 export const getTags = () => {
   return axiosInstanceWithHeader.get('/api/admin/tags');
 };
+
+export const searchTags = (params) => {
+  return axiosInstanceWithHeader.get('/api/admin/tags/_search',{params: {pageSize: 20, query: '', ...params}} )
+}

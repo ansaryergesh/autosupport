@@ -2,6 +2,8 @@ import {Typography} from "antd";
 import React from 'react'
 import styles from './index.module.less';
 import { Link } from 'react-router-dom';
+import TypographyHead from "../Typography/TypographyHead.jsx";
+import {TypoGraphyType} from "../Typography/constants.js";
 const CardComponent = (props) => {
     const { Text } = Typography;
     const questions = props.data?.questions;
@@ -13,7 +15,8 @@ const CardComponent = (props) => {
                 <div className={"my-heading-2"}>
                     <div className={styles.title}>
                         <Text ellipsis={{ rows: 2, expandable: false }}>
-                            {props.data?.categorieContents.name}
+                            <TypographyHead type={TypoGraphyType.SUB_HEAD}
+                                            content={props.data?.categorieContents.name} />
                         </Text>
                     </div>
                 </div>
@@ -21,7 +24,9 @@ const CardComponent = (props) => {
                     {questions?.slice(0, maxQuestionsToShow).map((q, index) => (
                         <p key={index} style={{ marginBottom: "11px" }}>
                             <Text ellipsis={{ rows: 2, expandable: false }}>
-                                {q.questionContents.title}
+                                <TypographyHead type={TypoGraphyType.LEVEL_2}
+                                                content= {q.questionContents.title} />
+
                             </Text>
                         </p>
                     ))}

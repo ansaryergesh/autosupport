@@ -1,21 +1,50 @@
-import { Card } from 'antd';
 import React from 'react';
-import { Typography } from 'antd';
+import {notification, Typography} from 'antd';
 import styles from './index.module.less';
 
 const { Title, Paragraph } = Typography;
 
-function CategoryItem({ data }) {
+function CategoryItem({
+                          editQuestion,
+                          getAllQuestion,
+                          data
+}) {
+    const handleEditQuestion = value => {
+        const finalQuestionContent = {
+            ...data,
+            questionContents: [{...data?.questionContents, title: value}]
+        };
+
+        console.log(finalQuestionContent);
+        editQuestion(finalQuestionContent).then(res=> {
+            console.log(res)
+            notification.info({message: 'Title changed'})
+            getAllQuestion();
+        })
+    }
+
+    const handleEditQuestionDesc = value => {
+        const finalQuestionContent = {
+            ...data,
+            questionContents: [{...data?.questionContents, stepDescription: value}]
+        };
+
+        editQuestion(finalQuestionContent).then(()=> {
+            notification.info({message: 'Description changed'})
+            getAllQuestion();
+        })
+    }
+
   return (
     <div>
-      <Card className={styles.card} bordered={false}>
-        <Title level={5} editable className={styles.title}>
-          {data.title}
+      <div className={styles.card}>
+        <Title level={5} editable={{ onChange: handleEditQuestion}} className={styles.title}>
+          {data?.questionContents?.title}
         </Title>
-        <Paragraph editable className={styles.paragraph}>
-          {data.questions}
+        <Paragraph editable={{ onChange: handleEditQuestionDesc}} className={styles.paragraph}>
+          {data?.questionContents?.stepDescription}
         </Paragraph>
-      </Card>
+      </div>
     </div>
   );
 }

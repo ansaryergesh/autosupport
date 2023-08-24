@@ -16,3 +16,8 @@ export const deleteKeyWord = (id) => {
 export const getKeywords = () => {
   return axiosInstanceWithHeader.get('/api/admin/keyWords');
 }
+
+export const searchKeyWords = (params) => {
+  return axiosInstanceWithHeader.get('/api/admin/keyWords/_search',{params: {pageSize: 20, query: '', ...params}} )
+}
+

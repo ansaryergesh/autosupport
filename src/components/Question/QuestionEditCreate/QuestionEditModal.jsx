@@ -4,7 +4,7 @@ import Input from "../../Input/index.js";
 import {Form, Modal, notification} from "antd";
 import Button from "../../Button/Button.jsx";
 import {initialQuestion} from "../constants.js";
-import {editCategoryQuestion} from "../../../service/Category/index.js";
+import {editCategoryQuestion} from "../../../service/Question/index.js";
 const QuestionEditModal = ({
                                  isModalOpen = false,
                                  handleModal,

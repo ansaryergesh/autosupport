@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Row, Space, Dropdown, Menu } from 'antd';
 import styles from './index.module.less';
-import TestImage from 'images/freedomSm.jpg';
 import Button from '../../components/Button/Button';
 import dots from 'images/dots.svg'
 import MyComponent from './SunEditor';
@@ -10,19 +9,6 @@ import plus from 'images/plus.svg';
 import deleteX from 'images/deleteX.svg';
 import { Upload } from 'antd';
 import Input from '../../components/Input/Input';
-
-
-const dataStep = [
-    "1. Зайдите в раздел “Категории”",
-    "2. Нажмите на кнопку Поиска",
-    "3. В окне Поиска введите название компании, или тикер ценной бумаги",
-    "4. Выберите нужный вам тикер(для покупки ценных бумаг на американских рынках, тикер должен содержать .US)"
-];
-const dataStep2 = [
-    "7. Укажите тип операции (Купить или Продать)",
-    "8. Укажите количество бумаг, которые хотите купить",
-];
-
 
 const DetailedQuestionAdmin = () => {
     const [showVideo, setShowVideo] = useState(true);
@@ -164,19 +150,19 @@ const DetailedQuestionAdmin = () => {
                 <Row>
                     <Space direction='horizontal' size={'small'}>
                         <Button
-                            type={selectedAppButton === "РУС" ? "primary" : undefined}
+                            type={selectedAppButton === "РУС" ? "default-active" : 'default'}
                             onClick={() => setSelectedAppButton("РУС")}
                         >
                             РУС
                         </Button>
                         <Button
-                            type={selectedAppButton === "КАЗ" ? "primary" : undefined}
+                            type={selectedAppButton === "КАЗ" ? "default-active" : 'default'}
                             onClick={() => setSelectedAppButton("КАЗ")}
                         >
                             КАЗ
                         </Button>
                         <Button
-                            type={selectedAppButton === "ENG" ? "primary" : undefined}
+                            type={selectedAppButton === "ENG" ? "default-active" : 'default'}
                             onClick={() => setSelectedAppButton("ENG")}
                         >
                             ENG
@@ -191,16 +177,6 @@ const DetailedQuestionAdmin = () => {
                             <Space direction='vertical' size={16}>
                                 <p className="my-heading-2  ">Описание шагов</p>
                                 <MyComponent />
-                                <Space direction='vertical' size="small">
-                                    {dataStep.map((item, index) => (
-                                        <p key={index} className='my-paragraph'>{item}</p>
-                                    ))}
-                                    <img src={TestImage} />
-                                    {dataStep2.map((item, index) => (
-                                        <p key={index} className='my-paragraph'>{item}</p>
-                                    ))}
-                                    <img src={TestImage} />
-                                </Space>
                             </Space>
                         </div>
                     </Col>
@@ -242,14 +218,14 @@ const DetailedQuestionAdmin = () => {
                         <Row>
                             <Space size={15}>
                                 <Button
-                                    type={selectedVideoButton === "Видео инструкция" ? 'primary' : undefined}
+                                    type={selectedVideoButton === "Видео инструкция" ? "default-active" : 'default'}
                                     className='my-paragraph'
                                     onClick={handleVideoButtonClick}
                                 >
                                     Видео инструкция
                                 </Button>
                                 <Button
-                                    type={selectedVideoButton === "Визуальная инструкция" ? 'primary' : undefined}
+                                    type={selectedVideoButton === "Визуальная инструкция" ? "default-active" : 'default'}
                                     className='my-paragraph'
                                     onClick={handleVisualButtonClick}
                                 >
