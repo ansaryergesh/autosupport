@@ -6,7 +6,7 @@ import {editCategoryQuestion, getQuestionById, getQuestions} from "../../service
 import JHeader from "../../components/JHeader/JHeader.jsx";
 import {initialQuestionDto} from "../../components/JHeader/constants.js";
 import Plus from 'images/plus.svg'
-import {Col, Dropdown, Menu, notification, Row} from "antd";
+import {Col, notification, Row} from "antd";
 import SunEditor from "../DetailedQuestionAdmin/SunEditor.jsx";
 import styles from './index.module.less'
 import TypographyHead from "../../components/Typography/TypographyHead.jsx";
@@ -23,12 +23,6 @@ import {initialQuestionAnswerContent} from "./constants.js";
 import {answerByQuestionAndResource, addAnswerToQuestion, editAnswerQuestion} from "../../service/Answer/index.js";
 
 const QuestionAnswerContent = () => {
-    const menu = () => (
-        <Menu>
-            <Menu.Item key={'edit'}>Edit</Menu.Item>
-            <Menu.Item key={'delete'}>Delete</Menu.Item>
-        </Menu>
-    )
     const {id} = useParams();
     const [resources,setResources] = useState([]);
     const [selectedResources,setSelectedResources] = useState([])
@@ -41,20 +35,16 @@ const QuestionAnswerContent = () => {
     const [selectedLanguage,setSelectedLanguage] = useState(LANG_KEY.KZ);
     const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
     useEffect(() => {
-        let resource = {}
         getResources().then(res=> {
             setResources(res.data);
             setSelectedResources(res.data.map(res=> {
                 return {...res,edit:false}
             }));
-            resource = res.data[0]
-            setActiveResource(resource);
-
+            setActiveResource(res.data[0]);
         })
     },[id]);
 
     useEffect(() => {
-        console.log('activeresource');
         setAnswerFormData(initialQuestionAnswerContent)
         if(activeResource) {
             answerByQuestionAndResource(id, activeResource.id)
@@ -73,9 +63,6 @@ const QuestionAnswerContent = () => {
         }
     },[activeResource])
 
-    // useEffect(() => {
-    //     console.log(answerFormData)
-    // },[answerFormData])
 
     const handleSubmit = () => {
         // addAnswerToQuestion
@@ -103,14 +90,12 @@ const QuestionAnswerContent = () => {
             <div style={{padding: '12px 0', display: "flex", alignItems: 'center', gap: '8px'}}>
                 {
                     selectedResources.map((resource,index) => (
-                            <Dropdown id={resource.id} key={index} overlay={menu} menu={menu} trigger={['contextMenu']}>
-                                <Button
-                                    onClick={() => setActiveResource(resource)}
-                                    type={`${activeResource.id === resource.id ? 'default-active' : 'default'}`}
-                                    key={index}>
-                                    {resource.name}
-                                </Button>
-                            </Dropdown>
+                        <Button
+                            onClick={() => setActiveResource(resource)}
+                            type={`${activeResource.id === resource.id ? 'default-active' : 'default'}`}
+                            key={index}>
+                            {resource.name}
+                        </Button>
                     ))
                 }
                 {selectedResources.length < resources.length && <img src={Plus} />}
