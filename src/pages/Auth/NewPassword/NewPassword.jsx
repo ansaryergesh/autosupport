@@ -5,13 +5,24 @@ import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
 import ArrowLeft from 'images/ArrowLeft.svg';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import queryString from 'query-string';
+import { resetPassword } from '../../../service/Auth';
 
 const NewPassword = () => {
+  const history = useHistory();
+  const queryParams = queryString.parse(history.location.search);
   const onFinish = (values) => {
-    console.log('Success:', values);
+    const key = queryParams.key;
+    const data = {
+      key,
+      newPassword: values.newPassword
+    }
+    console.log(values);
+    resetPassword(data).then(res => {
+      console.log(res);
+    })
   };
-
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -50,7 +61,7 @@ const NewPassword = () => {
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
-                name="username"
+                name="password"
                 rules={[
                   { required: true, message: 'Please input your username!' }
                 ]}>
@@ -64,9 +75,18 @@ const NewPassword = () => {
 
             <Col span={24}>
               <Form.Item
-                name="password"
+                name="newPassword"
+                dependencies={['password']}
                 rules={[
-                  { required: true, message: 'Please input your password!' }
+                  { required: true, message: 'Please input your password!' },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('The new password that you entered do not match!'));
+                    },
+                  }),
                 ]}>
                 <Input
                   size={'large'}
@@ -78,11 +98,9 @@ const NewPassword = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Link to={'/sign-in'}>
-                  <Button className={styles.inputButton} htmlType="submit">
-                    Сохранить
-                  </Button>
-                </Link>
+                <Button className={styles.inputButton} type="submit" htmlType="submit">
+                  Сохранить
+                </Button>
               </Form.Item>
             </Col>
           </Row>
