@@ -5,17 +5,19 @@ import 'suneditor/dist/css/suneditor.min.css';
 const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
     const selectedLanguageItem = answerFormData.answerContents?.find(item => item.langKey === selectedLanguage);
     const [editorContent, setEditorContent] = useState(selectedLanguageItem?.stepDescription);
+    useEffect(() => {
+        handleContentChange(editorContent)
+    }, [editorContent]);
+
 
     useEffect(() => {
-        if(!selectedLanguage) {
-            handleContentChange(editorContent)
-        }
-    }, [editorContent,selectedLanguage]);
+        setEditorContent(selectedLanguageItem?.stepDescription)
+    },[selectedLanguageItem])
 
     const handleContentChange = value => {
         const updatedAnswerContent = { ...answerFormData };
         const index = answerFormData?.answerContents.findIndex(content => content.langKey === selectedLanguage);
-
+        console.log(index)
         if (index !== -1) {
             updatedAnswerContent.answerContents[index].stepDescription = value;
             console.log(updatedAnswerContent)

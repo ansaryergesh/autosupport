@@ -5,22 +5,22 @@ import TypographyHead from "../../components/Typography/TypographyHead.jsx";
 import {TypoGraphyType} from "../../components/Typography/constants.js";
 
 const SearchReference = ({
-                             searchAction,
-                             selectedItems,
-                             setSelectedItems,
-                             title,
-                         }) => {
-    const [options, setOptions] = useState([]);
+     searchAction,
+     selectedItems,
+     setSelectedItems,
+     title,
+  }) => {
+  const [options, setOptions] = useState([]);
 
-    const getOptionsDefault = () => {
-        searchAction().then(response=> {
-            setOptions(response?.data.map((item) => ({ value: item.questionContents?.title, id: item.questionContents?.id })))
-        })
-    };
+  const getOptionsDefault = () => {
+    searchAction().then(response=> {
+        setOptions(response?.data.map((item) => ({ value: item.questionContents?.title, id: item.questionContents?.id })))
+    })
+  };
 
-    useEffect(() => {
+  useEffect(() => {
         getOptionsDefault();
-    },[]);
+  },[]);
 
     const [inputValue,setInputValue] = useState('');
     const handleSearch = (value) => {
@@ -47,8 +47,6 @@ const SearchReference = ({
         }
         setInputValue('')
     };
-
-
 
     const handleRemoveSelected =(id) => {
         const newData = selectedItems?.filter(item => item.id !== id);
