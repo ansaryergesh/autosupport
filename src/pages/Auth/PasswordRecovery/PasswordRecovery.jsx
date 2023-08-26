@@ -5,11 +5,14 @@ import ArrowLeft from 'images/ArrowLeft.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
-import { Link } from 'react-router-dom';
+import { sendMail } from '../../../service/Auth';
 
 const PasswordRecovery = () => {
   const onFinish = (values) => {
-    console.log('Success:', values);
+    console.log(values)
+    sendMail(values.email).then(res => {
+      console.log(res);
+    })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -29,7 +32,8 @@ const PasswordRecovery = () => {
             type="text"
             className={styles.btnBack}
             iconButton={<ArrowBack />}
-            iconPosition={'left'}>
+            iconPosition={'left'}
+            href="/sign-in">
             Назад
           </Button>
           <div className={styles.logo}>
@@ -48,7 +52,7 @@ const PasswordRecovery = () => {
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
-                name="username"
+                name="email"
                 rules={[
                   { required: true, message: 'Please input your email!' }
                 ]}>
@@ -62,11 +66,9 @@ const PasswordRecovery = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Link to={'/code-verify'}>
-                  <Button className={styles.inputButton} htmlType="submit">
-                    Отправить код
-                  </Button>
-                </Link>
+                <Button className={styles.inputButton} type='submit' htmlType="submit">
+                  Отправить код
+                </Button>
               </Form.Item>
             </Col>
           </Row>

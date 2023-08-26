@@ -10,6 +10,7 @@ import { LocalStorageKeys } from '../../../storage/localStorageKey.js';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { i18n } from '../../../utils/i18next.js';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -86,6 +87,7 @@ const SignIn = () => {
                   { required: true, message: 'Please input your password!' }
                 ]}>
                 <Input
+                  type='password'
                   size={'large'}
                   className={styles.inputItem}
                   placeholder="Пароль"
@@ -104,7 +106,7 @@ const SignIn = () => {
                   <span>Войти</span>
                 </Button>
               </Form.Item>
-              <span>Забыли пароль?</span>
+              <Link to="/password-recovery"><span>Забыли пароль?</span></Link>
             </Col>
           </Row>
         </Form>
