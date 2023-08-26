@@ -37,7 +37,7 @@ const ImageSlider = ({ slides, sliderData }) => {
                 <p className={styles.description}>{slide.description}</p>
                 <img
                   src={slide.url}
-                  alt="travel image"
+                  alt={styles.description}
                   className={styles.image}
                 />
               </>
