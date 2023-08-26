@@ -1,4 +1,4 @@
-import { Col, Form, Image, Row } from 'antd';
+import { Col, Form, Image, Row, notification } from 'antd';
 import styles from '../index.module.less';
 import Logo from 'images/logoFreedom.svg';
 import Title from 'antd/lib/typography/Title.js';
@@ -7,7 +7,7 @@ import Input from 'components/Input/Input.jsx';
 import ArrowLeft from 'images/ArrowLeft.svg';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
-import { resetPassword } from '../../../service/Auth';
+import { newPassword } from '../../../service/Auth';
 
 const NewPassword = () => {
   const history = useHistory();
@@ -18,9 +18,11 @@ const NewPassword = () => {
       key,
       newPassword: values.newPassword
     }
-    console.log(values);
-    resetPassword(data).then(res => {
+    console.log(data);
+    newPassword(data).then(res => {
       console.log(res);
+      notification.info({ message: 'Password is updated' })
+      history.push('/sign-in')
     })
   };
   const onFinishFailed = (errorInfo) => {
@@ -66,6 +68,7 @@ const NewPassword = () => {
                   { required: true, message: 'Please input your username!' }
                 ]}>
                 <Input
+                  type='password'
                   size={'large'}
                   placeholder="Придумайте новый пароль"
                   className={styles.inputItem}
@@ -89,6 +92,7 @@ const NewPassword = () => {
                   }),
                 ]}>
                 <Input
+                  type='password'
                   size={'large'}
                   className={styles.inputItem}
                   placeholder="Подтвердите новый пароль"

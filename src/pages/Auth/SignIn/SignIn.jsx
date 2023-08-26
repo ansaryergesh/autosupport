@@ -87,6 +87,7 @@ const SignIn = () => {
                   { required: true, message: 'Please input your password!' }
                 ]}>
                 <Input
+                  type='password'
                   size={'large'}
                   className={styles.inputItem}
                   placeholder="Пароль"

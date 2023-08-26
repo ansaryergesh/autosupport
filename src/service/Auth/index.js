@@ -13,7 +13,7 @@ export const sendMail = (email) => {
   })
 }
 
-export const resetPassword = (data) => {
+export const newPassword = (data) => {
   return axiosInstance.post('/api/account/reset-password/finish', data)
 }
 
