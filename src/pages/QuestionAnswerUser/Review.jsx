@@ -64,81 +64,69 @@ const Review = () => {
             'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше'
           }
         />
-      </Col>
 
-      <Col span={24}>
         <Form onFinish={() => {}}>
-          <Row>
-            <Col span={24}>
+          <Form.Item>
+            <Rate
+              value={rating}
+              onChange={handleRating}
+              className={styles.rate}
+            />
+          </Form.Item>
+
+          {rating > 0 && (
+            <>
               <Form.Item>
-                <Rate
-                  value={rating}
-                  onChange={handleRating}
-                  className={styles.rate}
-                />
-              </Form.Item>
-            </Col>
-
-            {rating > 0 && (
-              <>
-                <Col span={18}>
-                  <Form.Item>
-                    <div className={styles.quick}>
-                      {quickAnswers.map((q) => (
-                        <Button
-                          type={
-                            selectedAnswers?.includes(q.id)
-                              ? 'secondary-active'
-                              : 'secondary'
-                          }
-                          key={q.id}
-                          onClick={() => handleAnswer(q.id)}>
-                          {q.text}
-                        </Button>
-                      ))}
-                    </div>
-                  </Form.Item>
-                </Col>
-
-                <Col span={24}>
-                  <Form.Item>
-                    <InputTextArea
-                      value={text}
-                      onChange={handleTextChange}
-                      className={
-                        text.length === maxCharacterCount
-                          ? styles.textAreaLimit
-                          : styles.textArea
+                <div className={styles.quick}>
+                  {quickAnswers.map((q) => (
+                    <Button
+                      type={
+                        selectedAnswers?.includes(q.id)
+                          ? 'secondary-active'
+                          : 'secondary'
                       }
-                      autoSize={{ minRows: 5, maxRows: 5 }}
-                      placeholder="Ваш коментарий"
-                      maxLength={150}
-                    />
-                    <span className={styles.characterCount}>
-                      {text.length}/{maxCharacterCount}
-                    </span>
-                    {text.length === maxCharacterCount && (
-                      <span className={styles.characterLimitMessage}>
-                        Достигнут лимит символов
-                      </span>
-                    )}
-                  </Form.Item>
-                </Col>
-              </>
-            )}
-
-            <Col span={24}>
-              <Form.Item>
-                <Button
-                  className={styles.reviewBtn}
-                  disabled={!rating > 0}
-                  type="third"
-                  htmlType="submit">
-                  Оставить отзыв
-                </Button>
+                      key={q.id}
+                      onClick={() => handleAnswer(q.id)}>
+                      {q.text}
+                    </Button>
+                  ))}
+                </div>
               </Form.Item>
-            </Col>
-          </Row>
+
+              <Form.Item>
+                <InputTextArea
+                  value={text}
+                  onChange={handleTextChange}
+                  className={
+                    text.length === maxCharacterCount
+                      ? styles.textAreaLimit
+                      : styles.textArea
+                  }
+                  autoSize={{ minRows: 5, maxRows: 5 }}
+                  placeholder="Ваш коментарий"
+                  maxLength={150}
+                />
+                <span className={styles.characterCount}>
+                  {text.length}/{maxCharacterCount}
+                </span>
+                {text.length === maxCharacterCount && (
+                  <span className={styles.characterLimitMessage}>
+                    Достигнут лимит символов
+                  </span>
+                )}
+              </Form.Item>
+            </>
+          )}
+
+          <Form.Item>
+            <Button
+              className={styles.reviewBtn}
+              disabled={!rating > 0}
+              type="third"
+              htmlType="submit">
+              Оставить отзыв
+            </Button>
+          </Form.Item>
         </Form>
       </Col>
     </Row>

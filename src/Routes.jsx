@@ -88,13 +88,13 @@ const Routes = () => {
           exact
           layout={Main}
           component={QuestionAnswerContent}
-          path={'/detailedQuestionNewAdmin/:id'}
+          path={'/question/admin/:id'}
         />
         <RouteWithLayout
-            exact
-            layout={Main}
-            component={QuestionAnswerUser}
-            path={'/questionPreview/:id'}
+          exact
+          layout={Main}
+          component={QuestionAnswerUser}
+          path={'/question/preview/:questionId/:resourceId'}
         />
         <RouteWithLayout
           exact
