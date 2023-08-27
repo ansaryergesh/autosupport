@@ -3,16 +3,15 @@ import { LocalStorageKeys } from '../storage/localStorageKey.js';
 import { notification } from 'antd';
 import { clearStorage } from '../service/Auth/index.js';
 
+export const checkerAddress = import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/'
 const axiosParams = {
   baseURL:
-    // eslint-disable-next-line no-undef
-    import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/'
+    checkerAddress
 };
 
 const axiosParamsWithHeader = {
   baseURL:
-    // eslint-disable-next-line no-undef
-    import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/',
+    checkerAddress,
   headers: {
     Authorization:
       'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Upload, Modal, Input, Progress, notification} from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import {axiosInstanceWithHeader} from "../../api/api.js";
+import {axiosInstanceWithHeader, checkerAddress} from "../../api/api.js";
 import {removeImage} from "./index.js";
 
 
@@ -15,7 +15,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
     const [progress, setProgress] = useState(0);
     const handleCancel = () => setPreviewVisible(false);
 
-    const domainName = 'http://localhost:8080'
+    const domainName = checkerAddress
 
     useEffect(() => {
         updateAnswerFormData()
@@ -95,7 +95,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
                     status: 'done',
                     description: null,
                     imageOrder: prevState.length+1,
-                    thumbUrl: 'http://localhost:8080' + res.data.url,// Replace with the unique identifier for the image
+                    thumbUrl: checkerAddress + res.data.url,// Replace with the unique identifier for the image
                     url: res.data.url,  // Replace with the URL of the uploaded image
                 };
                 const newState = [...prevState,newFile];

@@ -70,10 +70,6 @@ const Keywords = () => {
 
   const columns = [
     {
-      title: 'Id',
-      dataIndex: 'id'
-    },
-    {
       title: 'Name',
       dataIndex: 'text'
     },

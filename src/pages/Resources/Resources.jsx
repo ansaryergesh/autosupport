@@ -69,10 +69,6 @@ const Resources = () => {
 
   const columns = [
     {
-      title: 'Id',
-      dataIndex: 'id'
-    },
-    {
       title: 'Code',
       dataIndex: 'code'
     },

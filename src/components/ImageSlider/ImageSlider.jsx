@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './index.module.less';
 import { ReactComponent as RightArrowButton } from '../../assets/images/RightArrowButton.svg';
 import { ReactComponent as LeftArrowButton } from '../../assets/images/LeftArrowButton.svg';
+import {checkerAddress} from "../../api/api.js";
 
 const ImageSlider = ({ slides, sliderData }) => {
   const [current, setCurrent] = useState(0);
@@ -18,7 +19,7 @@ const ImageSlider = ({ slides, sliderData }) => {
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
   }
-  const domainName = 'http://localhost:8080'
+  const domainName = checkerAddress
   return (
     <section className={styles.slider}>
 
