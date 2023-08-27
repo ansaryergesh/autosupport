@@ -1,34 +1,128 @@
-import React, { useState } from 'react';
-import { Upload, Input, Form, Slider } from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Upload, Modal, Input, Progress, notification} from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import {axiosInstanceWithHeader} from "../../api/api.js";
+import {removeImage} from "./index.js";
 
-const ImageUploadSlider = () => {
-    const [imageList, setImageList] = useState([]);
 
-    const handleUploadChange = async info => {
-        if (info.file.status === 'done') {
-            const response = await uploadImage(info.file);
-            if (response.success) {
-                setImageList([...imageList, { url: response.url, description: '', order: 1 }]);
+const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) => {
+    const selectedLanguageItem = answerFormData.answerContents?.find(item => item.langKey === selectedLanguage);
+    console.log(selectedLanguageItem?.images)
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState('');
+    const [fileList, setFileList] = useState(selectedLanguageItem?.images || []);
+    const [editingImage, setEditingImage] = useState(null);
+    const [progress, setProgress] = useState(0);
+    const handleCancel = () => setPreviewVisible(false);
+
+    const domainName = 'http://localhost:8080'
+
+    useEffect(() => {
+        updateAnswerFormData()
+    },[fileList])
+
+    useEffect(() => {
+        setFileList(selectedLanguageItem?.images)
+    },[selectedLanguage])
+
+    const updateAnswerFormData = () => {
+        const updatedAnswerContent = { ...answerFormData };
+        const index = answerFormData?.answerContents.findIndex(content => content.langKey === selectedLanguage);
+        if (index !== -1) {
+            updatedAnswerContent.answerContents[index].images = fileList;
+            setAnswerFormData(updatedAnswerContent);
+        }
+    }
+
+    // const displayFileList = Array.isArray(fileList) && fileList.map((file) => {
+    //     if (file.url) {
+    //         return {
+    //             ...file,
+    //             url: `${domainName}${file.url}` // Append domain name to the URL
+    //         };
+    //     }
+    //     return file;
+    // });
+
+    const handlePreview = async file => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+
+        setPreviewImage(`${domainName}${file.url}` || file.preview);
+        setPreviewVisible(true);
+        setEditingImage(file);
+    };
+
+    const handleRemove = file => {
+        removeImage(file.id).then(res=> {
+            console.log(res)
+            const newFileList = fileList.filter(item => item.id !== file.id);
+            setFileList(newFileList);
+        })
+    };
+
+
+    const uploadImage = async options => {
+        const { onSuccess, onError, file, onProgress } = options;
+
+        const fmData = new FormData();
+        const config = {
+            headers: { "content-type": "multipart/form-data" },
+            onUploadProgress: event => {
+                const percent = Math.floor((event.loaded / event.total) * 100);
+                setProgress(percent);
+                if (percent === 100) {
+                    setTimeout(() => setProgress(0), 1000);
+                }
+                onProgress({ percent: (event.loaded / event.total) * 100 });
             }
+        };
+        fmData.append("file", file);
+        try {
+            const res = await axiosInstanceWithHeader.post(
+                "/api/admin/image",
+                fmData,
+                config
+            );
+            setFileList((prevState => {
+                const newFile = {
+                    id: res.data.id,
+                    status: 'done',
+                    description: null,
+                    imageOrder: prevState.length+1,
+                    thumbUrl: 'http://localhost:8080' + res.data.url,// Replace with the unique identifier for the image
+                    url: res.data.url,  // Replace with the URL of the uploaded image
+                };
+                const newState = [...prevState,newFile];
+                setFileList(newState);
+                handlePreview(newFile)
+            }))
+            onSuccess("Ok");
+            console.log("server res: ", res);
+        } catch (err) {
+            console.log("Error: ", err);
+            onError({ err });
         }
     };
 
-    const uploadImage = async file => {
-        console.log(file)
-        // Upload logic, similar to the previous examples
-    };
+    const handleSaveDescription = description => {
+        if(description) {
+            const newFileList = fileList.map(item => {
+                if (item.uid === editingImage.uid) {
+                    return { ...item, description };
+                }
+                return item;
+            });
 
-    const handleDescriptionChange = (index, description) => {
-        const updatedImageList = [...imageList];
-        updatedImageList[index].description = description;
-        setImageList(updatedImageList);
-    };
+            setFileList(newFileList);
+            setEditingImage(null);
+            setPreviewVisible(false)
+            setPreviewImage(null)
+        } else {
+            notification.error({message: 'Description is required'})
+        }
 
-    const handleRatingChange = (index, rating) => {
-        const updatedImageList = [...imageList];
-        updatedImageList[index].rating = rating;
-        setImageList(updatedImageList);
     };
 
     const uploadButton = (
@@ -38,38 +132,48 @@ const ImageUploadSlider = () => {
         </div>
     );
 
-    const imageListItems = imageList.map((image, index) => (
-        <div key={index} style={{ marginBottom: 16 }}>
-            <img src={image.url} alt={`Image ${index}`} style={{ width: '100%', maxWidth: 200 }} />
-            <Input
-                placeholder="Enter description"
-                value={image.description}
-                onChange={e => handleDescriptionChange(index, e.target.value)}
-                style={{ marginTop: 8 }}
-            />
-            <Slider
-                value={image.rating}
-                onChange={value => handleRatingChange(index, value)}
-                marks={{ 0: '0', 10: '10' }}
-                step={1}
-            />
-        </div>
-    ));
+    const getBase64 = file => {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+        });
+    };
 
     return (
-        <div>
+        <div style={{marginTop: '10px'}}>
             <Upload
-                action="/your-upload-endpoint"
+                accept={"image/jpeg", 'image/jpg', 'image/png'}
+                maxCount={10}
+                // action="//jsonplaceholder.typicode.com/posts/"
+                customRequest={uploadImage}
                 listType="picture-card"
-                onChange={handleUploadChange}
+                fileList={fileList}
+                onPreview={handlePreview}
+                onRemove={handleRemove}
             >
-                {imageList.length >= 5 ? null : uploadButton}
+                {uploadButton}
             </Upload>
-            <Form>
-                {imageListItems}
-            </Form>
+            <Modal visible={previewVisible}
+                   onCancel={handleCancel}
+                   okText={'Save'}
+                   onOk={() => handleSaveDescription(editingImage.description)}>
+                <img alt="Preview" style={{ width: '100%' }} src={previewImage} />
+                <Input
+                    placeHolder={'Description of image'}
+                    value={editingImage ? editingImage.description : ''}
+                    onChange={e => {
+                        if (editingImage) {
+                            const newEditingImage = { ...editingImage, description: e.target.value };
+                            setEditingImage(newEditingImage);
+                        }
+                    }}
+                    onPressEnter={() => handleSaveDescription(editingImage.description)}
+                />
+            </Modal>
+            {progress > 0 ? <Progress percent={progress} /> : null}
         </div>
     );
 };
 
-export default ImageUploadSlider;
+export default ImageUploader;
