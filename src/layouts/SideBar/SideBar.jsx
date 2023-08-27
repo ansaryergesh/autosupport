@@ -290,7 +290,7 @@ const SidebarNav = ({ isAdmin = true }) => {
       <div
         onClick={handleLogOut}
         style={{ padding: '26px 0', cursor: 'pointer' }}>
-        <LogoutOutlined /> <span>Выйти</span>
+        <LogoutOutlined /> <span>{i18n.t('commons.signOut')}</span>
       </div>
 
       <Footer />

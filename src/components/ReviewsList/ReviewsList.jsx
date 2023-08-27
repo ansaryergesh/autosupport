@@ -67,7 +67,7 @@ const ReviewsList = () => {
     <div className={styles.box}>
       <Row gutter={[0, 16]}>
         <Col style={{ marginLeft: 'auto' }}>
-          <Title level={3}>{i18n.t('Feedback.ListTitle')}</Title>
+          <Title level={3}>{i18n.t('feedback.ListTitle')}</Title>
         </Col>
 
         {/* <Col>
@@ -89,7 +89,7 @@ const ReviewsList = () => {
 
         <Col style={{ marginLeft: 'auto' }}>
           <Button type="primary" className={styles.btnDownload}>
-            Скачать отзывы
+            {i18n.t('actions.saveReviews')}
           </Button>
         </Col>
       </Row>

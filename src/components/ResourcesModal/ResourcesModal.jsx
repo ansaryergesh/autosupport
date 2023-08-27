@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageResources } from '../../service/Resources/index.js';
 import { initialValues } from '../../pages/Resources/constants.js';
+import { i18n } from '../../utils/i18next';
 
 const ResourcesModal = ({
   isModalOpen = false,
@@ -26,7 +27,11 @@ const ResourcesModal = ({
         handleModal();
         getList();
         if (res.data) {
-          notification.success({ message: 'Запись добавлена' });
+          notification.success({
+            message: editPage
+              ? i18n.t('actions.edited')
+              : i18n.t('actions.added')
+          });
         }
       })
       .finally(() => {
@@ -37,7 +42,11 @@ const ResourcesModal = ({
   return (
     <>
       <Modal
-        title={editPage ? 'Edit resource' : 'Add resource'}
+        title={
+          editPage
+            ? i18n.t('actions.editResource')
+            : i18n.t('actions.addResource')
+        }
         confirmLoading={loading}
         open={isModalOpen}
         onCancel={() => {
@@ -64,12 +73,12 @@ const ResourcesModal = ({
           <Form.Item
             name="code"
             rules={[{ required: true, message: 'Code is required!' }]}>
-            <Input placeholder="Code" />
+            <Input placeholder={i18n.t('columns.code')} />
           </Form.Item>
           <Form.Item
             name="name"
             rules={[{ required: true, message: 'Resource is required!' }]}>
-            <Input placeholder="Resource name" />
+            <Input placeholder={i18n.t('resource')} />
           </Form.Item>
         </Form>
       </Modal>

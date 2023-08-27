@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageTag } from '../../service/Tags/index.js';
 import { initialValues } from '../../pages/Tags/constants.js';
+import { i18n } from '../../utils/i18next';
 
 const TagsModal = ({
   isModalOpen = false,
@@ -26,7 +27,11 @@ const TagsModal = ({
         handleModal();
         getList();
         if (res.data) {
-          notification.success({ message: 'Запись добавлена' });
+          notification.success({
+            message: editPage
+              ? i18n.t('actions.edited')
+              : i18n.t('actions.added')
+          });
         }
       })
       .finally(() => {
@@ -37,7 +42,7 @@ const TagsModal = ({
   return (
     <>
       <Modal
-        title={editPage ? 'Edit tag' : 'Add tag'}
+        title={editPage ? i18n.t('actions.editTag') : i18n.t('actions.addTag')}
         confirmLoading={loading}
         open={isModalOpen}
         onCancel={() => {
@@ -66,7 +71,7 @@ const TagsModal = ({
                 message: 'Tag is required'
               }
             ]}>
-            <Input placeholder="Tag" />
+            <Input placeholder={i18n.t('tag')} />
           </Form.Item>
           <Form.Item name="id" style={{ display: 'none' }}>
             <Input />

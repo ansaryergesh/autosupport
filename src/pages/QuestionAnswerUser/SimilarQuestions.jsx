@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
+import { i18n } from '../../utils/i18next.js';
 
 const dataSimilar = [
   {
@@ -31,7 +32,7 @@ const SimilarQuestions = () => {
         <TypographyHead
           className={styles.similarHead}
           type={TypoGraphyType.SUB_HEAD}
-          content={'Похожие запросы'}
+          content={i18n.t('similarRequests')}
         />
         {dataSimilar?.map((q) => (
           <TypographyHead

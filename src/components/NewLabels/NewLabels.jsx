@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './index.module.less';
 import Input from 'components/Input/Input.jsx';
 import { PlusCircleFilled } from '@ant-design/icons';
+import { i18n } from '../../utils/i18next';
 
 const NewLabels = ({ num }) => {
   const [inputValues, setInputValues] = useState([]);
@@ -32,7 +33,7 @@ const NewLabels = ({ num }) => {
             onChange={(e) => handleInputChange(index, e.target.value)}
             type="text"
             className={styles.inputItem}
-            placeholder="Введите метку"
+            placeholder={i18n.t('feedback.mark')}
           />
         );
       })}

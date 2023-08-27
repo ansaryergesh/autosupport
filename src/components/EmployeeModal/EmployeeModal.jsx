@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Form, Select } from 'antd';
 import Button from '../Button/Button.jsx';
 import Input from '../Input/Input.jsx';
+import { i18n } from 'utils/i18next.js';
 
 const optionsRole = [
   {
@@ -41,27 +42,33 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
       </Button>
 
       <Modal
-        title="Add new employee"
+        title={i18n.t('actions.addEmployee')}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         okButtonProps={{ className: 'button-modal' }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Form layout="vertical">
-          <Form.Item required label="Full Name">
-            <Input placeholder="Full name of the employee" />
+          <Form.Item required>
+            <Input placeholder={i18n.t('columns.fullName')} />
           </Form.Item>
 
-          <Form.Item required label="Email">
-            <Input placeholder="Email of the employee" />
+          <Form.Item required>
+            <Input placeholder={i18n.t('columns.email')} />
           </Form.Item>
 
-          <Form.Item required label="Role">
-            <Select options={optionsRole} placeholder="Select a role" />
+          <Form.Item required>
+            <Select
+              options={optionsRole}
+              placeholder={i18n.t('columns.role')}
+            />
           </Form.Item>
 
-          <Form.Item required label="Company">
-            <Select options={optionsComp} placeholder="Select a company" />
+          <Form.Item required>
+            <Select
+              options={optionsComp}
+              placeholder={i18n.t('organization')}
+            />
           </Form.Item>
         </Form>
       </Modal>

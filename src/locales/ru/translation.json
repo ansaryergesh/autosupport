@@ -3,9 +3,13 @@
   "VIDEO": "Видео инструкция",
   "DRAFT": "Черновик",
   "PUBLISHED": "Активный",
+  "keyword": "Ключевое слово",
   "keywords": "Ключевые слова",
+  "resource": "Ресурс",
   "resources": "Ресурсы",
+  "organization": "Организация",
   "organizations": "Организации",
+  "tag": "Тэг",
   "tags": "Тэги",
   "allTheme": "Все темы",
   "popularTheme": "Популярное",
@@ -13,39 +17,71 @@
   "employee": "Сотрудники",
   "reviews": "Отзывы",
   "categories": "Категории",
+  "home": "Главная",
+  "description": "Описание",
+  "similarRequests": "Похожие запросы",
   "commons": {
     "signIn": "Вход",
+    "signOut": "Выход",
     "comeBack": "Добро пожаловать!",
     "forgetPassword": "Забыли ваш пароль?"
   },
   "columns": {
     "name": "Наименование",
-    "deleteSelected": "Удалить выбранные элементы"
+    "fullName": "Полное имя",
+    "email": "Почта",
+    "role": "Роль",
+    "code": "Код"
   },
   "actions": {
+    "addEmployee": "Добавить нового сотрудника",
+    "sure": "Вы уверены?",
     "action": "Действия",
-    "addItem": "Добавить новый запись",
+    "add": "Добавить",
+    "added": "Добавлено",
     "delete": "Удалить",
+    "deleted": "Удалено",
     "cancel": "Отменить",
     "edit": "Редактировать",
-    "save": "Сохранить"
+    "edited": "Изменено",
+    "editKeyword": "Редактировать ключевое слово",
+    "addKeyword": "Добавить ключевое слово",
+    "editTag": "Редактировать тэг",
+    "addTag": "Добавить тэг",
+    "editResource": "Редактировать ресурс",
+    "addResource": "Добавить ресурс",
+    "editOrganization": "Редактировать организацию",
+    "addOrganization": "Добавить организацию",
+    "addSimilar": "Добавить похожи запрос",
+    "save": "Сохранить",
+    "saved": "Сохранено",
+    "back": "Назад",
+    "saveReviews": "Скачать отзывы",
+    "deleteSelected": "Удалить выбранное",
+    "selected": "Выбранно",
+    "preview": "Предпросмотр"
   },
-  "Feedback": {
+  "feedback": {
     "MainTitle1": "Вы находитесь в  административной панели Freedom Broker",
     "MainTitle2": "Инструкция по работе с тикетами:",
     "ResponseAnalytics": "Аналитика ответов",
     "AddTicketTitle": "Функционал добавление новых меток",
     "ListTitle": "Список всех отзывов",
-    "ReviewDownload": "Загрузить отзывы"
+    "ReviewDownload": "Загрузить отзывы",
+    "averageRating": "Средняя оценка",
+    "mark": "Новая метка"
   },
-  "DetailedQuestion": {
+  "questionAnswer": {
     "VisualInstruction": "Визуальная инструкция",
     "VideoInstruction": "Видеоинструкция",
     "DescriptionTitle": "Описание шагов",
     "FindMistake": "Нашли ошибку в тексте?",
     "FixMistake": "Выделите и нажмите CTRL+Enter",
-    "RateQuestion": "Полезен ли был ответ?",
-    "RateSubtitel": "Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше",
-    "RateButton": "Оставить отзыв"
+    "rateAnswer": "Полезен ли был ответ?",
+    "rateSubtitel": "Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше",
+    "rateButton": "Оставить отзыв",
+    "comment": "Ваш комментарий",
+    "characterLimit": "Достигнут лимит символов",
+    "previewMessage": "Вы перешли на предросмотр"
   }
 }

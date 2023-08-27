@@ -5,6 +5,7 @@ import Button from '../../components/Button/Button';
 import InputTextArea from '../../components/Input/textArea';
 import TypographyHead from '../../components/Typography/TypographyHead';
 import { TypoGraphyType } from '../../components/Typography/constants';
+import { i18n } from '../../utils/i18next.js';
 
 const quickAnswers = [
   {
@@ -56,13 +57,11 @@ const Review = () => {
         <TypographyHead
           className={styles.reviewHead}
           type={TypoGraphyType.SECONDARY_HEAD}
-          content={'Полезен ли был ответ?'}
+          content={i18n.t('questionAnswer.rateAnswer')}
         />
         <TypographyHead
           type={TypoGraphyType.LEVEL_3}
-          content={
-            'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше'
-          }
+          content={i18n.t('questionAnswer.rateSubtitel')}
         />
 
         <Form onFinish={() => {}}>
@@ -103,7 +102,7 @@ const Review = () => {
                       : styles.textArea
                   }
                   autoSize={{ minRows: 5, maxRows: 5 }}
-                  placeholder="Ваш коментарий"
+                  placeholder={i18n.t('questionAnswer.comment')}
                   maxLength={150}
                 />
                 <span className={styles.characterCount}>
@@ -111,7 +110,7 @@ const Review = () => {
                 </span>
                 {text.length === maxCharacterCount && (
                   <span className={styles.characterLimitMessage}>
-                    Достигнут лимит символов
+                    {i18n.t('questionAnswer.characterLimit')}
                   </span>
                 )}
               </Form.Item>
@@ -124,7 +123,7 @@ const Review = () => {
               disabled={!rating > 0}
               type="third"
               htmlType="submit">
-              Оставить отзыв
+              {i18n.t('questionAnswer.rateButton')}
             </Button>
           </Form.Item>
         </Form>

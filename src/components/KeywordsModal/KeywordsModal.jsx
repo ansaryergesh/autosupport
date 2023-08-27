@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import PropTypes from 'prop-types';
 import { manageKeyword } from '../../service/Keywords/index.js';
 import { initialValues } from '../../pages/Keywords/constants.js';
+import { i18n } from '../../utils/i18next';
 
 const KeywordsModal = ({
   isModalOpen = false,
@@ -26,7 +27,11 @@ const KeywordsModal = ({
         handleModal();
         getList();
         if (res.data) {
-          notification.success({ message: 'Запись добавлена' });
+          notification.success({
+            message: editPage
+              ? i18n.t('actions.edited')
+              : i18n.t('actions.added')
+          });
         }
       })
       .finally(() => {
@@ -37,7 +42,11 @@ const KeywordsModal = ({
   return (
     <>
       <Modal
-        title={editPage ? 'Edit keyword' : 'Add keyword'}
+        title={
+          editPage
+            ? i18n.t('actions.editKeyword')
+            : i18n.t('actions.addKeyword')
+        }
         confirmLoading={loading}
         open={isModalOpen}
         onCancel={() => {
@@ -61,7 +70,7 @@ const KeywordsModal = ({
           <Form.Item
             name="text"
             rules={[{ required: true, message: 'Keyword is required!' }]}>
-            <Input placeholder="Keyword" />
+            <Input placeholder={i18n.t('keyword')} />
           </Form.Item>
           <Form.Item name="id" style={{ display: 'none' }}>
             <Input />

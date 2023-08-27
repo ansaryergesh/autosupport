@@ -9,7 +9,7 @@ const NewLabelsList = () => {
     <div>
       <Row gutter={[0, 16]}>
         <Col span={24}>
-          <Title level={3}>{i18n.t('Feedback.AddTicketTitle')}</Title>
+          <Title level={3}>{i18n.t('feedback.AddTicketTitle')}</Title>
         </Col>
         <Col span={24}>
           <NewLabels num={5} />

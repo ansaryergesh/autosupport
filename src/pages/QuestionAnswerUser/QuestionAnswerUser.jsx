@@ -44,8 +44,7 @@ const QuestionAnswerUser = () => {
 
   const saveNotification = () => {
     notification.success({
-      message: 'Log out',
-      description: 'You have logged out',
+      message: i18n.t('actions.saved'),
       placement: 'top'
     });
   };
@@ -91,7 +90,7 @@ const QuestionAnswerUser = () => {
           <div className={styles.card}>
             <TypographyHead
               type={TypoGraphyType.SECONDARY_HEAD}
-              content={'Description'}
+              content={i18n.t('description')}
             />
             <ShowHtmlContent htmlContent={stepDescription} />
             {images === [] && videoUrl === '' ? null : (
@@ -145,8 +144,10 @@ const QuestionAnswerUser = () => {
         </Col>
 
         <Col span={16}>
-          <Button onClick={() => history.goBack()}>Отменить</Button>
-          <Button onClick={handleSave}>Сохранить</Button>
+          <Button onClick={() => history.goBack()}>
+            {i18n.t('actions.back')}
+          </Button>
+          <Button onClick={handleSave}>{i18n.t('actions.save')}</Button>
         </Col>
 
         <Col>

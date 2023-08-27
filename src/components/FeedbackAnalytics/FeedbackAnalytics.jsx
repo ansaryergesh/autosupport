@@ -47,7 +47,7 @@ const FeedbackAnalytics = () => {
 
   return (
     <div>
-      <Title level={3}>{i18n.t('Feedback.ResponseAnalytics')}</Title>
+      <Title level={3}>{i18n.t('feedback.ResponseAnalytics')}</Title>
 
       <div className={styles.analyticsBox}>
         <div style={{ width: '250px', height: '250px' }}>
@@ -70,7 +70,7 @@ const FeedbackAnalytics = () => {
           )}
         />
       </div>
-      <p>Средний балл 3.5</p>
+      <p>{i18n.t('feedback.averageRating')}</p>
     </div>
   );
 };
