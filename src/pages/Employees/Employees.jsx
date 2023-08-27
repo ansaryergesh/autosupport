@@ -3,6 +3,7 @@ import { Table, Space, Popconfirm } from 'antd';
 import { tempData } from './constants.js';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
+import { i18n } from 'utils/i18next.js';
 
 const Employees = () => {
   const [data, setData] = useState(tempData);
@@ -14,38 +15,38 @@ const Employees = () => {
 
   const columns = [
     {
-      title: 'Ф.И.О.',
+      title: i18n.t('columns.fullName'),
       dataIndex: 'name',
       key: 'name'
     },
     {
-      title: 'Почтовый адрес',
+      title: i18n.t('columns.email'),
       dataIndex: 'email',
       key: 'email'
     },
     {
-      title: 'Роль',
+      title: i18n.t('columns.role'),
       dataIndex: 'role',
       key: 'role'
     },
     {
-      title: 'Компания',
+      title: i18n.t('columns.organization'),
       dataIndex: 'company',
       key: 'company'
     },
 
     {
-      title: 'Действия',
+      title: i18n.t('actions.action'),
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EmployeeModal btnType="default" btnName="Редактировать" />
+          <EmployeeModal btnType="default" btnName={i18n.t('actions.edit')} />
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
-            title="Sure to delete?"
+            title={i18n.t('actions.sure')}
             onConfirm={() => handleDelete(record.key)}>
-            <Button>Удалить</Button>
+            <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
         </Space>
       )
@@ -55,7 +56,7 @@ const Employees = () => {
     <div style={{ margin: '68px auto 0 auto' }}>
       <EmployeeModal
         btnType="modal"
-        btnName="Добавить сотрудника"
+        btnName={i18n.t('actions.addEmployee')}
         margin={10}
       />
       <Table pagination={false} columns={columns} dataSource={data} />

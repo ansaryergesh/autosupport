@@ -4,6 +4,7 @@ import Button from 'components/Button/Button';
 import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
 import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
 import { initialValues } from './constants.js';
+import { i18n } from '../../utils/i18next';
 
 const Keywords = () => {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ const Keywords = () => {
     console.log(id);
     deleteKeyWord(id).then((res) => {
       if (res.status === 204) {
-        notification.success({ message: 'Deleted' });
+        notification.success({ message: i18n.t('actions.deleted') });
         getKeywordsList();
       }
     });
@@ -47,7 +48,7 @@ const Keywords = () => {
         selectedRowKeys.map((rowId) =>
           deleteKeyWord(rowId).then((res) => {
             if (res.status === 204) {
-              notification.success({ message: 'Deleted' });
+              notification.success({ message: i18n.t('actions.deleted') });
               getKeywordsList();
             }
           })
@@ -70,12 +71,12 @@ const Keywords = () => {
 
   const columns = [
     {
-      title: 'Name',
+      title: i18n.t('columns.name'),
       dataIndex: 'text'
     },
 
     {
-      title: 'Action',
+      title: i18n.t('actions.action'),
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
@@ -84,14 +85,14 @@ const Keywords = () => {
               setRecord(record);
               handleModal();
             }}>
-            {'Edit'}
+            {i18n.t('actions.edit')}
           </Button>
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
-            title="Sure to delete?"
+            title={i18n.t('actions.sure')}
             onConfirm={() => handleDelete(record.id)}>
-            <Button>Delete</Button>
+            <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
         </Space>
       )
@@ -109,13 +110,15 @@ const Keywords = () => {
           }}>
           <div>
             <Button onClick={handleDeleteSelected} disabled={!hasSelected}>
-              Delete selected
+              {i18n.t('actions.deleteSelected')}
             </Button>
             <span
               style={{
                 marginLeft: 8
               }}>
-              {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+              {hasSelected
+                ? `${i18n.t('actions.selected')} ${selectedRowKeys.length} `
+                : ''}
             </span>
           </div>
           <Button
@@ -124,7 +127,7 @@ const Keywords = () => {
               setRecord(initialValues);
               handleModal();
             }}>
-            Add item
+            {i18n.t('actions.add')}
           </Button>
         </div>
         <Table

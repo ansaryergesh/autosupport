@@ -4,6 +4,7 @@ import Button from 'components/Button/Button';
 import ResourcesModal from 'components/ResourcesModal/ResourcesModal.jsx';
 import { getResources, deleteResource } from '../../service/Resources/index.js';
 import { initialValues } from './constants.js';
+import { i18n } from '../../utils/i18next';
 
 const Resources = () => {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ const Resources = () => {
     console.log(id);
     deleteResource(id).then((res) => {
       if (res.status === 204) {
-        notification.success({ message: 'Deleted' });
+        notification.success({ message: i18n.t('actions.deleted') });
         getResourcesList();
       }
     });
@@ -47,7 +48,7 @@ const Resources = () => {
         selectedRowKeys.map((rowId) =>
           deleteResource(rowId).then((res) => {
             if (res.status === 204) {
-              notification.success({ message: 'Deleted' });
+              notification.success({ message: i18n.t('actions.deleted') });
               getResourcesList();
             }
           })
@@ -69,16 +70,17 @@ const Resources = () => {
 
   const columns = [
     {
-      title: 'Code',
+      title: i18n.t('columns.code'),
+
       dataIndex: 'code'
     },
     {
-      title: 'Name',
+      title: i18n.t('columns.name'),
       dataIndex: 'name'
     },
 
     {
-      title: 'Action',
+      title: i18n.t('actions.action'),
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
@@ -87,14 +89,14 @@ const Resources = () => {
               setRecord(record);
               handleModal();
             }}>
-            {'Edit'}
+            {i18n.t('actions.edit')}
           </Button>
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
-            title="Sure to delete?"
+            title={i18n.t('actions.sure')}
             onConfirm={() => handleDelete(record.id)}>
-            <Button>Delete</Button>
+            <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
         </Space>
       )
@@ -112,18 +114,20 @@ const Resources = () => {
           }}>
           <div>
             <Button onClick={handleDeleteSelected} disabled={!hasSelected}>
-              Delete selected
+              {i18n.t('actions.deleteSelected')}
             </Button>
             <span
               style={{
                 marginLeft: 8
               }}>
-              {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+              {hasSelected
+                ? `${i18n.t('actions.selected')} ${selectedRowKeys.length}`
+                : ''}
             </span>
           </div>
 
           <Button type="modal" onClick={handleModal}>
-            Add item
+            {i18n.t('actions.add')}
           </Button>
         </div>
         <Table

@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { i18n } from 'utils/i18next.js';
 
 const DraggableMenuItem = ({ handleAdd }) => {
   const constMenu = (
@@ -27,7 +28,7 @@ const DraggableMenuItem = ({ handleAdd }) => {
             marginBottom: '8px'
           }}>
           <Link className={` ${currentPath === '/' && 'activeLink'}`} to={`/`}>
-            <span>Главная</span>
+            <span>{i18n.t('home')}</span>
           </Link>
         </div>
       </Dropdown>
