@@ -1,5 +1,6 @@
 export const initialQuestionAnswerContent = {
   id: null,
+  status: 'status',
   question: {
     id: 0,
     orderNumber: 0,

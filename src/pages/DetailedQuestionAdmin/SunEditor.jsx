@@ -20,7 +20,7 @@ const MyComponent = ({
 
   useEffect(() => {
     setEditorContent(selectedLanguageItem?.stepDescription);
-  }, [selectedLanguage, answerFormData, selectedLanguageItem?.stepDescription]);
+  }, [answerFormData]);
 
   const handleContentChange = (value) => {
     const updatedAnswerContent = { ...answerFormData };
@@ -36,11 +36,9 @@ const MyComponent = ({
   return (
     <div style={{ padding: '16px 0' }}>
       <SunEditor
-        defaultValue={editorContent}
         height={'300px'}
         onChange={setEditorContent}
         setContents={editorContent} // Set initial content
-        autoFocus={true}
         placeholder="Enter the content"
         setOptions={{
           buttonList: [

@@ -1,7 +1,8 @@
 export default {
   VISUAL: 'Фото инструкция',
   VIDEO: 'Видео инструкция',
-
+  DRAFT: 'Черновик',
+  PUBLISHED: 'Активный',
   allTheme: 'Все темы',
   popularTheme: 'Популярное',
   SearchQuestion: 'Что вы ищете?',

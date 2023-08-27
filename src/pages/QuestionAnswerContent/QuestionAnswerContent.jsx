@@ -113,6 +113,7 @@ const QuestionAnswerContent = () => {
                         {item}
                     </Button>
                 ))}
+                <b>{i18n.t(answerFormData.status)}</b>
             </div>
             <Row gutter={[24,24]}>
                 <Col span={15}>
@@ -201,7 +202,7 @@ const QuestionAnswerContent = () => {
                     </Row>
                 </Col>
 
-                <Button type={'primary'} onClick={() => handleSubmit()}>Submit</Button>
+                <Button type={'primary'} onClick={() => handleSubmit()}>Preview</Button>
             </Row>
         </div>
     )
