@@ -18,11 +18,10 @@ const ImageSlider = ({ slides, sliderData }) => {
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
   }
-
+  const domainName = 'http://localhost:8080'
   return (
     <section className={styles.slider}>
-      <LeftArrowButton className={styles.leftArrow} onClick={prevSlide} />
-      <RightArrowButton className={styles.rightArrow} onClick={nextSlide} />
+
       {sliderData?.map((slide, index) => {
         return (
           <div
@@ -33,14 +32,20 @@ const ImageSlider = ({ slides, sliderData }) => {
                 : `${styles.slide}`
             }>
             {index === current && (
-              <>
-                <p className={styles.description}>{slide.description}</p>
-                <img
-                  src={slide.url}
-                  alt={styles.description}
-                  className={styles.image}
-                />
-              </>
+
+                  <div>
+                    <p className={styles.description}>{slide.description}</p>
+                    <div className={styles.imageBlock}>
+                      <LeftArrowButton className={styles.leftArrow} onClick={prevSlide} />
+                      <RightArrowButton className={styles.rightArrow} onClick={nextSlide} />
+                    <img
+                        src={`${domainName}${slide.url}`}
+                        alt={styles.description}
+                        className={styles.image}
+                    />
+                    </div>
+                  </div>
+
             )}
           </div>
         );
