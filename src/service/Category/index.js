@@ -12,7 +12,7 @@ export const editCategory = (data) => {
 
 export const getCategories = () => {
   const langKey = getLocale()?.toUpperCase() || LANG_KEY.RU;
-  return axiosInstanceWithHeader.get('/api/admin/categories', {params: {langKey}});
+  return axiosInstanceWithHeader.get('/api/admin/categories', {params: {langKey, pageSize: 20, pageCurrent: 0, pageTotal: 0}});
 };
 
 export const deleteCategory = (id) => {
