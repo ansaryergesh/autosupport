@@ -5,6 +5,7 @@ import {Form, Modal, notification} from "antd";
 import Button from "../../Button/Button.jsx";
 import {initialQuestion} from "../constants.js";
 import {createCategoryQuestion} from "../../../service/Question/index.js";
+import {useHistory} from "react-router-dom";
 const QuestionCreateModal = ({
                                  isModalOpen = false,
                                  handleModal,
@@ -13,7 +14,7 @@ const QuestionCreateModal = ({
                              }) => {
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
-
+    const history = useHistory();
     const handleSubmit = (values) => {
         console.log(categoryId)
 
@@ -23,6 +24,7 @@ const QuestionCreateModal = ({
             form.resetFields();
             getCategoryAll();
             handleModal();
+            history.push(`/question/admin/${res.data.id}`)
         }).finally(() => {
             setLoading(false);
         })

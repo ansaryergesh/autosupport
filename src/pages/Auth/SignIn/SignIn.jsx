@@ -26,6 +26,7 @@ const SignIn = () => {
                 res.data?.id_token
             );
           }
+          history.push('/')
 
           notification.success({ message: 'welcome' });
         }

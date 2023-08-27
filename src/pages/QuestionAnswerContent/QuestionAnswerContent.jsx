@@ -62,6 +62,7 @@ const QuestionAnswerContent = () => {
   }, [id]);
   const history = useHistory();
   useEffect(() => {
+    setAnswerFormData(initialQuestionAnswerContent);
     window.scrollTo(0, 0);
     if (activeResource) {
       answerByQuestionAndResource(id, activeResource.id)

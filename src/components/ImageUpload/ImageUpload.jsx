@@ -38,22 +38,22 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
         }
     }
 
-    // const displayFileList = Array.isArray(fileList) && fileList.map((file) => {
-    //     if (file.url) {
-    //         return {
-    //             ...file,
-    //             url: `${domainName}${file.url}` // Append domain name to the URL
-    //         };
-    //     }
-    //     return file;
-    // });
+    const displayFileList = Array.isArray(fileList) && fileList.map((file) => {
+        if (file.url) {
+            return {
+                ...file,
+                url: `${domainName}${file.url}` // Append domain name to the URL
+            };
+        }
+        return file;
+    });
 
     const handlePreview = async file => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
-
-        setPreviewImage(`${domainName}${file.url}` || file.preview);
+        // const inPreview = file.thumbUrl ? file.thumbUrl : file.url
+        setPreviewImage(file.url || file.preview);
         setPreviewVisible(true);
         setEditingImage(file);
     };
@@ -95,7 +95,6 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
                     status: 'done',
                     description: null,
                     imageOrder: prevState.length+1,
-                    thumbUrl: checkerAddress + res.data.url,// Replace with the unique identifier for the image
                     url: res.data.url,  // Replace with the URL of the uploaded image
                 };
                 const newState = [...prevState,newFile];
@@ -152,7 +151,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
                 // action="//jsonplaceholder.typicode.com/posts/"
                 customRequest={uploadImage}
                 listType="picture-card"
-                fileList={fileList}
+                fileList={displayFileList}
                 onPreview={handlePreview}
                 onRemove={handleRemove}
             >

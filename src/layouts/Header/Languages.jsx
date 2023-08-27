@@ -8,8 +8,8 @@ import { getLocale } from '../../utils/i18next';
 const Languages = () => {
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
-    console.log(language);
     localStorage.setItem('locale', language);
+    location.reload();
   };
   const [isHovered, setIsHovered] = useState(false);
 

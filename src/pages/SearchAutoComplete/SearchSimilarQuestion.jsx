@@ -17,7 +17,8 @@ const SearchReference = ({
       setOptions(
         response?.data.map((item) => ({
           value: item.questionContents?.title,
-          id: item.questionContents?.id
+          id: item.questionContents?.id,
+          itemValue: item,
         }))
       );
     });
@@ -37,14 +38,15 @@ const SearchReference = ({
       setOptions(
         response?.data.map((item) => ({
           value: item.questionContents?.title,
-          id: item.questionContents?.id
+          id: item.questionContents?.id,
+          itemValue: item,
         }))
       );
     });
   };
 
   const handleSelect = (value, option) => {
-    const selectedItem = { id: option.id, title: value };
+    const selectedItem = option.itemValue;
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
       notification.info({ message: 'Keyword already selected' });
     } else {
@@ -58,10 +60,15 @@ const SearchReference = ({
     setInputValue('');
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleRemoveSelected = (id) => {
     const newData = selectedItems?.filter((item) => item.id !== id);
     setSelectedItems(newData);
   };
+  //
+  // const selectedLanguageItemTitle = (questionItem) => {
+  //
+  // }
 
   return (
     <div>
@@ -90,7 +97,7 @@ const SearchReference = ({
                   borderBottom: '1px solid var(--green-color)',
                   alignItems: 'center'
                 }}>
-                <span key={item.id}>{item.title}</span>
+                <span key={item.id}>{item.questionContents?.title}</span>
                 <CloseOutlined
                   style={{
                     color: 'red',

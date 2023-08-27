@@ -3,7 +3,7 @@ import { LocalStorageKeys } from '../storage/localStorageKey.js';
 import { notification } from 'antd';
 import { clearStorage } from '../service/Auth/index.js';
 
-export const checkerAddress = import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/'
+export const checkerAddress = import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : 'http://localhost:8080'
 const axiosParams = {
   baseURL:
     checkerAddress
