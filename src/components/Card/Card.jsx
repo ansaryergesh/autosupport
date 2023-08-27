@@ -10,27 +10,31 @@ const CardComponent = (props) => {
   const maxQuestionsToShow = 4; // Maximum number of questions to show without ellipsis
 
   return (
-    <Link to={'/question/admin'}>
       <div className={styles.card}>
         <div className={'my-heading-2'}>
           <div className={styles.title}>
-            <Text ellipsis={{ rows: 2, expandable: false }}>
-              <TypographyHead
-                type={TypoGraphyType.SUB_HEAD}
-                content={props.data?.categorieContents.name}
-              />
-            </Text>
+            <Link to={`/category/${props.data?.id}`}>
+              <Text ellipsis={{ rows: 2, expandable: false }}>
+                <TypographyHead
+                    type={TypoGraphyType.SUB_HEAD}
+                    content={props.data?.categorieContents.name}
+                />
+              </Text>
+            </Link>
+
           </div>
         </div>
         <div className={styles.content}>
           {questions?.slice(0, maxQuestionsToShow).map((q, index) => (
             <p key={index} style={{ marginBottom: '11px' }}>
-              <Text ellipsis={{ rows: 2, expandable: false }}>
-                <TypographyHead
-                  type={TypoGraphyType.LEVEL_2}
-                  content={q.questionContents.title}
-                />
-              </Text>
+              <Link to={`/question/admin/${q.id}`}>
+                <Text ellipsis={{ rows: 2, expandable: false }}>
+                  <TypographyHead
+                      type={TypoGraphyType.LEVEL_2}
+                      content={q.questionContents.title}
+                  />
+                </Text>
+              </Link>
             </p>
           ))}
           {questions?.length > maxQuestionsToShow && (
@@ -40,7 +44,6 @@ const CardComponent = (props) => {
           )}
         </div>
       </div>
-    </Link>
   );
 };
 
