@@ -23,6 +23,10 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
 
     useEffect(() => {
         setFileList(selectedLanguageItem?.images)
+    },[answerFormData])
+
+    useEffect(() => {
+        setFileList(selectedLanguageItem?.images)
     },[selectedLanguage])
 
     const updateAnswerFormData = () => {

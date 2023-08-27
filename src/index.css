@@ -4,94 +4,118 @@
 /*}*/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /*body {*/
 /*    font-family: 'Museo';*/
 /*}*/
 .main-layout {
-    background-image: url('./assets/images/backgroundImg.jpg');
-    background-size: cover;
-    min-height: 100vh;
-    overflow-y: hidden;
-    background-repeat: no-repeat;
-    border-bottom: 1px solid black;
+  background-image: url('./assets/images/backgroundImg.jpg');
+  background-size: cover;
+  min-height: 100vh;
+  overflow-y: hidden;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid black;
 }
 
 .sidebar-nav {
-    position:relative;
-    background-color: #ffffff;
-    margin-top: 64px; /* Adjust this value according to the header's height */
-    padding: 16px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-right: 1px solid;
-    border-image: linear-gradient(270deg, #99A6F9 0%, #1CCC9E 33.33%, #1AE276 65.10%, #80FF61 100%); /* Replace these colors with your desired gradient */
-    border-image-slice: 1;
+  position: relative;
+  background-color: #ffffff;
+  margin-top: 64px; /* Adjust this value according to the header's height */
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid;
+  border-image: linear-gradient(
+    270deg,
+    #99a6f9 0%,
+    #1ccc9e 33.33%,
+    #1ae276 65.1%,
+    #80ff61 100%
+  ); /* Replace these colors with your desired gradient */
+  border-image-slice: 1;
 }
 
-
 .sidebar-nav::-webkit-scrollbar {
-    position: absolute;
-    left: 0;
-    width: 5px;
-    background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%);
+  position: absolute;
+  left: 0;
+  width: 5px;
+  background: linear-gradient(
+    270deg,
+    #99a6f9 0%,
+    #1ccc9e 33.33%,
+    #1ae276 65.1%,
+    #80ff61 100%
+  );
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
-
 
 .sidebar-nav::before {
 }
 
 .submenu {
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 .submenu:hover {
-    background: transparent;
+  background: transparent;
 }
 .submenu::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;/* Adjust the distance of the border from the right */
-    height: 1px; /* Adjust the width of the border */
-    background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%);
-    width: 100%;
-    /*content: '';*/
-    /*position: absolute,*/
-    /*bottom: 0,*/
-    /*left: 0,*/
-    /*right: 0,*/
-    /*height: 2px,*/
-    /*background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%),*/
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Adjust the distance of the border from the right */
+  height: 1px; /* Adjust the width of the border */
+  background: linear-gradient(
+    270deg,
+    #99a6f9 0%,
+    #1ccc9e 33.33%,
+    #1ae276 65.1%,
+    #80ff61 100%
+  );
+  width: 100%;
+  /*content: '';*/
+  /*position: absolute,*/
+  /*bottom: 0,*/
+  /*left: 0,*/
+  /*right: 0,*/
+  /*height: 2px,*/
+  /*background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.10%, #80ff61 100%),*/
 }
 
 .layout-content {
-    background: var(--background-color)!important;
-    overflow-x: scroll;
-    padding: 74px 13px; /* Adjust this value according to the header's height */
+  background: var(--background-color) !important;
+  overflow-x: scroll;
+  padding: 74px 13px; /* Adjust this value according to the header's height */
 }
 
 .layout-content::-webkit-scrollbar {
-    position: absolute;
-    left: 0;
-    width: 2px;
-    background: #DEE0E3;
-
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: #dee0e3;
 }
 
 .titleGradient {
-    background-image: linear-gradient(90deg, #6F95E3 0%, #5DA1D3 15.63%, #4EABC7 33.85%, #38B9B5 47.40%, #23C7A4 61.46%, #1CCE9A 79.17%, #1BD788 100%);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+  background-image: linear-gradient(
+    90deg,
+    #6f95e3 0%,
+    #5da1d3 15.63%,
+    #4eabc7 33.85%,
+    #38b9b5 47.4%,
+    #23c7a4 61.46%,
+    #1cce9a 79.17%,
+    #1bd788 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }

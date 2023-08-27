@@ -1,6 +1,8 @@
 export default {
   VISUAL: 'Фото нұсқау',
   VIDEO: 'Бейне нұсқау',
+  DRAFT: 'Черновик',
+  PUBLISHED: 'Активный',
   allTheme: 'Барлық',
   popularTheme: 'Танымал',
   SearchQuestion: 'Сен не іздеп тұрсың?',

@@ -17,3 +17,7 @@ export const editAnswerQuestion = (data, id) => {
 export const getAnswerById = (qId, rId) => {
   return axiosInstanceWithHeader.get(`/api/admin/answers/${qId}/${rId}`);
 };
+
+export const saveAnswer = (id, data) => {
+  return axiosInstanceWithHeader.patch(`/api/admin/answers/${id}`, data);
+};

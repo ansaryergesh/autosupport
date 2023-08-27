@@ -2,6 +2,7 @@ import { Dropdown, Menu } from 'antd';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const DraggableMenuItem = ({ handleAdd }) => {
   const constMenu = (
@@ -18,16 +19,16 @@ const DraggableMenuItem = ({ handleAdd }) => {
     <div>
       <Dropdown overlay={constMenu} trigger={['contextMenu']}>
         <div
-          className={'constMenu'}
+          className={'mainMenu hoveredLink'}
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            color: '@primary-color'
+            padding: '12px 0',
+            fontSize: '14px',
+            alignItems: 'center',
+            marginBottom: '8px'
           }}>
-          <Menu.SubMenu
-            className={`${currentPath === '/' && 'activeLink'}  submenu`}
-            title={'Главная'}
-          />
+          <Link className={` ${currentPath === '/' && 'activeLink'}`} to={`/`}>
+            <span>Главная</span>
+          </Link>
         </div>
       </Dropdown>
       {/*{children}*/}

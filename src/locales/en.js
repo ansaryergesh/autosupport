@@ -1,6 +1,8 @@
 export default {
   VISUAL: 'Photo instruction',
   VIDEO: 'Video instruction',
+  DRAFT: 'Черновик',
+  PUBLISHED: 'Активный',
   allTheme: 'All theme',
   popularTheme: 'Popular',
   SearchQuestion: 'What are you looking for?',

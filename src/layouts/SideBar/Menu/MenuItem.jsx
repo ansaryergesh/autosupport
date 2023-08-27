@@ -54,7 +54,9 @@ const MenuItem = ({
               }}>
               <Link
                 className={
-                  activeOpenedKeys?.includes(category.id) && 'activeLink'
+                  location.pathname !== '/' &&
+                  activeOpenedKeys?.includes(category.id) &&
+                  'activeLink'
                 }
                 style={{ display: 'flex', justifyContent: 'space-between' }}
                 to={`/category/${category?.id}`}>
