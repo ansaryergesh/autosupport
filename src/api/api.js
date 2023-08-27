@@ -6,13 +6,13 @@ import { clearStorage } from '../service/Auth/index.js';
 const axiosParams = {
   baseURL:
     // eslint-disable-next-line no-undef
-    import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/'
+    import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : 'http://localhost:8080'
 };
 
 const axiosParamsWithHeader = {
   baseURL:
     // eslint-disable-next-line no-undef
-    import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/',
+    import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : 'http://localhost:8080',
   headers: {
     Authorization:
       'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)

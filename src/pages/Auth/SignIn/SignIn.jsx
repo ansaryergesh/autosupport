@@ -42,10 +42,9 @@ const SignIn = () => {
 
   useEffect(() => {
     if (localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)) {
-      location.reload();
       history.push('/');
     }
-  }, [localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)]);
+  }, []);
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

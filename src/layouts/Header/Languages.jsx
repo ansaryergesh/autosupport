@@ -10,7 +10,6 @@ const Languages = () => {
     i18n.changeLanguage(language);
     console.log(language);
     localStorage.setItem('locale', language);
-    window.location.reload();
   };
   const [isHovered, setIsHovered] = useState(false);
 
