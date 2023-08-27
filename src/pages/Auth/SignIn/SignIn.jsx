@@ -20,10 +20,13 @@ const SignIn = () => {
     onLogin(values)
       .then((res) => {
         if (res) {
-          localStorage.setItem(
-            LocalStorageKeys.FREEDOM_ACCESS_TOKEN,
-            res.data?.id_token
-          );
+          if(res.data?.id_token) {
+            localStorage.setItem(
+                LocalStorageKeys.FREEDOM_ACCESS_TOKEN,
+                res.data?.id_token
+            );
+          }
+
           notification.success({ message: 'welcome' });
         }
       })

@@ -32,17 +32,20 @@ const Main = (props) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={'main-layout'}>
-        <Layout style={{ minHeight: '100vh' }}>
-          <div className="sidebar-nav">
-            <SidebarNav />
-          </div>
-          <Layout>
-            <Header />
-            <Layout.Content className="layout-content">
-              {children}
-            </Layout.Content>
-          </Layout>
-        </Layout>
+        {checkIfTokenIsValid() &&
+            <Layout style={{ minHeight: '100vh' }}>
+              <div className="sidebar-nav">
+                <SidebarNav />
+              </div>
+              <Layout>
+                <Header />
+                <Layout.Content className="layout-content">
+                  {children}
+                </Layout.Content>
+              </Layout>
+            </Layout>
+        }
+
       </div>
     </DndProvider>
   );
