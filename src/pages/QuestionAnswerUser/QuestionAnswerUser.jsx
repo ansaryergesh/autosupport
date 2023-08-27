@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Col, Row } from 'antd';
+import { Col, Row, notification } from 'antd';
 import ReactPlayer from 'react-player';
 import TypographyHead from 'components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from 'components/Typography/constants.js';
@@ -10,15 +10,16 @@ import ShowHtmlContent from 'components/ShowHtmlContent/ShowHtmlContent.jsx';
 import styles from './index.module.less';
 import Review from './Review.jsx';
 import SimilarQuestions from './SimilarQuestions.jsx';
-import { getAnswerById } from '../../service/Answer/index.js';
+import { getAnswerById, saveAnswer } from '../../service/Answer/index.js';
 import { INSTRUCTION_TYPE } from '../../constants/index.js';
 import { initialQuestionAnswerContent } from '../QuestionAnswerContent/constants';
 import { LANG_KEY } from '../../constants/index.js';
 import { i18n } from '../../utils/i18next.js';
+import { useHistory } from 'react-router';
 
 const QuestionAnswerUser = () => {
   const { questionId, resourceId } = useParams();
-  // const history = useHistory();
+  const history = useHistory();
   const [data, setData] = useState(initialQuestionAnswerContent);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
 
@@ -40,6 +41,28 @@ const QuestionAnswerUser = () => {
       console.log(res.data);
     });
   }, [questionId, resourceId]);
+
+  const saveNotification = () => {
+    notification.success({
+      message: 'Log out',
+      description: 'You have logged out',
+      placement: 'top'
+    });
+  };
+
+  const handleSave = () => {
+    const sendData = {
+      id: data.id,
+      status: 'PUBLISHED'
+    };
+    saveAnswer(data.id, sendData)
+      .then((res) => {
+        console.log(res.data);
+        history.push('/');
+        saveNotification();
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -120,6 +143,11 @@ const QuestionAnswerUser = () => {
 
         <Col span={16}>
           <Review />
+        </Col>
+
+        <Col span={16}>
+          <Button onClick={() => history.goBack()}>Отменить</Button>
+          <Button onClick={handleSave}>Сохранить</Button>
         </Col>
 
         <Col>

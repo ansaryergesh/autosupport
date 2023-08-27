@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Input, Layout, Menu, notification, Typography } from 'antd';
+import { Image, Input, Layout, notification, Typography } from 'antd';
 import { i18n } from 'utils/i18next.js';
 import { adminNavItems } from './constants.js';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,10 @@ import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 import { SIDEBAR_BUTTON } from '../../constants/index.js';
 import { getLocale } from '../../utils/i18next.js';
 import ConstDropDownMenuItem from './ConstDropDownMenuItem';
+import { useHistory } from 'react-router-dom';
+import { LogoutOutlined } from '@ant-design/icons';
+import { clearStorage } from '../../service/Auth/index.js';
+
 const { Sider } = Layout;
 
 const SearchInput = () => {
@@ -74,6 +78,8 @@ const SidebarNav = ({ isAdmin = true }) => {
     localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) ||
       SIDEBAR_BUTTON.ALL
   );
+
+  const history = useHistory();
 
   useEffect(() => {
     setOpenKeys([]);
@@ -171,6 +177,20 @@ const SidebarNav = ({ isAdmin = true }) => {
     setOpenKeys([key]); // Update openKeys with the clicked submenu's key
   };
 
+  const logOutNotification = () => {
+    notification.info({
+      message: 'Log out',
+      description: 'You have logged out',
+      placement: 'top'
+    });
+  };
+
+  const handleLogOut = () => {
+    clearStorage();
+    logOutNotification();
+    history.push(`/sign-in`);
+  };
+
   return (
     <Sider width={300} className="site-layout-background">
       <SearchInput />
@@ -201,6 +221,7 @@ const SidebarNav = ({ isAdmin = true }) => {
           borderRight: 0,
           width: '100%!important'
         }}>
+        <ConstDropDownMenuItem handleAdd={handleAddCategory} />
         {allCategories?.map((m, index) => (
           <MenuItem
             activeButton={activeButton}
@@ -248,9 +269,7 @@ const SidebarNav = ({ isAdmin = true }) => {
           />
         ))}
       </div>
-      <Menu>
-        <ConstDropDownMenuItem handleAdd={handleAddCategory} />
-      </Menu>
+
       <ActionsModal
         getCategoryAll={getCategoryAll}
         categoryId={categoryId}
@@ -267,9 +286,14 @@ const SidebarNav = ({ isAdmin = true }) => {
         orderModal={orderModal}
         setOrderModal={setOrderModal}
       />
-      <div>
-        <Footer />
+
+      <div
+        onClick={handleLogOut}
+        style={{ padding: '26px 0', cursor: 'pointer' }}>
+        <LogoutOutlined /> <span>Выйти</span>
       </div>
+
+      <Footer />
     </Sider>
   );
 };
