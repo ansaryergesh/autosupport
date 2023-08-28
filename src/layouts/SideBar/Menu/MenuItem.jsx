@@ -62,14 +62,8 @@ const MenuItem = ({
           <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
             Редактировать вопрос
           </Menu.Item>
-          <Menu.Item key="remove">
-            <Popconfirm
-                title="Title"
-                description="Open Popconfirm with Promise"
-                onConfirm={() => handleDeleteQuestion(id)}
-                onOpenChange={() => console.log('open change')}>
+          <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
               Удалить вопрос
-            </Popconfirm>
           </Menu.Item>
         </Menu>
     );
@@ -103,19 +97,9 @@ const MenuItem = ({
                 style={{ display: 'flex', justifyContent: 'space-between' }}
                 to={`/category/${category?.id}`}>
                 <span>{category?.categorieContents?.name}</span>
-                {category?.questions?.length !== 0 && (
-                  // <img
-                  //   src={
-                  //     activeOpenedKeys !== [] &&
-                  //     activeOpenedKeys?.includes(category.id)
-                  //       ? ArrowDown
-                  //       : ArrowRight
-                  //   }
-                  // />
-                    <Dropdown overlay={menu(category.id)} trigger={['contextMenu']}>
+                  <Dropdown overlay={menu(category.id)} trigger={['contextMenu']}>
                       <MoreOutlined style={{ fontSize: '1.5em' }} />
-                    </Dropdown>
-                )}
+                  </Dropdown>
               </Link>
             </div>
             {category?.questions?.map((q, qIndex) => (

@@ -135,6 +135,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const handleDeleteCategory = (categoryId) => {
     deleteCategory(categoryId).then((res) => {
       console.log(res);
+      history.push('/')
       notification.success('deleted category');
       getCategoryAll();
     });
