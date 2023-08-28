@@ -2,16 +2,16 @@ import axios from 'axios';
 import { LocalStorageKeys } from '../storage/localStorageKey.js';
 import { notification } from 'antd';
 import { clearStorage } from '../service/Auth/index.js';
+import { i18n } from '../utils/i18next';
 
-export const checkerAddress = import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/'
+export const checkerAddress =
+  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/';
 const axiosParams = {
-  baseURL:
-    checkerAddress
+  baseURL: checkerAddress
 };
 
 const axiosParamsWithHeader = {
-  baseURL:
-    checkerAddress,
+  baseURL: checkerAddress,
   headers: {
     Authorization:
       'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)
@@ -26,10 +26,10 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error?.status === 401) {
       clearStorage();
-      notification.error({ message: 'Не авторизован' });
+      notification.error({ message: i18n.t('commons.unauthorized') });
     } else if (error?.status === '403') {
       notification.error({
-        message: 'Нет доступа'
+        message: i18n.t('commons.accessDenied')
       });
     }
     notification.error(error);
@@ -44,12 +44,12 @@ axiosInstanceWithHeader.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       // logout();
-      notification.error({ message: 'Не авторизован' });
+      notification.error({ message: i18n.t('commons.unauthorized') });
       // localStorage.removeItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
       // location.href='/sign-in'
     } else if (error.response?.status === 403) {
       notification.error({
-        message: 'Нет доступа'
+        message: i18n.t('commons.accessDenied')
       });
     } else {
       notification.error(error);

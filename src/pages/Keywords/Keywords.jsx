@@ -5,7 +5,7 @@ import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
 import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
-import JHeader from "../../components/JHeader/JHeader.jsx";
+import JHeader from '../../components/JHeader/JHeader.jsx';
 
 const Keywords = () => {
   const [data, setData] = useState([]);
@@ -92,6 +92,7 @@ const Keywords = () => {
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
             title={i18n.t('actions.sure')}
+            cancelText={i18n.t('actions.cancel')}
             onConfirm={() => handleDelete(record.id)}>
             <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>

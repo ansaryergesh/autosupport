@@ -5,6 +5,7 @@ import Input from 'components/Input/Input.jsx';
 import Button from 'components/Button/Button.jsx';
 import TypographyHead from '../../components/Typography/TypographyHead';
 import { TypoGraphyType } from '../../components/Typography/constants';
+import { i18n } from '../../utils/i18next';
 
 const NewAnswer = () => {
   return (
@@ -14,9 +15,7 @@ const NewAnswer = () => {
           <Col span={16} className={styles.textBox}>
             <TypographyHead
               type={TypoGraphyType.SECONDARY_HEAD}
-              content={
-                ' Вы находитесь в административной панели Freedom Broker Инструкция по работе с тикетами:'
-              }
+              content={i18n.t('feedback.MainTitle1')}
             />
             <TypographyHead
               type={TypoGraphyType.LEVEL_3}
@@ -29,30 +28,42 @@ const NewAnswer = () => {
           <Col span={9}>
             <Form.Item
               name="question"
-              rules={[{ required: true, message: `Question is required` }]}
+              rules={[
+                { required: true, message: i18n.t('rule.questionRequired') }
+              ]}
               className={styles.labelText}>
-              <Input placeholder="Тема вопроса" maxLength={150} />
+              <Input
+                placeholder={i18n.t('newAnswer.whatQuestion')}
+                maxLength={150}
+              />
             </Form.Item>
           </Col>
 
           <Col span={9}>
             <Form.Item
               name="email"
-              rules={[{ required: true, message: `Email is required` }]}
+              rules={[
+                { required: true, message: i18n.t('rule.emailRequired') }
+              ]}
               className={styles.labelText}>
-              <Input placeholder="Введите почту" maxLength={150} />
+              <Input
+                placeholder={i18n.t('newAnswer.inputEmail')}
+                maxLength={150}
+              />
             </Form.Item>
           </Col>
 
           <Col span={18}>
             <Form.Item
               name="answer"
-              rules={[{ required: true, message: `Answer is required` }]}
+              rules={[
+                { required: true, message: i18n.t('rule.answerRequired') }
+              ]}
               className={styles.labelText}
-              label="Ответ">
+              label={i18n.t('newAnswer.answer')}>
               <Input.TextArea
                 rows={6}
-                placeholder="Начните вводить..."
+                placeholder={i18n.t('newAnswer.startTyping')}
                 maxLength={2000}
               />
             </Form.Item>
@@ -69,7 +80,7 @@ const NewAnswer = () => {
           <Col>
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Отправить
+                {i18n.t('commons.submit')}
               </Button>
             </Form.Item>
           </Col>

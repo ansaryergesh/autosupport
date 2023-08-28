@@ -4,7 +4,7 @@ import { tempData } from './constants.js';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
 import { i18n } from 'utils/i18next.js';
-import JHeader from "../../components/JHeader/JHeader.jsx";
+import JHeader from '../../components/JHeader/JHeader.jsx';
 
 const Employees = () => {
   const [data, setData] = useState(tempData);
@@ -46,6 +46,7 @@ const Employees = () => {
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
             title={i18n.t('actions.sure')}
+            cancelText={i18n.t('actions.cancel')}
             onConfirm={() => handleDelete(record.key)}>
             <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
@@ -54,7 +55,7 @@ const Employees = () => {
     }
   ];
   return (
-    <div >
+    <div>
       <JHeader pageTitle={i18n.t('employee')} />
       <EmployeeModal
         btnType="modal"

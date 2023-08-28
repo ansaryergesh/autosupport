@@ -45,6 +45,7 @@ const TagsModal = ({
         title={editPage ? i18n.t('actions.editTag') : i18n.t('actions.addTag')}
         confirmLoading={loading}
         open={isModalOpen}
+        cancelText={i18n.t('actions.cancel')}
         onCancel={() => {
           form.resetFields();
           handleModal();
@@ -68,7 +69,7 @@ const TagsModal = ({
             rules={[
               {
                 required: true,
-                message: 'Tag is required'
+                message: i18n.t('rule.nameRequired')
               }
             ]}>
             <Input placeholder={i18n.t('tag')} />

@@ -5,7 +5,7 @@ import TagsModal from 'components/TagsModal/TagsModal.jsx';
 import { getTags, deleteTag } from '../../service/Tags/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
-import JHeader from "../../components/JHeader/JHeader.jsx";
+import JHeader from '../../components/JHeader/JHeader.jsx';
 
 const Tags = () => {
   const [data, setData] = useState([]);
@@ -91,6 +91,7 @@ const Tags = () => {
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
+            cancelText={i18n.t('actions.cancel')}
             title={i18n.t('actions.sure')}
             onConfirm={() => handleDelete(record.id)}>
             <Button>{i18n.t('actions.delete')}</Button>

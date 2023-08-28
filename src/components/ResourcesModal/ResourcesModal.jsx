@@ -49,6 +49,7 @@ const ResourcesModal = ({
         }
         confirmLoading={loading}
         open={isModalOpen}
+        cancelText={i18n.t('actions.cancel')}
         onCancel={() => {
           form.resetFields();
           handleModal();
@@ -72,12 +73,12 @@ const ResourcesModal = ({
           </Form.Item>
           <Form.Item
             name="code"
-            rules={[{ required: true, message: 'Code is required!' }]}>
+            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('columns.code')} />
           </Form.Item>
           <Form.Item
             name="name"
-            rules={[{ required: true, message: 'Resource is required!' }]}>
+            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('resource')} />
           </Form.Item>
         </Form>
