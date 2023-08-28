@@ -48,7 +48,7 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTit
               )
             },
             {
-              title: pageTitle
+              title: questionTitle
             }
           ]}
         />
