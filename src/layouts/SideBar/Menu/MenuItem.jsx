@@ -158,7 +158,7 @@ const MenuItem = ({
             key={`question_${index}_${question?.id}`}
             className={'hoveredLink mainMenu'}
             style={{ padding: '8px', marginBottom: '4px' }}>
-            <Link to={`/detailedQuestionNewAdmin/${question?.id}`}>
+            <Link to={`/question/admin/${question?.id}`}>
               <span>{question?.questionContents?.title}</span>
             </Link>
           </div>
