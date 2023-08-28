@@ -42,6 +42,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
         if (file.url) {
             return {
                 ...file,
+                uid:file.id,
                 url: `${domainName}${file.url}` // Append domain name to the URL
             };
         }
@@ -91,6 +92,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
             );
             setFileList((prevState => {
                 const newFile = {
+                    uid: res.data.id,
                     id: res.data.id,
                     status: 'done',
                     description: null,
@@ -161,7 +163,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
                    onCancel={handleCancel}
                    okText={'Save'}
                    onOk={() => handleSaveDescription(editingImage.description)}>
-                <img alt="Preview" style={{ width: '100%' }} src={previewImage} />
+                <img alt="Preview" style={{ width: '100%' }} src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`} />
                 <Input
                     placeHolder={'Description of image'}
                     value={editingImage ? editingImage.description : ''}

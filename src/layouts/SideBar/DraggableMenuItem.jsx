@@ -16,10 +16,10 @@ const DraggableMenuItem = ({
   moveMenuItem,
   children,
   draggable = true,
+  isQuestion=false,
   handleEdit,
   handleAdd,
   handleDelete,
-  handleOrderChange,
   handleAddQuestion
 }) => {
   const menu = (
@@ -32,11 +32,6 @@ const DraggableMenuItem = ({
       <Menu.Item key="edit" onClick={() => handleEdit(id)}>
         Редактировать категория
       </Menu.Item>
-      {draggable && (
-        <Menu.Item key="add" onClick={() => handleOrderChange(id)}>
-          Изменить порядок
-        </Menu.Item>
-      )}
       <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
         Добавить вопрос
       </Menu.Item>
@@ -64,11 +59,6 @@ const DraggableMenuItem = ({
       <Menu.Item key="edit" onClick={() => handleEdit(id)}>
         Редактировать вопрос
       </Menu.Item>
-      {draggable && (
-        <Menu.Item key="add" onClick={() => handleOrderChange(id)}>
-          Изменить порядок
-        </Menu.Item>
-      )}
       <Menu.Item key="remove">
         <Popconfirm
           title="Title"
@@ -98,8 +88,8 @@ const DraggableMenuItem = ({
   return (
     <div ref={(node) => drag(drop(node))} style={{ cursor: 'move' }}>
       <Dropdown
-        overlay={isCategory ? menu : menuQuestion}
-        menu={isCategory ? menu : menuQuestion}
+        overlay={isQuestion ? menuQuestion : menu}
+        menu={isQuestion ? menuQuestion : menu}
         trigger={['contextMenu']}>
         {children}
       </Dropdown>

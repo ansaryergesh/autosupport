@@ -88,6 +88,7 @@ const MenuItem = ({
                   handleDelete={() => handleDeleteQuestion(q.id)}
                   handleAdd={handleAddCategory}
                   isCategory={false}
+                  isQuestion={true}
                   key={q.id}
                   id={q.id}
                   handleEdit={() => handleEditQuestion(q.id)}
