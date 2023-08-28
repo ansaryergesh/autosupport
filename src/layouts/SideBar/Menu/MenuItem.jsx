@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.module.less';
-import ArrowRight from 'images/arrowRight.svg';
-import ArrowDown from 'images/arrowDown.svg';
+// import ArrowRight from 'images/arrowRight.svg';
+// import ArrowDown from 'images/arrowDown.svg';
 import { SIDEBAR_BUTTON } from '../../../constants/index.js';
+import {MoreOutlined} from "@ant-design/icons";
+import {Dropdown, Menu, Popconfirm} from "antd";
+
 const MenuItem = ({
   category,
   question,
@@ -14,7 +17,6 @@ const MenuItem = ({
   handleDeleteCategory,
   handleEditCategory,
   handleAddQuestion,
-  setOrderModal,
   moveMenuItem,
   activeOpenedKeys,
   onMenuClick,
@@ -23,23 +25,63 @@ const MenuItem = ({
   moveMenuItemQuestion,
   activeButton = SIDEBAR_BUTTON.ALL
 }) => {
+
+  const menu = (id) => {
+    return (
+        <Menu>
+          { (
+              <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+                Добавить новая категория
+              </Menu.Item>
+          )}
+          <Menu.Item key="edit" onClick={() => handleEditCategory(id)}>
+            Редактировать категория
+          </Menu.Item>
+          <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
+            Добавить вопрос
+          </Menu.Item>
+          <Menu.Item key="remove">
+            <Popconfirm
+                title="Title"
+                description="Open Popconfirm with Promise"
+                onConfirm={() => handleDeleteCategory(id)}
+                onOpenChange={() => console.log('open change')}>
+              Удалить категория
+            </Popconfirm>
+          </Menu.Item>
+        </Menu>
+    )
+  }
+
+  const menuQuestion = (id) => {
+    return (
+        <Menu>
+          <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+            Добавить новая категория
+          </Menu.Item>
+          <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
+            Редактировать вопрос
+          </Menu.Item>
+          <Menu.Item key="remove">
+            <Popconfirm
+                title="Title"
+                description="Open Popconfirm with Promise"
+                onConfirm={() => handleDeleteQuestion(id)}
+                onOpenChange={() => console.log('open change')}>
+              Удалить вопрос
+            </Popconfirm>
+          </Menu.Item>
+        </Menu>
+    );
+  }
+
   const AllMenuItem = () => {
     return (
       <div key={`category_${category?.id}`}>
         <DraggableMenuItem
           item={category}
           key={`category_${category?.id}`}
-          id={category?.id}
           index={index}
-          handleAdd={handleAddCategory}
-          handleDelete={() => handleDeleteCategory(category?.id)}
-          handleEdit={() => {
-            handleEditCategory(category?.id);
-          }}
-          handleAddQuestion={() => handleAddQuestion(category?.id)}
-          handleOrderChange={() => {
-            setOrderModal(true);
-          }}
           moveMenuItem={moveMenuItem}>
           <div>
             <div
@@ -62,14 +104,17 @@ const MenuItem = ({
                 to={`/category/${category?.id}`}>
                 <span>{category?.categorieContents?.name}</span>
                 {category?.questions?.length !== 0 && (
-                  <img
-                    src={
-                      activeOpenedKeys !== [] &&
-                      activeOpenedKeys?.includes(category.id)
-                        ? ArrowDown
-                        : ArrowRight
-                    }
-                  />
+                  // <img
+                  //   src={
+                  //     activeOpenedKeys !== [] &&
+                  //     activeOpenedKeys?.includes(category.id)
+                  //       ? ArrowDown
+                  //       : ArrowRight
+                  //   }
+                  // />
+                    <Dropdown overlay={menu(category.id)} trigger={['contextMenu']}>
+                      <MoreOutlined style={{ fontSize: '1.5em' }} />
+                    </Dropdown>
                 )}
               </Link>
             </div>
@@ -85,21 +130,21 @@ const MenuItem = ({
                 }}>
                 <DraggableMenuItem
                   item={q}
-                  handleDelete={() => handleDeleteQuestion(q.id)}
-                  handleAdd={handleAddCategory}
                   isCategory={false}
-                  isQuestion={true}
                   key={q.id}
-                  id={q.id}
-                  handleEdit={() => handleEditQuestion(q.id)}
                   moveMenuItem={moveMenuItemQuestion}
                   index={index}>
                   <div
                     key={`question_${qIndex}_${q.id}`}
                     className={'hoveredLinkSecondary subMenu'}
-                    style={{ padding: '8px', marginBottom: '4px' }}>
-                    <Link to={`/question/admin/${q.id}`}>
+                    style={{ padding: '8px 2px 8px 8px', marginBottom: '4px' }}>
+                    <Link
+                        style={{ display: 'flex', justifyContent: 'space-between' }}
+                        to={`/question/admin/${q.id}`}>
                       <span>{q?.questionContents?.title}</span>
+                      <Dropdown style={{zIndex: '1000000000'}} overlay={menuQuestion(q.id)} trigger={['contextMenu']}>
+                        <MoreOutlined style={{ fontSize: '1.5em' }} />
+                      </Dropdown>
                     </Link>
                   </div>
                 </DraggableMenuItem>

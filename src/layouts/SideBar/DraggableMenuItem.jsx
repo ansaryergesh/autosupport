@@ -1,4 +1,3 @@
-import { Dropdown, Menu, Popconfirm } from 'antd';
 import { useDrag, useDrop } from 'react-dnd';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -9,68 +8,12 @@ const MenuItemTypes = {
 };
 
 const DraggableMenuItem = ({
-  id,
   index,
   item,
   isCategory = true,
   moveMenuItem,
   children,
-  draggable = true,
-  isQuestion=false,
-  handleEdit,
-  handleAdd,
-  handleDelete,
-  handleAddQuestion
 }) => {
-  const menu = (
-    <Menu>
-      {draggable && (
-        <Menu.Item key="addCategory" onClick={() => handleAdd(id)}>
-          Добавить новая категория
-        </Menu.Item>
-      )}
-      <Menu.Item key="edit" onClick={() => handleEdit(id)}>
-        Редактировать категория
-      </Menu.Item>
-      <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
-        Добавить вопрос
-      </Menu.Item>
-      <Menu.Item key="remove">
-        <Popconfirm
-          title="Title"
-          description="Open Popconfirm with Promise"
-          onConfirm={() => handleDelete(id)}
-          onOpenChange={() => console.log('open change')}>
-          Удалить категория
-        </Popconfirm>
-      </Menu.Item>
-    </Menu>
-  );
-  const menuQuestion = (
-    <Menu>
-      {draggable && (
-        <Menu.Item key="addCategory" onClick={() => handleAdd(id)}>
-          Добавить новая категория
-        </Menu.Item>
-      )}
-      <Menu.Item key="open" onClick={() => handleAdd(id)}>
-        Открыть вопрос
-      </Menu.Item>
-      <Menu.Item key="edit" onClick={() => handleEdit(id)}>
-        Редактировать вопрос
-      </Menu.Item>
-      <Menu.Item key="remove">
-        <Popconfirm
-          title="Title"
-          description="Open Popconfirm with Promise"
-          onConfirm={() => handleDelete(id)}
-          onOpenChange={() => console.log('open change')}>
-          Удалить вопрос
-        </Popconfirm>
-      </Menu.Item>
-    </Menu>
-  );
-
   const [, drag] = useDrag({
     type: isCategory ? MenuItemTypes.MENU_ITEM : MenuItemTypes.QUESTION_ITEM,
     item: { id: item.id }
@@ -87,13 +30,7 @@ const DraggableMenuItem = ({
   });
   return (
     <div ref={(node) => drag(drop(node))} style={{ cursor: 'move' }}>
-      <Dropdown
-        overlay={isQuestion ? menuQuestion : menu}
-        menu={isQuestion ? menuQuestion : menu}
-        trigger={['contextMenu']}>
         {children}
-      </Dropdown>
-      {/*{children}*/}
     </div>
   );
 };
