@@ -30,7 +30,6 @@ const QuestionAnswerUser = () => {
   const { videoUrl, videoDescription, images, stepDescription } =
     answerContentByLanguage;
 
-  console.log(images.length);
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
     images.length ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO
   );
@@ -93,7 +92,7 @@ const QuestionAnswerUser = () => {
               content={i18n.t('description')}
             />
             <ShowHtmlContent htmlContent={stepDescription} />
-            {images === [] || videoUrl === '' ? null : (
+            {  (
               <>
                 {videoUrl &&
                   images.length !== 0 &&
