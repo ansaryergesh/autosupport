@@ -94,8 +94,7 @@ const QuestionAnswerUser = () => {
             <ShowHtmlContent htmlContent={stepDescription} />
             {  (
               <>
-                {videoUrl &&
-                  images.length !== 0 &&
+                {
                   Object.values(INSTRUCTION_TYPE).map((item) => (
                     <Button
                       className={styles.instructionBtn}
@@ -127,7 +126,7 @@ const QuestionAnswerUser = () => {
                     </>
                   )}
 
-                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL && (
+                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL  && (
                     <div className={styles.mediaBox}>
                       <ImageSlider slides={images} sliderData={images} />
                     </div>

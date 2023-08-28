@@ -2,7 +2,7 @@ export default {
   VISUAL: 'Фото инструкция',
   VIDEO: 'Видео инструкция',
   DRAFT: 'Черновик',
-  PUBLISHED: 'Активный',
+  PUBLISHED: 'Опубликован',
   keyword: 'Ключевое слово',
   keywords: 'Ключевые слова',
   resource: 'Ресурс',
