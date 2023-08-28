@@ -10,12 +10,12 @@ import ArrowRight from 'images/arrowRight.svg';
 import { Link } from 'react-router-dom';
 import { i18n } from 'utils/i18next.js';
 import styles from './index.module.less'
-const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTitle=null }) => {
+const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTitle=null, lang=getLocale() }) => {
   const questionCategory =
     isQuestion &&
     getCategoryByLangKey(
       questionInfo.categorie?.categorieContents,
-      getLocale().toUpperCase()
+      lang
     );
   const questionCategoryTitle = questionCategory?.name;
   const questionCategoryId = questionInfo.categorie?.id;
@@ -24,7 +24,7 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTit
     isQuestion &&
     getCategoryByLangKey(
       questionInfo.questionContents,
-      getLocale().toUpperCase()
+      lang
     );
   const questionTitle = questionByKey?.title;
   const questionDescription = questionByKey?.stepDescription;

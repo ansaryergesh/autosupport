@@ -1,9 +1,8 @@
 export const LANG_KEY = {
-  KZ: 'KZ',
   RU: 'RU',
+  KZ: 'KZ',
   EN: 'EN',
 }
-
 
 export const SIDEBAR_BUTTON = {
   ALL: 'ALL',

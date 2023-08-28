@@ -44,7 +44,7 @@ const QuestionAnswerContent = () => {
     questionInfo?.keyWords || []
   );
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
-  const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.KZ);
+  const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
   const [answerFormData, setAnswerFormData] = useState(
     initialQuestionAnswerContent
   );
@@ -119,7 +119,7 @@ const QuestionAnswerContent = () => {
   };
   return (
     <div>
-      <JHeader questionInfo={questionInfo} />
+      <JHeader questionInfo={questionInfo} lang={selectedLanguage}/>
       <div
         style={{
           padding: '12px 0',

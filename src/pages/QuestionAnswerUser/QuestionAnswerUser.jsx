@@ -21,7 +21,7 @@ const QuestionAnswerUser = () => {
   const { questionId, resourceId } = useParams();
   const history = useHistory();
   const [data, setData] = useState(initialQuestionAnswerContent);
-  const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.KZ);
+  const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
 
   const answerContentByLanguage = data.answerContents?.find(
     (item) => item.langKey === selectedLanguage

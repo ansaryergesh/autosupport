@@ -112,7 +112,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
     const handleSaveDescription = description => {
         if(description) {
             const newFileList = fileList.map(item => {
-                if (item.uid === editingImage.uid) {
+                if (item.id === editingImage.id) {
                     return { ...item, description };
                 }
                 return item;
