@@ -5,7 +5,7 @@ import ResourcesModal from 'components/ResourcesModal/ResourcesModal.jsx';
 import { getResources, deleteResource } from '../../service/Resources/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
-import JHeader from "../../components/JHeader/JHeader.jsx";
+import JHeader from '../../components/JHeader/JHeader.jsx';
 
 const Resources = () => {
   const [data, setData] = useState([]);
@@ -96,6 +96,7 @@ const Resources = () => {
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
             title={i18n.t('actions.sure')}
+            cancelText={i18n.t('actions.cancel')}
             onConfirm={() => handleDelete(record.id)}>
             <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>

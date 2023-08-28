@@ -49,6 +49,7 @@ const KeywordsModal = ({
         }
         confirmLoading={loading}
         open={isModalOpen}
+        cancelText={i18n.t('actions.cancel')}
         onCancel={() => {
           form.resetFields();
           handleModal();
@@ -69,7 +70,7 @@ const KeywordsModal = ({
           initialValues={record}>
           <Form.Item
             name="text"
-            rules={[{ required: true, message: 'Keyword is required!' }]}>
+            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('keyword')} />
           </Form.Item>
           <Form.Item name="id" style={{ display: 'none' }}>

@@ -49,6 +49,7 @@ const OrganizationsModal = ({
         }
         confirmLoading={loading}
         open={isModalOpen}
+        cancelText={i18n.t('actions.cancel')}
         onCancel={() => {
           form.resetFields();
           handleModal();
@@ -72,12 +73,12 @@ const OrganizationsModal = ({
           </Form.Item>
           <Form.Item
             name="code"
-            rules={[{ required: true, message: 'Code is required!' }]}>
+            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('columns.code')} />
           </Form.Item>
           <Form.Item
             name="name"
-            rules={[{ required: true, message: 'Organization is required!' }]}>
+            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('organization')} />
           </Form.Item>
         </Form>

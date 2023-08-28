@@ -9,7 +9,7 @@ const DraggableMenuItem = ({ handleAdd }) => {
   const constMenu = (
     <Menu>
       <Menu.Item key="addCategory" onClick={() => handleAdd()}>
-        Добавить новая категория
+        {i18n.t('menu.addCategory')}
       </Menu.Item>
     </Menu>
   );

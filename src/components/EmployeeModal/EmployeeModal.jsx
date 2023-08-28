@@ -45,6 +45,7 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
         title={i18n.t('actions.addEmployee')}
         open={isModalOpen}
         onOk={handleOk}
+        cancelText={i18n.t('actions.cancel')}
         onCancel={handleCancel}
         okButtonProps={{ className: 'button-modal' }}
         cancelButtonProps={{ className: 'button-default' }}>

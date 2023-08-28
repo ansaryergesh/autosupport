@@ -25,7 +25,10 @@ export default {
     signIn: 'Кіру',
     signOut: 'Шығу',
     comeBack: 'Қайта келуінмен!',
-    forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?'
+    forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
+    submit: 'Растау',
+    unauthorized: 'Авторизациядан өтпеген',
+    accessDenied: 'Рұқсат жоқ'
   },
   columns: {
     name: 'Аталуы',
@@ -42,7 +45,7 @@ export default {
     added: 'Қосылды',
     delete: 'Өшіру',
     deleted: 'Өшірілді',
-    cancel: 'Отменить',
+    cancel: 'Артқа',
     edit: 'Өзгерту',
     edited: 'Өзгертілді',
     editKeyword: 'Кілт сөзін өзгерту',
@@ -82,6 +85,30 @@ export default {
     rateButton: 'Пікір қалдыру',
     comment: 'Сіздің пікіріңіз',
     characterLimit: 'Таңбалар шегіне жетті',
-    previewMessage: 'Сіз алдын ала қарау режиміне ауыстыңыз'
+    previewMessage: 'Сіз алдын ала қарау режиміне ауыстыңыз',
+    videoUrl: 'Бейне нұсқаудың url-і'
+  },
+  menu: {
+    addCategory: 'Санат қосу',
+    editCategory: 'Санатты өзгерту',
+    deleteCategory: 'Санатты өшіру',
+    addQuestion: 'Сұрақ қосу',
+    editQuestion: 'Сұрақты өзгерту',
+    deleteQuestion: 'Сұрақты өшіру',
+    openQuestion: 'Сұрақты ашу',
+    enterName: 'Аталуын жазыңыз'
+  },
+  rule: {
+    nameRequired: 'Аталуы міндетті',
+    descriptionRequired: 'Сипаттамасы міндетті',
+    emailRequired: 'Пошта міндетті',
+    questionRequired: 'Сұрақтың тақырыбы міндетті',
+    answerRequired: 'Жауаб міндетті'
+  },
+  newAnswer: {
+    answer: 'Жауабы',
+    whatQuestion: 'Сұрақтың тақырыбы',
+    inputEmail: 'Поштаңызды жазыңыз',
+    startTyping: 'Теруді бастаңыз...'
   }
 };

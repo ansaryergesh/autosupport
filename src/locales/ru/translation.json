@@ -24,7 +24,10 @@
     "signIn": "Вход",
     "signOut": "Выход",
     "comeBack": "Добро пожаловать!",
-    "forgetPassword": "Забыли ваш пароль?"
+    "forgetPassword": "Забыли ваш пароль?",
+    "submit": "Подтвердить",
+    "unauthorized": "Не авторизован",
+    "accessDenied": "Отказано в доступе"
   },
   "columns": {
     "name": "Наименование",
@@ -82,6 +85,30 @@
     "rateButton": "Оставить отзыв",
     "comment": "Ваш комментарий",
     "characterLimit": "Достигнут лимит символов",
-    "previewMessage": "Вы перешли на предросмотр"
+    "previewMessage": "Вы перешли на предросмотр",
+    "videoUrl": "Url видео"
+  },
+  "menu": {
+    "addCategory": "Добавить категорию",
+    "editCategory": "Редактировать категорию",
+    "deleteCategory": "Удалить категорию",
+    "addQuestion": "Добавить вопрос",
+    "editQuestion": "Редактировать вопрос",
+    "deleteQuestion": "Удалить вопрос",
+    "openQuestion": "Открыть вопрос",
+    "enterName": "Введите наименование"
+  },
+  "rule": {
+    "nameRequired": "Наименование обязательно",
+    "descriptionRequired": "Описание обязательно",
+    "emailRequired": "Почта обязательна",
+    "questionRequired": "Тема вопроса обязательна",
+    "answerRequired": "Ответ обязателен"
+  },
+  "newAnswer": {
+    "answer": "Ответ",
+    "whatQuestion": "Тема вопроса",
+    "inputEmail": "Введите почту",
+    "startTyping": "Начните вводить..."
   }
 }
