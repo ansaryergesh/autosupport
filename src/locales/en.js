@@ -2,7 +2,7 @@ export default {
   VISUAL: 'Photo instruction',
   VIDEO: 'Video instruction',
   DRAFT: 'Draft',
-  PUBLISHED: 'Active',
+  PUBLISHED: 'Опубликован',
   keyword: 'Keyword',
   keywords: 'Keywords',
   resource: 'Resource',

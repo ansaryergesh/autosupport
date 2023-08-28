@@ -2,7 +2,7 @@ export default {
   VISUAL: 'Фото нұсқау',
   VIDEO: 'Бейне нұсқау',
   DRAFT: 'Жоба',
-  PUBLISHED: 'Активный',
+  PUBLISHED: 'Опубликован',
   keyword: 'Кілт сөзі',
   keywords: 'Кілт сөздер',
   resource: 'Ресурс',
