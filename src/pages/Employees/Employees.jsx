@@ -4,6 +4,7 @@ import { tempData } from './constants.js';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
 import { i18n } from 'utils/i18next.js';
+import JHeader from "../../components/JHeader/JHeader.jsx";
 
 const Employees = () => {
   const [data, setData] = useState(tempData);
@@ -53,7 +54,8 @@ const Employees = () => {
     }
   ];
   return (
-    <div style={{ margin: '68px auto 0 auto' }}>
+    <div >
+      <JHeader pageTitle={i18n.t('employee')} />
       <EmployeeModal
         btnType="modal"
         btnName={i18n.t('actions.addEmployee')}

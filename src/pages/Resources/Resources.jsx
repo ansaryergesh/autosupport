@@ -5,6 +5,7 @@ import ResourcesModal from 'components/ResourcesModal/ResourcesModal.jsx';
 import { getResources, deleteResource } from '../../service/Resources/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
+import JHeader from "../../components/JHeader/JHeader.jsx";
 
 const Resources = () => {
   const [data, setData] = useState([]);
@@ -105,6 +106,7 @@ const Resources = () => {
 
   return (
     <div>
+      <JHeader pageTitle={i18n.t('resources')} />
       <div>
         <div
           style={{

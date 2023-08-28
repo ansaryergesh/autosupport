@@ -5,6 +5,7 @@ import KeywordsModal from 'components/KeywordsModal/KeywordsModal.jsx';
 import { getKeywords, deleteKeyWord } from '../../service/Keywords/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
+import JHeader from "../../components/JHeader/JHeader.jsx";
 
 const Keywords = () => {
   const [data, setData] = useState([]);
@@ -101,6 +102,7 @@ const Keywords = () => {
 
   return (
     <div>
+      <JHeader pageTitle={i18n.t('keywords')} />
       <div>
         <div
           style={{

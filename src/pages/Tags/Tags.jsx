@@ -5,6 +5,7 @@ import TagsModal from 'components/TagsModal/TagsModal.jsx';
 import { getTags, deleteTag } from '../../service/Tags/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
+import JHeader from "../../components/JHeader/JHeader.jsx";
 
 const Tags = () => {
   const [data, setData] = useState([]);
@@ -101,6 +102,8 @@ const Tags = () => {
 
   return (
     <div>
+      <JHeader pageTitle={i18n.t('tags')} />
+
       <div>
         <div
           style={{

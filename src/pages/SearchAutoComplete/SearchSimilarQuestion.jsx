@@ -47,6 +47,7 @@ const SearchReference = ({
 
   const handleSelect = (value, option) => {
     const selectedItem = option.itemValue;
+    console.log(selectedItem)
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
       notification.info({ message: 'Keyword already selected' });
     } else {

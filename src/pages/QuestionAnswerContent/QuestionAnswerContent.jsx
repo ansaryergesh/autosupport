@@ -44,11 +44,12 @@ const QuestionAnswerContent = () => {
     questionInfo?.keyWords || []
   );
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
-  const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.KZ);
   const [answerFormData, setAnswerFormData] = useState(
     initialQuestionAnswerContent
   );
+  const [selectedQuestions, setSelectedQuestions] = useState(answerFormData.children);
+
   useEffect(() => {
     getResources().then((res) => {
       setResources(res.data);
@@ -62,7 +63,6 @@ const QuestionAnswerContent = () => {
   }, [id]);
   const history = useHistory();
   useEffect(() => {
-    setAnswerFormData(initialQuestionAnswerContent);
     window.scrollTo(0, 0);
     if (activeResource) {
       answerByQuestionAndResource(id, activeResource.id)
@@ -93,9 +93,14 @@ const QuestionAnswerContent = () => {
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
-      resource: { id: activeResource.id }
+      resource: { id: activeResource.id },
     };
-    editCategoryQuestion(questionInfo).then((res) => {
+
+    const finalQuestionInfo = {
+      ...questionInfo,
+      children: selectedQuestions,
+    }
+    editCategoryQuestion(finalQuestionInfo).then((res) => {
       console.log(res);
       if (answerFormData.id) {
         editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
@@ -125,7 +130,13 @@ const QuestionAnswerContent = () => {
         }}>
         {selectedResources.map((resource, index) => (
           <Button
-            onClick={() => setActiveResource(resource)}
+            onClick={() => {
+              if(resource.id !== activeResource.id) {
+                setAnswerFormData(initialQuestionAnswerContent)
+                setQuestionInfo(initialQuestionDto)
+                setActiveResource(resource)
+              }
+            }}
             type={`${
               activeResource.id === resource.id ? 'default-active' : 'default'
             }`}

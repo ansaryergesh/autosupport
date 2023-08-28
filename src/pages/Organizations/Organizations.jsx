@@ -8,6 +8,7 @@ import {
 } from '../../service/Organizations/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
+import JHeader from "../../components/JHeader/JHeader.jsx";
 
 const Organizations = () => {
   const [data, setData] = useState([]);
@@ -107,6 +108,7 @@ const Organizations = () => {
 
   return (
     <div>
+      <JHeader pageTitle={i18n.t('organizations')} />
       <div>
         <div
           style={{

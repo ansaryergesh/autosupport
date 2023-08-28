@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Result, Row } from 'antd';
-import Title from 'antd/lib/typography/Title.js';
 import CategoryItem from 'components/CategoryItem/CategoryItem';
 import { useParams } from 'react-router';
 import {
@@ -9,14 +8,29 @@ import {
 } from '../../service/Question/index.js';
 import { getLocale } from '../../utils/i18next.js';
 import { useHistory } from 'react-router-dom';
+import {getCategoryById} from "../../service/Category/index.js";
+import JHeader from "../../components/JHeader/JHeader.jsx";
 
 function Сategory() {
   const { id } = useParams();
   const [questions, setQuestions] = useState([]);
+  const [categoryInfo,setCategoryInfo] = useState({})
+
   const history = useHistory();
   useEffect(() => {
     getAllQuestion();
+    getCategoryInfo();
   }, [id]);
+
+  const getCategoryInfo = () => {
+    console.log(categoryInfo)
+    getCategoryById(id).then(res=> {
+      setCategoryInfo(res.data)
+    })
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const selectedLanguageTitle =  categoryInfo.categorieContents?.find(item=>item.langKey = getLocale());
   const getAllQuestion = () => {
     const params = {
       langKey: getLocale().toUpperCase(),
@@ -38,9 +52,8 @@ function Сategory() {
   };
   return (
     <div>
-      <Title style={{ marginBottom: '48px' }}>
-        Торговая площадка-Tradernet global
-      </Title>
+      <JHeader pageTitle={selectedLanguageTitle?.name}/>
+
       <Row gutter={[16, 16]}>
         {questions &&
           questions?.map((item, index) => (

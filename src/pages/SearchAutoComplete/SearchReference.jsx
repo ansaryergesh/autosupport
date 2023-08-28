@@ -14,7 +14,9 @@ const SearchReference = ({
   selectedLanguage
 }) => {
   const [options, setOptions] = useState([]);
-
+  const [langSelectedItem,setLangSelectedItem] = useState(questionInfo.questionContents?.find(
+      (item) => item.langKey === selectedLanguage
+  )[keyItem] || [])
   const getOptionsDefault = () => {
     searchAction().then((response) => {
       setOptions(
@@ -26,6 +28,14 @@ const SearchReference = ({
   useEffect(() => {
     getOptionsDefault();
   }, []);
+
+
+  useEffect(() => {
+    console.log(questionInfo)
+    setLangSelectedItem(questionInfo.questionContents?.find(
+        (item) => item.langKey === selectedLanguage
+    )[keyItem] || [])
+  },[questionInfo])
 
   const [inputValue, setInputValue] = useState('');
   const handleSearch = (value) => {
@@ -39,10 +49,7 @@ const SearchReference = ({
       );
     });
   };
-  const langSelectedItem =
-    questionInfo.questionContents?.find(
-      (item) => item.langKey === selectedLanguage
-    )[keyItem] || [];
+
 
   const handleSelect = (value, option) => {
     const selectedItem = { id: option.id, text: value };

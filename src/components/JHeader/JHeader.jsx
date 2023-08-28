@@ -9,8 +9,8 @@ import { initialQuestionDto } from './constants.js';
 import ArrowRight from 'images/arrowRight.svg';
 import { Link } from 'react-router-dom';
 import { i18n } from 'utils/i18next.js';
-
-const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto }) => {
+import styles from './index.module.less'
+const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTitle=null }) => {
   const questionCategory =
     isQuestion &&
     getCategoryByLangKey(
@@ -18,7 +18,7 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto }) => {
       getLocale().toUpperCase()
     );
   const questionCategoryTitle = questionCategory?.name;
-  const questionCategoryId = questionCategory?.id;
+  const questionCategoryId = questionInfo.categorie?.id;
 
   const questionByKey =
     isQuestion &&
@@ -29,9 +29,10 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto }) => {
   const questionTitle = questionByKey?.title;
   const questionDescription = questionByKey?.stepDescription;
 
+
   return (
     <div>
-      {questionInfo !== {} && isQuestion && (
+      {questionInfo !== {} && isQuestion && !pageTitle && (
         <Breadcrumb
           style={{ marginBottom: '24px' }}
           separator={<img src={ArrowRight} />}
@@ -47,15 +48,29 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto }) => {
               )
             },
             {
-              title: questionTitle
+              title: pageTitle
             }
           ]}
         />
       )}
+      {pageTitle && (
+          <Breadcrumb
+              style={{ marginBottom: '24px' }}
+              separator={<img src={ArrowRight} />}
+              items={[
+                {
+                  title: <Link to={'/'}>Главная</Link>
+                },
+                {
+                  title: pageTitle
+                }
+              ]}
+          />
+      )}
       <TypographyHead
-        className={'headerText'}
+        className={styles.headerTitle}
         type={TypoGraphyType.HEADER}
-        content={!isQuestion ? i18n.t('home') : questionTitle}
+        content={!isQuestion ? i18n.t('home') : questionTitle || pageTitle}
       />
       <p style={{ padding: '16px 0' }}>{questionDescription}</p>
     </div>
