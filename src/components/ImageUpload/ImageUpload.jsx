@@ -117,7 +117,7 @@ const ImageUploader = ({answerFormData, setAnswerFormData, selectedLanguage}) =>
                 }
                 return item;
             });
-
+            console.log(newFileList)
             setFileList(newFileList);
             setEditingImage(null);
             setPreviewVisible(false)
