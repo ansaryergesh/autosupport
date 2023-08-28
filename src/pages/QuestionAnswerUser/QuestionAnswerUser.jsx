@@ -32,7 +32,7 @@ const QuestionAnswerUser = () => {
 
   console.log(images.length);
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
-    images.length ? INSTRUCTION_TYPE.VIDEO : INSTRUCTION_TYPE.VISUAL
+    images.length ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO
   );
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const QuestionAnswerUser = () => {
               content={i18n.t('description')}
             />
             <ShowHtmlContent htmlContent={stepDescription} />
-            {images === [] && videoUrl === '' ? null : (
+            {images === [] || videoUrl === '' ? null : (
               <>
                 {videoUrl &&
                   images.length !== 0 &&
