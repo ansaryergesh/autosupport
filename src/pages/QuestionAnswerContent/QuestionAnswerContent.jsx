@@ -48,7 +48,7 @@ const QuestionAnswerContent = () => {
   const [answerFormData, setAnswerFormData] = useState(
     initialQuestionAnswerContent
   );
-  const [selectedQuestions, setSelectedQuestions] = useState(answerFormData.children);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
 
   useEffect(() => {
     getResources().then((res) => {
@@ -98,7 +98,6 @@ const QuestionAnswerContent = () => {
 
     const finalQuestionInfo = {
       ...questionInfo,
-      children: selectedQuestions,
     }
     editCategoryQuestion(finalQuestionInfo).then((res) => {
       console.log(res);
