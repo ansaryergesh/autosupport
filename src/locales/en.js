@@ -24,12 +24,11 @@ export default {
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',
-    signOutMessage: 'You are logged out!',
     comeBack: 'Welcome back!',
     forgetPassword: 'Forgot your password?',
     submit: 'Submit',
     unauthorized: 'Unauthorized',
-    accessDenied: 'Access denied',
+    accessDenied: 'Access denied'
   },
   columns: {
     name: 'Name',
@@ -111,6 +110,26 @@ export default {
     answer: 'Answer',
     whatQuestion: 'Question topic',
     inputEmail: 'Enter your email',
-    startTyping: 'Start typing...',
+    startTyping: 'Start typing...'
   },
+  userProfile: {
+    passwordUpdateNotification: 'Password updated succsesfully!',
+    userProfileSelector: 'User settings',
+    accountSettingsSelector: 'Account settings',
+    accountDataTitle: 'Account settings',
+    idLabel: 'Id',
+    emailLabel: 'E-mail',
+    languageKeyLabel: 'Language key',
+    creatorLabel: 'Creator',
+    currentPasswordLabel: 'Current password',
+    currentPasswordPlaceholder: 'Enter the current password',
+    newPasswordLabel: 'New password',
+    newPasswordPlaceholder: 'Enter a new password',
+    saveButton: 'Save',
+    userDataTitle: 'User data',
+    loginLabel: 'Login',
+    firstNameLabel: 'First name',
+    lastNameLabel: 'Last name',
+    organizationLabel: 'Organization'
+  }
 };

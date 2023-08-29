@@ -1,65 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm } from 'antd';
-import { tempData } from './constants.js';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
-import { i18n } from 'utils/i18next.js';
-import JHeader from '../../components/JHeader/JHeader.jsx';
+import { getEmployeeData } from '../../service/Employee';
 
 const Employees = () => {
-  const [data, setData] = useState(tempData);
+  const [data, setData] = useState([]); // Initialize with an empty array
+
+  useEffect(() => {
+    getEmployeeData().then(res => {
+      console.log(res);
+      setData(res.data.content); // Extract the 'content' array from the response
+    });
+  }, []);
 
   const handleDelete = (key) => {
-    const newData = data.filter((item) => item.key !== key);
+    const newData = data.filter(item => item.id !== key); // Assuming 'id' is the unique identifier
     setData(newData);
   };
+
 
   const columns = [
     {
       title: i18n.t('columns.fullName'),
-      dataIndex: 'name',
-      key: 'name',
+        dataIndex: 'firstName', // Use 'firstName' as dataIndex
+        key: 'name'
     },
     {
       title: i18n.t('columns.email'),
       dataIndex: 'email',
-      key: 'email',
+      key: 'email'
     },
     {
       title: i18n.t('columns.role'),
-      dataIndex: 'role',
-      key: 'role',
+        dataIndex: 'authorities', // This might need further processing if it's an array
+        key: 'authorities'
     },
     {
       title: i18n.t('columns.organization'),
-      dataIndex: 'company',
-      key: 'company',
+        dataIndex: `authOrganization.name`, // Access nested property
+        key: 'authOrganization',
     },
 
     {
-      title: i18n.t('actions.action'),
+      title: 'Действия',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EmployeeModal btnType="default" btnName={i18n.t('actions.edit')} />
+          <EmployeeModal btnType="default" btnName="Редактировать" />
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
-            title={i18n.t('actions.sure')}
-            cancelText={i18n.t('actions.cancel')}
-            onConfirm={() => handleDelete(record.key)}
-          >
-            <Button>{i18n.t('actions.delete')}</Button>
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.id)}> {/* Assuming 'id' is the unique identifier */}
+            <Button>Удалить</Button>
           </Popconfirm>
         </Space>
       ),
     },
   ];
+
   return (
-    <div>
-      <JHeader pageTitle={i18n.t('employee')} />
-      <EmployeeModal btnType="modal" btnName={i18n.t('actions.addEmployee')} margin={10} />
-      <Table pagination={false} columns={columns} dataSource={data} />
+    <div style={{ margin: '68px auto 0 auto' }}>
+      <EmployeeModal
+        btnType="modal"
+        btnName="Добавить сотрудника"
+        margin={10}
+      />
+      <Table pagination={false} columns={columns} dataSource={data} /> {/* Use 'data' as dataSource */}
     </div>
   );
 };

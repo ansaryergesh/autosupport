@@ -109,6 +109,21 @@ export default {
     answer: 'Жауабы',
     whatQuestion: 'Сұрақтың тақырыбы',
     inputEmail: 'Поштаңызды жазыңыз',
-    startTyping: 'Теруді бастаңыз...',
+    startTyping: 'Теруді бастаңыз...'
   },
+  userProfile: {
+    AccountDataTitle: 'Данные аккаунта',
+    IdLabel: 'Id',
+    EmailLabel: 'Почта',
+    LanguageKeyLabel: 'Языковой ключ',
+    CreatorLabel: 'Создатель',
+    CurrentPasswordLabel: 'Текущий пароль',
+    NewPasswordLabel: 'Новый пароль',
+    SubmitButton: 'Отправить',
+    UserDataTitle: 'Данные пользователя',
+    LoginLabel: 'Логин',
+    FirstNameLabel: 'Имя',
+    LastNameLabel: 'Фамилия',
+    OrganizationLabel: 'Организация'
+  }
 };

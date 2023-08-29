@@ -1,4 +1,4 @@
-export const tempData = [
+export const tableData = [
   {
     key: '1',
     name: 'James Bond',

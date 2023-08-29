@@ -111,6 +111,26 @@ export default {
     answer: 'Ответ',
     whatQuestion: 'Тема вопроса',
     inputEmail: 'Введите почту',
-    startTyping: 'Начните вводить...',
+    startTyping: 'Начните вводить...'
   },
+  userProfile: {
+    passwordUpdateNotification: 'Пароль успешно изменен!',
+    userProfileSelector: 'Настройки пользователя',
+    accountSettingsSelector: 'Настройки аккаунта',
+    accountDataTitle: 'Данные аккаунта',
+    idLabel: 'Идентификационный номер',
+    emailLabel: 'Почта',
+    languageKeyLabel: 'Языковой ключ',
+    creatorLabel: 'Создатель',
+    currentPasswordLabel: 'Текущий пароль',
+    currentPasswordPlaceholder: 'Введите нынешний пароль',
+    newPasswordLabel: 'Новый пароль',
+    newPasswordPlaceholder: 'Введите новый пароль',
+    saveButton: 'Сохранить',
+    userDataTitle: 'Данные пользователя',
+    loginLabel: 'Логин',
+    firstNameLabel: 'Имя',
+    lastNameLabel: 'Фамилия',
+    organizationLabel: 'Организация'
+  }
 };
