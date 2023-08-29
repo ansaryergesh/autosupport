@@ -1,5 +1,5 @@
 import DraggableMenuItem from '../DraggableMenuItem.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.module.less';
@@ -25,7 +25,7 @@ const MenuItem = ({
   moveMenuItemQuestion,
   activeButton = SIDEBAR_BUTTON.ALL
 }) => {
-
+    const history = useHistory();
   const menu = (id) => {
     return (
         <Menu>
@@ -81,26 +81,36 @@ const MenuItem = ({
             <div
               className={'mainMenu hoveredLink'}
               key={`submenu_${category?.id}`}
-              onClick={() => onMenuClick(category?.id)}
+              onClick={(e) => {
+                  if (e.target.tagName !== 'svg' && !e.target.classList.contains('anticon')) {
+                      onMenuClick(category?.id)
+                  }
+              }}
               style={{
                 padding: '12px 0',
                 fontSize: '14px',
                 alignItems: 'center',
                 marginBottom: '8px'
               }}>
-              <Link
+              <a
                 className={
                   location.pathname !== '/' &&
                   activeOpenedKeys?.includes(category.id) &&
                   'activeLink'
                 }
-                style={{ display: 'flex', justifyContent: 'space-between' }}
-                to={`/category/${category?.id}`}>
+                onClick={(e) => {
+                    if (e.target.tagName !== 'svg' && !e.target.classList.contains('anticon')) {
+                        history.push(`/category/${category?.id}`)
+                    } else {
+                        e.preventDefault(); // Prevent the link from being triggered
+                    }
+                }}
+                style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>{category?.categorieContents?.name}</span>
-                  <Dropdown overlay={menu(category.id)} trigger={['contextMenu']}>
+                  <Dropdown overlay={menu(category.id)} trigger={['click']}>
                       <MoreOutlined style={{ fontSize: '1.5em' }} />
                   </Dropdown>
-              </Link>
+              </a>
             </div>
             {category?.questions?.map((q, qIndex) => (
               <div
@@ -122,14 +132,20 @@ const MenuItem = ({
                     key={`question_${qIndex}_${q.id}`}
                     className={'hoveredLinkSecondary subMenu'}
                     style={{ padding: '8px 2px 8px 8px', marginBottom: '4px' }}>
-                    <Link
+                    <a
                         style={{ display: 'flex', justifyContent: 'space-between' }}
-                        to={`/question/admin/${q.id}`}>
+                        onClick={(e) => {
+                            if (e.target.tagName !== 'svg' && !e.target.classList.contains('anticon')) {
+                                history.push(`/question/admin/${q.id}`)
+                            } else {
+                                e.preventDefault(); // Prevent the link from being triggered
+                            }
+                        }}>
                       <span>{q?.questionContents?.title}</span>
-                      <Dropdown style={{zIndex: '1000000000'}} overlay={menuQuestion(q.id)} trigger={['contextMenu']}>
+                      <Dropdown style={{zIndex: '1000000000'}} overlay={menuQuestion(q.id)} trigger={['click']}>
                         <MoreOutlined style={{ fontSize: '1.5em' }} />
                       </Dropdown>
-                    </Link>
+                    </a>
                   </div>
                 </DraggableMenuItem>
               </div>
