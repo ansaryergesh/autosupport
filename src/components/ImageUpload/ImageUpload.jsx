@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Upload, Modal, Input, Progress, notification } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { axiosInstanceWithHeader } from '../../api/api.js';
+import { axiosInstanceWithHeader, originAddress } from '../../api/api.js';
 import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
 
@@ -20,7 +20,7 @@ const ImageUploader = ({
   const [editingImage, setEditingImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const handleCancel = () => setPreviewVisible(false);
-  const domainName = window.location.origin;
+  const domainName = originAddress;
   console.log(domainName);
   useEffect(() => {
     updateAnswerFormData();
