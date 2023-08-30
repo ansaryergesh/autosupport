@@ -16,6 +16,7 @@ import { initialQuestionAnswerContent } from '../QuestionAnswerContent/constants
 import { LANG_KEY } from '../../constants/index.js';
 import { i18n } from '../../utils/i18next.js';
 import { useHistory } from 'react-router';
+import JHeader from '../../components/JHeader/JHeader';
 
 const QuestionAnswerUser = () => {
   const { questionId, resourceId } = useParams();
@@ -37,7 +38,6 @@ const QuestionAnswerUser = () => {
   useEffect(() => {
     getAnswerById(questionId, resourceId).then((res) => {
       setData(res.data);
-      console.log(res.data);
     });
   }, [questionId, resourceId]);
 
@@ -64,7 +64,13 @@ const QuestionAnswerUser = () => {
 
   return (
     <div>
+      <JHeader pageTitle={i18n.t('actions.preview')} />
+
       <Row gutter={[16, 16]}>
+        <Col span={16}>
+          <Button type="default-active">{data.resource.name}</Button>
+        </Col>
+
         <Col
           span={16}
           style={{
@@ -92,22 +98,21 @@ const QuestionAnswerUser = () => {
               content={i18n.t('description')}
             />
             <ShowHtmlContent htmlContent={stepDescription} />
-            {  (
+            {
               <>
-                {
-                  Object.values(INSTRUCTION_TYPE).map((item) => (
-                    <Button
-                      className={styles.instructionBtn}
-                      key={item}
-                      onClick={() => setSelectedInstrcutionType(item)}
-                      type={
-                        item === selectedInstructionType
-                          ? 'default-active'
-                          : 'default'
-                      }>
-                      {i18n.t(item)}
-                    </Button>
-                  ))}
+                {Object.values(INSTRUCTION_TYPE).map((item) => (
+                  <Button
+                    className={styles.instructionBtn}
+                    key={item}
+                    onClick={() => setSelectedInstrcutionType(item)}
+                    type={
+                      item === selectedInstructionType
+                        ? 'default-active'
+                        : 'default'
+                    }>
+                    {i18n.t(item)}
+                  </Button>
+                ))}
                 <div>
                   {selectedInstructionType === INSTRUCTION_TYPE.VIDEO && (
                     <>
@@ -126,14 +131,14 @@ const QuestionAnswerUser = () => {
                     </>
                   )}
 
-                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL  && (
+                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL && (
                     <div className={styles.mediaBox}>
                       <ImageSlider slides={images} sliderData={images} />
                     </div>
                   )}
                 </div>
               </>
-            )}
+            }
           </div>
         </Col>
 

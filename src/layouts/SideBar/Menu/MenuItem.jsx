@@ -6,8 +6,9 @@ import './index.module.less';
 // import ArrowRight from 'images/arrowRight.svg';
 // import ArrowDown from 'images/arrowDown.svg';
 import { SIDEBAR_BUTTON } from '../../../constants/index.js';
-import {MoreOutlined} from "@ant-design/icons";
-import {Dropdown, Menu, Popconfirm} from "antd";
+import { MoreOutlined } from '@ant-design/icons';
+import { Dropdown, Menu, Popconfirm } from 'antd';
+import { i18n } from '../../../utils/i18next.js';
 
 const MenuItem = ({
   category,
@@ -25,49 +26,53 @@ const MenuItem = ({
   moveMenuItemQuestion,
   activeButton = SIDEBAR_BUTTON.ALL
 }) => {
-    const history = useHistory();
+  const history = useHistory();
   const menu = (id) => {
     return (
-        <Menu>
-          { (
-              <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
-                Добавить новая категория
-              </Menu.Item>
-          )}
-          <Menu.Item key="edit" onClick={() => handleEditCategory(id)}>
-            Редактировать категория
+      <Menu>
+        {
+          <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+            {i18n.t('menu.addCategory')}
           </Menu.Item>
-          <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
-            Добавить вопрос
-          </Menu.Item>
-          <Menu.Item key="remove">
-            <Popconfirm
-                title="Title"
-                description="Open Popconfirm with Promise"
-                onConfirm={() => handleDeleteCategory(id)}
-                onOpenChange={() => console.log('open change')}>
-              Удалить категория
-            </Popconfirm>
-          </Menu.Item>
-        </Menu>
-    )
-  }
+        }
+        <Menu.Item key="edit" onClick={() => handleEditCategory(id)}>
+          {i18n.t('menu.editCategory')}
+        </Menu.Item>
+        <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
+          {i18n.t('menu.addQuestion')}
+        </Menu.Item>
+        <Menu.Item key="remove">
+          <Popconfirm
+            title={i18n.t('actions.sure')}
+            cancelText={i18n.t('actions.cancel')}
+            okButtonProps={{
+              className: 'button-modal'
+            }}
+            cancelButtonProps={{ className: 'button-default' }}
+            onConfirm={() => handleDeleteCategory(id)}
+            onOpenChange={() => console.log('open change')}>
+            {i18n.t('menu.deleteCategory')}
+          </Popconfirm>
+        </Menu.Item>
+      </Menu>
+    );
+  };
 
   const menuQuestion = (id) => {
     return (
-        <Menu>
-          <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
-            Добавить новая категория
-          </Menu.Item>
-          <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
-            Редактировать вопрос
-          </Menu.Item>
-          <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
-              Удалить вопрос
-          </Menu.Item>
-        </Menu>
+      <Menu>
+        <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+          {i18n.t('menu.addCategory')}
+        </Menu.Item>
+        <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
+          {i18n.t('menu.editQuestion')}
+        </Menu.Item>
+        <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
+          {i18n.t('menu.deleteQuestion')}
+        </Menu.Item>
+      </Menu>
     );
-  }
+  };
 
   const AllMenuItem = () => {
     return (
@@ -82,9 +87,12 @@ const MenuItem = ({
               className={'mainMenu hoveredLink'}
               key={`submenu_${category?.id}`}
               onClick={(e) => {
-                  if (e.target.tagName !== 'svg' && !e.target.classList.contains('anticon')) {
-                      onMenuClick(category?.id)
-                  }
+                if (
+                  e.target.tagName !== 'svg' &&
+                  e.target.classList.contains('linkName')
+                ) {
+                  onMenuClick(category?.id);
+                }
               }}
               style={{
                 padding: '12px 0',
@@ -99,17 +107,22 @@ const MenuItem = ({
                   'activeLink'
                 }
                 onClick={(e) => {
-                    if (e.target.tagName !== 'svg' && !e.target.classList.contains('anticon')) {
-                        history.push(`/category/${category?.id}`)
-                    } else {
-                        e.preventDefault(); // Prevent the link from being triggered
-                    }
+                  if (
+                    e.target.tagName !== 'svg' &&
+                    e.target.classList.contains('linkName')
+                  ) {
+                    history.push(`/category/${category?.id}`);
+                  } else {
+                    e.preventDefault(); // Prevent the link from being triggered
+                  }
                 }}
                 style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>{category?.categorieContents?.name}</span>
-                  <Dropdown overlay={menu(category.id)} trigger={['click']}>
-                      <MoreOutlined style={{ fontSize: '1.5em' }} />
-                  </Dropdown>
+                <span className="linkName">
+                  {category?.categorieContents?.name}
+                </span>
+                <Dropdown overlay={menu(category.id)} trigger={['click']}>
+                  <MoreOutlined style={{ fontSize: '1.5em' }} />
+                </Dropdown>
               </a>
             </div>
             {category?.questions?.map((q, qIndex) => (
@@ -133,16 +146,28 @@ const MenuItem = ({
                     className={'hoveredLinkSecondary subMenu'}
                     style={{ padding: '8px 2px 8px 8px', marginBottom: '4px' }}>
                     <a
-                        style={{ display: 'flex', justifyContent: 'space-between' }}
-                        onClick={(e) => {
-                            if (e.target.tagName !== 'svg' && !e.target.classList.contains('anticon')) {
-                                history.push(`/question/admin/${q.id}`)
-                            } else {
-                                e.preventDefault(); // Prevent the link from being triggered
-                            }
-                        }}>
-                      <span>{q?.questionContents?.title}</span>
-                      <Dropdown style={{zIndex: '1000000000'}} overlay={menuQuestion(q.id)} trigger={['click']}>
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                      onClick={(e) => {
+                        if (
+                          e.target.tagName !== 'svg' &&
+                          !e.target.classList.contains('anticon') &&
+                          e.target.classList.contains('linkName')
+                        ) {
+                          history.push(`/question/admin/${q.id}`);
+                        } else {
+                          e.preventDefault(); // Prevent the link from being triggered
+                        }
+                      }}>
+                      <span className="linkName">
+                        {q?.questionContents?.title}
+                      </span>
+                      <Dropdown
+                        style={{ zIndex: '10' }}
+                        overlay={menuQuestion(q.id)}
+                        trigger={['click']}>
                         <MoreOutlined style={{ fontSize: '1.5em' }} />
                       </Dropdown>
                     </a>

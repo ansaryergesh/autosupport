@@ -135,7 +135,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const handleDeleteCategory = (categoryId) => {
     deleteCategory(categoryId).then((res) => {
       console.log(res);
-      history.push('/')
+      history.push('/');
       notification.success('deleted category');
       getCategoryAll();
     });
@@ -180,8 +180,7 @@ const SidebarNav = ({ isAdmin = true }) => {
 
   const logOutNotification = () => {
     notification.info({
-      message: 'Log out',
-      description: 'You have logged out',
+      message: i18n.t('commons.signOutMessage'),
       placement: 'top'
     });
   };

@@ -113,9 +113,16 @@ const Tags = () => {
             marginBottom: 16
           }}>
           <div>
-            <Button onClick={handleDeleteSelected} disabled={!hasSelected}>
-              {i18n.t('actions.deleteSelected')}
-            </Button>
+            <Popconfirm
+              cancelButtonProps={{ className: 'button-default' }}
+              okButtonProps={{ className: 'button-modal' }}
+              title={i18n.t('actions.sure')}
+              cancelText={i18n.t('actions.cancel')}
+              onConfirm={handleDeleteSelected}>
+              <Button disabled={!hasSelected}>
+                {i18n.t('actions.deleteSelected')}
+              </Button>
+            </Popconfirm>
             <span
               style={{
                 marginLeft: 8

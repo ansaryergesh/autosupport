@@ -24,6 +24,7 @@ export default {
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
+    signOutMessage: 'Сіз аккаунттан шықтыңыз!',
     comeBack: 'Қайта келуінмен!',
     forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
     submit: 'Растау',

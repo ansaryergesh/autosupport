@@ -9,26 +9,23 @@ import { initialQuestionDto } from './constants.js';
 import ArrowRight from 'images/arrowRight.svg';
 import { Link } from 'react-router-dom';
 import { i18n } from 'utils/i18next.js';
-import styles from './index.module.less'
-const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTitle=null, lang=getLocale() }) => {
+import styles from './index.module.less';
+const JHeader = ({
+  isQuestion = true,
+  questionInfo = initialQuestionDto,
+  pageTitle = null,
+  lang = getLocale()
+}) => {
   const questionCategory =
     isQuestion &&
-    getCategoryByLangKey(
-      questionInfo.categorie?.categorieContents,
-      lang
-    );
+    getCategoryByLangKey(questionInfo.categorie?.categorieContents, lang);
   const questionCategoryTitle = questionCategory?.name;
   const questionCategoryId = questionInfo.categorie?.id;
 
   const questionByKey =
-    isQuestion &&
-    getCategoryByLangKey(
-      questionInfo.questionContents,
-      lang
-    );
+    isQuestion && getCategoryByLangKey(questionInfo.questionContents, lang);
   const questionTitle = questionByKey?.title;
   const questionDescription = questionByKey?.stepDescription;
-
 
   return (
     <div>
@@ -38,7 +35,7 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTit
           separator={<img src={ArrowRight} />}
           items={[
             {
-              title: <Link to={'/'}>Главная</Link>
+              title: <Link to={'/'}>{i18n.t('home')}</Link>
             },
             {
               title: (
@@ -54,18 +51,18 @@ const JHeader = ({ isQuestion = true, questionInfo = initialQuestionDto, pageTit
         />
       )}
       {pageTitle && (
-          <Breadcrumb
-              style={{ marginBottom: '24px' }}
-              separator={<img src={ArrowRight} />}
-              items={[
-                {
-                  title: <Link to={'/'}>Главная</Link>
-                },
-                {
-                  title: pageTitle
-                }
-              ]}
-          />
+        <Breadcrumb
+          style={{ marginBottom: '24px' }}
+          separator={<img src={ArrowRight} />}
+          items={[
+            {
+              title: <Link to={'/'}>{i18n.t('home')}</Link>
+            },
+            {
+              title: pageTitle
+            }
+          ]}
+        />
       )}
       <TypographyHead
         className={styles.headerTitle}
