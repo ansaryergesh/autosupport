@@ -118,9 +118,16 @@ const Organizations = () => {
             marginBottom: 16
           }}>
           <div>
-            <Button onClick={handleDeleteSelected} disabled={!hasSelected}>
-              {i18n.t('actions.deleteSelected')}
-            </Button>
+            <Popconfirm
+              cancelButtonProps={{ className: 'button-default' }}
+              okButtonProps={{ className: 'button-modal' }}
+              title={i18n.t('actions.sure')}
+              cancelText={i18n.t('actions.cancel')}
+              onConfirm={handleDeleteSelected}>
+              <Button disabled={!hasSelected}>
+                {i18n.t('actions.deleteSelected')}
+              </Button>
+            </Popconfirm>
             <span
               style={{
                 marginLeft: 8
@@ -135,7 +142,7 @@ const Organizations = () => {
           </Button>
         </div>
         <Table
-          rowKey={(record) => record.id}
+          rowKey={(record) => record.code}
           pagination={false}
           rowSelection={rowSelection}
           columns={columns}

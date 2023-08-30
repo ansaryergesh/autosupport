@@ -24,6 +24,7 @@ export default {
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',
+    signOutMessage: 'You are logged out!',
     comeBack: 'Welcome back!',
     forgetPassword: 'Forgot your password?',
     submit: 'Submit',

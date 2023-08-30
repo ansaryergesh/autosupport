@@ -23,7 +23,8 @@ export default {
 
   commons: {
     signIn: 'Вход',
-    signOut: 'Выход',
+    signOut: 'Выйти',
+    signOutMessage: 'Вы вышли из аккаунта!',
     comeBack: 'Добро пожаловать!',
     forgetPassword: 'Забыли ваш пароль?',
     submit: 'Подтвердить',
