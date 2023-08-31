@@ -31,19 +31,17 @@ const NewRequest = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        layout="vertical">
+        layout="vertical"
+      >
         <Row justify={'center'} gutter={16}>
           <Col>
             <Image src={notFound} alt="Illustrationw" preview={false} />
           </Col>
           <Col span={24} className={styles.textContainer}>
-            <h3 className={styles.heading}>
-              К сожалению, мы ничего не нашли по Вашему запросу
-            </h3>
+            <h3 className={styles.heading}>К сожалению, мы ничего не нашли по Вашему запросу</h3>
 
             <p className={styles.paragraph}>
-              Вы можете оставить заявку со своим вопросом, мы обязательно вам
-              ответим. <br />
+              Вы можете оставить заявку со своим вопросом, мы обязательно вам ответим. <br />
               Ответ займет 5 рабочих дней.
             </p>
           </Col>
@@ -51,26 +49,18 @@ const NewRequest = () => {
           <Col span={8}>
             <Form.Item
               name="question"
-              rules={[
-                { required: true, message: 'Please input your question!' }
-              ]}>
-              <Input
-                className={styles.inputItem}
-                placeholder="Тема вопроса"
-                maxLength={150}
-              />
+              rules={[{ required: true, message: 'Please input your question!' }]}
+            >
+              <Input className={styles.inputItem} placeholder="Тема вопроса" maxLength={150} />
             </Form.Item>
           </Col>
 
           <Col span={8}>
             <Form.Item
               name="email"
-              rules={[{ required: true, message: 'Please input your email!' }]}>
-              <Input
-                className={styles.inputItem}
-                placeholder="Введите почту"
-                maxLength={150}
-              />
+              rules={[{ required: true, message: 'Please input your email!' }]}
+            >
+              <Input className={styles.inputItem} placeholder="Введите почту" maxLength={150} />
             </Form.Item>
           </Col>
 
@@ -80,10 +70,11 @@ const NewRequest = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input text of your request!'
-                }
+                  message: 'Please input text of your request!',
+                },
               ]}
-              label="Текст вопроса">
+              label="Текст вопроса"
+            >
               <InputTextArea
                 value={text}
                 onChange={handleTextChange}

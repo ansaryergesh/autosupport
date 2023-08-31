@@ -1,3 +1,1 @@
-const ResourceButtons = () => {
-
-}
+const ResourceButtons = () => {};

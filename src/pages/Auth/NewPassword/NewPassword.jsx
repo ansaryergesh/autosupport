@@ -16,23 +16,21 @@ const NewPassword = () => {
     const key = queryParams.key;
     const data = {
       key,
-      newPassword: values.newPassword
-    }
+      newPassword: values.newPassword,
+    };
     console.log(data);
-    newPassword(data).then(res => {
+    newPassword(data).then((res) => {
       console.log(res);
-      notification.info({ message: 'Password is updated' })
-      history.push('/sign-in')
-    })
+      notification.info({ message: 'Password is updated' });
+      history.push('/sign-in');
+    });
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
   const ArrowBack = () => {
-    return (
-      <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />
-    );
+    return <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />;
   };
 
   return (
@@ -43,7 +41,8 @@ const NewPassword = () => {
             type="text"
             className={styles.btnBack}
             iconButton={<ArrowBack />}
-            iconPosition={'left'}>
+            iconPosition={'left'}
+          >
             Назад
           </Button>
           <div className={styles.logo}>
@@ -59,16 +58,16 @@ const NewPassword = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off">
+          autoComplete="off"
+        >
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
                 name="password"
-                rules={[
-                  { required: true, message: 'Please input your username!' }
-                ]}>
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
                 <Input
-                  type='password'
+                  type="password"
                   size={'large'}
                   placeholder="Придумайте новый пароль"
                   className={styles.inputItem}
@@ -87,12 +86,15 @@ const NewPassword = () => {
                       if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(new Error('The new password that you entered do not match!'));
+                      return Promise.reject(
+                        new Error('The new password that you entered do not match!'),
+                      );
                     },
                   }),
-                ]}>
+                ]}
+              >
                 <Input
-                  type='password'
+                  type="password"
                   size={'large'}
                   className={styles.inputItem}
                   placeholder="Подтвердите новый пароль"

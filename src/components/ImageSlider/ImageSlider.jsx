@@ -28,11 +28,8 @@ const ImageSlider = ({ slides, sliderData }) => {
         return (
           <div
             key={index}
-            className={
-              index === current
-                ? `${styles.slide} ${styles.active}`
-                : `${styles.slide}`
-            }>
+            className={index === current ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
+          >
             {index === current && (
               <div>
                 <p className={styles.description}>{slide.description}</p>

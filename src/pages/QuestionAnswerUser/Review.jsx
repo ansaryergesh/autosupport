@@ -10,24 +10,24 @@ import { i18n } from '../../utils/i18next.js';
 const quickAnswers = [
   {
     id: 1,
-    text: 'Понятно'
+    text: 'Понятно',
   },
   {
     id: 2,
-    text: 'Удобный интерфейс'
+    text: 'Удобный интерфейс',
   },
   {
     id: 3,
-    text: 'Быстро'
+    text: 'Быстро',
   },
   {
     id: 4,
-    text: 'Видео инструкция'
+    text: 'Видео инструкция',
   },
   {
     id: 5,
-    text: 'Содержание'
-  }
+    text: 'Содержание',
+  },
 ];
 
 const Review = () => {
@@ -66,11 +66,7 @@ const Review = () => {
 
         <Form onFinish={() => {}}>
           <Form.Item>
-            <Rate
-              value={rating}
-              onChange={handleRating}
-              className={styles.rate}
-            />
+            <Rate value={rating} onChange={handleRating} className={styles.rate} />
           </Form.Item>
 
           {rating > 0 && (
@@ -79,13 +75,10 @@ const Review = () => {
                 <div className={styles.quick}>
                   {quickAnswers.map((q) => (
                     <Button
-                      type={
-                        selectedAnswers?.includes(q.id)
-                          ? 'secondary-active'
-                          : 'secondary'
-                      }
+                      type={selectedAnswers?.includes(q.id) ? 'secondary-active' : 'secondary'}
                       key={q.id}
-                      onClick={() => handleAnswer(q.id)}>
+                      onClick={() => handleAnswer(q.id)}
+                    >
                       {q.text}
                     </Button>
                   ))}
@@ -97,9 +90,7 @@ const Review = () => {
                   value={text}
                   onChange={handleTextChange}
                   className={
-                    text.length === maxCharacterCount
-                      ? styles.textAreaLimit
-                      : styles.textArea
+                    text.length === maxCharacterCount ? styles.textAreaLimit : styles.textArea
                   }
                   autoSize={{ minRows: 5, maxRows: 5 }}
                   placeholder={i18n.t('questionAnswer.comment')}
@@ -122,7 +113,8 @@ const Review = () => {
               className={styles.reviewBtn}
               disabled={!rating > 0}
               type="third"
-              htmlType="submit">
+              htmlType="submit"
+            >
               {i18n.t('questionAnswer.rateButton')}
             </Button>
           </Form.Item>

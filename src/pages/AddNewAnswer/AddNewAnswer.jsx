@@ -35,20 +35,20 @@ const AddNewAnswer = () => {
   const selectPropsKeywords = {
     mode: 'multiple',
     placeholder: 'Выберите ключевые слова',
-    maxTagCount: 'responsive'
+    maxTagCount: 'responsive',
   };
 
   const selectPropsTags = {
     mode: 'multiple',
     placeholder: 'Выберите теги',
-    maxTagCount: 'responsive'
+    maxTagCount: 'responsive',
   };
 
   const selectPropsSimilar = {
     mode: 'multiple',
     // options: optionsSimilar,
     placeholder: 'Выберите похожие вопросы',
-    maxTagCount: 'responsive'
+    maxTagCount: 'responsive',
   };
 
   const onAddKeyword = (e) => {
@@ -82,10 +82,7 @@ const AddNewAnswer = () => {
       <Form layout="vertical">
         <Row gutter={[24, 24]}>
           <Col span={12}>
-            <Form.Item
-              name="Заголовок"
-              label="Заголовок"
-              rules={[{ required: true }]}>
+            <Form.Item name="Заголовок" label="Заголовок" rules={[{ required: true }]}>
               <InputTextArea
                 className={styles.inputItems}
                 autoSize={{ minRows: 1, maxRows: 15 }}
@@ -95,10 +92,7 @@ const AddNewAnswer = () => {
           </Col>
 
           <Col span={12}>
-            <Form.Item
-              name="Описание шагов"
-              label="Описание шагов"
-              rules={[{ required: true }]}>
+            <Form.Item name="Описание шагов" label="Описание шагов" rules={[{ required: true }]}>
               <InputTextArea
                 className={styles.textArea}
                 autoSize={{ minRows: 1, maxRows: 15 }}
@@ -115,16 +109,14 @@ const AddNewAnswer = () => {
 
           <Col span={24}>
             <Form.Item label="Визуальная инструкция">
-              <Upload
-                action="/upload.do"
-                multiple={true}
-                listType="picture-card">
+              <Upload action="/upload.do" multiple={true} listType="picture-card">
                 <div>
                   <PlusOutlined />
                   <div
                     style={{
-                      marginTop: 8
-                    }}>
+                      marginTop: 8,
+                    }}
+                  >
                     Загрузить
                   </div>
                 </div>
@@ -151,7 +143,8 @@ const AddNewAnswer = () => {
                 {...selectPropsTags}
                 onChange={(newValue) => {
                   setSelectedTags(newValue);
-                }}>
+                }}
+              >
                 {tags.map((item) => (
                   <Select.Option key={item.id} value={item.id}>
                     {item.text}
@@ -169,7 +162,8 @@ const AddNewAnswer = () => {
                 onInputKeyDown={(e) => onAddKeyword(e)}
                 onChange={(newValue) => {
                   setSelectedKeyWords(newValue);
-                }}>
+                }}
+              >
                 {keywords.map((item) => (
                   <Select.Option key={item.id} value={item.id}>
                     {item.text}

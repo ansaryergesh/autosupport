@@ -11,9 +11,9 @@ export const initialQuestionAnswerContent = {
         {
           id: 0,
           langKey: 'EN',
-          name: 'string'
-        }
-      ]
+          name: 'string',
+        },
+      ],
     },
     questionContents: [
       {
@@ -24,22 +24,22 @@ export const initialQuestionAnswerContent = {
         tags: [
           {
             id: 0,
-            text: 'string'
-          }
+            text: 'string',
+          },
         ],
         keyWords: [
           {
             id: 0,
-            text: 'string'
-          }
-        ]
-      }
-    ]
+            text: 'string',
+          },
+        ],
+      },
+    ],
   },
   resource: {
     id: 0,
     code: 'string',
-    name: 'string'
+    name: 'string',
   },
   answerContents: [
     {
@@ -47,21 +47,21 @@ export const initialQuestionAnswerContent = {
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: []
+      images: [],
     },
     {
       langKey: 'RU',
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: []
+      images: [],
     },
     {
       langKey: 'KZ',
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: []
-    }
+      images: [],
+    },
   ],
 };

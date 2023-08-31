@@ -1,23 +1,23 @@
-import {axiosInstanceWithHeader} from "../../api/api.js";
+import { axiosInstanceWithHeader } from '../../api/api.js';
 
 export const manageKeyword = (data) => {
-  if(data.id) {
-    return axiosInstanceWithHeader.put(`/api/admin/keyWords/${data.id}`,data)
-  }else {
-    return axiosInstanceWithHeader.post('/api/admin/keyWords',data)
+  if (data.id) {
+    return axiosInstanceWithHeader.put(`/api/admin/keyWords/${data.id}`, data);
+  } else {
+    return axiosInstanceWithHeader.post('/api/admin/keyWords', data);
   }
-}
-
+};
 
 export const deleteKeyWord = (id) => {
-  return axiosInstanceWithHeader.delete(`/api/admin/keyWords/${id}`)
-}
+  return axiosInstanceWithHeader.delete(`/api/admin/keyWords/${id}`);
+};
 
 export const getKeywords = () => {
   return axiosInstanceWithHeader.get('/api/admin/keyWords');
-}
+};
 
 export const searchKeyWords = (params) => {
-  return axiosInstanceWithHeader.get('/api/admin/keyWords/_search',{params: {pageSize: 20, query: '', ...params}} )
-}
-
+  return axiosInstanceWithHeader.get('/api/admin/keyWords/_search', {
+    params: { pageSize: 20, query: '', ...params },
+  });
+};

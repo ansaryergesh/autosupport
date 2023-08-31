@@ -10,52 +10,53 @@ export const adminNavItems = [
   {
     name: 'employee',
     path: '/employees',
-    icon: users
+    icon: users,
   },
   {
     name: 'reviews',
     path: '/feedback',
-    icon: reviews
+    icon: reviews,
   },
   {
     name: 'categories',
     path: '/',
-    icon: categories
+    icon: categories,
   },
   {
     name: 'keywords',
     path: '/keywords',
-    icon: keywords
+    icon: keywords,
   },
   {
     name: 'tags',
     path: '/tags',
-    icon: tags
+    icon: tags,
   },
   {
     name: 'resources',
     path: '/resources',
-    icon: resources
+    icon: resources,
   },
   {
     name: 'organizations',
     path: '/organizations',
-    icon: organizations
-  }
+    icon: organizations,
+  },
 ];
 
-export const initialMenuItems = [{
-  id: 'home',
-  label: 'Сколько занимает открытие счета1',
-  questions: [
-    { name: 'Продвинутые функции' },
-    { name: 'Веб версия и мобильная' },
-    { name: 'Основные фуниции' },
-    { name: 'Проблемы с платформой' },
-    { name: 'Веб версия и мобильная' }
-  ],
-  order: 1
-},
+export const initialMenuItems = [
+  {
+    id: 'home',
+    label: 'Сколько занимает открытие счета1',
+    questions: [
+      { name: 'Продвинутые функции' },
+      { name: 'Веб версия и мобильная' },
+      { name: 'Основные фуниции' },
+      { name: 'Проблемы с платформой' },
+      { name: 'Веб версия и мобильная' },
+    ],
+    order: 1,
+  },
   {
     id: 'about',
     label: 'Сколько занимает открытие счета2',
@@ -64,9 +65,9 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
+      { name: 'Веб версия и мобильная' },
     ],
-    order: 2
+    order: 2,
   },
   {
     id: 'home1',
@@ -76,8 +77,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about1',
@@ -87,8 +88,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home2',
@@ -98,8 +99,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about2',
@@ -109,8 +110,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home3',
@@ -120,8 +121,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about3',
@@ -131,8 +132,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home',
@@ -142,8 +143,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about',
@@ -153,8 +154,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home1',
@@ -164,8 +165,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about1',
@@ -175,8 +176,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home2',
@@ -186,8 +187,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about2',
@@ -197,8 +198,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home3',
@@ -208,8 +209,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about3',
@@ -219,8 +220,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'home',
@@ -230,8 +231,8 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
+      { name: 'Веб версия и мобильная' },
+    ],
   },
   {
     id: 'about',
@@ -241,8 +242,7 @@ export const initialMenuItems = [{
       { name: 'Веб версия и мобильная' },
       { name: 'Основные фуниции' },
       { name: 'Проблемы с платформой' },
-      { name: 'Веб версия и мобильная' }
-    ]
-  }]
-
-
+      { name: 'Веб версия и мобильная' },
+    ],
+  },
+];

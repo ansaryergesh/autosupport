@@ -4,7 +4,6 @@ const srcPath = path.resolve('src');
 const nodeModulesPath = path.resolve('node_modules');
 
 export default function css() {
-
   return {
     modules: {
       localsConvention: 'camelCase',

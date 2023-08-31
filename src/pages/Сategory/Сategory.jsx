@@ -2,19 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Col, Result, Row } from 'antd';
 import CategoryItem from 'components/CategoryItem/CategoryItem';
 import { useParams } from 'react-router';
-import {
-  editCategoryQuestionPatch,
-  getQuestions
-} from '../../service/Question/index.js';
+import { editCategoryQuestionPatch, getQuestions } from '../../service/Question/index.js';
 import { getLocale } from '../../utils/i18next.js';
 import { useHistory } from 'react-router-dom';
-import {getCategoryById} from "../../service/Category/index.js";
-import JHeader from "../../components/JHeader/JHeader.jsx";
+import { getCategoryById } from '../../service/Category/index.js';
+import JHeader from '../../components/JHeader/JHeader.jsx';
 
 function Сategory() {
   const { id } = useParams();
   const [questions, setQuestions] = useState([]);
-  const [categoryInfo,setCategoryInfo] = useState({})
+  const [categoryInfo, setCategoryInfo] = useState({});
 
   const history = useHistory();
   useEffect(() => {
@@ -23,19 +20,21 @@ function Сategory() {
   }, [id]);
 
   const getCategoryInfo = () => {
-    console.log(categoryInfo)
-    getCategoryById(id).then(res=> {
-      setCategoryInfo(res.data)
-    })
-  }
+    console.log(categoryInfo);
+    getCategoryById(id).then((res) => {
+      setCategoryInfo(res.data);
+    });
+  };
 
   // eslint-disable-next-line no-unused-vars
-  const selectedLanguageTitle =  categoryInfo.categorieContents?.find(item=>item.langKey = getLocale());
+  const selectedLanguageTitle = categoryInfo.categorieContents?.find(
+    (item) => (item.langKey = getLocale()),
+  );
   const getAllQuestion = () => {
     const params = {
       langKey: getLocale().toUpperCase(),
       categorieId: id,
-      pageSize: 10
+      pageSize: 10,
     };
     getQuestions(params)
       .then((res) => {
@@ -52,7 +51,7 @@ function Сategory() {
   };
   return (
     <div>
-      <JHeader pageTitle={selectedLanguageTitle?.name}/>
+      <JHeader pageTitle={selectedLanguageTitle?.name} />
 
       <Row gutter={[16, 16]}>
         {questions &&

@@ -6,7 +6,7 @@ export const TypoGraphyType = {
   LEVEL_1: 'LEVEL_1',
   LEVEL_2: 'LEVEL_2',
   LEVEL_2_BOLD: 'LEVEL_2_BOLD',
-  LEVEL_3: 'LEVEL_3'
+  LEVEL_3: 'LEVEL_3',
 };
 
 export const fontSize = (type) => {

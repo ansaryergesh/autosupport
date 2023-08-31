@@ -7,11 +7,7 @@ import { initialCategoryContents } from '../constants.js';
 import { createCategory } from '../../../service/Category/index.js';
 import { i18n } from '../../../utils/i18next.js';
 
-const CategoryCreateModal = ({
-  isModalOpen = false,
-  handleModal,
-  getCategoryAll
-}) => {
+const CategoryCreateModal = ({ isModalOpen = false, handleModal, getCategoryAll }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const handleSubmit = (values) => {
@@ -38,29 +34,29 @@ const CategoryCreateModal = ({
       onCancel={() => {
         handleModal();
         form.resetFields();
-      }}>
+      }}
+    >
       <Form
         form={form}
         layout="vertical"
         initialValues={{ initialCategoryContents }}
         onFinish={handleSubmit}
-        autoComplete="off">
+        autoComplete="off"
+      >
         {initialCategoryContents.map((content, index) => (
-          <Form.Item
-            key={index}
-            label={`${i18n.t('columns.name')} ${content.langKey}`}>
+          <Form.Item key={index} label={`${i18n.t('columns.name')} ${content.langKey}`}>
             <Form.Item
               name={['categorieContents', index, 'name']}
               rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
-              style={{ marginBottom: 0 }}>
-              <Input
-                placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`}
-              />
+              style={{ marginBottom: 0 }}
+            >
+              <Input placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`} />
             </Form.Item>
             <Form.Item
               name={['categorieContents', index, 'langKey']}
               initialValue={content.langKey}
-              style={{ display: 'none' }}>
+              style={{ display: 'none' }}
+            >
               <Input type="hidden" />
             </Form.Item>
           </Form.Item>
@@ -78,6 +74,6 @@ const CategoryCreateModal = ({
 CategoryCreateModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
-  getCategoryAll: PropTypes.func
+  getCategoryAll: PropTypes.func,
 };
 export default CategoryCreateModal;

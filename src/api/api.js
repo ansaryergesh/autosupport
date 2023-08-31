@@ -8,19 +8,16 @@ export const checkerAddress =
   import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/';
 
 export const originAddress =
-  import.meta.env?.MODE === 'development'
-    ? 'http://localhost:8080'
-    : window.location.origin;
+  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : window.location.origin;
 const axiosParams = {
-  baseURL: checkerAddress
+  baseURL: checkerAddress,
 };
 
 const axiosParamsWithHeader = {
   baseURL: checkerAddress,
   headers: {
-    Authorization:
-      'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)
-  }
+    Authorization: 'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN),
+  },
 };
 
 const axiosInstance = axios.create(axiosParams);
@@ -34,12 +31,12 @@ axiosInstance.interceptors.response.use(
       notification.error({ message: i18n.t('commons.unauthorized') });
     } else if (error?.status === '403') {
       notification.error({
-        message: i18n.t('commons.accessDenied')
+        message: i18n.t('commons.accessDenied'),
       });
     }
     notification.error(error);
     throw error;
-  }
+  },
 );
 const axiosInstanceWithHeader = axios.create(axiosParamsWithHeader);
 axiosInstanceWithHeader.interceptors.response.use(
@@ -54,12 +51,12 @@ axiosInstanceWithHeader.interceptors.response.use(
       // location.href='/sign-in'
     } else if (error.response?.status === 403) {
       notification.error({
-        message: i18n.t('commons.accessDenied')
+        message: i18n.t('commons.accessDenied'),
       });
     } else {
       notification.error(error);
     }
     throw error;
-  }
+  },
 );
 export { axiosInstance, axiosInstanceWithHeader };
