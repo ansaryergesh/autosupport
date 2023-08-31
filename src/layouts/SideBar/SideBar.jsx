@@ -10,13 +10,13 @@ import {
   changeOrderCategory,
   deleteCategory,
   getCategories,
-  getCategoryById
+  getCategoryById,
 } from '../../service/Category/index.js';
 import {
   changeQuestionOrder,
   deleteQuestion,
   getQuestionById,
-  getQuestions
+  getQuestions,
 } from '../../service/Question/index.js';
 import MenuItem from './Menu/MenuItem.jsx';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
@@ -50,7 +50,7 @@ const SearchInput = () => {
       placeholder={i18n.t('SearchQuestion')}
       style={{
         border: 'none',
-        width: '100%'
+        width: '100%',
       }}
       value={searchValue}
       onChange={handleInputChange}
@@ -75,8 +75,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const [questionInfo, setQuestionInfo] = useState({});
 
   const [activeButton, setActiveButton] = useState(
-    localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) ||
-      SIDEBAR_BUTTON.ALL
+    localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) || SIDEBAR_BUTTON.ALL,
   );
 
   const history = useHistory();
@@ -100,7 +99,7 @@ const SidebarNav = ({ isAdmin = true }) => {
     console.log(allQuestions);
     const params = {
       langKey: getLocale().toUpperCase(),
-      pageSize: 20
+      pageSize: 20,
     };
     getQuestions(params).then((res) => {
       setAllQuestions(res.data);
@@ -181,7 +180,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const logOutNotification = () => {
     notification.info({
       message: i18n.t('commons.signOutMessage'),
-      placement: 'top'
+      placement: 'top',
     });
   };
 
@@ -207,20 +206,19 @@ const SidebarNav = ({ isAdmin = true }) => {
         style={{
           marginTop: '10px',
           marginBottom: '20px',
-          background: 'transparent'
-        }}>
-        <SideBarButtons
-          activeButton={activeButton}
-          setActiveButton={setActiveButton}
-        />
+          background: 'transparent',
+        }}
+      >
+        <SideBarButtons activeButton={activeButton} setActiveButton={setActiveButton} />
       </div>
       <div
         className="custom-menu"
         style={{
           maxHeight: '100vh',
           borderRight: 0,
-          width: '100%!important'
-        }}>
+          width: '100%!important',
+        }}
+      >
         <ConstDropDownMenuItem handleAdd={handleAddCategory} />
         {allCategories?.map((m, index) => (
           <MenuItem
@@ -287,9 +285,7 @@ const SidebarNav = ({ isAdmin = true }) => {
         setOrderModal={setOrderModal}
       />
 
-      <div
-        onClick={handleLogOut}
-        style={{ padding: '26px 0', cursor: 'pointer' }}>
+      <div onClick={handleLogOut} style={{ padding: '26px 0', cursor: 'pointer' }}>
         <LogoutOutlined /> <span>{i18n.t('commons.signOut')}</span>
       </div>
 

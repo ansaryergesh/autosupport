@@ -10,7 +10,7 @@ const OrganizationsModal = ({
   isModalOpen = false,
   handleModal = () => {},
   getList = () => {},
-  record = initialValues
+  record = initialValues,
 }) => {
   const [loading, setLoading] = useState(false);
   const editPage = record.code;
@@ -28,9 +28,7 @@ const OrganizationsModal = ({
         getList();
         if (res.data) {
           notification.success({
-            message: editPage
-              ? i18n.t('actions.edited')
-              : i18n.t('actions.added')
+            message: editPage ? i18n.t('actions.edited') : i18n.t('actions.added'),
           });
         }
       })
@@ -42,11 +40,7 @@ const OrganizationsModal = ({
   return (
     <>
       <Modal
-        title={
-          editPage
-            ? i18n.t('actions.editOrganization')
-            : i18n.t('actions.addOrganization')
-        }
+        title={editPage ? i18n.t('actions.editOrganization') : i18n.t('actions.addOrganization')}
         confirmLoading={loading}
         open={isModalOpen}
         cancelText={i18n.t('actions.cancel')}
@@ -57,9 +51,10 @@ const OrganizationsModal = ({
         okButtonProps={{
           className: 'button-modal',
           htmlType: 'submit',
-          form: 'form'
+          form: 'form',
         }}
-        cancelButtonProps={{ className: 'button-default' }}>
+        cancelButtonProps={{ className: 'button-default' }}
+      >
         <Form
           form={form}
           id="form"
@@ -67,18 +62,15 @@ const OrganizationsModal = ({
           onFinish={(values) => {
             handleSubmit(values);
           }}
-          initialValues={record}>
+          initialValues={record}
+        >
           <Form.Item name="id" style={{ display: 'none' }}>
             <Input />
           </Form.Item>
-          <Form.Item
-            name="code"
-            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
+          <Form.Item name="code" rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('columns.code')} />
           </Form.Item>
-          <Form.Item
-            name="name"
-            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
+          <Form.Item name="name" rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('organization')} />
           </Form.Item>
         </Form>
@@ -91,7 +83,7 @@ OrganizationsModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   getList: PropTypes.func,
-  record: PropTypes.object
+  record: PropTypes.object,
 };
 
 export default OrganizationsModal;

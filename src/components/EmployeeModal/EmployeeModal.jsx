@@ -7,16 +7,16 @@ import { i18n } from 'utils/i18next.js';
 const optionsRole = [
   {
     value: 'Superadmin',
-    label: 'Superadmin'
+    label: 'Superadmin',
   },
   {
     value: 'Admin',
-    label: 'Admin'
+    label: 'Admin',
   },
   {
     value: 'Manager',
-    label: 'Manager'
-  }
+    label: 'Manager',
+  },
 ];
 
 const optionsComp = [{ value: 'Freedom', label: 'Freedom' }];
@@ -37,7 +37,8 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
       <Button
         style={{ marginBottom: `${margin}px` }}
         type={btnType ? `${btnType}` : 'primary'}
-        onClick={showModal}>
+        onClick={showModal}
+      >
         {btnName}
       </Button>
 
@@ -48,7 +49,8 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
         cancelText={i18n.t('actions.cancel')}
         onCancel={handleCancel}
         okButtonProps={{ className: 'button-modal' }}
-        cancelButtonProps={{ className: 'button-default' }}>
+        cancelButtonProps={{ className: 'button-default' }}
+      >
         <Form layout="vertical">
           <Form.Item required>
             <Input placeholder={i18n.t('columns.fullName')} />
@@ -59,17 +61,11 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
           </Form.Item>
 
           <Form.Item required>
-            <Select
-              options={optionsRole}
-              placeholder={i18n.t('columns.role')}
-            />
+            <Select options={optionsRole} placeholder={i18n.t('columns.role')} />
           </Form.Item>
 
           <Form.Item required>
-            <Select
-              options={optionsComp}
-              placeholder={i18n.t('organization')}
-            />
+            <Select options={optionsComp} placeholder={i18n.t('organization')} />
           </Form.Item>
         </Form>
       </Modal>

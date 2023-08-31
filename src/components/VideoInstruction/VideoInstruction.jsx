@@ -3,18 +3,14 @@ import Input from '../Input/Input.jsx';
 import ReactPlayer from 'react-player';
 import { i18n } from '../../utils/i18next';
 
-export const VideoInstruction = ({
-  answerFormData,
-  setAnswerFormData,
-  selectedLanguage
-}) => {
+export const VideoInstruction = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
   const handleChangeInput = (name, value) => {
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
-      (content) => content.langKey === selectedLanguage
+      (content) => content.langKey === selectedLanguage,
     );
 
     if (index !== -1) {
@@ -31,9 +27,7 @@ export const VideoInstruction = ({
         value={selectedLanguageItem?.videoUrl}
         onChange={(e) => handleChangeInput('videoUrl', e.target.value)}
       />
-      {selectedLanguageItem?.videoUrl && (
-        <ReactPlayer url={selectedLanguageItem?.videoUrl} />
-      )}
+      {selectedLanguageItem?.videoUrl && <ReactPlayer url={selectedLanguageItem?.videoUrl} />}
       <Input
         style={{ margin: '8px 0' }}
         placeholder={i18n.t('description')}

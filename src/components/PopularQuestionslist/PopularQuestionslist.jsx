@@ -6,8 +6,8 @@ const data = {
   questions: [
     'Сколько занимает открытие счета',
     'Сколько занимает открытие счета',
-    'Сколько занимает открытие счета'
-  ]
+    'Сколько занимает открытие счета',
+  ],
 };
 
 const PopularQuestionslist = () => {
@@ -15,9 +15,7 @@ const PopularQuestionslist = () => {
     <div className={styles.popularBox}>
       <h2 className="my-heading-2">{data.name}</h2>
       {data.questions.map((item, index) => (
-        <p
-          key={index}
-          className={`${index > 1 ? '' : styles.border} my-paragraph `}>
+        <p key={index} className={`${index > 1 ? '' : styles.border} my-paragraph `}>
           {item}
         </p>
       ))}

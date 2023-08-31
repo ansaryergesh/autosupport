@@ -18,22 +18,22 @@ const Employees = () => {
     {
       title: i18n.t('columns.fullName'),
       dataIndex: 'name',
-      key: 'name'
+      key: 'name',
     },
     {
       title: i18n.t('columns.email'),
       dataIndex: 'email',
-      key: 'email'
+      key: 'email',
     },
     {
       title: i18n.t('columns.role'),
       dataIndex: 'role',
-      key: 'role'
+      key: 'role',
     },
     {
       title: i18n.t('columns.organization'),
       dataIndex: 'company',
-      key: 'company'
+      key: 'company',
     },
 
     {
@@ -47,21 +47,18 @@ const Employees = () => {
             okButtonProps={{ className: 'button-modal' }}
             title={i18n.t('actions.sure')}
             cancelText={i18n.t('actions.cancel')}
-            onConfirm={() => handleDelete(record.key)}>
+            onConfirm={() => handleDelete(record.key)}
+          >
             <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
         </Space>
-      )
-    }
+      ),
+    },
   ];
   return (
     <div>
       <JHeader pageTitle={i18n.t('employee')} />
-      <EmployeeModal
-        btnType="modal"
-        btnName={i18n.t('actions.addEmployee')}
-        margin={10}
-      />
+      <EmployeeModal btnType="modal" btnName={i18n.t('actions.addEmployee')} margin={10} />
       <Table pagination={false} columns={columns} dataSource={data} />
     </div>
   );

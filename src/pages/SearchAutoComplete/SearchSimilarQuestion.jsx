@@ -4,12 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 
-const SearchReference = ({
-  searchAction,
-  selectedItems,
-  setSelectedItems,
-  title
-}) => {
+const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title }) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
@@ -19,7 +14,7 @@ const SearchReference = ({
           value: item.questionContents?.title,
           id: item.questionContents?.id,
           itemValue: item,
-        }))
+        })),
       );
     });
   };
@@ -32,7 +27,7 @@ const SearchReference = ({
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 20
+      pageSize: 20,
     };
     searchAction(params).then((response) => {
       setOptions(
@@ -40,14 +35,14 @@ const SearchReference = ({
           value: item.questionContents?.title,
           id: item.questionContents?.id,
           itemValue: item,
-        }))
+        })),
       );
     });
   };
 
   const handleSelect = (value, option) => {
     const selectedItem = option.itemValue;
-    console.log(selectedItem)
+    console.log(selectedItem);
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
       notification.info({ message: 'Keyword already selected' });
     } else {
@@ -81,7 +76,8 @@ const SearchReference = ({
         onSearch={handleSearch}
         placeholder="Search items"
         value={inputValue}
-        onChange={(value) => setInputValue(value)}>
+        onChange={(value) => setInputValue(value)}
+      >
         <Input.Search />
       </AutoComplete>
 
@@ -96,13 +92,14 @@ const SearchReference = ({
                   padding: '18px',
                   justifyContent: 'space-between',
                   borderBottom: '1px solid var(--green-color)',
-                  alignItems: 'center'
-                }}>
+                  alignItems: 'center',
+                }}
+              >
                 <span key={item.id}>{item.questionContents?.title}</span>
                 <CloseOutlined
                   style={{
                     color: 'red',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
                   }}
                   onClick={() => handleRemoveSelected(item.id)}
                 />

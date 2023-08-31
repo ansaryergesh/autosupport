@@ -1,5 +1,0 @@
-const getQuestions = () => {
-
-}
-
-export getQuestions;

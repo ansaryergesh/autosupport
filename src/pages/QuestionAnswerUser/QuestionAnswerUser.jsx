@@ -38,6 +38,7 @@ const QuestionAnswerUser = () => {
   useEffect(() => {
     getAnswerById(questionId, resourceId).then((res) => {
       setData(res.data);
+      console.log(res.data);
     });
   }, [questionId, resourceId]);
 
@@ -131,14 +132,14 @@ const QuestionAnswerUser = () => {
                     </>
                   )}
 
-                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL && (
+                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL  && (
                     <div className={styles.mediaBox}>
                       <ImageSlider slides={images} sliderData={images} />
                     </div>
                   )}
                 </div>
               </>
-            }
+            )}
           </div>
         </Col>
 

@@ -17,9 +17,7 @@ const CodeVerify = () => {
   };
 
   const ArrowBack = () => {
-    return (
-      <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />
-    );
+    return <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />;
   };
 
   return (
@@ -30,7 +28,8 @@ const CodeVerify = () => {
             type="text"
             className={styles.btnBack}
             iconButton={<ArrowBack />}
-            iconPosition={'left'}>
+            iconPosition={'left'}
+          >
             Назад
           </Button>
           <div className={styles.logo}>
@@ -46,7 +45,8 @@ const CodeVerify = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off">
+          autoComplete="off"
+        >
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item>
@@ -60,9 +60,7 @@ const CodeVerify = () => {
             </Col>
 
             <Col span={24}>
-              <p>
-                Можете отправить повторный код через 00:38, если код не пришел.
-              </p>
+              <p>Можете отправить повторный код через 00:38, если код не пришел.</p>
               <p className={styles.resend}>Отправить повторно</p>
             </Col>
 

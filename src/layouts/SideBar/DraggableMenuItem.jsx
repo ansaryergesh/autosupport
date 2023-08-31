@@ -4,19 +4,13 @@ import PropTypes from 'prop-types';
 
 const MenuItemTypes = {
   MENU_ITEM: 'menu_item',
-  QUESTION_ITEM: 'question_item'
+  QUESTION_ITEM: 'question_item',
 };
 
-const DraggableMenuItem = ({
-  index,
-  item,
-  isCategory = true,
-  moveMenuItem,
-  children,
-}) => {
+const DraggableMenuItem = ({ index, item, isCategory = true, moveMenuItem, children }) => {
   const [, drag] = useDrag({
     type: isCategory ? MenuItemTypes.MENU_ITEM : MenuItemTypes.QUESTION_ITEM,
-    item: { id: item.id }
+    item: { id: item.id },
   });
 
   const [, drop] = useDrop({
@@ -26,11 +20,11 @@ const DraggableMenuItem = ({
         moveMenuItem(draggedItem.id, item.orderNumber);
         draggedItem.index = index;
       }
-    }
+    },
   });
   return (
     <div ref={(node) => drag(drop(node))} style={{ cursor: 'move' }}>
-        {children}
+      {children}
     </div>
   );
 };
@@ -46,7 +40,7 @@ DraggableMenuItem.propTypes = {
   handleAddQuestion: PropTypes.func,
   isCategory: PropTypes.bool,
   item: PropTypes.object,
-  draggable: PropTypes.bool
+  draggable: PropTypes.bool,
 };
 
 export default DraggableMenuItem;

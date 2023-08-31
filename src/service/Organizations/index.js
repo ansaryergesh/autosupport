@@ -2,10 +2,7 @@ import { axiosInstanceWithHeader } from '../../api/api.js';
 
 export const manageOrganization = (data) => {
   if (data.id) {
-    return axiosInstanceWithHeader.put(
-      `/api/admin/organizations/${data.id}`,
-      data
-    );
+    return axiosInstanceWithHeader.put(`/api/admin/organizations/${data.id}`, data);
   } else {
     return axiosInstanceWithHeader.post('/api/admin/organizations', data);
   }

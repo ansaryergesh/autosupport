@@ -1,4 +1,4 @@
-import {LANG_KEY} from "../../constants/index.js";
+import { LANG_KEY } from '../../constants/index.js';
 
 export const initialQuestion = [
   {

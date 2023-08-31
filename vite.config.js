@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import{ plugins,css } from './config'
+import { plugins, css } from './config';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), ...plugins.dev, ...plugins.common ],
+  plugins: [react(), ...plugins.dev, ...plugins.common],
   server: {
-    port: 3000
+    port: 3000,
   },
   css: css(),
   resolve: {
@@ -17,7 +17,7 @@ export default defineConfig({
       utils: '/src/utils',
       helpers: '/src/helpers',
       views: '/src/views',
-      'fonts/*': '/src/public/fonts'
+      'fonts/*': '/src/public/fonts',
     },
     transform: (code, id) => {
       if (id.endsWith('.css')) {
@@ -25,6 +25,6 @@ export default defineConfig({
         return code.replace(/url\('\.\.\/fonts\//g, "url('/fonts/");
       }
       return code;
-    }
-  }
+    },
+  },
 });

@@ -10,7 +10,7 @@ const KeywordsModal = ({
   isModalOpen = false,
   handleModal = () => {},
   getList = () => {},
-  record = initialValues
+  record = initialValues,
 }) => {
   const [loading, setLoading] = useState(false);
   const editPage = record.id;
@@ -28,9 +28,7 @@ const KeywordsModal = ({
         getList();
         if (res.data) {
           notification.success({
-            message: editPage
-              ? i18n.t('actions.edited')
-              : i18n.t('actions.added')
+            message: editPage ? i18n.t('actions.edited') : i18n.t('actions.added'),
           });
         }
       })
@@ -42,11 +40,7 @@ const KeywordsModal = ({
   return (
     <>
       <Modal
-        title={
-          editPage
-            ? i18n.t('actions.editKeyword')
-            : i18n.t('actions.addKeyword')
-        }
+        title={editPage ? i18n.t('actions.editKeyword') : i18n.t('actions.addKeyword')}
         confirmLoading={loading}
         open={isModalOpen}
         cancelText={i18n.t('actions.cancel')}
@@ -57,9 +51,10 @@ const KeywordsModal = ({
         okButtonProps={{
           className: 'button-modal',
           htmlType: 'submit',
-          form: 'form'
+          form: 'form',
         }}
-        cancelButtonProps={{ className: 'button-default' }}>
+        cancelButtonProps={{ className: 'button-default' }}
+      >
         <Form
           form={form}
           id="form"
@@ -67,10 +62,9 @@ const KeywordsModal = ({
           onFinish={(values) => {
             handleSubmit(values);
           }}
-          initialValues={record}>
-          <Form.Item
-            name="text"
-            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
+          initialValues={record}
+        >
+          <Form.Item name="text" rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('keyword')} />
           </Form.Item>
           <Form.Item name="id" style={{ display: 'none' }}>
@@ -86,7 +80,7 @@ KeywordsModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   getList: PropTypes.func,
-  record: PropTypes.object
+  record: PropTypes.object,
 };
 
 export default KeywordsModal;

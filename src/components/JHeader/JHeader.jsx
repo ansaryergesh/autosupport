@@ -14,16 +14,14 @@ const JHeader = ({
   isQuestion = true,
   questionInfo = initialQuestionDto,
   pageTitle = null,
-  lang = getLocale()
+  lang = getLocale(),
 }) => {
   const questionCategory =
-    isQuestion &&
-    getCategoryByLangKey(questionInfo.categorie?.categorieContents, lang);
+    isQuestion && getCategoryByLangKey(questionInfo.categorie?.categorieContents, lang);
   const questionCategoryTitle = questionCategory?.name;
   const questionCategoryId = questionInfo.categorie?.id;
 
-  const questionByKey =
-    isQuestion && getCategoryByLangKey(questionInfo.questionContents, lang);
+  const questionByKey = isQuestion && getCategoryByLangKey(questionInfo.questionContents, lang);
   const questionTitle = questionByKey?.title;
   const questionDescription = questionByKey?.stepDescription;
 
@@ -35,18 +33,14 @@ const JHeader = ({
           separator={<img src={ArrowRight} />}
           items={[
             {
-              title: <Link to={'/'}>{i18n.t('home')}</Link>
+              title: <Link to={'/'}>{i18n.t('home')}</Link>,
             },
             {
-              title: (
-                <Link to={`/category/${questionCategoryId}`}>
-                  {questionCategoryTitle}
-                </Link>
-              )
+              title: <Link to={`/category/${questionCategoryId}`}>{questionCategoryTitle}</Link>,
             },
             {
-              title: questionTitle
-            }
+              title: questionTitle,
+            },
           ]}
         />
       )}
@@ -56,11 +50,11 @@ const JHeader = ({
           separator={<img src={ArrowRight} />}
           items={[
             {
-              title: <Link to={'/'}>{i18n.t('home')}</Link>
+              title: <Link to={'/'}>{i18n.t('home')}</Link>,
             },
             {
-              title: pageTitle
-            }
+              title: pageTitle,
+            },
           ]}
         />
       )}
@@ -76,6 +70,6 @@ const JHeader = ({
 
 JHeader.propTypes = {
   isQuestion: PropTypes.bool,
-  questionInfo: PropTypes.object
+  questionInfo: PropTypes.object,
 };
 export default JHeader;

@@ -16,13 +16,12 @@ const FeedbackAnalytics = () => {
     datasets: [
       {
         data: UserData.map((data) => data.reviewsNum),
-        backgroundColor: backgroundColor
-      }
-    ]
+        backgroundColor: backgroundColor,
+      },
+    ],
   });
 
-  const calculatePercentage = (value, total) =>
-    ((value / total) * 100).toFixed(2);
+  const calculatePercentage = (value, total) => ((value / total) * 100).toFixed(2);
 
   const chartOptions = {
     plugins: {
@@ -32,17 +31,17 @@ const FeedbackAnalytics = () => {
           label: (context) => {
             const dataset = context.dataset;
             const total = dataset.data.reduce(
-              (previousValue, currentValue) => previousValue + currentValue
+              (previousValue, currentValue) => previousValue + currentValue,
             );
             const currentValue = dataset.data[context.dataIndex];
             const percentage = calculatePercentage(currentValue, total);
             return ` ${currentValue} (${percentage}%)`;
-          }
-        }
-      }
+          },
+        },
+      },
     },
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
   };
 
   return (
@@ -58,12 +57,9 @@ const FeedbackAnalytics = () => {
           split={false}
           dataSource={dataList}
           renderItem={(item, index) => (
-            <List.Item
-              style={{ display: 'flex', alignItems: 'center', gap: '13px' }}>
+            <List.Item style={{ display: 'flex', alignItems: 'center', gap: '13px' }}>
               <Typography.Text mark>
-                <div
-                  className={styles.circle}
-                  style={{ background: backgroundColor[index] }}></div>
+                <div className={styles.circle} style={{ background: backgroundColor[index] }}></div>
               </Typography.Text>
               {item}
             </List.Item>

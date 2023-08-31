@@ -28,39 +28,30 @@ const NewAnswer = () => {
           <Col span={9}>
             <Form.Item
               name="question"
-              rules={[
-                { required: true, message: i18n.t('rule.questionRequired') }
-              ]}
-              className={styles.labelText}>
-              <Input
-                placeholder={i18n.t('newAnswer.whatQuestion')}
-                maxLength={150}
-              />
+              rules={[{ required: true, message: i18n.t('rule.questionRequired') }]}
+              className={styles.labelText}
+            >
+              <Input placeholder={i18n.t('newAnswer.whatQuestion')} maxLength={150} />
             </Form.Item>
           </Col>
 
           <Col span={9}>
             <Form.Item
               name="email"
-              rules={[
-                { required: true, message: i18n.t('rule.emailRequired') }
-              ]}
-              className={styles.labelText}>
-              <Input
-                placeholder={i18n.t('newAnswer.inputEmail')}
-                maxLength={150}
-              />
+              rules={[{ required: true, message: i18n.t('rule.emailRequired') }]}
+              className={styles.labelText}
+            >
+              <Input placeholder={i18n.t('newAnswer.inputEmail')} maxLength={150} />
             </Form.Item>
           </Col>
 
           <Col span={18}>
             <Form.Item
               name="answer"
-              rules={[
-                { required: true, message: i18n.t('rule.answerRequired') }
-              ]}
+              rules={[{ required: true, message: i18n.t('rule.answerRequired') }]}
               className={styles.labelText}
-              label={i18n.t('newAnswer.answer')}>
+              label={i18n.t('newAnswer.answer')}
+            >
               <Input.TextArea
                 rows={6}
                 placeholder={i18n.t('newAnswer.startTyping')}

@@ -28,10 +28,7 @@ const CardComponent = (props) => {
           <p key={index} style={{ marginBottom: '11px' }}>
             <Link to={`/question/admin/${q.id}`}>
               <Text ellipsis={{ rows: 2, expandable: false }}>
-                <TypographyHead
-                  type={TypoGraphyType.LEVEL_2}
-                  content={q.questionContents.title}
-                />
+                <TypographyHead type={TypoGraphyType.LEVEL_2} content={q.questionContents.title} />
               </Text>
             </Link>
           </p>

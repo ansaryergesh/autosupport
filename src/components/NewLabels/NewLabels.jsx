@@ -9,10 +9,7 @@ const NewLabels = ({ num }) => {
   const [inputValues, setInputValues] = useState([]);
 
   const handleAddInput = () => {
-    setInputValues((prevState) => [
-      ...prevState,
-      { value: '', edit: false, id: '1' }
-    ]);
+    setInputValues((prevState) => [...prevState, { value: '', edit: false, id: '1' }]);
   };
 
   const handleInputChange = (index, value) => {

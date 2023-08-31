@@ -15,9 +15,7 @@ const Main = (props) => {
   const history = useHistory();
 
   const checkIfTokenIsValid = () => {
-    const currentToken = localStorage.getItem(
-      LocalStorageKeys.FREEDOM_ACCESS_TOKEN
-    );
+    const currentToken = localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
 
     return !!currentToken;
   };
@@ -32,27 +30,24 @@ const Main = (props) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={'main-layout'}>
-        {checkIfTokenIsValid() &&
-            <Layout style={{ minHeight: '100vh' }}>
-              <div className="sidebar-nav">
-                <SidebarNav />
-              </div>
-              <Layout>
-                <Header />
-                <Layout.Content className="layout-content">
-                  {children}
-                </Layout.Content>
-              </Layout>
+        {checkIfTokenIsValid() && (
+          <Layout style={{ minHeight: '100vh' }}>
+            <div className="sidebar-nav">
+              <SidebarNav />
+            </div>
+            <Layout>
+              <Header />
+              <Layout.Content className="layout-content">{children}</Layout.Content>
             </Layout>
-        }
-
+          </Layout>
+        )}
       </div>
     </DndProvider>
   );
 };
 
 Main.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Main;

@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button.jsx';
 import {
   editCategoryQuestion,
   getQuestionById,
-  getQuestions
+  getQuestions,
 } from '../../service/Question/index.js';
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
@@ -27,7 +27,7 @@ import { initialQuestionAnswerContent } from './constants.js';
 import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
-  editAnswerQuestion
+  editAnswerQuestion,
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 
@@ -37,17 +37,11 @@ const QuestionAnswerContent = () => {
   const [selectedResources, setSelectedResources] = useState([]);
   const [activeResource, setActiveResource] = useState(null);
   const [questionInfo, setQuestionInfo] = useState({ initialQuestionDto });
-  const [instructionType, setInstructionType] = useState(
-    INSTRUCTION_TYPE.VISUAL
-  );
-  const [selectedKeyWords, setSelectedKeyWords] = useState(
-    questionInfo?.keyWords || []
-  );
+  const [instructionType, setInstructionType] = useState(INSTRUCTION_TYPE.VISUAL);
+  const [selectedKeyWords, setSelectedKeyWords] = useState(questionInfo?.keyWords || []);
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
-  const [answerFormData, setAnswerFormData] = useState(
-    initialQuestionAnswerContent
-  );
+  const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
   useEffect(() => {
@@ -56,7 +50,7 @@ const QuestionAnswerContent = () => {
       setSelectedResources(
         res.data.map((res) => {
           return { ...res, edit: false };
-        })
+        }),
       );
       setActiveResource(res.data[0]);
     });
@@ -84,7 +78,7 @@ const QuestionAnswerContent = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('questionAnswer.previewMessage'),
-      placement: 'top'
+      placement: 'top',
     });
   };
 
@@ -98,7 +92,7 @@ const QuestionAnswerContent = () => {
 
     const finalQuestionInfo = {
       ...questionInfo,
-    }
+    };
     editCategoryQuestion(finalQuestionInfo).then((res) => {
       console.log(res);
       if (answerFormData.id) {
@@ -119,27 +113,27 @@ const QuestionAnswerContent = () => {
   };
   return (
     <div>
-      <JHeader questionInfo={questionInfo} lang={selectedLanguage}/>
+      <JHeader questionInfo={questionInfo} lang={selectedLanguage} />
       <div
         style={{
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px'
-        }}>
+          gap: '8px',
+        }}
+      >
         {selectedResources.map((resource, index) => (
           <Button
             onClick={() => {
-              if(resource.id !== activeResource.id) {
-                setAnswerFormData(initialQuestionAnswerContent)
-                setQuestionInfo(initialQuestionDto)
-                setActiveResource(resource)
+              if (resource.id !== activeResource.id) {
+                setAnswerFormData(initialQuestionAnswerContent);
+                setQuestionInfo(initialQuestionDto);
+                setActiveResource(resource);
               }
             }}
-            type={`${
-              activeResource.id === resource.id ? 'default-active' : 'default'
-            }`}
-            key={index}>
+            type={`${activeResource.id === resource.id ? 'default-active' : 'default'}`}
+            key={index}
+          >
             {resource.name}
           </Button>
         ))}
@@ -150,15 +144,15 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px'
-        }}>
+          gap: '8px',
+        }}
+      >
         {Object.values(LANG_KEY).map((item) => (
           <Button
             key={item}
             onClick={() => setSelectedLanguage(item)}
-            type={`${
-              selectedLanguage === item ? 'default-active' : 'default'
-            }`}>
+            type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
+          >
             {item}
           </Button>
         ))}
@@ -167,10 +161,7 @@ const QuestionAnswerContent = () => {
       <Row gutter={[24, 24]}>
         <Col span={15}>
           <div className={styles.card}>
-            <TypographyHead
-              type={TypoGraphyType.SUB_HEAD}
-              content={i18n.t('description')}
-            />
+            <TypographyHead type={TypoGraphyType.SUB_HEAD} content={i18n.t('description')} />
             <SunEditor
               answerFormData={answerFormData}
               setAnswerFormData={setAnswerFormData}
@@ -193,7 +184,8 @@ const QuestionAnswerContent = () => {
                 <Button
                   key={item}
                   onClick={() => setInstructionType(item)}
-                  type={item === instructionType ? 'default-active' : 'active'}>
+                  type={item === instructionType ? 'default-active' : 'active'}
+                >
                   {i18n.t(item)}
                 </Button>
               ))}

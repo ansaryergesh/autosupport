@@ -23,10 +23,7 @@ const SignIn = () => {
       .then((res) => {
         if (res) {
           if (res.data?.id_token) {
-            localStorage.setItem(
-              LocalStorageKeys.FREEDOM_ACCESS_TOKEN,
-              res.data?.id_token
-            );
+            localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
           }
           history.push('/');
 
@@ -72,28 +69,23 @@ const SignIn = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off">
+          autoComplete="off"
+        >
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
                 name="username"
-                rules={[
-                  { required: true, message: 'Please input your username!' }
-                ]}>
-                <Input
-                  size={'large'}
-                  placeholder="Почта"
-                  className={styles.inputItem}
-                />
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
+                <Input size={'large'} placeholder="Почта" className={styles.inputItem} />
               </Form.Item>
             </Col>
 
             <Col span={24}>
               <Form.Item
                 name="password"
-                rules={[
-                  { required: true, message: 'Please input your password!' }
-                ]}>
+                rules={[{ required: true, message: 'Please input your password!' }]}
+              >
                 <Input
                   type="password"
                   size={'large'}
@@ -112,7 +104,8 @@ const SignIn = () => {
                   className={styles.inputButton}
                   loading={loading}
                   iconButton={isHovered ? <IconSendHover /> : <IconSend />}
-                  htmlType="submit">
+                  htmlType="submit"
+                >
                   <span>Войти</span>
                 </Button>
               </Form.Item>

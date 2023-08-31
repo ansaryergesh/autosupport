@@ -8,21 +8,21 @@ const dataSimilar = [
   {
     id: 1,
     questionContents: {
-      title: 'Типы приказов'
-    }
+      title: 'Типы приказов',
+    },
   },
   {
     id: 2,
     questionContents: {
-      title: 'Сессия безопасности'
-    }
+      title: 'Сессия безопасности',
+    },
   },
   {
     id: 3,
     questionContents: {
-      title: 'Типы безопасности'
-    }
-  }
+      title: 'Типы безопасности',
+    },
+  },
 ];
 
 const SimilarQuestions = () => {

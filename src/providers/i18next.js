@@ -9,14 +9,14 @@ import ru from '../locales/ru/translation.json';
 export const locales = ['ru', 'kz', 'en'];
 
 export const capitalizedLocales = locales.map(
-  (locale) => locale[0].toUpperCase() + locale.slice(1)
+  (locale) => locale[0].toUpperCase() + locale.slice(1),
 );
 export const upperCaseLocales = locales.map((locale) => locale.toUpperCase());
 
 export const resources = {
   ru: { translation: ru },
   kz: { translation: kz },
-  en: { translation: en }
+  en: { translation: en },
 };
 
 i18next
@@ -39,15 +39,15 @@ i18next
       // saveMissing: true,
       partialBundledLanguages: true,
       interpolation: {
-        escapeValue: false
+        escapeValue: false,
       },
       react: {
-        useSuspense: false
-      }
+        useSuspense: false,
+      },
     },
     (err) => {
       if (err) return console.error('Error i18next: ', err);
-    }
+    },
   )
   .catch(console.error);
 

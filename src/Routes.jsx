@@ -22,25 +22,14 @@ import DetailedQuestionNewAdmin from './pages/DetailedQuestionAdmin/DetailedQues
 import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
 import QuestionAnswerUser from './pages/QuestionAnswerUser/QuestionAnswerUser.jsx';
 
-function RouteWithLayout({
-  layout,
-  component,
-  isAuthLoading = false,
-  ...rest
-}) {
+function RouteWithLayout({ layout, component, isAuthLoading = false, ...rest }) {
   if (isAuthLoading) {
     return <div>Loading</div>;
   }
   return (
     <Route
       {...rest}
-      render={(props) =>
-        React.createElement(
-          layout,
-          props,
-          React.createElement(component, props)
-        )
-      }
+      render={(props) => React.createElement(layout, props, React.createElement(component, props))}
     />
   );
 }
@@ -54,18 +43,8 @@ const Routes = () => {
         <Route exact component={PasswordRecovery} path={'/password-recovery'} />
         <Route exact component={NewPassword} path={'/new-password'} />
         <Route exact component={CodeVerify} path={'/code-verify'} />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Feedback}
-          path="/feedback"
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={NewRequest}
-          path={'/new-request'}
-        />
+        <RouteWithLayout exact layout={Main} component={Feedback} path="/feedback" />
+        <RouteWithLayout exact layout={Main} component={NewRequest} path={'/new-request'} />
         <RouteWithLayout
           exact
           layout={Main}
@@ -96,61 +75,16 @@ const Routes = () => {
           component={QuestionAnswerUser}
           path={'/question/preview/:questionId/:resourceId'}
         />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={NewAnswer}
-          path={'/new-answer'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Employees}
-          path={'/employees'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={AddNewAnswer}
-          path={'/add-new-answer'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={NewAnswer}
-          path={'/new-answer'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Employees}
-          path={'/employees'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Keywords}
-          path={'/keywords'}
-        />
+        <RouteWithLayout exact layout={Main} component={NewAnswer} path={'/new-answer'} />
+        <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
+        <RouteWithLayout exact layout={Main} component={AddNewAnswer} path={'/add-new-answer'} />
+        <RouteWithLayout exact layout={Main} component={NewAnswer} path={'/new-answer'} />
+        <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
+        <RouteWithLayout exact layout={Main} component={Keywords} path={'/keywords'} />
         <RouteWithLayout exact layout={Main} component={Tags} path={'/tags'} />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Organizations}
-          path={'/organizations'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Resources}
-          path={'/resources'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Сategory}
-          path={'/category/:id'}
-        />
+        <RouteWithLayout exact layout={Main} component={Organizations} path={'/organizations'} />
+        <RouteWithLayout exact layout={Main} component={Resources} path={'/resources'} />
+        <RouteWithLayout exact layout={Main} component={Сategory} path={'/category/:id'} />
       </Switch>
     </React.Fragment>
   );
@@ -158,6 +92,6 @@ const Routes = () => {
 RouteWithLayout.propTypes = {
   layout: PropTypes.any,
   component: PropTypes.any,
-  isAuthLoading: PropTypes.any
+  isAuthLoading: PropTypes.any,
 };
 export default Routes;

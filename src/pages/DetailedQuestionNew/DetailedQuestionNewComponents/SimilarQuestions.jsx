@@ -4,7 +4,7 @@ import styles from './index.module.less';
 
 const data = {
   title: 'Похожие запросы',
-  questions: ['Типы приказов', 'Сессия безопасности', 'Типы безопасности']
+  questions: ['Типы приказов', 'Сессия безопасности', 'Типы безопасности'],
 };
 
 const SimilarQuestions = () => {
