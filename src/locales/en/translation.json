@@ -31,10 +31,12 @@
   },
   "columns": {
     "name": "Name",
-    "fullName": "Full name",
+    "firstName": "First name",
+    "lastName": "Last name",
     "email": "Email",
     "role": "Role",
-    "code": "Code"
+    "organization": "Organization",
+    "password": "Password"
   },
   "actions": {
     "addEmployee": "Add new employee",

@@ -32,10 +32,12 @@
   },
   "columns": {
     "name": "Наименование",
-    "fullName": "Полное имя",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
     "email": "Почта",
     "role": "Роль",
-    "code": "Код"
+    "code": "Код",
+    "password": "Пароль"
   },
   "actions": {
     "addEmployee": "Добавить нового сотрудника",

@@ -1,77 +1,95 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Form, Select, notification } from 'antd';
 import Button from '../Button/Button.jsx';
 import Input from '../Input/Input.jsx';
 import { i18n } from 'utils/i18next.js';
-import { postEmployeeData } from '../../service/Employee/index.js';
+import { getAllOrganizations, getAllRoles, manageEmployee } from '../../service/Employee/index.js';
 
 
-
-const optionsRole = [
-  {
-    value: 'Superadmin',
-    label: 'Superadmin',
+const initialData = {
+  "id": 0,
+  "login": "",
+  "firstName": "",
+  "lastName": "",
+  "email": "",
+  "imageUrl": "",
+  "activated": true,
+  "langKey": "",
+  "createdBy": "",
+  "createdDate": "",
+  "lastModifiedBy": "",
+  "lastModifiedDate": "",
+  "authority": "",
+  "authOrganization": {
+    "name": "",
+    "code": ""
   },
-  {
-    value: 'Admin',
-    label: 'Admin',
-  },
-  {
-    value: 'Manager',
-    label: 'Manager',
-  },
-];
+  "password": ""
+}
 
-const optionsComp = [{ value: 'Freedom', label: 'Freedom' }];
 
 const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
+  const [roles, setRoles] = useState()
+  const [organizations, setOrganizations] = useState()
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const data = {
-      "login": values.email,
-      "firstName": values.firstName,
-      "lastName": values.lastName,
-      "email": values.email,
-      "authorities": [
-        values.authorities
-      ],
-      "authOrganization": {
-        "name": "string",
-        "code": "string"
-      },
-      "password": "string"
-    }
-    console.log(data);
-    console.log('submited')
-    postEmployeeData(data).then(res => {
+    console.log(values)
+    const transformedValues = {
+
+      ...values,
+      authOrganization: JSON.parse(values.authOrganization)
+
+    };
+
+    manageEmployee({ ...transformedValues }).then(res => {
       console.log(res);
-      notification.info({ message: 'Employee created' })
+      notification.info({ message: 'Employee added' })
     })
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
+
+  useEffect(() => {
+    getAllRoles().then((res) => {
+      const optionRole = res.data.map(option => ({
+        label: option,
+        value: option
+      })
+      )
+      setRoles(optionRole)
+    })
+
+    getAllOrganizations().then((res) => {
+      setOrganizations(res.data);
+    })
+  }, []);
+
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    // onFinish();
+    // setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+
   return (
     <>
       <Button
         style={{ marginBottom: `${margin}px` }}
         type={btnType ? `${btnType}` : 'primary'}
-        onClick={showModal}
-      >
+        onClick={showModal}>
         {btnName}
       </Button>
 
@@ -81,17 +99,20 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
         onOk={handleOk}
         cancelText={i18n.t('actions.cancel')}
         onCancel={handleCancel}
-        okButtonProps={{ className: 'button-modal' }}
+        okButtonProps={{ className: 'button-modal', form: 'form', htmlType: 'submit', }}
         cancelButtonProps={{ className: 'button-default' }}>
         <Form
+          form={form}
+          id='form'
           onFinish={onFinish}
+          initialValues={initialData}
           onFinishFailed={onFinishFailed}
           layout="vertical">
           <Form.Item
             name='firstName'
             required>
             <Input
-              placeholder={i18n.t('columns.fullName')}
+              placeholder={i18n.t('columns.firstName')}
             />
           </Form.Item>
 
@@ -111,6 +132,14 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
             />
           </Form.Item>
           <Form.Item
+            name='login'
+            required>
+            <Input
+              placeholder={i18n.t('columns.email')}
+            />
+          </Form.Item>
+
+          <Form.Item
             name='password'
             required>
             <Input
@@ -119,22 +148,24 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
           </Form.Item>
 
           <Form.Item
-            name='authorities'
+            name='authority'
             required>
             <Select
-              options={optionsRole}
+              options={roles}
               placeholder={i18n.t('columns.role')}
             />
           </Form.Item>
 
-          <Form.Item
-            name='authOrganization'
-            required>
-            <Select
-              options={optionsComp}
-              placeholder={i18n.t('organization')}
-            />
+          <Form.Item name="authOrganization" required>
+            <Select placeholder={i18n.t('columns.organization')} >
+              {organizations && organizations.map(item => (
+                <Select.Option key={item.code} value={JSON.stringify(item)}>
+                  {item.name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
+
         </Form>
       </Modal>
     </>

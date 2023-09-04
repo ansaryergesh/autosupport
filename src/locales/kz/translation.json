@@ -32,10 +32,12 @@
   },
   "columns": {
     "name": "Аталуы",
-    "fullName": "Толық аты",
+    "firstName": "Аты",
+    "lastName": "Тегі",
     "email": "Пошта",
     "role": "Рөль",
-    "code": "Код"
+    "code": "Код",
+    "password": "Құпия сөз"
   },
   "actions": {
     "addEmployee": "Жаңа жұмысшыны қосу",
