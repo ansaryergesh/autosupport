@@ -3,6 +3,7 @@ import { AutoComplete, Input, notification } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
+import styles from './index.module.less';
 
 const SearchReference = ({
   searchAction,
@@ -15,11 +16,15 @@ const SearchReference = ({
 }) => {
   const [options, setOptions] = useState([]);
   const [langSelectedItem, setLangSelectedItem] = useState(
-    questionInfo.questionContents?.find((item) => item.langKey === selectedLanguage)[keyItem] || [],
+    questionInfo.questionContents?.find(
+      (item) => item.langKey === selectedLanguage
+    )[keyItem] || []
   );
   const getOptionsDefault = () => {
     searchAction().then((response) => {
-      setOptions(response?.data.map((item) => ({ value: item.text, id: item.id })));
+      setOptions(
+        response?.data.map((item) => ({ value: item.text, id: item.id }))
+      );
     });
   };
 
@@ -30,8 +35,9 @@ const SearchReference = ({
   useEffect(() => {
     console.log(questionInfo);
     setLangSelectedItem(
-      questionInfo.questionContents?.find((item) => item.langKey === selectedLanguage)[keyItem] ||
-        [],
+      questionInfo.questionContents?.find(
+        (item) => item.langKey === selectedLanguage
+      )[keyItem] || []
     );
   }, [questionInfo]);
 
@@ -151,16 +157,12 @@ const SearchReference = ({
                   display: 'flex',
                   padding: '18px',
                   justifyContent: 'space-between',
-                  borderBottom: '1px solid var(--green-color)',
-                  alignItems: 'center',
-                }}
-              >
+                  borderBottom: '1px solid #d9d9d9',
+                  alignItems: 'center'
+                }}>
                 <span key={item.id}>{item.text}</span>
                 <CloseOutlined
-                  style={{
-                    color: 'red',
-                    cursor: 'pointer',
-                  }}
+                  className={styles.xBtn}
                   onClick={() => handleRemoveSelected(item.id)}
                 />
               </div>

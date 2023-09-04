@@ -2,16 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
 import ResourcesModal from 'components/ResourcesModal/ResourcesModal.jsx';
+import EditResourceModal from '../../components/ResourcesModal/EditResourceModal.jsx';
 import { getResources, deleteResource } from '../../service/Resources/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
 import JHeader from '../../components/JHeader/JHeader.jsx';
+import { getLocale } from '../../utils/i18next.js';
+import { getResourceById } from '../../service/Resources';
 
 const Resources = () => {
   const [data, setData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [record, setRecord] = useState(initialValues);
+  const [resourceInfo, setResourceInfo] = useState({});
+
+  const handleEditResource = (resourceId) => {
+    getResourceById(resourceId).then((res) => {
+      console.log(res);
+      setResourceInfo({});
+      setResourceInfo(res.data);
+      isEditOpen(true);
+    });
+  };
 
   const handleModal = () => {
     if (isModalOpen) {
@@ -20,11 +34,19 @@ const Resources = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleEdit = () => {
+    if (isEditOpen) {
+      setRecord(initialValues);
+    }
+    setIsEditOpen(!isEditOpen);
+  };
+
   const getResourcesList = () => {
     getResources().then((res) => {
       setData(res.data);
     });
   };
+
   useEffect(() => {
     getResourcesList();
   }, []);
@@ -77,7 +99,10 @@ const Resources = () => {
     },
     {
       title: i18n.t('columns.name'),
-      dataIndex: 'name',
+      dataIndex: 'resourceContents',
+      render: (row) => {
+        return row.find((item) => item?.langKey === getLocale())?.name;
+      }
     },
 
     {
@@ -88,9 +113,9 @@ const Resources = () => {
           <Button
             onClick={() => {
               setRecord(record);
-              handleModal();
-            }}
-          >
+              handleEdit();
+              handleEditResource(record.id);
+            }}>
             {i18n.t('actions.edit')}
           </Button>
           <Popconfirm
@@ -152,9 +177,18 @@ const Resources = () => {
 
       <ResourcesModal
         record={record}
+        setRecord={setRecord}
+        data={data}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
         getList={getResourcesList}
+      />
+
+      <EditResourceModal
+        handleEdit={handleEdit}
+        isEditOpen={isEditOpen}
+        getList={getResourcesList}
+        resourceInfo={resourceInfo}
       />
     </div>
   );

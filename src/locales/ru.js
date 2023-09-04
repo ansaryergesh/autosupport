@@ -20,6 +20,9 @@ export default {
   home: 'Главная',
   description: 'Описание',
   similarRequests: 'Похожие запросы',
+  noContent:
+    'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
+  counter: 'Счетчик кликов',
 
   commons: {
     signIn: 'Вход',

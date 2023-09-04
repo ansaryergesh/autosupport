@@ -20,7 +20,8 @@ export default {
   home: 'Басты бет',
   description: 'Сипаттама',
   similarRequests: 'Ұқсас сұрақтар',
-
+  noContent: 'Контент жоқ, ресурсты қосу таңбасы арқылы қосыңыз',
+  counter: 'Кликтер саны',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',

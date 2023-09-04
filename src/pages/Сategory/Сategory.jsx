@@ -28,8 +28,9 @@ function Сategory() {
 
   // eslint-disable-next-line no-unused-vars
   const selectedLanguageTitle = categoryInfo.categorieContents?.find(
-    (item) => (item.langKey = getLocale()),
+    (item) => (item.langKey = getLocale())
   );
+
   const getAllQuestion = () => {
     const params = {
       langKey: getLocale().toUpperCase(),

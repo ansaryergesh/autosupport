@@ -14,6 +14,7 @@ const ResourcesModal = ({
   setRecord = () => {}
 }) => {
   const [loading, setLoading] = useState(false);
+  const editPage = record.id;
   const [form] = Form.useForm();
   console.log(record);
 
@@ -30,7 +31,9 @@ const ResourcesModal = ({
         getList();
         if (res.data) {
           notification.success({
-            message: i18n.t('actions.added')
+            message: editPage
+              ? i18n.t('actions.edited')
+              : i18n.t('actions.added')
           });
           console.log(res.data);
         }
@@ -43,7 +46,11 @@ const ResourcesModal = ({
   return (
     <>
       <Modal
-        title={i18n.t('actions.addResource')}
+        title={
+          editPage
+            ? i18n.t('actions.editResource')
+            : i18n.t('actions.addResource')
+        }
         confirmLoading={loading}
         open={isModalOpen}
         cancelText={i18n.t('actions.cancel')}
@@ -54,10 +61,9 @@ const ResourcesModal = ({
         okButtonProps={{
           className: 'button-modal',
           htmlType: 'submit',
-          form: 'form',
+          form: 'form'
         }}
-        cancelButtonProps={{ className: 'button-default' }}
-      >
+        cancelButtonProps={{ className: 'button-default' }}>
         <Form
           form={form}
           id="form"
@@ -66,13 +72,19 @@ const ResourcesModal = ({
             handleSubmit(values);
           }}
           initialValues={record}>
+          {editPage && (
+            <Form.Item name="id" style={{ display: 'none' }}>
+              <Input />
+            </Form.Item>
+          )}
+
           <Form.Item
             name="code"
             rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('columns.code')} />
           </Form.Item>
 
-          {record.resourceContents?.map((resLang, index) => (
+          {record.resourceContents.map((resLang, index) => (
             <>
               <Form.Item
                 key={index}
