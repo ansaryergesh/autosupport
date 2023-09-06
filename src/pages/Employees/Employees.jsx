@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm } from 'antd';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
-import { getEmployeeData } from '../../service/Employee';
+import { deleteEmployee, getEmployeeData } from '../../service/Employee';
 
 const Employees = () => {
   const [data, setData] = useState([]); // Initialize with an empty array
@@ -15,9 +15,12 @@ const Employees = () => {
   }, []);
 
   const handleDelete = (key) => {
-    const newData = data.filter(item => item.id !== key); // Assuming 'id' is the unique identifier
-    setData(newData);
+    deleteEmployee(key).then(() => {
+      const newData = data.filter(item => item.id !== key);
+      setData(newData);
+    });
   };
+
 
 
   const columns = [
@@ -37,11 +40,14 @@ const Employees = () => {
         key: 'authorities'
     },
     {
-      title: i18n.t('columns.organization'),
-        dataIndex: `authOrganization.name`, // Access nested property
-        key: 'authOrganization',
+      title: 'Компания',
+      dataIndex: `authOrganization`, // Access nested property
+      key: 'authOrganization',
+      ///Проверить почему не работает
+      render: (authOrganization) => (
+        <span>{authOrganization.name}</span>
+      )
     },
-
     {
       title: 'Действия',
       key: 'action',
@@ -52,13 +58,14 @@ const Employees = () => {
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.id)}> {/* Assuming 'id' is the unique identifier */}
+            onConfirm={() => handleDelete(record.id)}>
             <Button>Удалить</Button>
           </Popconfirm>
         </Space>
       ),
     },
   ];
+
 
   return (
     <div style={{ margin: '68px auto 0 auto' }}>
