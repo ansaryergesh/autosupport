@@ -132,14 +132,14 @@ const QuestionAnswerUser = () => {
                     </>
                   )}
 
-                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL  && (
+                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL && (
                     <div className={styles.mediaBox}>
                       <ImageSlider slides={images} sliderData={images} />
                     </div>
                   )}
                 </div>
               </>
-            )}
+            }
           </div>
         </Col>
 
