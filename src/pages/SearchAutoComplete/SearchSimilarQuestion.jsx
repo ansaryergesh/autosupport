@@ -3,8 +3,14 @@ import { AutoComplete, Input, notification } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
+import styles from './index.module.less';
 
-const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title }) => {
+const SearchReference = ({
+  searchAction,
+  selectedItems,
+  setSelectedItems,
+  title
+}) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
@@ -13,8 +19,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
         response?.data.map((item) => ({
           value: item.questionContents?.title,
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
@@ -34,8 +40,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
         response?.data.map((item) => ({
           value: item.questionContents?.title,
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
@@ -91,16 +97,12 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
                   display: 'flex',
                   padding: '18px',
                   justifyContent: 'space-between',
-                  borderBottom: '1px solid var(--green-color)',
-                  alignItems: 'center',
-                }}
-              >
+                  borderBottom: '1px solid #d9d9d9',
+                  alignItems: 'center'
+                }}>
                 <span key={item.id}>{item.questionContents?.title}</span>
                 <CloseOutlined
-                  style={{
-                    color: 'red',
-                    cursor: 'pointer',
-                  }}
+                  className={styles.xBtn}
                   onClick={() => handleRemoveSelected(item.id)}
                 />
               </div>

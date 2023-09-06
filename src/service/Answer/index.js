@@ -12,6 +12,10 @@ export const editAnswerQuestion = (data, id) => {
   return axiosInstanceWithHeader.put(`/api/admin/answers/${id}`, data);
 };
 
+export const deleteAnswerById = (id) => {
+  return axiosInstanceWithHeader.delete(`/api/admin/answers/${id}`);
+};
+
 export const getAnswerById = (qId, rId) => {
   return axiosInstanceWithHeader.get(`/api/admin/answers/${qId}/${rId}`);
 };

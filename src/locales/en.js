@@ -20,7 +20,8 @@ export default {
   home: 'Home',
   description: 'Description',
   similarRequests: 'Similar requests',
-
+  noContent: 'No content yet, please add resource by clicking plus button',
+  counter: 'Counter',
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',

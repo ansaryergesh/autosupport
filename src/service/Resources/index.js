@@ -8,6 +8,10 @@ export const manageResources = (data) => {
   }
 };
 
+export const getResourceById = (resourceId) => {
+  return axiosInstanceWithHeader.get(`/api/admin/resources/${resourceId}`);
+};
+
 export const deleteResource = (id) => {
   return axiosInstanceWithHeader.delete(`/api/admin/resources/${id}`);
 };
