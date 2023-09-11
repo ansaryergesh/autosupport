@@ -5,6 +5,7 @@ import keywords from 'images/keywords.svg';
 import tags from 'images/tags.svg';
 import organizations from 'images/organizations.svg';
 import resources from 'images/resources.svg';
+import search from 'images/search.svg';
 
 export const adminNavItems = [
   {
@@ -21,6 +22,11 @@ export const adminNavItems = [
     name: 'categories',
     path: '/',
     icon: categories,
+  },
+  {
+    name: 'searchHistory',
+    path: '/search-history',
+    icon: search,
   },
   {
     name: 'keywords',

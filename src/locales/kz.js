@@ -22,9 +22,14 @@ export default {
   similarRequests: 'Ұқсас сұрақтар',
   noContent: 'Контент жоқ, ресурсты қосу таңбасы арқылы қосыңыз',
   counter: 'Кликтер саны',
+  searchHistory: 'Іздеу тарихы',
+  choice: 'Қайда беру керектігін таңдаңыз',
+  noQuestion: 'Қазіргі уақытта санатта байланысты сұрақтар жоқ',
+
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
+    signOutMessage: 'Сіз аккаунттан шықтыңыз!',
     comeBack: 'Қайта келуінмен!',
     forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
     submit: 'Растау',
@@ -38,6 +43,7 @@ export default {
     email: 'Пошта',
     role: 'Рөль',
     code: 'Код',
+    numberOfRequests: 'Сұраулар саны',
     password: 'Құпия сөз',
   },
   actions: {
@@ -59,6 +65,7 @@ export default {
     addResource: 'Ресурсты қосу',
     editOrganization: 'Ұйымды өзгерту',
     addOrganization: 'Ұйымды қосу',
+    editText: 'Текстті өзгерту',
     addSimilar: 'Ұқсас сұрақты қосу',
     save: 'Сақтау',
     saved: 'Сақталды',

@@ -22,6 +22,9 @@
   "similarRequests": "Ұқсас сұрақтар",
   "noContent": "Контент жоқ, ресурсты қосу таңбасы арқылы қосыңыз",
   "counter": "Кликтер саны",
+  "searchHistory": "Іздеу тарихы",
+  "choice": "Қайда беру керектігін таңдаңыз",
+  "noQuestion": "Қазіргі уақытта санатта байланысты сұрақтар жоқ",
   "commons": {
     "signIn": "Кіру",
     "signOut": "Шығу",
@@ -39,7 +42,8 @@
     "email": "Пошта",
     "role": "Рөль",
     "code": "Код",
-    "password": "Құпия сөз"
+    "password": "Құпия сөз",
+    "numberOfRequests": "Сұраулар саны"
   },
   "actions": {
     "addEmployee": "Жаңа жұмысшыны қосу",
@@ -60,6 +64,7 @@
     "addResource": "Ресурсты қосу",
     "editOrganization": "Ұйымды өзгерту",
     "addOrganization": "Ұйымды қосу",
+    "editText": "Текстті өзгерту",
     "addSimilar": "Ұқсас сұрақты қосу",
     "save": "Сақтау",
     "saved": "Сақталды",
