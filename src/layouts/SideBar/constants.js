@@ -5,6 +5,8 @@ import keywords from 'images/keywords.svg';
 import tags from 'images/tags.svg';
 import organizations from 'images/organizations.svg';
 import resources from 'images/resources.svg';
+import oldTickets from 'images/oldTickets.svg';
+import newTickets from 'images/newTickets.svg';
 import search from 'images/search.svg';
 
 export const adminNavItems = [
@@ -47,6 +49,16 @@ export const adminNavItems = [
     name: 'organizations',
     path: '/organizations',
     icon: organizations,
+  },
+  {
+    name: 'newTickets',
+    path: '/new-tickets',
+    icon: newTickets,
+  },
+  {
+    name: 'oldTickets',
+    path: '/old-tickets',
+    icon: oldTickets,
   },
 ];
 

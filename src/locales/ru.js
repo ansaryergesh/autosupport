@@ -25,7 +25,12 @@ export default {
   searchHistory: 'История поиска',
   choice: 'Выберите куда присвоить текст',
   noQuestion: 'На данный момент у категории отсутствуют связанные вопросы',
-
+  newTickets: 'Новые тикеты',
+  oldTickets: 'Обработанные тикеты',
+  processed: 'Обработан',
+  processedBy: 'Обработан кем',
+  processedWhen: 'Обработан когда',
+  noData: 'Нет данных',
   commons: {
     signIn: 'Вход',
     signOut: 'Выход',
