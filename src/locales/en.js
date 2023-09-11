@@ -22,9 +22,14 @@ export default {
   similarRequests: 'Similar requests',
   noContent: 'No content yet, please add resource by clicking plus button',
   counter: 'Counter',
+  searchHistory: 'Search history',
+  choice: 'Choose where to assign the text',
+  noQuestion: 'There are currently no related questions for this category',
+
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',
+    signOutMessage: 'You are logged out!',
     comeBack: 'Welcome back!',
     forgetPassword: 'Forgot your password?',
     submit: 'Submit',
@@ -37,8 +42,8 @@ export default {
     lastName: 'Last name',
     email: 'Email',
     role: 'Role',
-    organization: 'Organization',
-    password: 'Password',
+    code: 'Code',
+    numberOfRequests: 'Number of requests',
   },
   actions: {
     addEmployee: 'Add new employee',
@@ -59,6 +64,7 @@ export default {
     addResource: 'Add resource',
     editOrganization: 'Edit organization',
     addOrganization: 'Add organization',
+    editText: 'Edit text',
     addSimilar: 'Add similar request',
     save: 'Save',
     saved: 'Saved',

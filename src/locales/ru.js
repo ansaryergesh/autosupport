@@ -22,6 +22,9 @@ export default {
   similarRequests: 'Похожие запросы',
   noContent: 'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
   counter: 'Счетчик кликов',
+  searchHistory: 'История поиска',
+  choice: 'Выберите куда присвоить текст',
+  noQuestion: 'На данный момент у категории отсутствуют связанные вопросы',
 
   commons: {
     signIn: 'Вход',
@@ -39,6 +42,7 @@ export default {
     email: 'Почта',
     role: 'Роль',
     code: 'Код',
+    numberOfRequests: 'Количество запросов',
     password: 'Пароль',
   },
   actions: {
@@ -60,6 +64,7 @@ export default {
     addResource: 'Добавить ресурс',
     editOrganization: 'Редактировать организацию',
     addOrganization: 'Добавить организацию',
+    editText: 'Редактировать текст',
     addSimilar: 'Добавить похожи запрос',
     save: 'Сохранить',
     saved: 'Сохранено',

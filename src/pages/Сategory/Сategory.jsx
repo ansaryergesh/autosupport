@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Result, Row } from 'antd';
+import { Col, Empty, Row } from 'antd';
 import CategoryItem from 'components/CategoryItem/CategoryItem';
 import { useParams } from 'react-router';
 import { editCategoryQuestionPatch, getQuestions } from '../../service/Question/index.js';
-import { getLocale } from '../../utils/i18next.js';
+import { getLocale, i18n } from '../../utils/i18next.js';
 import { useHistory } from 'react-router-dom';
 import { getCategoryById } from '../../service/Category/index.js';
 import JHeader from '../../components/JHeader/JHeader.jsx';
@@ -66,10 +66,11 @@ function Сategory() {
             </Col>
           ))}
         {!questions.length && (
-          <Result
-            status="404"
-            title="404"
-            subTitle="Sorry, you are not authorized to access this page."
+          <Empty
+            style={{
+              margin: '0 auto',
+            }}
+            description={i18n.t('noQuestion')}
           />
         )}
       </Row>

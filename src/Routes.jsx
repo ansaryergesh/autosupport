@@ -21,6 +21,7 @@ import Сategory from './pages/Сategory/Сategory.jsx';
 import DetailedQuestionNewAdmin from './pages/DetailedQuestionAdmin/DetailedQuestionAdmin.jsx';
 import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
 import QuestionAnswerUser from './pages/QuestionAnswerUser/QuestionAnswerUser.jsx';
+import SearchHistory from './pages/SearchHistory/SearchHistory.jsx';
 import UserProfile from './pages/UserProfile/UserProfile.jsx';
 
 function RouteWithLayout({ layout, component, isAuthLoading = false, ...rest }) {
@@ -44,6 +45,8 @@ const Routes = () => {
         <Route exact component={PasswordRecovery} path={'/password-recovery'} />
         <Route exact component={NewPassword} path={'/new-password'} />
         <Route exact component={CodeVerify} path={'/code-verify'} />
+
+        <RouteWithLayout exact layout={Main} component={SearchHistory} path="/search-history" />
         <RouteWithLayout exact layout={Main} component={Feedback} path="/feedback" />
         <RouteWithLayout exact layout={Main} component={NewRequest} path={'/new-request'} />
         <RouteWithLayout
@@ -80,6 +83,11 @@ const Routes = () => {
         <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
         <RouteWithLayout exact layout={Main} component={AddNewAnswer} path={'/add-new-answer'} />
         <RouteWithLayout exact layout={Main} component={NewAnswer} path={'/new-answer'} />
+        <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
+        <RouteWithLayout exact layout={Main} component={Keywords} path={'/keywords'} />
+        <RouteWithLayout exact layout={Main} component={NewAnswer} path={'/new-answer'} />
+        <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
+        <RouteWithLayout exact layout={Main} component={AddNewAnswer} path={'/add-new-answer'} />
         <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
         <RouteWithLayout exact layout={Main} component={Keywords} path={'/keywords'} />
         <RouteWithLayout exact layout={Main} component={Tags} path={'/tags'} />
