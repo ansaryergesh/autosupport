@@ -1,65 +1,80 @@
-import React, { useState } from 'react';
-import { Table, Space, Popconfirm } from 'antd';
-import { tempData } from './constants.js';
+import React, { useEffect, useState } from 'react';
+import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
-import { i18n } from 'utils/i18next.js';
-import JHeader from '../../components/JHeader/JHeader.jsx';
+import { deleteEmployee, getEmployeeData } from '../../service/Employee';
 
 const Employees = () => {
-  const [data, setData] = useState(tempData);
+  const [data, setData] = useState([]); // Initialize with an empty array
+
+  useEffect(() => {
+    getEmployeeData().then(res => {
+      setData(res.data.content); // Extract the 'content' array from the response
+    });
+  }, []);
 
   const handleDelete = (key) => {
-    const newData = data.filter((item) => item.key !== key);
-    setData(newData);
+    deleteEmployee(key).then(() => {
+      const newData = data.filter(item => item.id !== key);
+      setData(newData);
+      notification.info({ message: 'Employee deleted' })
+    });
   };
+
+
 
   const columns = [
     {
-      title: i18n.t('columns.fullName'),
-      dataIndex: 'name',
-      key: 'name',
+      title: 'Ф.И.О.',
+      dataIndex: 'firstName', // Use 'firstName' as dataIndex
+      key: 'name'
     },
     {
-      title: i18n.t('columns.email'),
+      title: 'Почтовый адрес',
       dataIndex: 'email',
-      key: 'email',
+      key: 'email'
     },
     {
-      title: i18n.t('columns.role'),
-      dataIndex: 'role',
-      key: 'role',
+      title: 'Роль',
+      dataIndex: 'authority', // This might need further processing if it's an array
+      key: 'authority'
     },
     {
-      title: i18n.t('columns.organization'),
-      dataIndex: 'company',
-      key: 'company',
+      title: 'Компания',
+      dataIndex: `authOrganization`, // Access nested property
+      key: 'authOrganization',
+      ///Проверить почему не работает 
+      render: (authOrganization) => (
+        <span>{authOrganization.name}</span>
+      )
     },
-
     {
-      title: i18n.t('actions.action'),
+      title: 'Действия',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EmployeeModal btnType="default" btnName={i18n.t('actions.edit')} />
+          <EmployeeModal btnType="default" btnName="Редактировать" />
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
             okButtonProps={{ className: 'button-modal' }}
-            title={i18n.t('actions.sure')}
-            cancelText={i18n.t('actions.cancel')}
-            onConfirm={() => handleDelete(record.key)}
-          >
-            <Button>{i18n.t('actions.delete')}</Button>
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.id)}>
+            <Button>Удалить</Button>
           </Popconfirm>
         </Space>
-      ),
-    },
+      )
+    }
   ];
+
+
   return (
-    <div>
-      <JHeader pageTitle={i18n.t('employee')} />
-      <EmployeeModal btnType="modal" btnName={i18n.t('actions.addEmployee')} margin={10} />
-      <Table pagination={false} columns={columns} dataSource={data} />
+    <div style={{ margin: '68px auto 0 auto' }}>
+      <EmployeeModal
+        btnType="modal"
+        btnName="Добавить сотрудника"
+        margin={10}
+      />
+      <Table pagination={false} columns={columns} dataSource={data} /> {/* Use 'data' as dataSource */}
     </div>
   );
 };

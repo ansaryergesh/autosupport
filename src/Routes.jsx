@@ -21,6 +21,7 @@ import Сategory from './pages/Сategory/Сategory.jsx';
 import DetailedQuestionNewAdmin from './pages/DetailedQuestionAdmin/DetailedQuestionAdmin.jsx';
 import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerContent.jsx';
 import QuestionAnswerUser from './pages/QuestionAnswerUser/QuestionAnswerUser.jsx';
+import UserProfile from './pages/UserProfile/UserProfile.jsx';
 
 function RouteWithLayout({ layout, component, isAuthLoading = false, ...rest }) {
   if (isAuthLoading) {
@@ -82,9 +83,30 @@ const Routes = () => {
         <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
         <RouteWithLayout exact layout={Main} component={Keywords} path={'/keywords'} />
         <RouteWithLayout exact layout={Main} component={Tags} path={'/tags'} />
-        <RouteWithLayout exact layout={Main} component={Organizations} path={'/organizations'} />
-        <RouteWithLayout exact layout={Main} component={Resources} path={'/resources'} />
-        <RouteWithLayout exact layout={Main} component={Сategory} path={'/category/:id'} />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Organizations}
+          path={'/organizations'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Resources}
+          path={'/resources'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={Сategory}
+          path={'/category/:id'}
+        />
+        <RouteWithLayout
+          exact
+          layout={Main}
+          component={UserProfile}
+          path={'/user-profile'}
+        />
       </Switch>
     </React.Fragment>
   );

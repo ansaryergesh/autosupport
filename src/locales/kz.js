@@ -25,19 +25,20 @@ export default {
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
-    signOutMessage: 'Сіз аккаунттан шықтыңыз!',
     comeBack: 'Қайта келуінмен!',
     forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
     submit: 'Растау',
     unauthorized: 'Авторизациядан өтпеген',
-    accessDenied: 'Рұқсат жоқ',
+    accessDenied: 'Рұқсат жоқ'
   },
   columns: {
     name: 'Аталуы',
-    fullName: 'Толық аты',
+    firstName: 'Аты',
+    lastName: 'Тегі',
     email: 'Пошта',
     role: 'Рөль',
     code: 'Код',
+    password: 'Құпия сөз'
   },
   actions: {
     addEmployee: 'Жаңа жұмысшыны қосу',
@@ -65,7 +66,7 @@ export default {
     saveReviews: 'Пікірлерді жүктеу',
     deleteSelected: 'Таңдалғандарды өшіру',
     selected: 'Таңдалған',
-    preview: 'Тексеру',
+    preview: 'Тексеру'
   },
   feedback: {
     MainTitle1: 'Сіз Freedom Broker әкімшілік панеліндесіз',
@@ -75,19 +76,20 @@ export default {
     ListTitle: 'Барлық пікірлер тізімі',
     ReviewDownload: 'Айғақтарды жүктеп алыңыз',
     averageRating: 'Орташа рейтинг',
-    mark: 'Жаңа метка',
+    mark: 'Жаңа метка'
   },
   questionAnswer: {
     DescriptionTitle: 'Қадамдардың сипаттамасы',
     FindMistake: 'Мәтіннен қате таптыңыз ба?',
     FixMistake: 'Таңдап, CTRL+Enter пернелерін басыңыз',
     rateAnswer: 'Жауап пайдалы болды ма?',
-    rateSubtitel: 'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
+    rateSubtitel:
+      'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
     rateButton: 'Пікір қалдыру',
     comment: 'Сіздің пікіріңіз',
     characterLimit: 'Таңбалар шегіне жетті',
     previewMessage: 'Сіз алдын ала қарау режиміне ауыстыңыз',
-    videoUrl: 'Бейне нұсқаудың url-і',
+    videoUrl: 'Бейне нұсқаудың url-і'
   },
   menu: {
     addCategory: 'Санат қосу',
@@ -97,19 +99,34 @@ export default {
     editQuestion: 'Сұрақты өзгерту',
     deleteQuestion: 'Сұрақты өшіру',
     openQuestion: 'Сұрақты ашу',
-    enterName: 'Аталуын жазыңыз',
+    enterName: 'Аталуын жазыңыз'
   },
   rule: {
     nameRequired: 'Аталуы міндетті',
     descriptionRequired: 'Сипаттамасы міндетті',
     emailRequired: 'Пошта міндетті',
     questionRequired: 'Сұрақтың тақырыбы міндетті',
-    answerRequired: 'Жауаб міндетті',
+    answerRequired: 'Жауаб міндетті'
   },
   newAnswer: {
     answer: 'Жауабы',
     whatQuestion: 'Сұрақтың тақырыбы',
     inputEmail: 'Поштаңызды жазыңыз',
-    startTyping: 'Теруді бастаңыз...',
+    startTyping: 'Теруді бастаңыз...'
   },
+  userProfile: {
+    AccountDataTitle: 'Данные аккаунта',
+    IdLabel: 'Id',
+    EmailLabel: 'Почта',
+    LanguageKeyLabel: 'Языковой ключ',
+    CreatorLabel: 'Создатель',
+    CurrentPasswordLabel: 'Текущий пароль',
+    NewPasswordLabel: 'Новый пароль',
+    SubmitButton: 'Отправить',
+    UserDataTitle: 'Данные пользователя',
+    LoginLabel: 'Логин',
+    FirstNameLabel: 'Имя',
+    LastNameLabel: 'Фамилия',
+    OrganizationLabel: 'Организация'
+  }
 };

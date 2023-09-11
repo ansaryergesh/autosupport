@@ -26,20 +26,21 @@ export default {
 
   commons: {
     signIn: 'Вход',
-    signOut: 'Выйти',
-    signOutMessage: 'Вы вышли из аккаунта!',
+    signOut: 'Выход',
     comeBack: 'Добро пожаловать!',
     forgetPassword: 'Забыли ваш пароль?',
     submit: 'Подтвердить',
     unauthorized: 'Не авторизован',
-    accessDenied: 'Отказано в доступе',
+    accessDenied: 'Отказано в доступе'
   },
   columns: {
     name: 'Наименование',
-    fullName: 'Полное имя',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
     email: 'Почта',
     role: 'Роль',
     code: 'Код',
+    password: 'Пароль'
   },
   actions: {
     addEmployee: 'Добавить нового сотрудника',
@@ -67,7 +68,7 @@ export default {
     saveReviews: 'Скачать отзывы',
     deleteSelected: 'Удалить выбранное',
     selected: 'Выбранно',
-    preview: 'Предпросмотр',
+    preview: 'Предпросмотр'
   },
   feedback: {
     MainTitle1: 'Вы находитесь в  административной панели Freedom Broker',
@@ -77,7 +78,7 @@ export default {
     ListTitle: 'Список всех отзывов',
     ReviewDownload: 'Загрузить отзывы',
     averageRating: 'Средняя оценка',
-    mark: 'Новая метка',
+    mark: 'Новая метка'
   },
   questionAnswer: {
     VisualInstruction: 'Визуальная инструкция',
@@ -86,12 +87,13 @@ export default {
     FindMistake: 'Нашли ошибку в тексте?',
     FixMistake: 'Выделите и нажмите CTRL+Enter',
     rateAnswer: 'Полезен ли был ответ?',
-    rateSubtitel: 'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
+    rateSubtitel:
+      'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
     rateButton: 'Оставить отзыв',
     comment: 'Ваш комментарий',
     characterLimit: 'Достигнут лимит символов',
     previewMessage: 'Вы перешли на предросмотр',
-    videoUrl: 'Url видео',
+    videoUrl: 'Url видео'
   },
   menu: {
     addCategory: 'Добавить категорию',
@@ -101,19 +103,39 @@ export default {
     editQuestion: 'Редактировать вопрос',
     deleteQuestion: 'Удалить вопрос',
     openQuestion: 'Открыть вопрос',
-    enterName: 'Введите наименование',
+    enterName: 'Введите наименование'
   },
   rule: {
     nameRequired: 'Наименование обязательно',
     descriptionRequired: 'Описание обязательно',
     emailRequired: 'Почта обязательна',
     questionRequired: 'Тема вопроса обязательна',
-    answerRequired: 'Ответ обязателен',
+    answerRequired: 'Ответ обязателен'
   },
   newAnswer: {
     answer: 'Ответ',
     whatQuestion: 'Тема вопроса',
     inputEmail: 'Введите почту',
-    startTyping: 'Начните вводить...',
+    startTyping: 'Начните вводить...'
   },
+  userProfile: {
+    passwordUpdateNotification: 'Пароль успешно изменен!',
+    userProfileSelector: 'Настройки пользователя',
+    accountSettingsSelector: 'Настройки аккаунта',
+    accountDataTitle: 'Данные аккаунта',
+    idLabel: 'Идентификационный номер',
+    emailLabel: 'Почта',
+    languageKeyLabel: 'Языковой ключ',
+    creatorLabel: 'Создатель',
+    currentPasswordLabel: 'Текущий пароль',
+    currentPasswordPlaceholder: 'Введите нынешний пароль',
+    newPasswordLabel: 'Новый пароль',
+    newPasswordPlaceholder: 'Введите новый пароль',
+    saveButton: 'Сохранить',
+    userDataTitle: 'Данные пользователя',
+    loginLabel: 'Логин',
+    firstNameLabel: 'Имя',
+    lastNameLabel: 'Фамилия',
+    organizationLabel: 'Организация'
+  }
 };

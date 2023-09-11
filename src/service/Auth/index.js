@@ -11,12 +11,13 @@ export const onLogin = (data) => {
 };
 
 export const sendMail = (email) => {
-  return axiosInstance.post('/api/account/reset-password/init', email, {
-    headers: {
-      'Content-Type': 'text/plain', // Set the content type to text/plain
-    },
-  });
-};
+  return axiosInstance.post('/api/account/reset-password/init', email,
+    {
+      headers: {
+        'Content-Type': 'text/plain', // Set the content type to text/plain
+      }
+  })
+}
 
 export const newPassword = (data) => {
   return axiosInstance.post('/api/account/reset-password/finish', data);

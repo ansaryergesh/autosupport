@@ -31,10 +31,12 @@
   },
   "columns": {
     "name": "Name",
-    "fullName": "Full name",
+    "firstName": "First name",
+    "lastName": "Last name",
     "email": "Email",
     "role": "Role",
-    "code": "Code"
+    "organization": "Organization",
+    "password": "Password"
   },
   "actions": {
     "addEmployee": "Add new employee",
@@ -110,5 +112,25 @@
     "whatQuestion": "Question topic",
     "inputEmail": "Enter your email",
     "startTyping": "Start typing..."
+  },
+  "userProfile": {
+    "passwordUpdateNotification": "Password updated succsesfully!",
+    "userProfileSelector": "User settings",
+    "accountSettingsSelector": "Account settings",
+    "accountDataTitle": "Account settings",
+    "idLabel": "Id",
+    "emailLabel": "E-mail",
+    "languageKeyLabel": "Language key",
+    "creatorLabel": "Creator",
+    "currentPasswordLabel": "Current password",
+    "currentPasswordPlaceholder": "Enter the current password",
+    "newPasswordLabel": "New password",
+    "newPasswordPlaceholder": "Enter a new password",
+    "saveButton": "Save",
+    "userDataTitle": "User data",
+    "loginLabel": "Login",
+    "firstNameLabel": "First name",
+    "lastNameLabel": "Last name",
+    "organizationLabel": "Organization"
   }
 }
