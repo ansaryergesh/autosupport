@@ -25,6 +25,12 @@
   "searchHistory": "Іздеу тарихы",
   "choice": "Қайда беру керектігін таңдаңыз",
   "noQuestion": "Қазіргі уақытта санатта байланысты сұрақтар жоқ",
+  "newTickets": "Жаңа тикеттер",
+  "oldTickets": "Өңделген  тикеттер",
+  "processed": "Өңделгді",
+  "processedBy": "Кім өңдеді",
+  "processedWhen": "Қашан өңделді",
+  "noData": "Ақпарат жоқ",
   "commons": {
     "signIn": "Кіру",
     "signOut": "Шығу",

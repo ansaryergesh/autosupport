@@ -23,6 +23,8 @@ import QuestionAnswerContent from './pages/QuestionAnswerContent/QuestionAnswerC
 import QuestionAnswerUser from './pages/QuestionAnswerUser/QuestionAnswerUser.jsx';
 import SearchHistory from './pages/SearchHistory/SearchHistory.jsx';
 import UserProfile from './pages/UserProfile/UserProfile.jsx';
+import NewTickets from './pages/Tickets/NewTickets.jsx';
+import OldTickets from './pages/Tickets/OldTickets.jsx';
 
 function RouteWithLayout({ layout, component, isAuthLoading = false, ...rest }) {
   if (isAuthLoading) {
@@ -94,6 +96,8 @@ const Routes = () => {
         <RouteWithLayout exact layout={Main} component={Organizations} path={'/organizations'} />
         <RouteWithLayout exact layout={Main} component={Resources} path={'/resources'} />
         <RouteWithLayout exact layout={Main} component={Сategory} path={'/category/:id'} />
+        <RouteWithLayout exact layout={Main} component={NewTickets} path={'/new-tickets'} />
+        <RouteWithLayout exact layout={Main} component={OldTickets} path={'/old-tickets'} />
         <RouteWithLayout exact layout={Main} component={UserProfile} path={'/user-profile'} />
       </Switch>
     </React.Fragment>
