@@ -7,17 +7,17 @@ export const initialValues = {
     {
       id: 0,
       langKey: LANG_KEY.RU,
-      name: ''
+      name: '',
     },
     {
       id: 0,
       langKey: LANG_KEY.KZ,
-      name: ''
+      name: '',
     },
     {
       id: 0,
       langKey: LANG_KEY.EN,
-      name: ''
-    }
-  ]
+      name: '',
+    },
+  ],
 };

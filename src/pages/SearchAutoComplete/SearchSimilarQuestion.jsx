@@ -5,12 +5,7 @@ import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 import styles from './index.module.less';
 
-const SearchReference = ({
-  searchAction,
-  selectedItems,
-  setSelectedItems,
-  title
-}) => {
+const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title }) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
@@ -19,8 +14,8 @@ const SearchReference = ({
         response?.data.map((item) => ({
           value: item.questionContents?.title,
           id: item.questionContents?.id,
-          itemValue: item
-        }))
+          itemValue: item,
+        })),
       );
     });
   };
@@ -40,8 +35,8 @@ const SearchReference = ({
         response?.data.map((item) => ({
           value: item.questionContents?.title,
           id: item.questionContents?.id,
-          itemValue: item
-        }))
+          itemValue: item,
+        })),
       );
     });
   };
@@ -98,8 +93,9 @@ const SearchReference = ({
                   padding: '18px',
                   justifyContent: 'space-between',
                   borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center'
-                }}>
+                  alignItems: 'center',
+                }}
+              >
                 <span key={item.id}>{item.questionContents?.title}</span>
                 <CloseOutlined
                   className={styles.xBtn}

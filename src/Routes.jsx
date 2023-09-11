@@ -83,30 +83,10 @@ const Routes = () => {
         <RouteWithLayout exact layout={Main} component={Employees} path={'/employees'} />
         <RouteWithLayout exact layout={Main} component={Keywords} path={'/keywords'} />
         <RouteWithLayout exact layout={Main} component={Tags} path={'/tags'} />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Organizations}
-          path={'/organizations'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Resources}
-          path={'/resources'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={Сategory}
-          path={'/category/:id'}
-        />
-        <RouteWithLayout
-          exact
-          layout={Main}
-          component={UserProfile}
-          path={'/user-profile'}
-        />
+        <RouteWithLayout exact layout={Main} component={Organizations} path={'/organizations'} />
+        <RouteWithLayout exact layout={Main} component={Resources} path={'/resources'} />
+        <RouteWithLayout exact layout={Main} component={Сategory} path={'/category/:id'} />
+        <RouteWithLayout exact layout={Main} component={UserProfile} path={'/user-profile'} />
       </Switch>
     </React.Fragment>
   );

@@ -6,12 +6,7 @@ import { i18n } from '../../utils/i18next';
 // import { initialValues } from '../../pages/Resources/constants';
 import { manageResources } from '../../service/Resources';
 
-const EditResourceModal = ({
-  getList,
-  handleEdit,
-  isEditOpen = false,
-  resourceInfo
-}) => {
+const EditResourceModal = ({ getList, handleEdit, isEditOpen = false, resourceInfo }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
@@ -24,11 +19,9 @@ const EditResourceModal = ({
       handleEdit();
       getList();
       form.resetFields();
-      notification
-        .success({ message: i18n.t('actions.edited') })
-        .finally(() => {
-          setLoading(false);
-        });
+      notification.success({ message: i18n.t('actions.edited') }).finally(() => {
+        setLoading(false);
+      });
     });
   };
 
@@ -67,52 +60,49 @@ const EditResourceModal = ({
       okButtonProps={{
         className: 'button-modal',
         htmlType: 'submit',
-        form: 'form'
-      }}>
+        form: 'form',
+      }}
+    >
       <Form
         form={form}
         layout="vertical"
         initialValues={{ resourceInfo }}
         onFinish={handleSubmit}
-        autoComplete="off">
+        autoComplete="off"
+      >
         <Form.Item
           name="code"
           initialValue={resourceInfo.code}
-          rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
+          rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+        >
           <Input placeholder={i18n.t('columns.code')} />
         </Form.Item>
 
-        <Form.Item
-          name="id"
-          initialValue={resourceInfo.id}
-          style={{ display: 'none' }}>
+        <Form.Item name="id" initialValue={resourceInfo.id} style={{ display: 'none' }}>
           <Input placeholder="id" />
         </Form.Item>
 
         {resourceInfo?.resourceContents?.map((content, index) => (
-          <Form.Item
-            key={index}
-            label={`${i18n.t('columns.name')} ${content.langKey}`}>
+          <Form.Item key={index} label={`${i18n.t('columns.name')} ${content.langKey}`}>
             <Form.Item
               initialValue={content?.name}
               name={['resourceContents', index, 'name']}
-              rules={[
-                { required: true, message: i18n.t('rule.nameRequired') }
-              ]}>
-              <Input
-                placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`}
-              />
+              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+            >
+              <Input placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`} />
             </Form.Item>
             <Form.Item
               name={['resourceContents', index, 'langKey']}
               initialValue={content.langKey}
-              style={{ display: 'none' }}>
+              style={{ display: 'none' }}
+            >
               <Input type="hidden" />
             </Form.Item>
             <Form.Item
               initialValue={content?.id}
               name={['resourceContents', index, 'id']}
-              style={{ marginBottom: 0, display: 'none' }}>
+              style={{ marginBottom: 0, display: 'none' }}
+            >
               <Input />
             </Form.Item>
           </Form.Item>
@@ -126,7 +116,7 @@ EditResourceModal.propTypes = {
   handleEdit: PropTypes.func,
   resourceInfo: PropTypes.object,
   record: PropTypes.object,
-  isEditOpen: PropTypes.bool
+  isEditOpen: PropTypes.bool,
 };
 
 export default EditResourceModal;

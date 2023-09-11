@@ -25,14 +25,13 @@ const QuestionAnswerUser = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
 
   const answerContentByLanguage = data.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
 
-  const { videoUrl, videoDescription, images, stepDescription } =
-    answerContentByLanguage;
+  const { videoUrl, videoDescription, images, stepDescription } = answerContentByLanguage;
 
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
-    images.length ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO
+    images.length ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO,
   );
 
   useEffect(() => {
@@ -45,14 +44,14 @@ const QuestionAnswerUser = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('actions.saved'),
-      placement: 'top'
+      placement: 'top',
     });
   };
 
   const handleSave = () => {
     const sendData = {
       id: data.id,
-      status: 'PUBLISHED'
+      status: 'PUBLISHED',
     };
     saveAnswer(data.id, sendData)
       .then((res) => {
@@ -78,15 +77,15 @@ const QuestionAnswerUser = () => {
             marginLeft: '8px',
             padding: '12px 0',
             display: 'flex',
-            alignItems: 'center'
-          }}>
+            alignItems: 'center',
+          }}
+        >
           {Object.values(LANG_KEY).map((item) => (
             <Button
               key={item}
               onClick={() => setSelectedLanguage(item)}
-              type={`${
-                selectedLanguage === item ? 'default-active' : 'default'
-              }`}>
+              type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
+            >
               {item}
             </Button>
           ))}
@@ -94,10 +93,7 @@ const QuestionAnswerUser = () => {
 
         <Col span={16}>
           <div className={styles.card}>
-            <TypographyHead
-              type={TypoGraphyType.SECONDARY_HEAD}
-              content={i18n.t('description')}
-            />
+            <TypographyHead type={TypoGraphyType.SECONDARY_HEAD} content={i18n.t('description')} />
             <ShowHtmlContent htmlContent={stepDescription} />
             {
               <>
@@ -106,11 +102,8 @@ const QuestionAnswerUser = () => {
                     className={styles.instructionBtn}
                     key={item}
                     onClick={() => setSelectedInstrcutionType(item)}
-                    type={
-                      item === selectedInstructionType
-                        ? 'default-active'
-                        : 'default'
-                    }>
+                    type={item === selectedInstructionType ? 'default-active' : 'default'}
+                  >
                     {i18n.t(item)}
                   </Button>
                 ))}
@@ -148,9 +141,7 @@ const QuestionAnswerUser = () => {
         </Col>
 
         <Col span={16}>
-          <Button onClick={() => history.goBack()}>
-            {i18n.t('actions.back')}
-          </Button>
+          <Button onClick={() => history.goBack()}>{i18n.t('actions.back')}</Button>
           <Button onClick={handleSave}>{i18n.t('actions.save')}</Button>
         </Col>
 

@@ -1,26 +1,25 @@
-import { axiosInstanceWithHeader} from '../../api/api'
- 
+import { axiosInstanceWithHeader } from '../../api/api';
+
 export const getEmployeeData = () => {
-  return axiosInstanceWithHeader.get('/api/accounts')
+  return axiosInstanceWithHeader.get('/api/accounts');
 };
 
 export const getAllRoles = () => {
-  return axiosInstanceWithHeader.get('/api/get-roles')
+  return axiosInstanceWithHeader.get('/api/get-roles');
 };
 
 export const getAllOrganizations = () => {
-  return axiosInstanceWithHeader.get('/api/admin/organizations')
+  return axiosInstanceWithHeader.get('/api/admin/organizations');
 };
 
-
 export const deleteEmployee = (id) => {
-  return axiosInstanceWithHeader.delete(`/api/delete/account/${id}`)
-}
+  return axiosInstanceWithHeader.delete(`/api/delete/account/${id}`);
+};
 
 export const manageEmployee = (data) => {
-  if(data.id) {
-    return axiosInstanceWithHeader.put(`/api/update/accout/${data.id}`)
-  }else {
-    return axiosInstanceWithHeader.post('/api/create', data)
+  if (data.id) {
+    return axiosInstanceWithHeader.put(`/api/update/accout/${data.id}`);
+  } else {
+    return axiosInstanceWithHeader.post('/api/create', data);
   }
-}
+};

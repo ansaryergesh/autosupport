@@ -102,7 +102,7 @@ const Resources = () => {
       dataIndex: 'resourceContents',
       render: (row) => {
         return row.find((item) => item?.langKey === getLocale())?.name;
-      }
+      },
     },
 
     {
@@ -115,7 +115,8 @@ const Resources = () => {
               setRecord(record);
               handleEdit();
               handleEditResource(record.id);
-            }}>
+            }}
+          >
             {i18n.t('actions.edit')}
           </Button>
           <Popconfirm
