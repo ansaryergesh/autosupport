@@ -28,6 +28,9 @@
   "processedBy": "Processed by",
   "processedWhen": "Processed when",
   "noData": "No data",
+  "searchHistory": "Search history",
+  "choice": "Choose where to assign the text",
+  "noQuestion": "There are currently no related questions for this category",
   "commons": {
     "signIn": "Sign in",
     "signOut": "Sign out",
@@ -44,8 +47,8 @@
     "lastName": "Last name",
     "email": "Email",
     "role": "Role",
-    "organization": "Organization",
-    "password": "Password"
+    "code": "Code",
+    "numberOfRequests": "Number of requests"
   },
   "actions": {
     "addEmployee": "Add new employee",

@@ -22,15 +22,15 @@
   "similarRequests": "Ұқсас сұрақтар",
   "noContent": "Контент жоқ, ресурсты қосу таңбасы арқылы қосыңыз",
   "counter": "Кликтер саны",
-  "searchHistory": "Іздеу тарихы",
-  "choice": "Қайда беру керектігін таңдаңыз",
-  "noQuestion": "Қазіргі уақытта санатта байланысты сұрақтар жоқ",
   "newTickets": "Жаңа тикеттер",
   "oldTickets": "Өңделген  тикеттер",
   "processed": "Өңделгді",
   "processedBy": "Кім өңдеді",
   "processedWhen": "Қашан өңделді",
   "noData": "Ақпарат жоқ",
+  "searchHistory": "Іздеу тарихы",
+  "choice": "Қайда беру керектігін таңдаңыз",
+  "noQuestion": "Қазіргі уақытта санатта байланысты сұрақтар жоқ",
   "commons": {
     "signIn": "Кіру",
     "signOut": "Шығу",
@@ -48,8 +48,8 @@
     "email": "Пошта",
     "role": "Рөль",
     "code": "Код",
-    "password": "Құпия сөз",
-    "numberOfRequests": "Сұраулар саны"
+    "numberOfRequests": "Сұраулар саны",
+    "password": "Құпия сөз"
   },
   "actions": {
     "addEmployee": "Жаңа жұмысшыны қосу",

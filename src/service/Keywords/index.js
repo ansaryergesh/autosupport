@@ -17,7 +17,7 @@ export const getKeywords = () => {
 };
 
 export const searchKeyWords = (params) => {
-  return axiosInstanceWithHeader.get('/api/admin/keyWords/_search', {
+  return axiosInstanceWithHeader.get('/api/admin/keyWords', {
     params: { pageSize: 20, query: '', ...params },
   });
 };
