@@ -12,10 +12,11 @@ const CardComponent = (props) => {
   return (
     <div className={styles.card}>
       <div className={'my-heading-2'}>
-        <div className={styles.title}>
+        <div>
           <Link to={`/category/${props.data?.id}`}>
             <Text ellipsis={{ rows: 2, expandable: false }}>
               <TypographyHead
+                className={styles.title}
                 type={TypoGraphyType.SUB_HEAD}
                 content={props.data?.categorieContents?.name}
               />
@@ -34,7 +35,7 @@ const CardComponent = (props) => {
           </p>
         ))}
         {questions?.length > maxQuestionsToShow && (
-          <Text style={{ color: '#1890ff', cursor: 'pointer' }}>
+          <Text style={{ color: '#13ad64', cursor: 'pointer' }}>
             ...and {questions.length - maxQuestionsToShow} more questions
           </Text>
         )}

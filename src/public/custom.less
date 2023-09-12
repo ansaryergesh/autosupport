@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background-color);
 }
@@ -22,7 +26,6 @@ body {
 }
 
 .main-layout {
-  background-image: url('./assets/images/backgroundImg.jpg');
   background-size: cover;
   min-height: 100vh;
   overflow-y: hidden;
@@ -371,4 +374,9 @@ body {
 .ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td,
 .ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected:hover > td {
   background-color: @green-color-4;
+}
+
+.ant-typography p,
+.ant-typography {
+  margin: 0 !important;
 }

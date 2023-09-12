@@ -1,0 +1,20 @@
+@import url('src/assets/styles/variables');
+
+.searchInput {
+  border: none !important;
+  position: relative;
+  border-radius: 10px;
+  padding: 8px 0px 8px 48px;
+  font-size: 16px;
+
+  &::placeholder {
+    color: @gray-color-2;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  top: 10px;
+  transform: translateX(12px);
+  z-index: 1;
+}

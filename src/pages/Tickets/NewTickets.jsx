@@ -53,6 +53,8 @@ const NewTickets = () => {
   ];
 
   const getNewTicketsList = (pageCurrent, pageSize) => {
+    window.scrollTo(0, 0);
+
     getNewTickets(pageCurrent - 1, pageSize)
       .then((res) => {
         setData(res.data);
