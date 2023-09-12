@@ -13,9 +13,8 @@ const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage }) =>
   }, [editorContent]);
 
   useEffect(() => {
-    console.log(selectedLanguageItem);
     setEditorContent(selectedLanguageItem?.stepDescription);
-  }, [answerFormData]);
+  }, [answerFormData, selectedLanguageItem]);
 
   const handleContentChange = (value) => {
     const updatedAnswerContent = { ...answerFormData };

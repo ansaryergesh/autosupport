@@ -10,7 +10,15 @@ import {
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
-import { Col, Dropdown, notification, Row, Menu, Empty, Typography } from 'antd';
+import {
+  Col,
+  Dropdown,
+  notification,
+  Row,
+  Menu,
+  Empty,
+  Typography
+} from 'antd';
 import SunEditor from '../DetailedQuestionAdmin/SunEditor.jsx';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
@@ -62,8 +70,12 @@ const QuestionAnswerContent = () => {
         return (
           <Menu.Item
             key={resource.id}
-            onClick={() => setSelectedResources((prev) => [...prev, finalResources])}
-          >
+            onClick={() => {
+              if(!activeResource?.id) {
+                setActiveResource(finalResources);
+              }
+              setSelectedResources((prev) => [...prev, finalResources])
+            }}>
             {
               resource.resourceContents.find((content) => content.langKey === selectedLanguage)
                 ?.name
@@ -77,24 +89,28 @@ const QuestionAnswerContent = () => {
   };
 
   const menuDelete = (resource) => {
+    const handleDelete = () => {
+      setAnswerFormData((prevState) => {
+        console.log(prevState)
+        setAnswerFormData({...initialQuestionAnswerContent})
+      })
+      if (resource.isNew) {
+        setSelectedResources((prev) =>
+            prev.filter((selectedResource) => selectedResource.id !== resource.id),
+        );
+      } else {
+        deleteAnswerById(answerFormData.id).then((res) => {
+          setSelectedResources((prev) =>
+              prev.filter((selectedResource) => selectedResource.id !== resource.id),
+          );
+          console.log(res, 'deleted').catch((err) => console.log(err));
+        });
+      }
+    }
     return (
       <Menu.Item
         key={resource.id}
-        onClick={() => {
-          if (resource.isNew) {
-            setSelectedResources((prev) =>
-              prev.filter((selectedResource) => selectedResource.id !== resource.id),
-            );
-          } else {
-            deleteAnswerById(answerFormData.id).then((res) => {
-              setSelectedResources((prev) =>
-                prev.filter((selectedResource) => selectedResource.id !== resource.id),
-              );
-
-              console.log(res, 'deleted').catch((err) => console.log(err));
-            });
-          }
-        }}
+        onClick={() => {handleDelete()}}
       >
         {i18n.t('actions.delete')}
       </Menu.Item>
@@ -112,12 +128,10 @@ const QuestionAnswerContent = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    if (activeResource?.id) {
+    if (activeResource?.id && !activeResource.isNew) {
       answerByQuestionAndResource(id, activeResource.id)
         .then((res) => {
           setAnswerFormData(res.data);
-          console.log(res.data);
         })
         .catch((err) => {
           console.error(err);
@@ -126,6 +140,7 @@ const QuestionAnswerContent = () => {
         .finally(() => {
           getQuestionById(id).then((res) => {
             setQuestionInfo(res.data);
+            setSelectedQuestions(res.data?.children || []);
           });
         });
     }
@@ -139,33 +154,35 @@ const QuestionAnswerContent = () => {
   };
 
   const handleSubmit = () => {
-    // addAnswerToQuestion
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
-      resource: { id: activeResource.id },
+      resource: activeResource,
     };
 
     const finalQuestionInfo = {
       ...questionInfo,
+      children: selectedQuestions
     };
+    delete finalQuestionInfo.resources;
     editCategoryQuestion(finalQuestionInfo).then((res) => {
       console.log(res);
-      if (answerFormData.id) {
-        editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
-          console.log(res);
-          saveNotification();
-          history.push(`/question/preview/${id}/${activeResource.id}`);
-        });
-      } else {
-        delete finalDataAnswer['id'];
-        addAnswerToQuestion(finalDataAnswer).then((res) => {
-          console.log(res);
-          notification.info('Answer edited');
-          history.push(`/question/preview/${id}/${activeResource.id}`);
-        });
-      }
     });
+    if (answerFormData.id) {
+      editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
+        console.log(res);
+        saveNotification();
+        history.push(`/question/preview/${id}/${activeResource.id}`);
+      });
+    } else {
+      delete finalDataAnswer['id'];
+      console.log(finalDataAnswer)
+      addAnswerToQuestion(finalDataAnswer).then((res) => {
+        console.log(res);
+        notification.info('Answer edited');
+        history.push(`/question/preview/${id}/${activeResource.id}`);
+      });
+    }
   };
 
   const handleChangeCounter = (counter) => {
@@ -186,6 +203,37 @@ const QuestionAnswerContent = () => {
     }
   };
 
+  const handleChangeResource = (resource) => {
+    if(resource.id !== activeResource.id) {
+      setSelectedLanguage(LANG_KEY.RU)
+      setActiveResource(resource)
+      setAnswerFormData({...initialQuestionAnswerContent,   answerContents: [
+          {
+            langKey: 'EN',
+            stepDescription: '',
+            videoUrl: '',
+            videoDescription: '',
+            images: [],
+          },
+          {
+            langKey: 'RU',
+            stepDescription: '',
+            videoUrl: '',
+            videoDescription: '',
+            images: [],
+          },
+          {
+            langKey: 'KZ',
+            stepDescription: '',
+            videoUrl: '',
+            videoDescription: '',
+            images: [],
+          },
+        ],})
+    }
+
+  };
+
   return (
     <div>
       <JHeader questionInfo={questionInfo} lang={selectedLanguage} />
@@ -194,36 +242,44 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
-        }}
-      >
+          gap: '8px'
+        }}>
         {selectedResources.map((resource, index) => (
           <Dropdown
             key={index}
             overlay={<Menu>{menuDelete(resource)}</Menu>}
-            trigger={'contextMenu'}
-          >
+            trigger={'contextMenu'}>
             <Button
               onClick={() => {
-                if (resource?.id !== activeResource?.id || activeResource === undefined) {
+                if (
+                  resource?.id !== activeResource?.id ||
+                  activeResource === undefined
+                ) {
                   setAnswerFormData(initialQuestionAnswerContent);
                   setQuestionInfo(initialQuestionDto);
                   setActiveResource(resource);
-                  console.log(activeResource);
                 }
               }}
-              type={`${activeResource?.id === resource.id ? 'default-active' : 'default'}`}
-            >
+              type={`${
+                activeResource?.id === resource.id
+                  ? 'default-active'
+                  : 'default'
+              }`}>
               {
-                resource.resourceContents.find((content) => content.langKey === selectedLanguage)
-                  ?.name
+                resource.resourceContents.find(
+                  (content) => content.langKey === selectedLanguage
+                )?.name
               }
             </Button>
           </Dropdown>
         ))}
         {selectedResources.length < resources.length && (
           <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
-            <img title={i18n.t('actions.addResource')} style={{ cursor: 'pointer' }} src={Plus} />
+            <img
+              title={i18n.t('actions.addResource')}
+              style={{ cursor: 'pointer' }}
+              src={Plus}
+            />
           </Dropdown>
         )}
       </div>
@@ -244,7 +300,7 @@ const QuestionAnswerContent = () => {
             {item}
           </Button>
         ))}
-        <b>{i18n.t(answerFormData.status)}</b>
+        <b>{answerFormData.status && i18n.t(answerFormData.status)}</b>
       </div>
       {selectedResources.length > 0 ? (
         <>
@@ -258,15 +314,16 @@ const QuestionAnswerContent = () => {
 
             <Col span={15}>
               <Row gutter={[16, 16]}>
-                <Col span={5}>
+                {questionInfo?.counter !== 0 && <Col span={5}>
                   <Typography.Paragraph
-                    type="number"
-                    className={styles.counter}
-                    editable={{ onChange: handleChangeCounter }}
+                      type="number"
+                      className={styles.counter}
+                      editable={{ onChange: handleChangeCounter }}
                   >
                     {questionInfo?.counter}
                   </Typography.Paragraph>
-                </Col>
+                </Col>}
+
                 <Col span={24}>
                   <div className={styles.card}>
                     <TypographyHead

@@ -11,7 +11,7 @@ export const initialQuestionAnswerContent = {
         {
           id: 0,
           langKey: 'EN',
-          name: 'string',
+          name: '',
         },
       ],
     },
@@ -19,18 +19,18 @@ export const initialQuestionAnswerContent = {
       {
         id: 0,
         langKey: 'EN',
-        title: 'string',
-        stepDescription: 'string',
+        title: '',
+        stepDescription: '',
         tags: [
           {
             id: 0,
-            text: 'string',
+            text: '',
           },
         ],
         keyWords: [
           {
             id: 0,
-            text: 'string',
+            text: '',
           },
         ],
       },
@@ -38,8 +38,8 @@ export const initialQuestionAnswerContent = {
   },
   resource: {
     id: 0,
-    code: 'string',
-    name: 'string',
+    code: '',
+    name: '',
   },
   answerContents: [
     {
@@ -64,4 +64,5 @@ export const initialQuestionAnswerContent = {
       images: [],
     },
   ],
+  status: null,
 };

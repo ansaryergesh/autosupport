@@ -17,7 +17,7 @@ export const getTags = () => {
 };
 
 export const searchTags = (params) => {
-  return axiosInstanceWithHeader.get('/api/admin/tags/_search', {
+  return axiosInstanceWithHeader.get('/api/admin/tags', {
     params: { pageSize: 20, query: '', ...params },
   });
 };

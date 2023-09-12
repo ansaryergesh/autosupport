@@ -17,17 +17,17 @@ import { LANG_KEY } from '../../constants/index.js';
 import { i18n } from '../../utils/i18next.js';
 import { useHistory } from 'react-router';
 import JHeader from '../../components/JHeader/JHeader';
+import { getQuestionById } from '../../service/Question/index.js';
 
 const QuestionAnswerUser = () => {
   const { questionId, resourceId } = useParams();
   const history = useHistory();
   const [data, setData] = useState(initialQuestionAnswerContent);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
-
   const answerContentByLanguage = data.answerContents?.find(
     (item) => item.langKey === selectedLanguage,
   );
-
+  const [activeResource, setActiveResource] = useState(null);
   const { videoUrl, videoDescription, images, stepDescription } = answerContentByLanguage;
 
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
@@ -35,6 +35,11 @@ const QuestionAnswerUser = () => {
   );
 
   useEffect(() => {
+    getQuestionById(questionId).then(res=> {
+      const active = res.data?.resources?.find(item => item.id === resourceId) || null;
+      setActiveResource(active);
+    });
+
     getAnswerById(questionId, resourceId).then((res) => {
       setData(res.data);
       console.log(res.data);
@@ -68,7 +73,7 @@ const QuestionAnswerUser = () => {
 
       <Row gutter={[16, 16]}>
         <Col span={16}>
-          <Button type="default-active">{data.resource.name}</Button>
+          {activeResource && <Button type="default-active">{activeResource.name}</Button>}
         </Col>
 
         <Col
@@ -154,14 +159,3 @@ const QuestionAnswerUser = () => {
 };
 
 export default QuestionAnswerUser;
-
-{
-  /* <TypographyHead
-                type={TypoGraphyType.LEVEL_2_BOLD}
-                content={'Нашел ошибку в тексте?'}
-              />
-              <TypographyHead
-                type={TypoGraphyType.LEVEL_2}
-                content={'Выдели и нажми CTRL+Enter'}
-              /> */
-}

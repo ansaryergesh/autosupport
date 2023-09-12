@@ -20,18 +20,9 @@
   "home": "Home",
   "description": "Description",
   "similarRequests": "Similar requests",
-  "noContent": "No content yet, please add resource by clicking plus button",
-  "counter": "Counter",
-  "newTickets": "New tickets",
-  "oldTickets": "Processed tickets",
-  "processed": "Processed",
-  "processedBy": "Processed by",
-  "processedWhen": "Processed when",
-  "noData": "No data",
   "commons": {
     "signIn": "Sign in",
     "signOut": "Sign out",
-    "signOutMessage": "You are logged out!",
     "comeBack": "Welcome back!",
     "forgetPassword": "Forgot your password?",
     "submit": "Submit",
@@ -40,12 +31,10 @@
   },
   "columns": {
     "name": "Name",
-    "firstName": "First name",
-    "lastName": "Last name",
+    "fullName": "Full name",
     "email": "Email",
     "role": "Role",
-    "organization": "Organization",
-    "password": "Password"
+    "code": "Code"
   },
   "actions": {
     "addEmployee": "Add new employee",
@@ -66,7 +55,6 @@
     "addResource": "Add resource",
     "editOrganization": "Edit organization",
     "addOrganization": "Add organization",
-    "editText": "Edit text",
     "addSimilar": "Add similar request",
     "save": "Save",
     "saved": "Saved",
@@ -122,25 +110,5 @@
     "whatQuestion": "Question topic",
     "inputEmail": "Enter your email",
     "startTyping": "Start typing..."
-  },
-  "userProfile": {
-    "passwordUpdateNotification": "Password updated succsesfully!",
-    "userProfileSelector": "User settings",
-    "accountSettingsSelector": "Account settings",
-    "accountDataTitle": "Account settings",
-    "idLabel": "Id",
-    "emailLabel": "E-mail",
-    "languageKeyLabel": "Language key",
-    "creatorLabel": "Creator",
-    "currentPasswordLabel": "Current password",
-    "currentPasswordPlaceholder": "Enter the current password",
-    "newPasswordLabel": "New password",
-    "newPasswordPlaceholder": "Enter a new password",
-    "saveButton": "Save",
-    "userDataTitle": "User data",
-    "loginLabel": "Login",
-    "firstNameLabel": "First name",
-    "lastNameLabel": "Last name",
-    "organizationLabel": "Organization"
   }
 }

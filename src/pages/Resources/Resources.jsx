@@ -19,11 +19,11 @@ const Resources = () => {
   const [resourceInfo, setResourceInfo] = useState({});
 
   const handleEditResource = (resourceId) => {
+    setResourceInfo({});
     getResourceById(resourceId).then((res) => {
       console.log(res);
-      setResourceInfo({});
+      setIsEditOpen(true);
       setResourceInfo(res.data);
-      isEditOpen(true);
     });
   };
 
@@ -112,8 +112,6 @@ const Resources = () => {
         <Space size="middle">
           <Button
             onClick={() => {
-              setRecord(record);
-              handleEdit();
               handleEditResource(record.id);
             }}
           >
@@ -175,22 +173,22 @@ const Resources = () => {
           dataSource={data}
         />
       </div>
+      {isModalOpen &&  <ResourcesModal
+          record={record}
+          setRecord={setRecord}
+          data={data}
+          handleModal={handleModal}
+          isModalOpen={isModalOpen}
+          getList={getResourcesList}
+      />}
 
-      <ResourcesModal
-        record={record}
-        setRecord={setRecord}
-        data={data}
-        handleModal={handleModal}
-        isModalOpen={isModalOpen}
-        getList={getResourcesList}
-      />
+      {isEditOpen && <EditResourceModal
+          handleEdit={handleEdit}
+          isEditOpen={isEditOpen}
+          getList={getResourcesList}
+          resourceInfo={resourceInfo}
+      />}
 
-      <EditResourceModal
-        handleEdit={handleEdit}
-        isEditOpen={isEditOpen}
-        getList={getResourcesList}
-        resourceInfo={resourceInfo}
-      />
     </div>
   );
 };
