@@ -173,22 +173,25 @@ const Resources = () => {
           dataSource={data}
         />
       </div>
-      {isModalOpen &&  <ResourcesModal
+      {isModalOpen && (
+        <ResourcesModal
           record={record}
           setRecord={setRecord}
           data={data}
           handleModal={handleModal}
           isModalOpen={isModalOpen}
           getList={getResourcesList}
-      />}
+        />
+      )}
 
-      {isEditOpen && <EditResourceModal
+      {isEditOpen && (
+        <EditResourceModal
           handleEdit={handleEdit}
           isEditOpen={isEditOpen}
           getList={getResourcesList}
           resourceInfo={resourceInfo}
-      />}
-
+        />
+      )}
     </div>
   );
 };

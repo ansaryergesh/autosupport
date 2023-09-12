@@ -145,9 +145,9 @@ const SearchReference = ({
       <div>
         <div>
           {Array.isArray(langSelectedItem) &&
-            langSelectedItem.map((item,index) => (
+            langSelectedItem.map((item, index) => (
               <div
-                key={item.id+"_"+index}
+                key={item.id + '_' + index}
                 style={{
                   display: 'flex',
                   padding: '18px',

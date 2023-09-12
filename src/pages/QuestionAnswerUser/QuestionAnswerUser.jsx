@@ -35,8 +35,8 @@ const QuestionAnswerUser = () => {
   );
 
   useEffect(() => {
-    getQuestionById(questionId).then(res=> {
-      const active = res.data?.resources?.find(item => item.id === resourceId) || null;
+    getQuestionById(questionId).then((res) => {
+      const active = res.data?.resources?.find((item) => item.id === resourceId) || null;
       setActiveResource(active);
     });
 
