@@ -35,3 +35,14 @@ export const getQuestions = (params) => {
 export const changeQuestionOrder = (questionId, orderNumber) => {
   return axiosInstanceWithHeader.patch(`/api/admin/questions/${questionId}/orders/${orderNumber}`);
 };
+
+export const searchQuestions = (params) => {
+  return axiosInstanceWithHeader.get('/api/admin/questions', {
+    params: {
+      pageSize: params.pageSize,
+      query: params.query,
+      langKey: getLocale().toUpperCase(),
+      ...params,
+    },
+  });
+};

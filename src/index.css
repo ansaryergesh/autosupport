@@ -13,7 +13,6 @@
 /*    font-family: 'Museo';*/
 /*}*/
 .main-layout {
-  background-image: url('./assets/images/backgroundImg.jpg');
   background-size: cover;
   min-height: 100vh;
   overflow-y: hidden;

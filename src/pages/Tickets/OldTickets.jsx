@@ -36,6 +36,8 @@ const OldTickets = () => {
   ];
 
   const getOldTicketsList = (pageCurrent, pageSize) => {
+    window.scrollTo(0, 0);
+
     getOldTickets(pageCurrent - 1, pageSize)
       .then((res) => {
         setData(res.data);

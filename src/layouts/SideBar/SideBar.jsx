@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Input, Layout, notification, Typography } from 'antd';
+import { Image, Input, Layout, notification, Typography, AutoComplete } from 'antd';
 import { i18n } from 'utils/i18next.js';
 import { adminNavItems } from './constants.js';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,7 @@ import {
   deleteQuestion,
   getQuestionById,
   getQuestions,
+  searchQuestions,
 } from '../../service/Question/index.js';
 import MenuItem from './Menu/MenuItem.jsx';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
@@ -26,36 +27,67 @@ import ConstDropDownMenuItem from './ConstDropDownMenuItem';
 import { useHistory } from 'react-router-dom';
 import { LogoutOutlined } from '@ant-design/icons';
 import { clearStorage } from '../../service/Auth/index.js';
+import styles from './index.module.less';
+import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
+import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
 
 const { Sider } = Layout;
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');
-  const handleSearch = () => {
-    console.log('searchValue:', searchValue);
+  const [options, setOptions] = useState([]);
+  const [focus, setFocus] = useState(false);
+
+  const handleFocus = (focused) => {
+    setFocus(focused);
   };
 
-  const handleInputChange = (e) => {
-    setSearchValue(e.target.value);
+  const handleSearch = (value) => {
+    if (searchValue.length >= 2) {
+      const params = {
+        query: value,
+        pageSize: 5,
+      };
+      searchQuestions(params).then((res) => {
+        setOptions(
+          res?.data.map((item) => ({
+            value: item.questionContents.title,
+            id: item.questionContents.id,
+          })),
+        );
+      });
+    }
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearch();
-      window.location.href = '/detailedQuestion';
+      // window.location.href = '/detailedQuestion';
     }
   };
   return (
-    <Input
-      placeholder={i18n.t('SearchQuestion')}
-      style={{
-        border: 'none',
-        width: '100%',
-      }}
-      value={searchValue}
-      onChange={handleInputChange}
-      onKeyPress={handleKeyPress}
-    />
+    <>
+      {focus ? (
+        <SearchIconFocus className={styles.searchIcon} />
+      ) : (
+        <SearchIcon className={styles.searchIcon} />
+      )}
+      <AutoComplete
+        className={styles.autoComplete}
+        onSearch={handleSearch}
+        onFocus={() => handleFocus(true)}
+        onBlur={() => handleFocus(false)}
+        options={options}
+        value={searchValue}
+        onChange={(value) => setSearchValue(value)}
+      >
+        <Input
+          className={styles.searchInput}
+          placeholder={i18n.t('SearchQuestion')}
+          onKeyDown={handleKeyPress}
+        />
+      </AutoComplete>
+    </>
   );
 };
 
