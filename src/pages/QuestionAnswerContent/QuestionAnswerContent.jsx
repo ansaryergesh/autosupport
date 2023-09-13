@@ -117,7 +117,6 @@ const QuestionAnswerContent = () => {
   useEffect(() => {
     getQuestionById(id).then((res) => {
       setSelectedResources(res.data.resources || []);
-      res.data.resources
       res.data.resourcers && setActiveResource(res.data.resources[0]);
     });
   }, [id]);

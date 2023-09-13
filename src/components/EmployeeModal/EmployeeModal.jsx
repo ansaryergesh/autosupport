@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Form, Select, notification } from 'antd';
-import Button from '../Button/Button.jsx';
 import Input from '../Input/Input.jsx';
 import { i18n } from 'utils/i18next.js';
 import { getAllOrganizations, getAllRoles, manageEmployee } from '../../service/Employee/index.js';

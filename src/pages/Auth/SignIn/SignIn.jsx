@@ -25,8 +25,7 @@ const SignIn = () => {
           if (res.data?.id_token) {
             localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
           }
-          history.push('/');
-
+          location.reload();
           notification.success({ message: 'welcome' });
         }
       })
