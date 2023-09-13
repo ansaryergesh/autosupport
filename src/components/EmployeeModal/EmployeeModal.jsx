@@ -4,9 +4,10 @@ import Button from '../Button/Button.jsx';
 import Input from '../Input/Input.jsx';
 import { i18n } from 'utils/i18next.js';
 import { getAllOrganizations, getAllRoles, manageEmployee } from '../../service/Employee/index.js';
+import { LANG_KEY } from '../../constants/index.js';
 
 const initialData = {
-  id: 0,
+  id: null,
   login: '',
   firstName: '',
   lastName: '',
@@ -23,15 +24,28 @@ const initialData = {
     name: '',
     code: '',
   },
-  password: '',
+  password: null,
 };
+const langKey = [
+  { label: LANG_KEY.RU, value: LANG_KEY.RU },
+  { label: LANG_KEY.KZ, value: LANG_KEY.KZ },
+  { label: LANG_KEY.EN, value: LANG_KEY.EN },
+];
 
-const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
+const EmployeeModal = ({
+  record = initialData,
+  handleModal,
+  isModalOpen = false,
+  getEmployeeData,
+}) => {
   const [roles, setRoles] = useState();
   const [organizations, setOrganizations] = useState();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [form] = Form.useForm();
+  const editPage = record.id;
+
+  useEffect(() => {
+    form.setFieldsValue(record);
+  }, [record, form]);
 
   const onFinish = (values) => {
     console.log(values);
@@ -40,13 +54,32 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
       authOrganization: JSON.parse(values.authOrganization),
     };
 
-    manageEmployee({ ...transformedValues }).then((res) => {
-      console.log(res);
-      notification.info({ message: 'Employee added' });
-    });
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    let finalData;
+
+    if (editPage) {
+      finalData = values;
+    } else {
+      finalData = transformedValues;
+    }
+
+    manageEmployee(finalData)
+      .then((res) => {
+        console.log(res);
+        if (editPage) {
+          notification.success({
+            message: i18n.t('actions.edited'),
+          });
+        } else {
+          notification.success({
+            message: i18n.t('actions.added'),
+          });
+        }
+        handleModal();
+        getEmployeeData();
+      })
+      .finally(() => {
+        form.resetFields();
+      });
   };
 
   useEffect(() => {
@@ -63,82 +96,101 @@ const EmployeeModal = ({ btnName, margin = 0, btnType }) => {
     });
   }, []);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    // onFinish();
-    // setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   return (
-    <>
-      <Button
-        style={{ marginBottom: `${margin}px` }}
-        type={btnType ? `${btnType}` : 'primary'}
-        onClick={showModal}
+    <Modal
+      title={editPage ? i18n.t('actions.edit') : i18n.t('actions.add')}
+      open={isModalOpen}
+      onCancel={() => {
+        form.resetFields();
+        handleModal();
+      }}
+      cancelText={i18n.t('actions.cancel')}
+      okButtonProps={{ className: 'button-modal', form: 'form', htmlType: 'submit' }}
+      cancelButtonProps={{ className: 'button-default' }}
+    >
+      <Form
+        autocomplete="off"
+        form={form}
+        id="form"
+        onFinish={onFinish}
+        initialValues={record}
+        layout="vertical"
       >
-        {btnName}
-      </Button>
+        {editPage ? (
+          <>
+            <Form.Item
+              name="langKey"
+              rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
+            >
+              <Select
+                style={{ marginTop: '15px' }}
+                options={langKey}
+                placeholder={i18n.t('columns.langKey')}
+              />
+            </Form.Item>
 
-      <Modal
-        title={i18n.t('actions.addEmployee')}
-        visible={isModalOpen}
-        onOk={handleOk}
-        cancelText={i18n.t('actions.cancel')}
-        onCancel={handleCancel}
-        okButtonProps={{ className: 'button-modal', form: 'form', htmlType: 'submit' }}
-        cancelButtonProps={{ className: 'button-default' }}
-      >
-        <Form
-          form={form}
-          id="form"
-          onFinish={onFinish}
-          initialValues={initialData}
-          onFinishFailed={onFinishFailed}
-          layout="vertical"
+            <Form.Item style={{ display: 'none' }} name="id">
+              <Input />
+            </Form.Item>
+          </>
+        ) : null}
+
+        {editPage ? null : (
+          <>
+            <Form.Item
+              name="firstName"
+              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+            >
+              <Input placeholder={i18n.t('columns.firstName')} />
+            </Form.Item>
+            <Form.Item
+              name="lastName"
+              rules={[{ required: true, message: i18n.t('rule.lastNameRequired') }]}
+            >
+              <Input placeholder={i18n.t('columns.lastName')} />
+            </Form.Item>
+
+            <Form.Item
+              name="email"
+              rules={[{ required: true, message: i18n.t('rule.emailRequired') }]}
+            >
+              <Input placeholder={i18n.t('columns.email')} />
+            </Form.Item>
+            <Form.Item style={{ display: 'none' }} name="login" required>
+              <Input placeholder={i18n.t('columns.email')} />
+            </Form.Item>
+
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: i18n.t('rule.passwordRequired') }]}
+            >
+              <Input placeholder={i18n.t('columns.password')} />
+            </Form.Item>
+
+            <Form.Item
+              name="authOrganization"
+              rules={[{ required: true, message: i18n.t('rule.organizationRequired') }]}
+            >
+              <Select placeholder={i18n.t('columns.organization')}>
+                {organizations &&
+                  organizations.map((item) => (
+                    <Select.Option key={item.code} value={JSON.stringify(item)}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Form.Item>
+          </>
+        )}
+
+        <Form.Item
+          name="authority"
+          rules={[{ required: true, message: i18n.t('rule.roleRequired') }]}
         >
-          <Form.Item name="firstName" required>
-            <Input placeholder={i18n.t('columns.firstName')} />
-          </Form.Item>
-
-          <Form.Item name="lastName" required>
-            <Input placeholder={i18n.t('columns.lastName')} />
-          </Form.Item>
-
-          <Form.Item name="email" required>
-            <Input placeholder={i18n.t('columns.email')} />
-          </Form.Item>
-          <Form.Item name="login" required>
-            <Input placeholder={i18n.t('columns.email')} />
-          </Form.Item>
-
-          <Form.Item name="password" required>
-            <Input placeholder={i18n.t('columns.password')} />
-          </Form.Item>
-
-          <Form.Item name="authority" required>
-            <Select options={roles} placeholder={i18n.t('columns.role')} />
-          </Form.Item>
-
-          <Form.Item name="authOrganization" required>
-            <Select placeholder={i18n.t('columns.organization')}>
-              {organizations &&
-                organizations.map((item) => (
-                  <Select.Option key={item.code} value={JSON.stringify(item)}>
-                    {item.name}
-                  </Select.Option>
-                ))}
-            </Select>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </>
+          <Select placeholder={i18n.t('columns.role')} options={roles} />
+        </Form.Item>
+      </Form>
+    </Modal>
   );
 };
 

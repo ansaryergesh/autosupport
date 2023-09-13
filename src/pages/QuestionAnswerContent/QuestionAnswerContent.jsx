@@ -10,7 +10,15 @@ import {
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
-import { Col, Dropdown, notification, Row, Menu, Empty, Typography } from 'antd';
+import {
+  Col,
+  Dropdown,
+  notification,
+  Row,
+  Menu,
+  Empty,
+  Typography
+} from 'antd';
 import SunEditor from '../DetailedQuestionAdmin/SunEditor.jsx';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
@@ -28,7 +36,7 @@ import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
   editAnswerQuestion,
-  deleteAnswerById,
+  deleteAnswerById
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 
@@ -127,6 +135,7 @@ const QuestionAnswerContent = () => {
       answerByQuestionAndResource(id, activeResource.id)
         .then((res) => {
           setAnswerFormData(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.error(err);

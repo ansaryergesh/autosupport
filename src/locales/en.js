@@ -50,6 +50,9 @@ export default {
     role: 'Role',
     code: 'Code',
     numberOfRequests: 'Number of requests',
+      langKey: 'Language key',
+      organization: 'Organization',
+      password: 'Password',
   },
   actions: {
     addEmployee: 'Add new employee',
@@ -116,6 +119,10 @@ export default {
   },
   rule: {
     nameRequired: 'Name is required',
+    lastNameRequired: 'Last name is required',
+    passwordRequired: 'Password is required',
+    roleRequired: 'Role is required',
+    langKeyRequired: 'Language key is required',
     descriptionRequired: 'Description is required',
     emailRequired: 'Email is required',
     questionRequired: 'Question is required',
@@ -147,4 +154,9 @@ export default {
     lastNameLabel: 'Last name',
     organizationLabel: 'Organization',
   },
+  employeePage:{
+    employeeDeletedNotification: 'Employee deleted!',
+    employeeAddedNotification: 'Employee added!',
+    employeeEditedNotification: 'Employee edited!',
+  }
 };

@@ -46,6 +46,7 @@ export default {
     lastName: 'Фамилия',
     email: 'Почта',
     role: 'Роль',
+    organization: 'Организация',
     code: 'Код',
     numberOfRequests: 'Количество запросов',
     password: 'Пароль',
@@ -146,4 +147,9 @@ export default {
     lastNameLabel: 'Фамилия',
     organizationLabel: 'Организация',
   },
+  employeePage:{
+    employeeDeletedNotification: 'Сотрудник удален!',
+    employeeAddedNotification: 'Сотрудник добавлен!',
+    employeeEditedNotification: 'Сотрудник редактирован!',
+  }
 };

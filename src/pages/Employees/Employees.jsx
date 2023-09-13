@@ -3,13 +3,41 @@ import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
 import { deleteEmployee, getEmployeeData } from '../../service/Employee';
+import { i18n } from '../../utils/i18next';
+
+const initialData = {
+  id: null,
+  login: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  imageUrl: '',
+  activated: true,
+  langKey: '',
+  createdBy: '',
+  createdDate: '',
+  lastModifiedBy: '',
+  lastModifiedDate: '',
+  authority: '',
+  authOrganization: {
+    name: '',
+    code: '',
+  },
+  password: '',
+};
 
 const Employees = () => {
-  const [data, setData] = useState([]); // Initialize with an empty array
+  const [data, setData] = useState([]);
+  const [record, setRecord] = useState(initialData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   useEffect(() => {
     getEmployeeData().then((res) => {
-      setData(res.data.content); // Extract the 'content' array from the response
+      setData(res.data.content);
     });
   }, []);
 
@@ -17,57 +45,82 @@ const Employees = () => {
     deleteEmployee(key).then(() => {
       const newData = data.filter((item) => item.id !== key);
       setData(newData);
-      notification.info({ message: 'Employee deleted' });
+      notification.info({ message: `${i18n.t('employeePage.employeeDeletedNotification')}` });
     });
   };
 
+
+
   const columns = [
     {
-      title: 'Ф.И.О.',
-      dataIndex: 'firstName', // Use 'firstName' as dataIndex
+      title: `${i18n.t('columns.name')}`,
+      dataIndex: 'firstName',
       key: 'name',
     },
     {
-      title: 'Почтовый адрес',
+      title: `${i18n.t('columns.email')}`,
       dataIndex: 'email',
       key: 'email',
     },
     {
-      title: 'Роль',
-      dataIndex: 'authority', // This might need further processing if it's an array
+      title: `${i18n.t('columns.role')}`,
+      dataIndex: 'authority',
       key: 'authority',
     },
     {
-      title: 'Компания',
-      dataIndex: `authOrganization`, // Access nested property
+      title: `${i18n.t('columns.organization')}`,
+      dataIndex: `authOrganization`,
       key: 'authOrganization',
-      ///Проверить почему не работает
       render: (authOrganization) => <span>{authOrganization.name}</span>,
     },
     {
-      title: 'Действия',
+      title: `${i18n.t('actions.action')}`,
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EmployeeModal btnType="default" btnName="Редактировать" />
+          <Button
+            onClick={() => {
+              setRecord(record);
+              handleModal();
+            }}
+          >
+            {i18n.t('actions.edit')}
+          </Button>
+
           <Popconfirm
             cancelButtonProps={{ className: 'button-default' }}
+            cancelText={i18n.t('actions.cancel')}
             okButtonProps={{ className: 'button-modal' }}
-            title="Sure to delete?"
+            title={i18n.t('actions.sure')}
             onConfirm={() => handleDelete(record.id)}
           >
-            <Button>Удалить</Button>
+            <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
         </Space>
       ),
     },
   ];
 
+
   return (
     <div style={{ margin: '68px auto 0 auto' }}>
-      <EmployeeModal btnType="modal" btnName="Добавить сотрудника" margin={10} />
-      <Table pagination={false} columns={columns} dataSource={data} />{' '}
-      {/* Use 'data' as dataSource */}
+      <EmployeeModal
+        record={record}
+        handleModal={handleModal}
+        isModalOpen={isModalOpen}
+        getEmployeeData={getEmployeeData}
+      />
+      <Button
+        type="modal"
+        onClick={() => {
+          setRecord(initialData);
+          handleModal();
+        }}
+        style={{ marginBottom: '10px' }}
+      >
+        {i18n.t('actions.addEmployee')}
+      </Button>
+      <Table pagination={false} columns={columns} dataSource={data} />
     </div>
   );
 };

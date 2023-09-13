@@ -18,8 +18,13 @@ export const deleteEmployee = (id) => {
 
 export const manageEmployee = (data) => {
   if (data.id) {
-    return axiosInstanceWithHeader.put(`/api/update/accout/${data.id}`);
+    return axiosInstanceWithHeader.put(`/api/update/account/${data.id}`, data);
   } else {
     return axiosInstanceWithHeader.post('/api/create', data);
   }
 };
+
+
+
+
+

@@ -41,7 +41,7 @@ const AccountData = () => {
     console.log(data);
     changePassword(data).then((res) => {
       console.log(res);
-      notification.info({ message: 'Password is updated' });
+      notification.info({ message: `${i18n.t('userProfile.passwordUpdateNotification')}` });
     });
   };
   const onFinishFailed = (errorInfo) => {
@@ -68,7 +68,7 @@ const AccountData = () => {
           label={i18n.t('userProfile.currentPasswordLabel')}
           rules={[{ message: 'Please input your password!' }]}
         >
-          <Input type="password" placeholder={i18n.t('userProfile.сurrentPasswordPlaceholder')} />
+          <Input type="password" placeholder={i18n.t('userProfile.currentPasswordPlaceholder')} />
         </Form.Item>
         <Form.Item
           name="newPassword"
