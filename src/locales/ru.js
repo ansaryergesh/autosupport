@@ -147,9 +147,9 @@ export default {
     lastNameLabel: 'Фамилия',
     organizationLabel: 'Организация',
   },
-  employeePage:{
+  employeePage: {
     employeeDeletedNotification: 'Сотрудник удален!',
     employeeAddedNotification: 'Сотрудник добавлен!',
     employeeEditedNotification: 'Сотрудник редактирован!',
-  }
+  },
 };

@@ -146,9 +146,9 @@ export default {
     lastNameLabel: 'Тегі',
     organizationLabel: 'Ұйымдастыру',
   },
-  employeePage:{
+  employeePage: {
     employeeDeletedNotification: 'Қызметкер жойылған!',
     employeeAddedNotification: 'Қызметкер қосылды!',
     employeeEditedNotification: 'Қызметкер өңделді!',
-  }
+  },
 };

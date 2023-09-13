@@ -96,6 +96,8 @@ const Routes = () => {
         <RouteWithLayout exact layout={Main} component={Organizations} path={'/organizations'} />
         <RouteWithLayout exact layout={Main} component={Resources} path={'/resources'} />
         <RouteWithLayout exact layout={Main} component={Сategory} path={'/category/:id'} />
+        <RouteWithLayout exact layout={Main} component={NewTickets} path={'/new-tickets'} />
+        <RouteWithLayout exact layout={Main} component={OldTickets} path={'/old-tickets'} />
         <RouteWithLayout exact layout={Main} component={UserProfile} path={'/user-profile'} />
       </Switch>
     </React.Fragment>

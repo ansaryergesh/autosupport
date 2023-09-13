@@ -5,7 +5,6 @@ import Input from '../../../components/Input/Input';
 import { getAccountData } from '../../../service/Profile';
 import { i18n } from '../../../utils/i18next.js';
 
-
 const initialData = {
   id: 1,
   login: 'super_admin',

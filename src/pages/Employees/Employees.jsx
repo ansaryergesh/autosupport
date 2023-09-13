@@ -49,8 +49,6 @@ const Employees = () => {
     });
   };
 
-
-
   const columns = [
     {
       title: `${i18n.t('columns.name')}`,
@@ -100,7 +98,6 @@ const Employees = () => {
       ),
     },
   ];
-
 
   return (
     <div style={{ margin: '68px auto 0 auto' }}>

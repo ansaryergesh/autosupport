@@ -23,8 +23,3 @@ export const manageEmployee = (data) => {
     return axiosInstanceWithHeader.post('/api/create', data);
   }
 };
-
-
-
-
-
