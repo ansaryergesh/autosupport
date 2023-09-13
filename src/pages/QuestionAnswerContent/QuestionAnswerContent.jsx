@@ -116,12 +116,17 @@ const QuestionAnswerContent = () => {
 
   useEffect(() => {
     getQuestionById(id).then((res) => {
-      setSelectedResources(res.data.resources);
-      setActiveResource(res.data.resources[0]);
+      setSelectedResources(res.data.resources || []);
+      res.data.resources
+      res.data.resourcers && setActiveResource(res.data.resources[0]);
     });
   }, [id]);
 
   useEffect(() => {
+    getQuestionById(id).then((res) => {
+      setQuestionInfo(res.data);
+      setSelectedQuestions(res.data?.children || []);
+    });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
       answerByQuestionAndResource(id, activeResource.id)

@@ -21,12 +21,13 @@ import {
 } from '../../service/Question/index.js';
 import MenuItem from './Menu/MenuItem.jsx';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
-import { SIDEBAR_BUTTON } from '../../constants/index.js';
+import {LANG_KEY, SIDEBAR_BUTTON} from '../../constants/index.js';
 import { getLocale } from '../../utils/i18next.js';
 import ConstDropDownMenuItem from './ConstDropDownMenuItem';
 import { useHistory } from 'react-router-dom';
 import { LogoutOutlined } from '@ant-design/icons';
 import { clearStorage } from '../../service/Auth/index.js';
+import {checkIfBottomScrolled} from "../../helpers/handleScroll.js";
 import styles from './index.module.less';
 import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
 import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
@@ -105,7 +106,9 @@ const SidebarNav = ({ isAdmin = true }) => {
   const [categoryId, setCategoryId] = useState(0);
   const [categoryInfo, setCategoryInfo] = useState({});
   const [questionInfo, setQuestionInfo] = useState({});
-
+  const [pageCurrent,setPageCurrent] = useState(0)
+  const [totalCount,setTotalCount] = useState(0)
+  const defaultPageSize = 20;
   const [activeButton, setActiveButton] = useState(
     localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) || SIDEBAR_BUTTON.ALL,
   );
@@ -122,10 +125,17 @@ const SidebarNav = ({ isAdmin = true }) => {
   }, [activeButton]);
 
   const getCategoryAll = () => {
-    getCategories().then((res) => {
-      setAllCategories(res.data);
+    getCategories({pageCurrent: 0, pageSize:defaultPageSize, langKey: getLocale()?.toUpperCase() || LANG_KEY.RU}).then((res) => {
+      setAllCategories(res.data)
+      setTotalCount(res.headers["x-total-count"])
     });
   };
+
+  const getCategoryOnScroll = (pageCurrent) => {
+    getCategories({pageCurrent, pageSize:defaultPageSize, langKey: getLocale()?.toUpperCase() || LANG_KEY.RU}).then((res) => {
+      setAllCategories(prevState => [...prevState,...res.data]);
+    });
+  }
 
   const getAllQuestions = () => {
     console.log(allQuestions);
@@ -222,6 +232,15 @@ const SidebarNav = ({ isAdmin = true }) => {
     history.push(`/sign-in`);
   };
 
+  const handleScroll = (e) => {
+    if(checkIfBottomScrolled(e) && Math.ceil(totalCount/defaultPageSize) >= pageCurrent+1) {
+      setPageCurrent(prevState => {
+        getCategoryOnScroll(prevState+1)
+        return prevState+1
+      })
+    }
+  }
+
   return (
     <Sider width={300} className="site-layout-background">
       <SearchInput />
@@ -243,7 +262,11 @@ const SidebarNav = ({ isAdmin = true }) => {
       >
         <SideBarButtons activeButton={activeButton} setActiveButton={setActiveButton} />
       </div>
+      <ConstDropDownMenuItem handleAdd={handleAddCategory} />
       <div
+          onScroll={e=> {
+            handleScroll(e)
+          }}
         className="custom-menu"
         style={{
           maxHeight: '100vh',
@@ -251,7 +274,6 @@ const SidebarNav = ({ isAdmin = true }) => {
           width: '100%!important',
         }}
       >
-        <ConstDropDownMenuItem handleAdd={handleAddCategory} />
         {allCategories?.map((m, index) => (
           <MenuItem
             activeButton={activeButton}
