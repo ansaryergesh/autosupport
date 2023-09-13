@@ -9,7 +9,7 @@ import styles from './index.module.less';
 import { List, Typography } from 'antd';
 import { i18n } from '../../utils/i18next.js';
 
-const backgroundColor = ['#9debb0', '#87CEEB', '#FFD700', '#FFC0CB', '#FFA07A'];
+const backgroundColor = ['#3F9534', '#343c95', '#957534', '#959234', '#953434'];
 const FeedbackAnalytics = () => {
   const [userData] = useState({
     labels: UserData.map((data) => data.review),

@@ -132,6 +132,7 @@ const QuestionAnswerContent = () => {
       answerByQuestionAndResource(id, activeResource.id)
         .then((res) => {
           setAnswerFormData(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.error(err);

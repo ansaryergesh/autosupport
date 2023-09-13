@@ -35,65 +35,17 @@ const UserData = () => {
     <Form layout="vertical">
       <Col span={12}>
         <Title level={2}>{i18n.t('userProfile.userDataTitle')}</Title>
-        <Form.Item
-          name="login"
-          label={i18n.t('userProfile.loginLabel')}
-          rules={[
-            {
-              type: 'login',
-              message: 'The input is not valid Login!',
-            },
-            {
-              message: 'Please input your Login!',
-            },
-          ]}
-        >
+        <Form.Item name="login" label={i18n.t('userProfile.loginLabel')}>
           <Input defaultValue={data.login} readOnly />
         </Form.Item>
-        <Form.Item
-          name="firstName"
-          label={i18n.t('userProfile.firstNameLabel')}
-          rules={[
-            {
-              type: 'firstName',
-              message: 'The input is not valid First Name!',
-            },
-            {
-              message: 'Please input your First Name!',
-            },
-          ]}
-        >
+        <Form.Item name="firstName" label={i18n.t('userProfile.firstNameLabel')}>
           <Input defaultValue={data.firstName} readOnly />
         </Form.Item>
-        <Form.Item
-          name="lastName"
-          label={i18n.t('userProfile.lastNameLabel')}
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid Last Name!',
-            },
-            {
-              message: 'Please input your Last Name!',
-            },
-          ]}
-        >
+        <Form.Item name="lastName" label={i18n.t('userProfile.lastNameLabel')}>
           <Input defaultValue={data.lastName} readOnly />
         </Form.Item>
-        <Form.Item
-          name="authOrganization"
-          label={i18n.t('userProfile.organizationLabel')}
-          rules={[
-            {
-              type: 'organization',
-              message: 'The input is not valid Organization!',
-            },
-            {
-              message: 'Please input your Organization!',
-            },
-          ]}
-        >
-          <Input defaultValue={data.authOrganization?.code} disabled={true} />
+        <Form.Item name="authOrganization" label={i18n.t('userProfile.organizationLabel')}>
+          <Input defaultValue={data.authOrganization} readOnly />
         </Form.Item>
       </Col>
     </Form>
