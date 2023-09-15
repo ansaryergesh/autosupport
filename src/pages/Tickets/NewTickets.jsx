@@ -12,14 +12,14 @@ const NewTickets = () => {
   const handleTicketStatus = (id) => {
     const statusData = {
       id,
-      status: 'CLOSED',
+      status: 'CLOSED'
     };
     updateTicketStatus(statusData)
       .then((res) => {
         if (res.data) {
           notification.success({
             message: i18n.t('processed'),
-            placement: 'top',
+            placement: 'top'
           });
         }
         getNewTicketsList(1, 10);
@@ -31,11 +31,11 @@ const NewTickets = () => {
   const columns = [
     {
       title: i18n.t('newAnswer.whatQuestion'),
-      dataIndex: 'title',
+      dataIndex: 'title'
     },
     {
       title: i18n.t('columns.email'),
-      dataIndex: 'email',
+      dataIndex: 'email'
     },
     {
       title: i18n.t('actions.action'),
@@ -44,12 +44,11 @@ const NewTickets = () => {
         <Button
           onClick={() => {
             handleTicketStatus(record.id);
-          }}
-        >
+          }}>
           {i18n.t('processed')}
         </Button>
-      ),
-    },
+      )
+    }
   ];
 
   const getNewTicketsList = (pageCurrent, pageSize) => {
@@ -75,20 +74,26 @@ const NewTickets = () => {
         tableLayout="fixed"
         rowKey={(record) => record.id}
         expandable={{
-          expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.text}</p>,
+          expandedRowRender: (record) => (
+            <p style={{ margin: 0 }}>{record.text}</p>
+          )
         }}
         columns={columns}
         dataSource={data}
         pagination={{
           total: totalPages,
           onChange: (page, pageSize) => getNewTicketsList(page, pageSize),
-          position: ['bottomCenter'],
+          position: ['bottomCenter']
         }}
         bordered
         locale={{
-          emptyText: <Empty description={i18n.t('noData')} />,
+          emptyText: <Empty description={i18n.t('noData')} />
         }}
       />
+
+      <Button style={{ marginTop: '16px' }} type="primary">
+        {i18n.t('actions.downloadTickets')}
+      </Button>
     </div>
   );
 };

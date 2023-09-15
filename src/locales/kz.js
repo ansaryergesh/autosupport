@@ -76,7 +76,9 @@ export default {
     save: 'Сақтау',
     saved: 'Сақталды',
     back: 'Артқа',
-    saveReviews: 'Пікірлерді жүктеу',
+    downloadReviews: 'Пікірлерді жүктеу',
+    downloadSearchHistory: 'Іздеу тарихын жүктеу',
+    downloadTickets: 'Тикеттарды жүктеу',
     deleteSelected: 'Таңдалғандарды өшіру',
     selected: 'Таңдалған',
     preview: 'Тексеру',
@@ -90,6 +92,7 @@ export default {
     ReviewDownload: 'Айғақтарды жүктеп алыңыз',
     averageRating: 'Орташа рейтинг',
     mark: 'Жаңа метка',
+    reviewsWith: 'Пікірдің балы',
   },
   questionAnswer: {
     DescriptionTitle: 'Қадамдардың сипаттамасы',

@@ -1,27 +1,32 @@
-import React from 'react';
-import Title from 'antd/lib/typography/Title.js';
+import React, { useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
 import { useState } from 'react';
-import { UserData, dataList } from './constants.js';
+import { dataList } from './constants.js';
 import styles from './index.module.less';
 import { List, Typography } from 'antd';
 import { i18n } from '../../utils/i18next.js';
+import { getAnalytics } from '../../service/Feedback/index.js';
+import { StarFilled } from '@ant-design/icons';
+import TypographyHead from '../Typography/TypographyHead.jsx';
+import { TypoGraphyType } from '../Typography/constants.js';
 
-const backgroundColor = ['#3F9534', '#343c95', '#957534', '#959234', '#953434'];
+const backgroundColor = ['#13AD63', '#1A6B9F', '#FFD700', '#F9971B', '#F9541B'];
+const reversed = backgroundColor.slice().reverse();
+
 const FeedbackAnalytics = () => {
-  const [userData] = useState({
-    labels: UserData.map((data) => data.review),
-    datasets: [
-      {
-        data: UserData.map((data) => data.reviewsNum),
-        backgroundColor: backgroundColor,
-      },
-    ],
-  });
+  const [data, setData] = useState();
 
-  const calculatePercentage = (value, total) => ((value / total) * 100).toFixed(2);
+  const getAnalyticsList = () => {
+    getAnalytics().then((res) => {
+      setData(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getAnalyticsList();
+  }, []);
 
   const chartOptions = {
     plugins: {
@@ -30,12 +35,8 @@ const FeedbackAnalytics = () => {
         callbacks: {
           label: (context) => {
             const dataset = context.dataset;
-            const total = dataset.data.reduce(
-              (previousValue, currentValue) => previousValue + currentValue,
-            );
-            const currentValue = dataset.data[context.dataIndex];
-            const percentage = calculatePercentage(currentValue, total);
-            return ` ${currentValue} (${percentage}%)`;
+            const dataValue = dataset.data[context.dataIndex];
+            return dataValue + '%';
           },
         },
       },
@@ -46,27 +47,51 @@ const FeedbackAnalytics = () => {
 
   return (
     <div>
-      <Title level={3}>{i18n.t('feedback.ResponseAnalytics')}</Title>
+      <TypographyHead
+        content={i18n.t('feedback.ResponseAnalytics')}
+        type={TypoGraphyType.SECONDARY_HEAD}
+      />
 
       <div className={styles.analyticsBox}>
         <div style={{ width: '250px', height: '250px' }}>
-          <Pie data={userData} options={chartOptions} />
+          <Pie
+            data={{
+              labels: data?.percents
+                .sort((a, b) => a.score - b.score)
+                .map((item) => `Оценка ${item.score}`),
+              datasets: [
+                {
+                  data: data?.percents.map((item) => item.percent),
+                  backgroundColor: reversed,
+                },
+              ],
+            }}
+            options={chartOptions}
+          />
         </div>
 
         <List
           split={false}
           dataSource={dataList}
           renderItem={(item, index) => (
-            <List.Item style={{ display: 'flex', alignItems: 'center', gap: '13px' }}>
+            <List.Item style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Typography.Text mark>
                 <div className={styles.circle} style={{ background: backgroundColor[index] }}></div>
               </Typography.Text>
-              {item}
+              <TypographyHead
+                className={styles.rateText}
+                type={TypoGraphyType.LEVEL_2}
+                content={item}
+              />
             </List.Item>
           )}
         />
       </div>
-      <p>{i18n.t('feedback.averageRating')}</p>
+
+      <p>
+        {i18n.t('feedback.averageRating')}: {Number(data?.average).toFixed(2)}{' '}
+        <StarFilled style={{ color: '#13AD63' }} />
+      </p>
     </div>
   );
 };
