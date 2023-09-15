@@ -75,7 +75,9 @@
     "save": "Сақтау",
     "saved": "Сақталды",
     "back": "Артқа",
-    "saveReviews": "Пікірлерді жүктеу",
+    "downloadReviews": "Пікірлерді жүктеу",
+    "downloadSearchHistory": "Іздеу тарихын жүктеу",
+    "downloadTickets": "Тикеттарды жүктеу",
     "deleteSelected": "Таңдалғандарды өшіру",
     "selected": "Таңдалған",
     "preview": "Тексеру"
@@ -88,7 +90,8 @@
     "ListTitle": "Барлық пікірлер тізімі",
     "ReviewDownload": "Айғақтарды жүктеп алыңыз",
     "averageRating": "Орташа рейтинг",
-    "mark": "Жаңа метка"
+    "mark": "Жаңа метка",
+    "reviewsWith": "Пікірдің балы"
   },
   "questionAnswer": {
     "DescriptionTitle": "Қадамдардың сипаттамасы",

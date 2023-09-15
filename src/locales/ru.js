@@ -75,7 +75,9 @@ export default {
     save: 'Сохранить',
     saved: 'Сохранено',
     back: 'Назад',
-    saveReviews: 'Скачать отзывы',
+    downloadReviews: 'Скачать отзывы',
+    downloadSearchHistory: 'Скачать историю поиска',
+    downloadTickets: 'Скачать тикеты',
     deleteSelected: 'Удалить выбранное',
     selected: 'Выбранно',
     preview: 'Предпросмотр',
@@ -89,6 +91,7 @@ export default {
     ReviewDownload: 'Загрузить отзывы',
     averageRating: 'Средняя оценка',
     mark: 'Новая метка',
+    reviewsWith: 'Отзывы с оценкой',
   },
   questionAnswer: {
     VisualInstruction: 'Визуальная инструкция',

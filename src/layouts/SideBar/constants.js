@@ -1,8 +1,5 @@
 import users from 'images/users.svg';
 import reviews from 'images/message-square-lines.svg';
-import categories from 'images/edit-2.svg';
-import keywords from 'images/keywords.svg';
-import tags from 'images/tags.svg';
 import organizations from 'images/organizations.svg';
 import resources from 'images/resources.svg';
 import oldTickets from 'images/oldTickets.svg';
@@ -21,24 +18,9 @@ export const adminNavItems = [
     icon: reviews,
   },
   {
-    name: 'categories',
-    path: '/',
-    icon: categories,
-  },
-  {
     name: 'searchHistory',
     path: '/search-history',
     icon: search,
-  },
-  {
-    name: 'keywords',
-    path: '/keywords',
-    icon: keywords,
-  },
-  {
-    name: 'tags',
-    path: '/tags',
-    icon: tags,
   },
   {
     name: 'resources',

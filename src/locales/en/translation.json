@@ -77,7 +77,9 @@
     "save": "Save",
     "saved": "Saved",
     "back": "Back",
-    "saveReviews": "Save reviews",
+    "downloadReviews": "Download reviews",
+    "downloadSearchHistory": "Download search history",
+    "downloadTickets": "Download tickets",
     "deleteSelected": "Delete selected",
     "selected": "Selected",
     "preview": "Preview"
@@ -86,11 +88,12 @@
     "MainTitle1": "You are in the Freedom Broker administration panel",
     "MainTitle2": "Ticket Instructions:",
     "ResponseAnalytics": "Response analytics",
-    "AddTicketTitle": "Functionality of adding new tags",
+    "AddTicketTitle": "Functionality of adding new marks",
     "ListTitle": "List of all reviews",
     "ReviewDownload": "Download reviews",
     "averageRating": "Average rating",
-    "mark": "New mark"
+    "mark": "New mark",
+    "reviewsWith": "Reviews with rating"
   },
   "questionAnswer": {
     "VisualInstruction": "Visual Instruction",

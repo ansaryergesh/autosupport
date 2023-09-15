@@ -11,7 +11,7 @@ import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
 import { Col, Dropdown, notification, Row, Menu, Empty, Typography } from 'antd';
-import SunEditor from '../DetailedQuestionAdmin/SunEditor.jsx';
+import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
