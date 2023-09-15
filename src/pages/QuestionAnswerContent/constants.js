@@ -1,3 +1,5 @@
+import {LocalStorageKeys} from "../../storage/localStorageKey.js";
+
 export const initialQuestionAnswerContent = {
   id: null,
   question: {
@@ -66,3 +68,18 @@ export const initialQuestionAnswerContent = {
   ],
   status: null,
 };
+
+
+export const saveAnswerNews = (answerFormData) => {
+  let answerFormDataList = JSON.parse(localStorage.getItem(LocalStorageKeys.ANSWER_FROM_DATA)) || [];
+  const filtered = answerFormDataList.filter(item => item.resource?.id !== answerFormData.resource?.id);
+  answerFormDataList = [...filtered,answerFormData];
+  localStorage.setItem(LocalStorageKeys.ANSWER_FROM_DATA, JSON.stringify(answerFormDataList));
+}
+
+
+export const getAnswerFormDataByResource = (resource) => {
+  let answerFormDataList = JSON.parse(localStorage.getItem(LocalStorageKeys.ANSWER_FROM_DATA)) || [];
+  console.log(answerFormDataList.find(item => item.resource.id === resource.id))
+  return answerFormDataList.find(item => item.resource.id === resource.id) || null;
+}

@@ -23,7 +23,7 @@ import { searchKeyWords, manageKeyword } from '../../service/Keywords/index.js';
 import SearchReference from '../SearchAutoComplete/SearchReference';
 import { manageTag, searchTags } from '../../service/Tags/index.js';
 import SearchSimilarQuestion from '../SearchAutoComplete/SearchSimilarQuestion';
-import { initialQuestionAnswerContent } from './constants.js';
+import {getAnswerFormDataByResource, initialQuestionAnswerContent, saveAnswerNews} from './constants.js';
 import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
@@ -31,6 +31,7 @@ import {
   deleteAnswerById,
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
+import {LocalStorageKeys} from "../../storage/localStorageKey.js";
 
 const QuestionAnswerContent = () => {
   const { id } = useParams();
@@ -46,6 +47,7 @@ const QuestionAnswerContent = () => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
   useEffect(() => {
+    localStorage.removeItem(LocalStorageKeys.ANSWER_FROM_DATA);
     getResources()
       .then((res) => {
         setResources(res.data);
@@ -53,7 +55,9 @@ const QuestionAnswerContent = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
-  console.log(resources);
+  useEffect(() => {
+    saveAnswerNews(answerFormData)
+  },[answerFormData])
 
   const menuResources = () => {
     return resources.map((resource) => {
@@ -84,8 +88,7 @@ const QuestionAnswerContent = () => {
   const menuDelete = (resource) => {
     const handleDelete = () => {
       setAnswerFormData((prevState) => {
-        console.log(prevState);
-        setAnswerFormData({ ...initialQuestionAnswerContent });
+        return {...prevState,...initialQuestionAnswerContent}
       });
       if (resource.isNew) {
         setSelectedResources((prev) =>
@@ -117,7 +120,7 @@ const QuestionAnswerContent = () => {
   useEffect(() => {
     getQuestionById(id).then((res) => {
       setSelectedResources(res.data.resources || []);
-      res.data.resourcers && setActiveResource(res.data.resources[0]);
+      res.data.resources && setActiveResource(res.data.resources[0]);
     });
   }, [id]);
 
@@ -207,32 +210,37 @@ const QuestionAnswerContent = () => {
     if (resource.id !== activeResource.id) {
       setSelectedLanguage(LANG_KEY.RU);
       setActiveResource(resource);
-      setAnswerFormData({
-        ...initialQuestionAnswerContent,
-        answerContents: [
-          {
-            langKey: 'EN',
-            stepDescription: '',
-            videoUrl: '',
-            videoDescription: '',
-            images: [],
-          },
-          {
-            langKey: 'RU',
-            stepDescription: '',
-            videoUrl: '',
-            videoDescription: '',
-            images: [],
-          },
-          {
-            langKey: 'KZ',
-            stepDescription: '',
-            videoUrl: '',
-            videoDescription: '',
-            images: [],
-          },
-        ],
-      });
+      if(getAnswerFormDataByResource(resource)) {
+        setAnswerFormData(getAnswerFormDataByResource(resource))
+      } else {
+        setAnswerFormData({
+          ...initialQuestionAnswerContent,
+          resource: activeResource,
+          answerContents: [
+            {
+              langKey: 'EN',
+              stepDescription: '',
+              videoUrl: '',
+              videoDescription: '',
+              images: [],
+            },
+            {
+              langKey: 'RU',
+              stepDescription: '',
+              videoUrl: '',
+              videoDescription: '',
+              images: [],
+            },
+            {
+              langKey: 'KZ',
+              stepDescription: '',
+              videoUrl: '',
+              videoDescription: '',
+              images: [],
+            },
+          ],
+        });
+      }
     }
   };
 

@@ -38,6 +38,7 @@ const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');
   const [options, setOptions] = useState([]);
   const [focus, setFocus] = useState(false);
+  const history = useHistory();
 
   const handleFocus = (focused) => {
     setFocus(focused);
@@ -50,10 +51,11 @@ const SearchInput = () => {
         pageSize: 5,
       };
       searchQuestions(params).then((res) => {
+        console.log(res.data)
         setOptions(
           res?.data.map((item) => ({
             value: item.questionContents.title,
-            id: item.questionContents.id,
+            id: item.id,
           })),
         );
       });
@@ -66,6 +68,13 @@ const SearchInput = () => {
       // window.location.href = '/detailedQuestion';
     }
   };
+
+  const handleSelect = (value,option) => {
+    console.log('selected', option)
+    setSearchValue(value);
+    history.push(`/question/admin/${option.id}`)
+    setSearchValue('')
+  }
   return (
     <>
       {focus ? (
@@ -76,6 +85,7 @@ const SearchInput = () => {
       <AutoComplete
         className={styles.autoComplete}
         onSearch={handleSearch}
+        onSelect={handleSelect}
         onFocus={() => handleFocus(true)}
         onBlur={() => handleFocus(false)}
         options={options}
