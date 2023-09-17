@@ -47,6 +47,7 @@ export default {
     email: 'Почта',
     role: 'Роль',
     organization: 'Организация',
+    langKey: 'Язык',
     code: 'Код',
     numberOfRequests: 'Количество запросов',
     password: 'Пароль',

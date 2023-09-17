@@ -30,15 +30,24 @@ const Employees = () => {
   const [data, setData] = useState([]);
   const [record, setRecord] = useState(initialData);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [totalPages, setTotalPages] = useState();
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  useEffect(() => {
-    getEmployeeData().then((res) => {
+  const getEmployeeList = (pageCurrent, pageSize) => {
+    window.scrollTo(0, 0);
+
+    getEmployeeData(pageCurrent - 1, pageSize).then((res) => {
       setData(res.data.content);
+      setTotalPages(res.data.totalElements);
+      console.log(res);
     });
+  };
+
+  useEffect(() => {
+    getEmployeeList(1, 10);
   }, []);
 
   const handleDelete = (key) => {
@@ -52,8 +61,8 @@ const Employees = () => {
   const columns = [
     {
       title: `${i18n.t('columns.name')}`,
-      dataIndex: 'firstName',
       key: 'name',
+      render: (_, record) => <span>{`${record.firstName} ${record.lastName}`}</span>,
     },
     {
       title: `${i18n.t('columns.email')}`,
@@ -70,6 +79,11 @@ const Employees = () => {
       dataIndex: `authOrganization`,
       key: 'authOrganization',
       render: (authOrganization) => <span>{authOrganization.name}</span>,
+    },
+    {
+      title: `${i18n.t('columns.langKey')}`,
+      dataIndex: 'langKey',
+      key: 'langKey',
     },
     {
       title: `${i18n.t('actions.action')}`,
@@ -105,19 +119,28 @@ const Employees = () => {
         record={record}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
-        getEmployeeData={getEmployeeData}
+        getEmployeeList={getEmployeeList}
       />
       <Button
         type="modal"
         onClick={() => {
           setRecord(initialData);
+          getEmployeeData();
           handleModal();
         }}
         style={{ marginBottom: '10px' }}
       >
         {i18n.t('actions.addEmployee')}
       </Button>
-      <Table pagination={false} columns={columns} dataSource={data} />
+      <Table
+        pagination={{
+          total: totalPages,
+          onChange: (page, pageSize) => getEmployeeList(page, pageSize),
+          position: ['bottomCenter'],
+        }}
+        columns={columns}
+        dataSource={data}
+      />
     </div>
   );
 };

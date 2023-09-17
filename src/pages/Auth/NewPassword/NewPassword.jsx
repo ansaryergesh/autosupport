@@ -4,7 +4,6 @@ import Logo from 'images/logoFreedom.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
-import ArrowLeft from 'images/ArrowLeft.svg';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { newPassword } from '../../../service/Auth';
@@ -29,22 +28,10 @@ const NewPassword = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const ArrowBack = () => {
-    return <Image src={ArrowLeft} preview={false} className={styles.btnBackIcon} />;
-  };
-
   return (
     <div className={styles.authBlock}>
       <Col span={24}>
         <div className={styles.logoBox}>
-          <Button
-            type="text"
-            className={styles.btnBack}
-            iconButton={<ArrowBack />}
-            iconPosition={'left'}
-          >
-            Назад
-          </Button>
           <div className={styles.logo}>
             <Image src={Logo} preview={false} />
           </div>

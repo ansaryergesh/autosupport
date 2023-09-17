@@ -1,7 +1,18 @@
 import { axiosInstanceWithHeader } from '../../api/api';
 
-export const getEmployeeData = () => {
-  return axiosInstanceWithHeader.get('/api/accounts');
+export const getEmployeeData = (pageCurrent, pageSize, params) => {
+  return axiosInstanceWithHeader.get('/api/accounts', {
+    params: {
+      pageSize,
+      pageCurrent,
+      query: '',
+      ...params,
+    },
+  });
+};
+
+export const getEmployeeDataId = (id) => {
+  return axiosInstanceWithHeader.get(`/api/account/${id}`);
 };
 
 export const getAllRoles = () => {

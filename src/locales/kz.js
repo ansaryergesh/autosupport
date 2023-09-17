@@ -50,6 +50,7 @@ export default {
     role: 'Рөль',
     code: 'Код',
     numberOfRequests: 'Сұраулар саны',
+    langKey: 'Тіл',
     password: 'Құпия сөз',
   },
   actions: {
