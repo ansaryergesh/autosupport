@@ -27,12 +27,12 @@ const CardComponent = (props) => {
       <div className={styles.content}>
         {questions?.slice(0, maxQuestionsToShow).map((q, index) => (
           <p key={index} style={{ marginBottom: '11px' }}>
-
             <Link to={`/question/admin/${q.id}`}>
               <Text ellipsis={{ rows: 2, expandable: false }}>
                 <TypographyHead
-                    type={TypoGraphyType.LEVEL_2}
-                    content={q.questionContents[0].title} />
+                  type={TypoGraphyType.LEVEL_2}
+                  content={q.questionContents[0].title}
+                />
               </Text>
             </Link>
           </p>

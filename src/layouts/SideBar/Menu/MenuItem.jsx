@@ -9,7 +9,7 @@ import { SIDEBAR_BUTTON } from '../../../constants/index.js';
 import { MoreOutlined } from '@ant-design/icons';
 import { Dropdown, Menu, Popconfirm } from 'antd';
 import { i18n } from '../../../utils/i18next.js';
-import {findByLangKey} from "../../../helpers/findByLangKey";
+import { findByLangKey } from '../../../helpers/findByLangKey';
 
 const MenuItem = ({
   category,
@@ -161,7 +161,11 @@ const MenuItem = ({
                         }
                       }}
                     >
-                      <span className="linkName">{findByLangKey(q?.questionContents) ? findByLangKey(q?.questionContents).title : ''}</span>
+                      <span className="linkName">
+                        {findByLangKey(q?.questionContents)
+                          ? findByLangKey(q?.questionContents).title
+                          : ''}
+                      </span>
                       <Dropdown
                         style={{ zIndex: '10' }}
                         overlay={menuQuestion(q.id)}
@@ -201,7 +205,11 @@ const MenuItem = ({
             style={{ padding: '8px', marginBottom: '4px' }}
           >
             <Link to={`/question/admin/${question?.id}`}>
-              <span>{findByLangKey(question?.questionContents) ? findByLangKey(question?.questionContents).title : ''}</span>
+              <span>
+                {findByLangKey(question?.questionContents)
+                  ? findByLangKey(question?.questionContents).title
+                  : ''}
+              </span>
             </Link>
           </div>
         </DraggableMenuItem>

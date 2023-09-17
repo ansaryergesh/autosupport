@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Form, Select, notification } from 'antd';
 import Input from '../Input/Input.jsx';
 import { i18n } from 'utils/i18next.js';
-import { getAllOrganizations, getAllRoles, manageEmployee } from '../../service/Employee/index.js';
+import {
+  getAllOrganizations,
+  getAllRoles,
+  getEmployeeData,
+  manageEmployee,
+} from '../../service/Employee/index.js';
 import { LANG_KEY } from '../../constants/index.js';
 
 const initialData = {
@@ -35,12 +40,29 @@ const EmployeeModal = ({
   record = initialData,
   handleModal,
   isModalOpen = false,
-  getEmployeeData,
+  getEmployeeList,
 }) => {
   const [roles, setRoles] = useState();
   const [organizations, setOrganizations] = useState();
   const [form] = Form.useForm();
   const editPage = record.id;
+  const [employeeData, setEmployeeData] = useState(initialData);
+
+  useEffect(() => {
+    form.setFieldsValue(employeeData);
+  }, [employeeData, form]);
+
+  useEffect(() => {
+    if (editPage) {
+      getEmployeeData(editPage)
+        .then((res) => {
+          setEmployeeData(res.data);
+        })
+        .catch((error) => {
+          console.error('Ошибка при загрузке данных о сотруднике:', error);
+        });
+    }
+  }, [editPage]);
 
   useEffect(() => {
     form.setFieldsValue(record);
@@ -50,7 +72,8 @@ const EmployeeModal = ({
     console.log(values);
     const transformedValues = {
       ...values,
-      authOrganization: JSON.parse(values.authOrganization),
+      login: values.email,
+      authOrganization: editPage ? null : JSON.parse(values.authOrganization),
     };
 
     let finalData;
@@ -74,10 +97,10 @@ const EmployeeModal = ({
           });
         }
         handleModal();
-        getEmployeeData();
       })
       .finally(() => {
         form.resetFields();
+        getEmployeeList(1, 10);
       });
   };
 
@@ -121,11 +144,7 @@ const EmployeeModal = ({
               name="langKey"
               rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
             >
-              <Select
-                style={{ marginTop: '15px' }}
-                options={langKey}
-                placeholder={i18n.t('columns.langKey')}
-              />
+              <Select name="langKey" style={{ marginTop: '15px' }} options={langKey} />
             </Form.Item>
 
             <Form.Item style={{ display: 'none' }} name="id">
@@ -140,7 +159,7 @@ const EmployeeModal = ({
               name="firstName"
               rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
             >
-              <Input placeholder={i18n.t('columns.firstName')} />
+              <Input style={{ marginTop: '15px' }} placeholder={i18n.t('columns.firstName')} />
             </Form.Item>
             <Form.Item
               name="lastName"
@@ -151,10 +170,11 @@ const EmployeeModal = ({
 
             <Form.Item
               name="email"
-              rules={[{ required: true, message: i18n.t('rule.emailRequired') }]}
+              rules={[{ required: true, type: 'email', message: i18n.t('rule.emailRequired') }]}
             >
               <Input placeholder={i18n.t('columns.email')} />
             </Form.Item>
+
             <Form.Item style={{ display: 'none' }} name="login" required>
               <Input placeholder={i18n.t('columns.email')} />
             </Form.Item>
@@ -163,7 +183,18 @@ const EmployeeModal = ({
               name="password"
               rules={[{ required: true, message: i18n.t('rule.passwordRequired') }]}
             >
-              <Input placeholder={i18n.t('columns.password')} />
+              <Input
+                type="password"
+                placeholder={i18n.t('columns.password')}
+                // className={ }
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="langKey"
+              rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
+            >
+              <Select name="langKey" options={langKey} />
             </Form.Item>
 
             <Form.Item
@@ -186,7 +217,10 @@ const EmployeeModal = ({
           name="authority"
           rules={[{ required: true, message: i18n.t('rule.roleRequired') }]}
         >
-          <Select placeholder={i18n.t('columns.role')} options={roles} />
+          <Select
+            placeholder={i18n.t('columns.role')}
+            options={(roles && roles.filter((role) => role.value !== 'ROLE_SUPER_ADMIN')) || []}
+          />
         </Form.Item>
       </Form>
     </Modal>

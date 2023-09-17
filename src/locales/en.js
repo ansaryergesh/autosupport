@@ -50,7 +50,7 @@ export default {
     role: 'Role',
     code: 'Code',
     numberOfRequests: 'Number of requests',
-    langKey: 'Language key',
+    langKey: 'Language',
     organization: 'Organization',
     password: 'Password',
   },
