@@ -27,8 +27,8 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error?.status === 401) {
-      clearStorage();
       notification.error({ message: i18n.t('commons.unauthorized') });
+      clearStorage();
     } else if (error?.status === '403') {
       notification.error({
         message: i18n.t('commons.accessDenied'),
@@ -46,6 +46,8 @@ axiosInstanceWithHeader.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       // logout();
+      clearStorage();
+      location.reload();
       notification.error({ message: i18n.t('commons.unauthorized') });
       // localStorage.removeItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
       // location.href='/sign-in'

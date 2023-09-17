@@ -4,6 +4,7 @@ import styles from './index.module.less';
 import { Link } from 'react-router-dom';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
+import {findByLangKey} from "../../helpers/findByLangKey";
 const CardComponent = (props) => {
   const { Text } = Typography;
   const questions = props.data?.questions;
@@ -29,7 +30,7 @@ const CardComponent = (props) => {
           <p key={index} style={{ marginBottom: '11px' }}>
             <Link to={`/question/admin/${q.id}`}>
               <Text ellipsis={{ rows: 2, expandable: false }}>
-                <TypographyHead type={TypoGraphyType.LEVEL_2} content={q.questionContents.title} />
+                <TypographyHead type={TypoGraphyType.LEVEL_2} content={findByLangKey(q?.questionContents) ? findByLangKey(q.questionContents)?.title : ''} />
               </Text>
             </Link>
           </p>

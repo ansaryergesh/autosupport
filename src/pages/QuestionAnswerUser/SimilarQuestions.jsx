@@ -3,7 +3,7 @@ import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 import { i18n } from '../../utils/i18next.js';
-
+import {findByLangKey} from "../../helpers/findByLangKey.js";
 const dataSimilar = [
   {
     id: 1,
@@ -39,7 +39,7 @@ const SimilarQuestions = () => {
             className={styles.similarParagraph}
             key={q.id}
             type={TypoGraphyType.LEVEL_2}
-            content={q.questionContents.title}
+            content={findByLangKey(q?.questionContents) ? findByLangKey(q?.questionContents).title : ''}
           />
         ))}
       </div>

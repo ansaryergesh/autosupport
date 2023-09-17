@@ -31,6 +31,7 @@ import { checkIfBottomScrolled } from '../../helpers/handleScroll.js';
 import styles from './index.module.less';
 import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
 import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
+import {findByLangKey} from "../../helpers/findByLangKey.js";
 
 const { Sider } = Layout;
 
@@ -54,7 +55,7 @@ const SearchInput = () => {
         console.log(res.data)
         setOptions(
           res?.data.map((item) => ({
-            value: item.questionContents.title,
+            value: findByLangKey(item?.questionContents) ? findByLangKey(item?.questionContents).title : '',
             id: item.id,
           })),
         );

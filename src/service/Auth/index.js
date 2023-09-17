@@ -2,6 +2,7 @@ import { axiosInstance } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 
 export const clearStorage = () => {
+  console.log("clearStorage")
   localStorage.removeItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
   localStorage.removeItem(LocalStorageKeys.FREEDOM_REFRESH_TOKEN);
 };
