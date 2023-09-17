@@ -4,17 +4,17 @@ import { CloseOutlined } from '@ant-design/icons';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 import styles from './index.module.less';
-import {findByLangKey} from "../../helpers/findByLangKey.js";
+import { findByLangKey } from '../../helpers/findByLangKey.js';
 const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title }) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
     searchAction().then((response) => {
       setOptions(
-        response?.data.
-
-        map((item) => ({
-          value: findByLangKey(item?.questionContents) ? findByLangKey(item?.questionContents).title : '',
+        response?.data.map((item) => ({
+          value: findByLangKey(item?.questionContents)
+            ? findByLangKey(item?.questionContents).title
+            : '',
           id: item.questionContents?.id,
           itemValue: item,
         })),
@@ -35,7 +35,9 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
     searchAction(params).then((response) => {
       setOptions(
         response?.data.map((item) => ({
-          value: findByLangKey(item?.questionContents) ? findByLangKey(item?.questionContents).title : '',
+          value: findByLangKey(item?.questionContents)
+            ? findByLangKey(item?.questionContents).title
+            : '',
           id: item.questionContents?.id,
           itemValue: item,
         })),
@@ -98,7 +100,11 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
                   alignItems: 'center',
                 }}
               >
-                <span key={item.id}>{findByLangKey(item?.questionContents) ? findByLangKey(item?.questionContents).title : ''}</span>
+                <span key={item.id}>
+                  {findByLangKey(item?.questionContents)
+                    ? findByLangKey(item?.questionContents).title
+                    : ''}
+                </span>
                 <CloseOutlined
                   className={styles.xBtn}
                   onClick={() => handleRemoveSelected(item.id)}

@@ -3,10 +3,7 @@ import JHeader from '../../components/JHeader/JHeader';
 import { i18n } from '../../utils/i18next';
 import { Table, Popconfirm, notification } from 'antd';
 import Button from '../../components/Button/Button';
-import {
-  deleteSearchHistoryItems,
-  getSearchHistory
-} from '../../service/SearchHistory';
+import { deleteSearchHistoryItems, getSearchHistory } from '../../service/SearchHistory';
 import SearchHistoryModal from '../../components/SearchHistoryModal/SearchHistoryModal';
 // import { initialValues } from './constants';
 
@@ -50,7 +47,7 @@ const SearchHistory = () => {
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange
+    onChange: onSelectChange,
   };
 
   useEffect(() => {
@@ -60,11 +57,11 @@ const SearchHistory = () => {
   const columns = [
     {
       title: i18n.t('columns.name'),
-      dataIndex: 'text'
+      dataIndex: 'text',
     },
     {
       title: i18n.t('columns.numberOfRequests'),
-      dataIndex: 'count'
+      dataIndex: 'count',
     },
 
     {
@@ -75,11 +72,12 @@ const SearchHistory = () => {
           onClick={() => {
             setRecord(record);
             handleModal();
-          }}>
+          }}
+        >
           {i18n.t('actions.add')}
         </Button>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -92,17 +90,12 @@ const SearchHistory = () => {
           okButtonProps={{ className: 'button-modal' }}
           title={i18n.t('actions.sure')}
           cancelText={i18n.t('actions.cancel')}
-          onConfirm={handleDeleteSelected}>
-          <Button disabled={!hasSelected}>
-            {i18n.t('actions.deleteSelected')}
-          </Button>
+          onConfirm={handleDeleteSelected}
+        >
+          <Button disabled={!hasSelected}>{i18n.t('actions.deleteSelected')}</Button>
         </Popconfirm>
 
-        <span>
-          {hasSelected
-            ? `${i18n.t('actions.selected')} ${selectedRowKeys.length} `
-            : ''}
-        </span>
+        <span>{hasSelected ? `${i18n.t('actions.selected')} ${selectedRowKeys.length} ` : ''}</span>
       </div>
 
       <Table
@@ -114,7 +107,7 @@ const SearchHistory = () => {
         pagination={{
           total: totalPages,
           onChange: (page, pageSize) => getSearchHistoryList(page, pageSize),
-          position: ['bottomCenter']
+          position: ['bottomCenter'],
         }}
       />
 

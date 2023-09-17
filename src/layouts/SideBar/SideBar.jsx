@@ -31,7 +31,7 @@ import { checkIfBottomScrolled } from '../../helpers/handleScroll.js';
 import styles from './index.module.less';
 import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
 import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
-import {findByLangKey} from "../../helpers/findByLangKey.js";
+import { findByLangKey } from '../../helpers/findByLangKey.js';
 
 const { Sider } = Layout;
 
@@ -52,10 +52,12 @@ const SearchInput = () => {
         pageSize: 5,
       };
       searchQuestions(params).then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setOptions(
           res?.data.map((item) => ({
-            value: findByLangKey(item?.questionContents) ? findByLangKey(item?.questionContents).title : '',
+            value: findByLangKey(item?.questionContents)
+              ? findByLangKey(item?.questionContents).title
+              : '',
             id: item.id,
           })),
         );
@@ -70,12 +72,12 @@ const SearchInput = () => {
     }
   };
 
-  const handleSelect = (value,option) => {
-    console.log('selected', option)
+  const handleSelect = (value, option) => {
+    console.log('selected', option);
     setSearchValue(value);
-    history.push(`/question/admin/${option.id}`)
-    setSearchValue('')
-  }
+    history.push(`/question/admin/${option.id}`);
+    setSearchValue('');
+  };
   return (
     <>
       {focus ? (

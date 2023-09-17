@@ -23,7 +23,7 @@ import { searchKeyWords, manageKeyword } from '../../service/Keywords/index.js';
 import SearchReference from '../SearchAutoComplete/SearchReference';
 import { manageTag, searchTags } from '../../service/Tags/index.js';
 import SearchSimilarQuestion from '../SearchAutoComplete/SearchSimilarQuestion';
-import { initialQuestionAnswerContent} from './constants.js';
+import { initialQuestionAnswerContent } from './constants.js';
 import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
@@ -31,7 +31,7 @@ import {
   deleteAnswerById,
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
-import {LocalStorageKeys} from "../../storage/localStorageKey.js";
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 
 const QuestionAnswerContent = () => {
   const { id } = useParams();
@@ -84,7 +84,7 @@ const QuestionAnswerContent = () => {
   const menuDelete = (resource) => {
     const handleDelete = () => {
       setAnswerFormData((prevState) => {
-        return {...prevState,...initialQuestionAnswerContent}
+        return { ...prevState, ...initialQuestionAnswerContent };
       });
       if (resource.isNew) {
         setSelectedResources((prev) =>
@@ -127,15 +127,15 @@ const QuestionAnswerContent = () => {
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
-      console.log('activeResource changed')
+      console.log('activeResource changed');
       answerByQuestionAndResource(id, activeResource.id)
         .then((res) => {
-          console.log('resolved')
+          console.log('resolved');
           setAnswerFormData(res.data);
           console.log(res.data);
         })
         .catch((err) => {
-          console.log("Error")
+          console.log('Error');
           console.error(err);
           setAnswerFormData(initialQuestionAnswerContent);
         })

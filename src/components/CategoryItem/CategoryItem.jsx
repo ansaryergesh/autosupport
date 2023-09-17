@@ -1,7 +1,7 @@
 import React from 'react';
 import { notification, Typography } from 'antd';
 import styles from './index.module.less';
-import {findByLangKey} from "../../helpers/findByLangKey.js";
+import { findByLangKey } from '../../helpers/findByLangKey.js';
 const { Title, Paragraph } = Typography;
 
 function CategoryItem({ editQuestion, getAllQuestion, data }) {
@@ -38,7 +38,9 @@ function CategoryItem({ editQuestion, getAllQuestion, data }) {
           {findByLangKey(data?.questionContents) ? findByLangKey(data?.questionContents).title : ''}
         </Title>
         <Paragraph editable={{ onChange: handleEditQuestionDesc }} className={styles.paragraph}>
-          {findByLangKey(data?.questionContents) ? findByLangKey(data?.questionContents).stepDescription : ''}
+          {findByLangKey(data?.questionContents)
+            ? findByLangKey(data?.questionContents).stepDescription
+            : ''}
         </Paragraph>
       </div>
     </div>
