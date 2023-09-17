@@ -23,7 +23,7 @@ import { searchKeyWords, manageKeyword } from '../../service/Keywords/index.js';
 import SearchReference from '../SearchAutoComplete/SearchReference';
 import { manageTag, searchTags } from '../../service/Tags/index.js';
 import SearchSimilarQuestion from '../SearchAutoComplete/SearchSimilarQuestion';
-import {getAnswerFormDataByResource, initialQuestionAnswerContent, saveAnswerNews} from './constants.js';
+import { initialQuestionAnswerContent} from './constants.js';
 import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
@@ -54,10 +54,6 @@ const QuestionAnswerContent = () => {
       })
       .catch((err) => console.log(err));
   }, [id]);
-
-  useEffect(() => {
-    saveAnswerNews(answerFormData)
-  },[answerFormData])
 
   const menuResources = () => {
     return resources.map((resource) => {
@@ -131,12 +127,15 @@ const QuestionAnswerContent = () => {
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
+      console.log('activeResource changed')
       answerByQuestionAndResource(id, activeResource.id)
         .then((res) => {
+          console.log('resolved')
           setAnswerFormData(res.data);
           console.log(res.data);
         })
         .catch((err) => {
+          console.log("Error")
           console.error(err);
           setAnswerFormData(initialQuestionAnswerContent);
         })
@@ -210,37 +209,6 @@ const QuestionAnswerContent = () => {
     if (resource.id !== activeResource.id) {
       setSelectedLanguage(LANG_KEY.RU);
       setActiveResource(resource);
-      if(getAnswerFormDataByResource(resource)) {
-        setAnswerFormData(getAnswerFormDataByResource(resource))
-      } else {
-        setAnswerFormData({
-          ...initialQuestionAnswerContent,
-          resource: activeResource,
-          answerContents: [
-            {
-              langKey: 'EN',
-              stepDescription: '',
-              videoUrl: '',
-              videoDescription: '',
-              images: [],
-            },
-            {
-              langKey: 'RU',
-              stepDescription: '',
-              videoUrl: '',
-              videoDescription: '',
-              images: [],
-            },
-            {
-              langKey: 'KZ',
-              stepDescription: '',
-              videoUrl: '',
-              videoDescription: '',
-              images: [],
-            },
-          ],
-        });
-      }
     }
   };
 
