@@ -1,5 +1,6 @@
-import { axiosInstance, axiosInstanceWithHeader } from '../../api/api.js';
+import { axiosInstance } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+import axios from "axios";
 
 export const clearStorage = () => {
   console.log('clearStorage');
@@ -8,6 +9,10 @@ export const clearStorage = () => {
   localStorage.removeItem(LocalStorageKeys.ACCOUNT_DATA);
   localStorage.clear();
 };
+
+export const checkerAddress =
+  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : 'http://localhost:8080';
+
 
 export const onLogin = (data) => {
   return axiosInstance.post('/api/authenticate', data);
@@ -25,6 +30,9 @@ export const newPassword = (data) => {
   return axiosInstance.post('/api/account/reset-password/finish', data);
 };
 
-export const getCurrentAccount = () => {
-  return axiosInstanceWithHeader.get('/api/account');
+export const getCurrentAccount = (bearerToken) => {
+  return axios.get(checkerAddress+'/api/account', {
+    headers: {
+      Authorization: 'Bearer ' + bearerToken,
+    },});
 };

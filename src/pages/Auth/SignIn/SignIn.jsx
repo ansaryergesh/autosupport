@@ -17,16 +17,6 @@ const SignIn = () => {
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)) {
-      getCurrentAccount().then((res) => {
-        console.log(res.data);
-        localStorage.setItem(LocalStorageKeys.ACCOUNT_DATA, JSON.stringify(res.data));
-      });
-      console.log('check token');
-      location.reload();
-    }
-  }, [localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)]);
 
   const onFinish = (values) => {
     setLoading(true);
@@ -34,6 +24,10 @@ const SignIn = () => {
       .then((res) => {
         if (res) {
           if (res.data?.id_token) {
+            getCurrentAccount(res.data?.id_token).then(res=> {
+              location.reload();
+              localStorage.setItem(LocalStorageKeys.ACCOUNT_DATA, JSON.stringify(res.data));
+            })
             localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
           }
           notification.success({ message: 'welcome' });

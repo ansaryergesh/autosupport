@@ -5,7 +5,7 @@ import { clearStorage } from '../service/Auth/index.js';
 import { i18n } from '../utils/i18next';
 
 export const checkerAddress =
-  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/';
+  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : 'http://localhost:8080';
 
 export const originAddress =
   import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : window.location.origin;
