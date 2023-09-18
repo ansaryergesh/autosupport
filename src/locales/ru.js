@@ -39,6 +39,7 @@ export default {
     submit: 'Подтвердить',
     unauthorized: 'Не авторизован',
     accessDenied: 'Отказано в доступе',
+    signOutMessage: 'Вы вышли из аккаунта',
   },
   columns: {
     name: 'Наименование',

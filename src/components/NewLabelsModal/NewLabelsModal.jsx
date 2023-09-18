@@ -10,18 +10,8 @@ const NewLabelsModal = ({ isModalOpen, handleModal, modalData, getAllMarksList }
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
-    const finalData = {
-      ...values,
-    };
-
-    finalData.organizationDto = {
-      name: 'Freedom',
-      code: 'Freedom',
-    };
-
-    console.log(finalData);
     setLoading(true);
-    manageMark(finalData)
+    manageMark(values)
       .then((res) => {
         console.log(res);
         handleModal();

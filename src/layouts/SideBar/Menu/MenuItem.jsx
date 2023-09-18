@@ -10,6 +10,7 @@ import { MoreOutlined } from '@ant-design/icons';
 import { Dropdown, Menu, Popconfirm } from 'antd';
 import { i18n } from '../../../utils/i18next.js';
 import { findByLangKey } from '../../../helpers/findByLangKey';
+import { checkPermissions } from '../../../helpers/checkPermission.js';
 
 const MenuItem = ({
   category,
@@ -31,17 +32,19 @@ const MenuItem = ({
   const menu = (id) => {
     return (
       <Menu>
-        {
-          <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
-            {i18n.t('menu.addCategory')}
-          </Menu.Item>
-        }
-        <Menu.Item key="edit" onClick={() => handleEditCategory(id)}>
-          {i18n.t('menu.editCategory')}
-        </Menu.Item>
-        <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
-          {i18n.t('menu.addQuestion')}
-        </Menu.Item>
+        {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <>
+            <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+              {i18n.t('menu.addCategory')}
+            </Menu.Item>
+            <Menu.Item key="edit" onClick={() => handleEditCategory(id)}>
+              {i18n.t('menu.editCategory')}
+            </Menu.Item>
+            <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
+              {i18n.t('menu.addQuestion')}
+            </Menu.Item>
+          </>
+        )}
         <Menu.Item key="remove">
           <Popconfirm
             title={i18n.t('actions.sure')}
@@ -63,12 +66,16 @@ const MenuItem = ({
   const menuQuestion = (id) => {
     return (
       <Menu>
-        <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
-          {i18n.t('menu.addCategory')}
-        </Menu.Item>
-        <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
-          {i18n.t('menu.editQuestion')}
-        </Menu.Item>
+        {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <>
+            <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+              {i18n.t('menu.addCategory')}
+            </Menu.Item>
+            <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
+              {i18n.t('menu.editQuestion')}
+            </Menu.Item>
+          </>
+        )}
         <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
           {i18n.t('menu.deleteQuestion')}
         </Menu.Item>

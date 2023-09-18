@@ -22,7 +22,12 @@ const OrganizationsModal = ({
 
   const handleSubmit = (values) => {
     setLoading(true);
-    manageOrganization(values)
+
+    const params = {
+      code: values.code,
+    };
+
+    manageOrganization(values, params, editPage)
       .then((res) => {
         handleModal();
         getList();
@@ -64,11 +69,8 @@ const OrganizationsModal = ({
           }}
           initialValues={record}
         >
-          <Form.Item name="id" style={{ display: 'none' }}>
-            <Input />
-          </Form.Item>
           <Form.Item name="code" rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
-            <Input placeholder={i18n.t('columns.code')} />
+            <Input readOnly={editPage && true} placeholder={i18n.t('columns.code')} />
           </Form.Item>
           <Form.Item name="name" rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('organization')} />

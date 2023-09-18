@@ -9,6 +9,7 @@ import {
   manageEmployee,
 } from '../../service/Employee/index.js';
 import { LANG_KEY } from '../../constants/index.js';
+import { checkPermissions } from '../../helpers/checkPermission.js';
 
 const initialData = {
   id: null,
@@ -113,9 +114,10 @@ const EmployeeModal = ({
       setRoles(optionRole);
     });
 
-    getAllOrganizations().then((res) => {
-      setOrganizations(res.data);
-    });
+    checkPermissions(['ROLE_SUPER_ADMIN']) &&
+      getAllOrganizations().then((res) => {
+        setOrganizations(res.data);
+      });
   }, []);
 
   return (
@@ -127,7 +129,11 @@ const EmployeeModal = ({
         handleModal();
       }}
       cancelText={i18n.t('actions.cancel')}
-      okButtonProps={{ className: 'button-modal', form: 'form', htmlType: 'submit' }}
+      okButtonProps={{
+        className: 'button-modal',
+        form: 'form',
+        htmlType: 'submit',
+      }}
       cancelButtonProps={{ className: 'button-default' }}
     >
       <Form
@@ -170,7 +176,13 @@ const EmployeeModal = ({
 
             <Form.Item
               name="email"
-              rules={[{ required: true, type: 'email', message: i18n.t('rule.emailRequired') }]}
+              rules={[
+                {
+                  required: true,
+                  type: 'email',
+                  message: i18n.t('rule.emailRequired'),
+                },
+              ]}
             >
               <Input placeholder={i18n.t('columns.email')} />
             </Form.Item>
@@ -183,11 +195,7 @@ const EmployeeModal = ({
               name="password"
               rules={[{ required: true, message: i18n.t('rule.passwordRequired') }]}
             >
-              <Input
-                type="password"
-                placeholder={i18n.t('columns.password')}
-                // className={ }
-              />
+              <Input type="password" placeholder={i18n.t('columns.password')} />
             </Form.Item>
 
             <Form.Item
@@ -197,19 +205,26 @@ const EmployeeModal = ({
               <Select name="langKey" options={langKey} />
             </Form.Item>
 
-            <Form.Item
-              name="authOrganization"
-              rules={[{ required: true, message: i18n.t('rule.organizationRequired') }]}
-            >
-              <Select placeholder={i18n.t('columns.organization')}>
-                {organizations &&
-                  organizations.map((item) => (
-                    <Select.Option key={item.code} value={JSON.stringify(item)}>
-                      {item.name}
-                    </Select.Option>
-                  ))}
-              </Select>
-            </Form.Item>
+            {checkPermissions(['ROLE_SUPER_ADMIN']) && (
+              <Form.Item
+                name="authOrganization"
+                rules={[
+                  {
+                    required: true,
+                    message: i18n.t('rule.organizationRequired'),
+                  },
+                ]}
+              >
+                <Select placeholder={i18n.t('columns.organization')}>
+                  {organizations &&
+                    organizations.map((item) => (
+                      <Select.Option key={item.code} value={JSON.stringify(item)}>
+                        {item.name}
+                      </Select.Option>
+                    ))}
+                </Select>
+              </Form.Item>
+            )}
           </>
         )}
 

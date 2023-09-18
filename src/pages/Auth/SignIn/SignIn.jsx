@@ -6,7 +6,7 @@ import SendHover from 'images/SendHover.svg';
 import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
-import { onLogin } from '../../../service/Auth/index.js';
+import { getCurrentAccount, onLogin } from '../../../service/Auth/index.js';
 import { LocalStorageKeys } from '../../../storage/localStorageKey.js';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -17,6 +17,17 @@ const SignIn = () => {
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
 
+  useEffect(() => {
+    if (localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)) {
+      getCurrentAccount().then((res) => {
+        console.log(res.data);
+        localStorage.setItem(LocalStorageKeys.ACCOUNT_DATA, JSON.stringify(res.data));
+      });
+      console.log('check token');
+      location.reload();
+    }
+  }, [localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)]);
+
   const onFinish = (values) => {
     setLoading(true);
     onLogin(values)
@@ -25,7 +36,6 @@ const SignIn = () => {
           if (res.data?.id_token) {
             localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
           }
-          location.reload();
           notification.success({ message: 'welcome' });
         }
       })

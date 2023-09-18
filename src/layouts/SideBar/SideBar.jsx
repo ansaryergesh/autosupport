@@ -198,7 +198,9 @@ const SidebarNav = ({ isAdmin = true }) => {
     deleteCategory(categoryId).then((res) => {
       console.log(res);
       history.push('/');
-      notification.success('deleted category');
+      notification.success({
+        message: i18n.t('actions.deleted'),
+      });
       getCategoryAll();
     });
   };
@@ -206,7 +208,9 @@ const SidebarNav = ({ isAdmin = true }) => {
   const handleDeleteQuestion = (questionId) => {
     deleteQuestion(questionId).then((res) => {
       console.log(res);
-      notification.success('deleted question');
+      notification.success({
+        message: i18n.t('actions.deleted'),
+      });
       getCategoryAll();
     });
   };
@@ -243,7 +247,6 @@ const SidebarNav = ({ isAdmin = true }) => {
   const logOutNotification = () => {
     notification.info({
       message: i18n.t('commons.signOutMessage'),
-      placement: 'top',
     });
   };
 
