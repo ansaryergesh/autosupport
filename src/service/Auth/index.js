@@ -11,7 +11,7 @@ export const clearStorage = () => {
 };
 
 export const checkerAddress =
-  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : 'http://localhost:8080';
+  import.meta.env?.MODE === 'development' ? 'http://localhost:8080' : '/';
 
 
 export const onLogin = (data) => {
