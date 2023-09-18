@@ -11,7 +11,7 @@ const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearc
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const arr = [values.id];
     setLoading(true);
 
@@ -24,22 +24,24 @@ const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearc
       manageFunction = manageTag;
     }
 
-    manageFunction(values)
-      .then((res) => {
-        handleModal();
-        deleteSearchHistoryItems(arr);
-        getSearchHistoryList();
-        if (res.data) {
-          notification.success({
-            message: i18n.t('actions.added'),
-          });
-        }
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setLoading(false);
-        form.resetFields();
-      });
+    try {
+      await deleteSearchHistoryItems(arr);
+      const res = await manageFunction(values);
+
+      handleModal();
+
+      if (res.data) {
+        notification.success({
+          message: i18n.t('actions.added'),
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      await getSearchHistoryList(1, 10);
+      setLoading(false);
+      form.resetFields();
+    }
   };
 
   useEffect(() => {

@@ -33,9 +33,8 @@ const Organizations = () => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const handleDelete = (id) => {
-    console.log(id);
-    deleteOrganization(id).then((res) => {
+  const handleDelete = (code) => {
+    deleteOrganization(code).then((res) => {
       if (res.status === 204) {
         notification.success({ message: i18n.t('actions.deleted') });
         getOrganizationsList();
@@ -46,8 +45,8 @@ const Organizations = () => {
   const handleDeleteSelected = async () => {
     try {
       await Promise.all(
-        selectedRowKeys.map((rowId) =>
-          deleteOrganization(rowId).then((res) => {
+        selectedRowKeys.map((code) =>
+          deleteOrganization(code).then((res) => {
             if (res.status === 204) {
               notification.success({ message: i18n.t('actions.deleted') });
               getOrganizationsList();
@@ -97,7 +96,7 @@ const Organizations = () => {
             okButtonProps={{ className: 'button-modal' }}
             title={i18n.t('actions.sure')}
             cancelText={i18n.t('actions.cancel')}
-            onConfirm={() => handleDelete(record.id)}
+            onConfirm={() => handleDelete(record.code)}
           >
             <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>

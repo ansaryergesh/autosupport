@@ -2,19 +2,21 @@ import React from 'react';
 import { notification, Typography } from 'antd';
 import styles from './index.module.less';
 import { findByLangKey } from '../../helpers/findByLangKey.js';
+import { i18n } from '../../utils/i18next.js';
+
 const { Title, Paragraph } = Typography;
 
 function CategoryItem({ editQuestion, getAllQuestion, data }) {
   const handleEditQuestion = (value) => {
     const finalQuestionContent = {
       ...data,
-      questionContents: [{ ...data?.questionContents, title: value }],
+      questionContents: [{ ...data.questionContents[0], title: value }],
     };
 
     console.log(finalQuestionContent);
     editQuestion(finalQuestionContent).then((res) => {
       console.log(res);
-      notification.info({ message: 'Title changed' });
+      notification.info({ message: i18n.t('actions.edited') });
       getAllQuestion();
     });
   };
@@ -22,11 +24,11 @@ function CategoryItem({ editQuestion, getAllQuestion, data }) {
   const handleEditQuestionDesc = (value) => {
     const finalQuestionContent = {
       ...data,
-      questionContents: [{ ...data?.questionContents, stepDescription: value }],
+      questionContents: [{ ...data?.questionContents[0], stepDescription: value }],
     };
 
     editQuestion(finalQuestionContent).then(() => {
-      notification.info({ message: 'Description changed' });
+      notification.info({ message: i18n.t('actions.edited') });
       getAllQuestion();
     });
   };

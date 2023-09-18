@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Space, Popconfirm, notification } from 'antd';
+import { Table, Space, Popconfirm, Empty, notification } from 'antd';
 import Button from 'components/Button/Button.jsx';
 import EmployeeModal from 'components/EmployeeModal/EmployeeModal.jsx';
 import { deleteEmployee, getEmployeeData } from '../../service/Employee';
 import { i18n } from '../../utils/i18next';
+import { checkPermissions } from '../../helpers/checkPermission';
+import JHeader from '../../components/JHeader/JHeader';
 
 const initialData = {
   id: null,
@@ -54,7 +56,9 @@ const Employees = () => {
     deleteEmployee(key).then(() => {
       const newData = data.filter((item) => item.id !== key);
       setData(newData);
-      notification.info({ message: `${i18n.t('employeePage.employeeDeletedNotification')}` });
+      notification.info({
+        message: `${i18n.t('employeePage.employeeDeletedNotification')}`,
+      });
     });
   };
 
@@ -88,51 +92,58 @@ const Employees = () => {
     {
       title: `${i18n.t('actions.action')}`,
       key: 'action',
-      render: (_, record) => (
-        <Space size="middle">
-          <Button
-            onClick={() => {
-              setRecord(record);
-              handleModal();
-            }}
-          >
-            {i18n.t('actions.edit')}
-          </Button>
+      render: (_, record) =>
+        checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN']) && (
+          <Space size="middle">
+            <Button
+              onClick={() => {
+                setRecord(record);
+                handleModal();
+              }}
+            >
+              {i18n.t('actions.edit')}
+            </Button>
 
-          <Popconfirm
-            cancelButtonProps={{ className: 'button-default' }}
-            cancelText={i18n.t('actions.cancel')}
-            okButtonProps={{ className: 'button-modal' }}
-            title={i18n.t('actions.sure')}
-            onConfirm={() => handleDelete(record.id)}
-          >
-            <Button>{i18n.t('actions.delete')}</Button>
-          </Popconfirm>
-        </Space>
-      ),
+            <Popconfirm
+              cancelButtonProps={{ className: 'button-default' }}
+              cancelText={i18n.t('actions.cancel')}
+              okButtonProps={{ className: 'button-modal' }}
+              title={i18n.t('actions.sure')}
+              onConfirm={() => handleDelete(record.id)}
+            >
+              <Button>{i18n.t('actions.delete')}</Button>
+            </Popconfirm>
+          </Space>
+        ),
     },
   ];
 
   return (
-    <div style={{ margin: '68px auto 0 auto' }}>
+    <div>
+      <JHeader pageTitle={i18n.t('employee')} />
+
       <EmployeeModal
         record={record}
         handleModal={handleModal}
         isModalOpen={isModalOpen}
         getEmployeeList={getEmployeeList}
       />
-      <Button
-        type="modal"
-        onClick={() => {
-          setRecord(initialData);
-          getEmployeeData();
-          handleModal();
-        }}
-        style={{ marginBottom: '10px' }}
-      >
-        {i18n.t('actions.addEmployee')}
-      </Button>
+
+      {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN']) && (
+        <Button
+          type="modal"
+          onClick={() => {
+            setRecord(initialData);
+            getEmployeeData();
+            handleModal();
+          }}
+          style={{ marginBottom: '10px' }}
+        >
+          {i18n.t('actions.addEmployee')}
+        </Button>
+      )}
       <Table
+        bordered
         pagination={{
           total: totalPages,
           onChange: (page, pageSize) => getEmployeeList(page, pageSize),
@@ -140,6 +151,9 @@ const Employees = () => {
         }}
         columns={columns}
         dataSource={data}
+        locale={{
+          emptyText: <Empty description={i18n.t('noData')} />,
+        }}
       />
     </div>
   );

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import JHeader from '../../components/JHeader/JHeader';
 import { i18n } from '../../utils/i18next';
-import { Table, Popconfirm, notification } from 'antd';
+import { Table, Popconfirm, notification, Empty } from 'antd';
 import Button from '../../components/Button/Button';
 import { deleteSearchHistoryItems, getSearchHistory } from '../../service/SearchHistory';
 import SearchHistoryModal from '../../components/SearchHistoryModal/SearchHistoryModal';
 // import { initialValues } from './constants';
+import { checkPermissions } from '../../helpers/checkPermission';
 
 const SearchHistory = () => {
   const [data, setData] = useState([]);
@@ -67,16 +68,17 @@ const SearchHistory = () => {
     {
       title: i18n.t('actions.action'),
       key: 'action',
-      render: (_, record) => (
-        <Button
-          onClick={() => {
-            setRecord(record);
-            handleModal();
-          }}
-        >
-          {i18n.t('actions.add')}
-        </Button>
-      ),
+      render: (_, record) =>
+        checkPermissions(['ROLE_SUPER_ADMIN']) ? null : (
+          <Button
+            onClick={() => {
+              setRecord(record);
+              handleModal();
+            }}
+          >
+            {i18n.t('actions.add')}
+          </Button>
+        ),
     },
   ];
 
@@ -99,6 +101,7 @@ const SearchHistory = () => {
       </div>
 
       <Table
+        bordered
         tableLayout="fixed"
         rowKey={(record) => record.id}
         columns={columns}
@@ -108,6 +111,9 @@ const SearchHistory = () => {
           total: totalPages,
           onChange: (page, pageSize) => getSearchHistoryList(page, pageSize),
           position: ['bottomCenter'],
+        }}
+        locale={{
+          emptyText: <Empty description={i18n.t('noData')} />,
         }}
       />
 

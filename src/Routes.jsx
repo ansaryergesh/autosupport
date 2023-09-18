@@ -8,7 +8,6 @@ import CodeVerify from './pages/Auth/CodeVerify/CodeVerify.jsx';
 import NewPassword from './pages/Auth/NewPassword/NewPassword.jsx';
 import Feedback from './pages/Feedback/Feedback.jsx';
 import PropTypes from 'prop-types';
-import NewRequest from './pages/NewRequest/NewRequest.jsx';
 import AddNewAnswer from './pages/AddNewAnswer/AddNewAnswer.jsx';
 import NewAnswer from './pages/NewAnswer/NewAnswer.jsx';
 import Employees from './pages/Employees/Employees.jsx';
@@ -45,7 +44,6 @@ const Routes = () => {
         <Route exact component={CodeVerify} path={'/code-verify'} />
         <RouteWithLayout exact layout={Main} component={SearchHistory} path="/search-history" />
         <RouteWithLayout exact layout={Main} component={Feedback} path="/feedback" />
-        <RouteWithLayout exact layout={Main} component={NewRequest} path={'/new-request'} />
         <RouteWithLayout
           exact
           layout={Main}

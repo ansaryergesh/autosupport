@@ -7,6 +7,7 @@ import { deleteMark, getAllMarks } from '../../service/Feedback';
 import { initialValues, marksByNum } from './constants';
 import { Dropdown, Menu } from 'antd';
 import NewLabelsModal from '../NewLabelsModal/NewLabelsModal';
+import { checkPermissions } from '../../helpers/checkPermission';
 
 const NewLabels = ({ num }) => {
   const [data, setData] = useState([]);
@@ -28,10 +29,6 @@ const NewLabels = ({ num }) => {
   useEffect(() => {
     getAllMarksList();
   }, []);
-
-  const handleAddInput = () => {
-    handleModal();
-  };
 
   const handleMark = (item) => {
     handleModal();
@@ -78,22 +75,29 @@ const NewLabels = ({ num }) => {
               className={styles.inputItem}
               placeholder={i18n.t('feedback.mark')}
             />
-            <Dropdown trigger={'click'} overlay={menu(item)}>
-              <MoreOutlined
-                style={{
-                  fontSize: '1.5em',
-                  position: 'absolute',
-                  right: '0',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                }}
-              />
-            </Dropdown>
+            {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+              <Dropdown trigger={'click'} overlay={menu(item)}>
+                <MoreOutlined
+                  style={{
+                    fontSize: '1.5em',
+                    position: 'absolute',
+                    right: '0',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                  }}
+                />
+              </Dropdown>
+            )}
           </div>
         );
       })}
-      {data?.length > 4 ? null : (
-        <PlusCircleFilled className={styles.icon} onClick={handleAddInput} />
+      {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : data?.length > 4 ? null : (
+        <PlusCircleFilled
+          className={styles.icon}
+          onClick={() => {
+            handleModal();
+          }}
+        />
       )}
       {isModalOpen && (
         <NewLabelsModal

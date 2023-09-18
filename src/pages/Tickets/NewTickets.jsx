@@ -4,6 +4,7 @@ import { i18n } from '../../utils/i18next';
 import Button from '../../components/Button/Button';
 import { getNewTickets, updateTicketStatus } from '../../service/Tickets';
 import { useEffect, useState } from 'react';
+import { checkPermissions } from '../../helpers/checkPermission';
 
 const NewTickets = () => {
   const [data, setData] = useState([]);
@@ -40,15 +41,16 @@ const NewTickets = () => {
     {
       title: i18n.t('actions.action'),
       key: 'action',
-      render: (_, record) => (
-        <Button
-          onClick={() => {
-            handleTicketStatus(record.id);
-          }}
-        >
-          {i18n.t('processed')}
-        </Button>
-      ),
+      render: (_, record) =>
+        checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <Button
+            onClick={() => {
+              handleTicketStatus(record.id);
+            }}
+          >
+            {i18n.t('processed')}
+          </Button>
+        ),
     },
   ];
 

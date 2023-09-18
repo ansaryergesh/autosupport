@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Space, Popconfirm, notification } from 'antd';
+import { Table, Space, Empty, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
 import ResourcesModal from 'components/ResourcesModal/ResourcesModal.jsx';
 import EditResourceModal from '../../components/ResourcesModal/EditResourceModal.jsx';
@@ -9,6 +9,7 @@ import { i18n } from '../../utils/i18next';
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { getLocale } from '../../utils/i18next.js';
 import { getResourceById } from '../../service/Resources';
+import { checkPermissions } from '../../helpers/checkPermission.js';
 
 const Resources = () => {
   const [data, setData] = useState([]);
@@ -108,26 +109,27 @@ const Resources = () => {
     {
       title: i18n.t('actions.action'),
       key: 'action',
-      render: (_, record) => (
-        <Space size="middle">
-          <Button
-            onClick={() => {
-              handleEditResource(record.id);
-            }}
-          >
-            {i18n.t('actions.edit')}
-          </Button>
-          <Popconfirm
-            cancelButtonProps={{ className: 'button-default' }}
-            okButtonProps={{ className: 'button-modal' }}
-            title={i18n.t('actions.sure')}
-            cancelText={i18n.t('actions.cancel')}
-            onConfirm={() => handleDelete(record.id)}
-          >
-            <Button>{i18n.t('actions.delete')}</Button>
-          </Popconfirm>
-        </Space>
-      ),
+      render: (_, record) =>
+        checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <Space size="middle">
+            <Button
+              onClick={() => {
+                handleEditResource(record.id);
+              }}
+            >
+              {i18n.t('actions.edit')}
+            </Button>
+            <Popconfirm
+              cancelButtonProps={{ className: 'button-default' }}
+              okButtonProps={{ className: 'button-modal' }}
+              title={i18n.t('actions.sure')}
+              cancelText={i18n.t('actions.cancel')}
+              onConfirm={() => handleDelete(record.id)}
+            >
+              <Button>{i18n.t('actions.delete')}</Button>
+            </Popconfirm>
+          </Space>
+        ),
     },
   ];
 
@@ -135,42 +137,49 @@ const Resources = () => {
     <div>
       <JHeader pageTitle={i18n.t('resources')} />
       <div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: 16,
-          }}
-        >
-          <div>
-            <Popconfirm
-              cancelButtonProps={{ className: 'button-default' }}
-              okButtonProps={{ className: 'button-modal' }}
-              title={i18n.t('actions.sure')}
-              cancelText={i18n.t('actions.cancel')}
-              onConfirm={handleDeleteSelected}
-            >
-              <Button disabled={!hasSelected}>{i18n.t('actions.deleteSelected')}</Button>
-            </Popconfirm>
-            <span
-              style={{
-                marginLeft: 8,
-              }}
-            >
-              {hasSelected ? `${i18n.t('actions.selected')} ${selectedRowKeys.length}` : ''}
-            </span>
-          </div>
+        {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginBottom: 16,
+            }}
+          >
+            <div>
+              <Popconfirm
+                cancelButtonProps={{ className: 'button-default' }}
+                okButtonProps={{ className: 'button-modal' }}
+                title={i18n.t('actions.sure')}
+                cancelText={i18n.t('actions.cancel')}
+                onConfirm={handleDeleteSelected}
+              >
+                <Button disabled={!hasSelected}>{i18n.t('actions.deleteSelected')}</Button>
+              </Popconfirm>
+              <span
+                style={{
+                  marginLeft: 8,
+                }}
+              >
+                {hasSelected ? `${i18n.t('actions.selected')} ${selectedRowKeys.length}` : ''}
+              </span>
+            </div>
 
-          <Button type="modal" onClick={handleModal}>
-            {i18n.t('actions.add')}
-          </Button>
-        </div>
+            <Button type="modal" onClick={handleModal}>
+              {i18n.t('actions.add')}
+            </Button>
+          </div>
+        )}
         <Table
+          bordered
+          tableLayout="fixed"
           rowKey={(record) => record.id}
           pagination={false}
           rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
+          locale={{
+            emptyText: <Empty description={i18n.t('noData')} />,
+          }}
         />
       </div>
       {isModalOpen && (

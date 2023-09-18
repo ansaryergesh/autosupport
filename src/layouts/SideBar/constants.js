@@ -5,6 +5,7 @@ import resources from 'images/resources.svg';
 import oldTickets from 'images/oldTickets.svg';
 import newTickets from 'images/newTickets.svg';
 import search from 'images/search.svg';
+import { checkPermissions } from '../../helpers/checkPermission';
 
 export const adminNavItems = [
   {
@@ -28,11 +29,6 @@ export const adminNavItems = [
     icon: resources,
   },
   {
-    name: 'organizations',
-    path: '/organizations',
-    icon: organizations,
-  },
-  {
     name: 'newTickets',
     path: '/new-tickets',
     icon: newTickets,
@@ -41,6 +37,11 @@ export const adminNavItems = [
     name: 'oldTickets',
     path: '/old-tickets',
     icon: oldTickets,
+  },
+  checkPermissions(['ROLE_SUPER_ADMIN']) && {
+    name: 'organizations',
+    path: '/organizations',
+    icon: organizations,
   },
 ];
 
