@@ -121,6 +121,7 @@ const QuestionAnswerContent = () => {
   }, [id]);
 
   useEffect(() => {
+    setAnswerFormData(initialQuestionAnswerContent);
     getQuestionById(id).then((res) => {
       setQuestionInfo(res.data);
       setSelectedQuestions(res.data?.children || []);

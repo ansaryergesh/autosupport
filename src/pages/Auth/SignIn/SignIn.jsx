@@ -33,10 +33,7 @@ const SignIn = () => {
           notification.success({ message: 'welcome' });
         }
       })
-      .catch((err) => {
-        notification.error({ message: err });
-        console.error(err);
-      })
+
       .finally(() => {
         setLoading(false);
         console.log('finally');
