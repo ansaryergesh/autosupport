@@ -31,6 +31,12 @@
   "searchHistory": "Іздеу тарихы",
   "choice": "Қайда беру керектігін таңдаңыз",
   "noQuestion": "Қазіргі уақытта санатта байланысты сұрақтар жоқ",
+  "searchTickets": "Тикеттер бойынша іздеу",
+  "toggleTickets": "Тикет жіберу мүмкіндігі",
+  "search": "Іздеу",
+  "alreadyKeyword": "Кілт сөзі таңдалған",
+  "alreadyTag": "Тэг таңдалған",
+  "alreadySimilar": "Сұрақ таңдалған",
   "commons": {
     "signIn": "Кіру",
     "signOut": "Шығу",
@@ -79,9 +85,11 @@
     "downloadReviews": "Пікірлерді жүктеу",
     "downloadSearchHistory": "Іздеу тарихын жүктеу",
     "downloadTickets": "Тикеттарды жүктеу",
+    "downloadAnswers": "Барлық жауаптарды жүктеу",
     "deleteSelected": "Таңдалғандарды өшіру",
     "selected": "Таңдалған",
-    "preview": "Тексеру"
+    "preview": "Тексеру",
+    "reset": "Тазарту"
   },
   "feedback": {
     "MainTitle1": "Сіз Freedom Broker әкімшілік панеліндесіз",
@@ -104,6 +112,7 @@
     "comment": "Сіздің пікіріңіз",
     "characterLimit": "Таңбалар шегіне жетті",
     "previewMessage": "Сіз алдын ала қарау режиміне ауыстыңыз",
+    "previewErrorMessage": "Үш тілде жауап қосу керек",
     "videoUrl": "Бейне нұсқаудың url-і"
   },
   "menu": {

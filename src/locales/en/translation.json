@@ -31,6 +31,12 @@
   "searchHistory": "Search history",
   "choice": "Choose where to assign the text",
   "noQuestion": "There are currently no related questions for this category",
+  "searchTickets": "Search by tickets",
+  "toggleTickets": "Ability to send tickets",
+  "search": "Search",
+  "alreadyKeyword": "Keyword already selected",
+  "alreadyTag": "Tag already selected",
+  "alreadySimilar": "Question already selected",
   "commons": {
     "signIn": "Sign in",
     "signOut": "Sign out",
@@ -80,9 +86,11 @@
     "downloadReviews": "Download reviews",
     "downloadSearchHistory": "Download search history",
     "downloadTickets": "Download tickets",
+    "downloadAnswers": "Download all answers",
     "deleteSelected": "Delete selected",
     "selected": "Selected",
-    "preview": "Preview"
+    "preview": "Preview",
+    "reset": "Reset"
   },
   "feedback": {
     "MainTitle1": "You are in the Freedom Broker administration panel",
@@ -107,6 +115,7 @@
     "comment": "Your comment",
     "characterLimit": "Character limit reached",
     "previewMessage": "You have switched to preview",
+    "previewErrorMessage": "You must add an answer in three languages",
     "videoUrl": "Video url"
   },
   "menu": {

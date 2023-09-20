@@ -5,7 +5,14 @@ import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 import styles from './index.module.less';
 import { findByLangKey } from '../../helpers/findByLangKey.js';
-const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title }) => {
+import { i18n } from '../../utils/i18next.js';
+
+const SearchReference = ({
+  searchAction,
+  selectedItems,
+  setSelectedItems,
+  title
+}) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
@@ -16,8 +23,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
             ? findByLangKey(item?.questionContents).title
             : '',
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
@@ -30,7 +37,7 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 20,
+      pageSize: 20
     };
     searchAction(params).then((response) => {
       setOptions(
@@ -39,8 +46,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
             ? findByLangKey(item?.questionContents).title
             : '',
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
@@ -49,7 +56,7 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
     const selectedItem = option.itemValue;
     console.log(selectedItem);
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
-      notification.info({ message: 'Keyword already selected' });
+      notification.info({ message: i18n.t('alreadySimilar') });
     } else {
       setSelectedItems([...selectedItems, selectedItem]);
       console.log([...selectedItems, selectedItem]);
@@ -79,10 +86,9 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
         options={options}
         onSelect={handleSelect}
         onSearch={handleSearch}
-        placeholder="Search items"
+        placeholder={i18n.t('search')}
         value={inputValue}
-        onChange={(value) => setInputValue(value)}
-      >
+        onChange={(value) => setInputValue(value)}>
         <Input.Search />
       </AutoComplete>
 
@@ -97,9 +103,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
                   padding: '18px',
                   justifyContent: 'space-between',
                   borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center',
-                }}
-              >
+                  alignItems: 'center'
+                }}>
                 <span key={item.id}>
                   {findByLangKey(item?.questionContents)
                     ? findByLangKey(item?.questionContents).title

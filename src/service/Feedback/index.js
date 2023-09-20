@@ -2,7 +2,7 @@ import { axiosInstanceWithHeader } from '../../api/api.js';
 
 export const getAllReviews = () => {
   return axiosInstanceWithHeader.get('/api/admin/feedbacks', {
-    params: { pageSize: 5, pageCurrent: 0 },
+    params: { pageSize: 5, pageCurrent: 0 }
   });
 };
 
@@ -24,4 +24,13 @@ export const manageMark = (data) => {
   } else {
     return axiosInstanceWithHeader.post('/api/admin/marks', data);
   }
+};
+
+export const getFeedbackExcel = (startDate, endDate) => {
+  return axiosInstanceWithHeader.get('/api/export/feedBack', {
+    params: {
+      startDate,
+      endDate
+    }
+  });
 };

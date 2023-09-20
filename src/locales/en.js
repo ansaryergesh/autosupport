@@ -31,7 +31,12 @@ export default {
   searchHistory: 'Search history',
   choice: 'Choose where to assign the text',
   noQuestion: 'There are currently no related questions for this category',
-
+  searchTickets: 'Search by tickets',
+  toggleTickets: 'Ability to send tickets',
+  search: 'Search',
+  alreadyKeyword: 'Keyword already selected',
+  alreadyTag: 'Tag already selected',
+  alreadySimilar: 'Question already selected',
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',
@@ -40,7 +45,7 @@ export default {
     forgetPassword: 'Forgot your password?',
     submit: 'Submit',
     unauthorized: 'Unauthorized',
-    accessDenied: 'Access denied',
+    accessDenied: 'Access denied'
   },
   columns: {
     name: 'Name',
@@ -52,7 +57,7 @@ export default {
     numberOfRequests: 'Number of requests',
     langKey: 'Language',
     organization: 'Organization',
-    password: 'Password',
+    password: 'Password'
   },
   actions: {
     addEmployee: 'Add new employee',
@@ -81,9 +86,11 @@ export default {
     downloadReviews: 'Download reviews',
     downloadSearchHistory: 'Download search history',
     downloadTickets: 'Download tickets',
+    downloadAnswers: 'Download all answers',
     deleteSelected: 'Delete selected',
     selected: 'Selected',
     preview: 'Preview',
+    reset: 'Reset'
   },
   feedback: {
     MainTitle1: 'You are in the Freedom Broker administration panel',
@@ -94,7 +101,7 @@ export default {
     ReviewDownload: 'Download reviews',
     averageRating: 'Average rating',
     mark: 'New mark',
-    reviewsWith: 'Reviews with rating',
+    reviewsWith: 'Reviews with rating'
   },
   questionAnswer: {
     VisualInstruction: 'Visual Instruction',
@@ -103,12 +110,14 @@ export default {
     FindMistake: 'Did you find a mistake in the text?',
     FixMistake: 'Highlight and press CTRL+Enter',
     rateAnswer: 'Was the answer helpful?',
-    rateSubtitel: 'Please rate the answer on a 5 point scale, it will help us to be better',
+    rateSubtitel:
+      'Please rate the answer on a 5 point scale, it will help us to be better',
     rateButton: 'Leave a review',
     comment: 'Your comment',
     characterLimit: 'Character limit reached',
     previewMessage: 'You have switched to preview',
-    videoUrl: 'Video url',
+    previewErrorMessage: 'You must add an answer in three languages',
+    videoUrl: 'Video url'
   },
   menu: {
     addCategory: 'Add category',
@@ -118,7 +127,7 @@ export default {
     editQuestion: 'Edit question',
     deleteQuestion: 'Delete question',
     openQuestion: 'Open question',
-    enterName: 'Enter name',
+    enterName: 'Enter name'
   },
   rule: {
     nameRequired: 'Name is required',
@@ -129,13 +138,13 @@ export default {
     descriptionRequired: 'Description is required',
     emailRequired: 'Email is required',
     questionRequired: 'Question is required',
-    answerRequired: 'Answer is required ',
+    answerRequired: 'Answer is required '
   },
   newAnswer: {
     answer: 'Answer',
     whatQuestion: 'Question topic',
     inputEmail: 'Enter your email',
-    startTyping: 'Start typing...',
+    startTyping: 'Start typing...'
   },
   userProfile: {
     passwordUpdateNotification: 'Password updated succsesfully!',
@@ -155,11 +164,11 @@ export default {
     loginLabel: 'Login',
     firstNameLabel: 'First name',
     lastNameLabel: 'Last name',
-    organizationLabel: 'Organization',
+    organizationLabel: 'Organization'
   },
   employeePage: {
     employeeDeletedNotification: 'Employee deleted!',
     employeeAddedNotification: 'Employee added!',
-    employeeEditedNotification: 'Employee edited!',
-  },
+    employeeEditedNotification: 'Employee edited!'
+  }
 };
