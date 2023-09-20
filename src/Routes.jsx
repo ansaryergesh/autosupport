@@ -20,6 +20,7 @@ import SearchHistory from './pages/SearchHistory/SearchHistory.jsx';
 import UserProfile from './pages/UserProfile/UserProfile.jsx';
 import NewTickets from './pages/Tickets/NewTickets.jsx';
 import OldTickets from './pages/Tickets/OldTickets.jsx';
+import Activate from "./pages/Auth/Activate/Activate.jsx";
 
 function RouteWithLayout({ layout, component, isAuthLoading = false, ...rest }) {
   if (isAuthLoading) {
@@ -41,6 +42,7 @@ const Routes = () => {
         <Route exact component={SignIn} path={'/sign-in'} />
         <Route exact component={PasswordRecovery} path={'/password-recovery'} />
         <Route exact component={NewPassword} path={'/new-password'} />
+        <Route exact component={Activate} path={'/activation'} />
         <Route exact component={CodeVerify} path={'/code-verify'} />
         <RouteWithLayout exact layout={Main} component={SearchHistory} path="/search-history" />
         <RouteWithLayout exact layout={Main} component={Feedback} path="/feedback" />

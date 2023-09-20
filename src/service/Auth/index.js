@@ -29,6 +29,11 @@ export const newPassword = (data) => {
   return axiosInstance.post('/api/account/reset-password/finish', data);
 };
 
+export const activateUser = (data) => {
+  return axiosInstance.post(`/api/activate?key=${data.key}`, {password:data.password});
+};
+
+
 export const getCurrentAccount = (bearerToken) => {
   return axios.get(checkerAddress+'/api/account', {
     headers: {
