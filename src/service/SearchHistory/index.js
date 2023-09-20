@@ -2,7 +2,7 @@ import { axiosInstanceWithHeader } from '../../api/api.js';
 
 export const deleteSearchHistoryItems = (arr) => {
   return axiosInstanceWithHeader.delete('/api/admin/search-history', {
-    data: arr,
+    data: arr
   });
 };
 
@@ -12,7 +12,13 @@ export const getSearchHistory = (pageCurrent, pageSize, params) => {
       pageSize,
       pageCurrent,
       query: '',
-      ...params,
-    },
+      ...params
+    }
+  });
+};
+
+export const getSearchHistoryExcel = () => {
+  return axiosInstanceWithHeader.get('/api/export/searchHistory', {
+    responseType: 'arraybuffer'
   });
 };

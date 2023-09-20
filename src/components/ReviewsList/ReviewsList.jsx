@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
-import { Col, Row, DatePicker } from 'antd';
+import { Col, Row, DatePicker, Empty } from 'antd';
 import Button from '../Button/Button.jsx';
 import { i18n } from '../../utils/i18next';
 import { getAllReviews } from '../../service/Feedback';
@@ -12,28 +12,28 @@ const { RangePicker } = DatePicker;
 const rangePresets = [
   {
     label: 'Последние 7 дней',
-    value: [],
+    value: []
   },
   {
     label: 'Последние 14 дней',
-    value: [],
+    value: []
   },
   {
     label: 'Последний месяц',
-    value: [],
+    value: []
   },
   {
     label: 'Последние 3 месяца',
-    value: [],
+    value: []
   },
   {
     label: 'Последний год',
-    value: [],
+    value: []
   },
   {
     label: 'За все время',
-    value: [],
-  },
+    value: []
+  }
 ];
 
 const ReviewsList = () => {
@@ -42,6 +42,7 @@ const ReviewsList = () => {
   const getReviewsList = () => {
     getAllReviews().then((res) => {
       setData(res.data);
+      console.log(res.data);
     });
   };
 
@@ -51,24 +52,44 @@ const ReviewsList = () => {
 
   return (
     <div className={styles.box}>
-      <TypographyHead content={i18n.t('feedback.ListTitle')} type={TypoGraphyType.SECONDARY_HEAD} />
+      <TypographyHead
+        content={i18n.t('feedback.ListTitle')}
+        type={TypoGraphyType.SECONDARY_HEAD}
+      />
 
       <Row justify={'center'} gutter={[0, 16]}>
-        {data?.map((q) => (
-          <Col span={24} className={styles.questionBox} key={q.id}>
-            <span>{q.text}</span>
+        {data?.length === 0 ? (
+          <Col span={24}>
+            <Empty
+              imageStyle={{ height: '100%' }}
+              description={i18n.t('noData')}
+            />
           </Col>
-        ))}
-
-        <Col>
-          <RangePicker className={styles.datePicker} presets={rangePresets} />
-        </Col>
-
-        <Col style={{ marginLeft: 'auto' }}>
-          <Button type="primary" className={styles.btnDownload}>
-            {i18n.t('actions.downloadReviews')}
-          </Button>
-        </Col>
+        ) : (
+          data?.map(
+            (q) =>
+              q.text?.length > 0 && (
+                <Col span={24} className={styles.questionBox} key={q.id}>
+                  <span>{q.text}</span>
+                </Col>
+              )
+          )
+        )}
+        {data?.length > 0 && (
+          <>
+            <Col>
+              <RangePicker
+                className={styles.datePicker}
+                presets={rangePresets}
+              />
+            </Col>
+            <Col style={{ marginLeft: 'auto' }}>
+              <Button type="primary" className={styles.btnDownload}>
+                {i18n.t('actions.downloadReviews')}
+              </Button>
+            </Col>
+          </>
+        )}
       </Row>
     </div>
   );

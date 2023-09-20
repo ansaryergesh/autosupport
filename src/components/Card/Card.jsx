@@ -38,7 +38,7 @@ const CardComponent = (props) => {
           </p>
         ))}
         {questions?.length > maxQuestionsToShow && (
-          <Text style={{ color: '#13ad64', cursor: 'pointer' }}>
+          <Text className={styles.more}>
             ...and {questions.length - maxQuestionsToShow} more questions
           </Text>
         )}

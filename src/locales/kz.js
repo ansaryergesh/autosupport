@@ -31,7 +31,12 @@ export default {
   searchHistory: 'Іздеу тарихы',
   choice: 'Қайда беру керектігін таңдаңыз',
   noQuestion: 'Қазіргі уақытта санатта байланысты сұрақтар жоқ',
-
+  searchTickets: 'Тикеттер бойынша іздеу',
+  toggleTickets: 'Тикет жіберу мүмкіндігі',
+  search: 'Іздеу',
+  alreadyKeyword: 'Кілт сөзі таңдалған',
+  alreadyTag: 'Тэг таңдалған',
+  alreadySimilar: 'Сұрақ таңдалған',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
@@ -40,7 +45,7 @@ export default {
     forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
     submit: 'Растау',
     unauthorized: 'Авторизациядан өтпеген',
-    accessDenied: 'Рұқсат жоқ',
+    accessDenied: 'Рұқсат жоқ'
   },
   columns: {
     name: 'Аталуы',
@@ -51,7 +56,7 @@ export default {
     code: 'Код',
     numberOfRequests: 'Сұраулар саны',
     langKey: 'Тіл',
-    password: 'Құпия сөз',
+    password: 'Құпия сөз'
   },
   actions: {
     addEmployee: 'Жаңа жұмысшыны қосу',
@@ -80,9 +85,11 @@ export default {
     downloadReviews: 'Пікірлерді жүктеу',
     downloadSearchHistory: 'Іздеу тарихын жүктеу',
     downloadTickets: 'Тикеттарды жүктеу',
+    downloadAnswers: 'Барлық жауаптарды жүктеу',
     deleteSelected: 'Таңдалғандарды өшіру',
     selected: 'Таңдалған',
     preview: 'Тексеру',
+    reset: 'Тазарту'
   },
   feedback: {
     MainTitle1: 'Сіз Freedom Broker әкімшілік панеліндесіз',
@@ -93,19 +100,21 @@ export default {
     ReviewDownload: 'Айғақтарды жүктеп алыңыз',
     averageRating: 'Орташа рейтинг',
     mark: 'Жаңа метка',
-    reviewsWith: 'Пікірдің балы',
+    reviewsWith: 'Пікірдің балы'
   },
   questionAnswer: {
     DescriptionTitle: 'Қадамдардың сипаттамасы',
     FindMistake: 'Мәтіннен қате таптыңыз ба?',
     FixMistake: 'Таңдап, CTRL+Enter пернелерін басыңыз',
     rateAnswer: 'Жауап пайдалы болды ма?',
-    rateSubtitel: 'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
+    rateSubtitel:
+      'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
     rateButton: 'Пікір қалдыру',
     comment: 'Сіздің пікіріңіз',
     characterLimit: 'Таңбалар шегіне жетті',
     previewMessage: 'Сіз алдын ала қарау режиміне ауыстыңыз',
-    videoUrl: 'Бейне нұсқаудың url-і',
+    previewErrorMessage: 'Үш тілде жауап қосу керек',
+    videoUrl: 'Бейне нұсқаудың url-і'
   },
   menu: {
     addCategory: 'Санат қосу',
@@ -115,20 +124,20 @@ export default {
     editQuestion: 'Сұрақты өзгерту',
     deleteQuestion: 'Сұрақты өшіру',
     openQuestion: 'Сұрақты ашу',
-    enterName: 'Аталуын жазыңыз',
+    enterName: 'Аталуын жазыңыз'
   },
   rule: {
     nameRequired: 'Аталуы міндетті',
     descriptionRequired: 'Сипаттамасы міндетті',
     emailRequired: 'Пошта міндетті',
     questionRequired: 'Сұрақтың тақырыбы міндетті',
-    answerRequired: 'Жауаб міндетті',
+    answerRequired: 'Жауаб міндетті'
   },
   newAnswer: {
     answer: 'Жауабы',
     whatQuestion: 'Сұрақтың тақырыбы',
     inputEmail: 'Поштаңызды жазыңыз',
-    startTyping: 'Теруді бастаңыз...',
+    startTyping: 'Теруді бастаңыз...'
   },
   userProfile: {
     passwordUpdateNotification: 'Құпия сөз сәтті өзгертілді!',
@@ -148,11 +157,11 @@ export default {
     loginLabel: 'Логин',
     firstNameLabel: 'Аты',
     lastNameLabel: 'Тегі',
-    organizationLabel: 'Ұйымдастыру',
+    organizationLabel: 'Ұйымдастыру'
   },
   employeePage: {
     employeeDeletedNotification: 'Қызметкер жойылған!',
     employeeAddedNotification: 'Қызметкер қосылды!',
-    employeeEditedNotification: 'Қызметкер өңделді!',
-  },
+    employeeEditedNotification: 'Қызметкер өңделді!'
+  }
 };

@@ -31,6 +31,12 @@
   "processedBy": "Обработан кем",
   "processedWhen": "Обработан когда",
   "noData": "Нет данных",
+  "searchTickets": "Поиск по тикетам",
+  "toggleTickets": "Возможность отправки тикетов",
+  "search": "Поиск",
+  "alreadyKeyword": "Ключевое слово уже выбрано",
+  "alreadyTag": "Тэг уже выбран",
+  "alreadySimilar": "Вопрос уже выбран",
   "commons": {
     "signIn": "Вход",
     "signOut": "Выход",
@@ -80,9 +86,11 @@
     "downloadReviews": "Скачать отзывы",
     "downloadSearchHistory": "Скачать историю поиска",
     "downloadTickets": "Скачать тикеты",
+    "downloadAnswers": "Скачать все ответы",
     "deleteSelected": "Удалить выбранное",
     "selected": "Выбранно",
-    "preview": "Предпросмотр"
+    "preview": "Предпросмотр",
+    "reset": "Сбросить"
   },
   "feedback": {
     "MainTitle1": "Вы находитесь в  административной панели Freedom Broker",
@@ -107,6 +115,7 @@
     "comment": "Ваш комментарий",
     "characterLimit": "Достигнут лимит символов",
     "previewMessage": "Вы перешли на предросмотр",
+    "previewErrorMessage": "Вы должны добавить ответ на трех языках",
     "videoUrl": "Url видео"
   },
   "menu": {

@@ -2,12 +2,15 @@ import { Table, Empty } from 'antd';
 import JHeader from '../../components/JHeader/JHeader';
 import { i18n } from '../../utils/i18next';
 import { useEffect, useState } from 'react';
-import { getOldTickets } from '../../service/Tickets';
+import { getOldTickets, getTicketsExcel } from '../../service/Tickets';
 import Button from '../../components/Button/Button';
+import SearchTickets from './SearchTickets';
+import { handleExport } from '../../helpers/downloadFile';
 
 const OldTickets = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [inputValue, setInputValue] = useState('');
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -18,28 +21,28 @@ const OldTickets = () => {
   const columns = [
     {
       title: i18n.t('newAnswer.whatQuestion'),
-      dataIndex: 'title',
+      dataIndex: 'title'
     },
     {
       title: i18n.t('columns.email'),
-      dataIndex: 'email',
+      dataIndex: 'email'
     },
     {
       title: i18n.t('processedBy'),
       dataIndex: 'lastModifiedBy',
-      render: (_, record) => <p>{record.lastModifiedBy}</p>,
+      render: (_, record) => <p>{record.lastModifiedBy}</p>
     },
     {
       title: i18n.t('processedWhen'),
       dataIndex: 'closedDate',
-      render: (_, record) => <p>{formatDate(record.closedDate)}</p>,
-    },
+      render: (_, record) => <p>{formatDate(record.closedDate)}</p>
+    }
   ];
 
-  const getOldTicketsList = (pageCurrent, pageSize) => {
+  const getOldTicketsList = (pageCurrent, pageSize, search) => {
     window.scrollTo(0, 0);
 
-    getOldTickets(pageCurrent - 1, pageSize)
+    getOldTickets(pageCurrent - 1, pageSize, search)
       .then((res) => {
         setData(res.data);
         setTotalPages(res.headers['x-total-count']);
@@ -56,26 +59,40 @@ const OldTickets = () => {
     <div>
       <JHeader pageTitle={i18n.t('oldTickets')} />
 
+      <SearchTickets
+        getTicketsList={getOldTicketsList}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
+
       <Table
         tableLayout="fixed"
         rowKey={(record) => record.id}
         expandable={{
-          expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.text}</p>,
+          expandedRowRender: (record) => (
+            <p style={{ margin: 0 }}>{record.text}</p>
+          )
         }}
         columns={columns}
         dataSource={data}
         pagination={{
           total: totalPages,
-          onChange: (page, pageSize) => getOldTicketsList(page, pageSize),
-          position: ['bottomCenter'],
+          onChange: (page, pageSize) =>
+            getOldTicketsList(page, pageSize, inputValue),
+          position: ['bottomCenter']
         }}
         bordered
         locale={{
-          emptyText: <Empty description={i18n.t('noData')} />,
+          emptyText: <Empty description={i18n.t('noData')} />
         }}
       />
 
-      <Button style={{ marginTop: '16px' }} type="primary">
+      <Button
+        onClick={() =>
+          handleExport(getTicketsExcel('CLOSED'), i18n.t('oldTickets'))
+        }
+        style={{ marginTop: '16px' }}
+        type="primary">
         {i18n.t('actions.downloadTickets')}
       </Button>
     </div>

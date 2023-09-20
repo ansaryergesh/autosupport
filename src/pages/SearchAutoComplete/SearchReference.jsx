@@ -4,6 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 import styles from './index.module.less';
+import { i18n } from '../../utils/i18next.js';
 
 const SearchReference = ({
   searchAction,
@@ -12,15 +13,19 @@ const SearchReference = ({
   keyItem,
   setQuestionInfo,
   questionInfo,
-  selectedLanguage,
+  selectedLanguage
 }) => {
   const [options, setOptions] = useState([]);
   const [langSelectedItem, setLangSelectedItem] = useState(
-    questionInfo.questionContents?.find((item) => item.langKey === selectedLanguage)[keyItem] || [],
+    questionInfo.questionContents?.find(
+      (item) => item.langKey === selectedLanguage
+    )[keyItem] || []
   );
   const getOptionsDefault = () => {
     searchAction().then((response) => {
-      setOptions(response?.data.map((item) => ({ value: item.text, id: item.id })));
+      setOptions(
+        response?.data.map((item) => ({ value: item.text, id: item.id }))
+      );
     });
   };
 
@@ -31,8 +36,9 @@ const SearchReference = ({
   useEffect(() => {
     console.log(questionInfo);
     setLangSelectedItem(
-      questionInfo.questionContents?.find((item) => item.langKey === selectedLanguage)[keyItem] ||
-        [],
+      questionInfo.questionContents?.find(
+        (item) => item.langKey === selectedLanguage
+      )[keyItem] || []
     );
   }, [questionInfo]);
 
@@ -40,38 +46,47 @@ const SearchReference = ({
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 20,
+      pageSize: 20
     };
     searchAction(params).then((response) => {
-      setOptions(response?.data.map((item) => ({ value: item.text, id: item.id })));
+      setOptions(
+        response?.data.map((item) => ({ value: item.text, id: item.id }))
+      );
     });
   };
 
   const handleSelect = (value, option) => {
     const selectedItem = { id: option.id, text: value };
     console.log(questionInfo);
-    const updatedQuestionContents = questionInfo.questionContents?.map((questionContent) => {
-      if (questionContent.langKey === selectedLanguage) {
-        // Update the tags and keyWords arrays for this questionContent
-        return {
-          ...questionContent,
-          [keyItem]: [...questionContent[keyItem], selectedItem],
-        };
+    const updatedQuestionContents = questionInfo.questionContents?.map(
+      (questionContent) => {
+        if (questionContent.langKey === selectedLanguage) {
+          // Update the tags and keyWords arrays for this questionContent
+          return {
+            ...questionContent,
+            [keyItem]: [...questionContent[keyItem], selectedItem]
+          };
+        }
+        return questionContent; // Return unchanged questionContent for other langKeys
       }
-      return questionContent; // Return unchanged questionContent for other langKeys
-    });
+    );
 
     if (langSelectedItem?.some((item) => item.id === selectedItem.id)) {
-      notification.info({ message: 'Keyword already selected' });
+      notification.info({
+        message:
+          keyItem === 'keyWords'
+            ? i18n.t('alreadyKeyword')
+            : i18n.t('alreadyTag')
+      });
     } else {
       console.log(updatedQuestionContents);
       console.log({
         ...questionInfo,
-        questionContents: updatedQuestionContents,
+        questionContents: updatedQuestionContents
       });
       setQuestionInfo({
         ...questionInfo,
-        questionContents: updatedQuestionContents,
+        questionContents: updatedQuestionContents
       });
       setInputValue('');
       getOptionsDefault();
@@ -87,20 +102,22 @@ const SearchReference = ({
       if (options.length === 0) {
         addNewRecords({ id: null, text: inputValue }).then((res) => {
           selectedItem = res.data;
-          const updatedQuestionContents = questionInfo.questionContents.map((questionContent) => {
-            if (questionContent.langKey === selectedLanguage) {
-              // Update the tags and keyWords arrays for this questionContent
-              return {
-                ...questionContent,
-                [keyItem]: [...questionContent[keyItem], selectedItem],
-              };
+          const updatedQuestionContents = questionInfo.questionContents.map(
+            (questionContent) => {
+              if (questionContent.langKey === selectedLanguage) {
+                // Update the tags and keyWords arrays for this questionContent
+                return {
+                  ...questionContent,
+                  [keyItem]: [...questionContent[keyItem], selectedItem]
+                };
+              }
+              return questionContent; // Return unchanged questionContent for other langKeys
             }
-            return questionContent; // Return unchanged questionContent for other langKeys
-          });
+          );
 
           setQuestionInfo({
             ...questionInfo,
-            questionContents: updatedQuestionContents,
+            questionContents: updatedQuestionContents
           });
         });
       }
@@ -111,19 +128,21 @@ const SearchReference = ({
   const handleRemoveSelected = (id) => {
     const newData = langSelectedItem?.filter((item) => item.id !== id);
     console.log(newData);
-    const updatedQuestionContents = questionInfo.questionContents.map((questionContent) => {
-      if (questionContent.langKey === selectedLanguage) {
-        // Update the tags and keyWords arrays for this questionContent
-        return {
-          ...questionContent,
-          [keyItem]: newData,
-        };
+    const updatedQuestionContents = questionInfo.questionContents.map(
+      (questionContent) => {
+        if (questionContent.langKey === selectedLanguage) {
+          // Update the tags and keyWords arrays for this questionContent
+          return {
+            ...questionContent,
+            [keyItem]: newData
+          };
+        }
+        return questionContent; // Return unchanged questionContent for other langKeys
       }
-      return questionContent; // Return unchanged questionContent for other langKeys
-    });
+    );
     setQuestionInfo({
       ...questionInfo,
-      questionContents: updatedQuestionContents,
+      questionContents: updatedQuestionContents
     });
   };
 
@@ -135,10 +154,9 @@ const SearchReference = ({
         options={options}
         onSelect={handleSelect}
         onSearch={handleSearch}
-        placeholder="Search items"
+        placeholder={i18n.t('search')}
         value={inputValue}
-        onChange={(value) => setInputValue(value)}
-      >
+        onChange={(value) => setInputValue(value)}>
         <Input.Search onKeyDown={handleEnter} />
       </AutoComplete>
 
@@ -153,9 +171,8 @@ const SearchReference = ({
                   padding: '18px',
                   justifyContent: 'space-between',
                   borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center',
-                }}
-              >
+                  alignItems: 'center'
+                }}>
                 <span key={item.id}>{item.text}</span>
                 <CloseOutlined
                   className={styles.xBtn}

@@ -20,7 +20,8 @@ export default {
   home: 'Главная',
   description: 'Описание',
   similarRequests: 'Похожие запросы',
-  noContent: 'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
+  noContent:
+    'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
   counter: 'Счетчик кликов',
   searchHistory: 'История поиска',
   choice: 'Выберите куда присвоить текст',
@@ -31,6 +32,12 @@ export default {
   processedBy: 'Обработан кем',
   processedWhen: 'Обработан когда',
   noData: 'Нет данных',
+  searchTickets: 'Поиск по тикетам',
+  toggleTickets: 'Возможность отправки тикетов',
+  search: 'Поиск',
+  alreadyKeyword: 'Ключевое слово уже выбрано',
+  alreadyTag: 'Тэг уже выбран',
+  alreadySimilar: 'Вопрос уже выбран',
   commons: {
     signIn: 'Вход',
     signOut: 'Выход',
@@ -39,7 +46,7 @@ export default {
     submit: 'Подтвердить',
     unauthorized: 'Не авторизован',
     accessDenied: 'Отказано в доступе',
-    signOutMessage: 'Вы вышли из аккаунта',
+    signOutMessage: 'Вы вышли из аккаунта'
   },
   columns: {
     name: 'Наименование',
@@ -51,7 +58,7 @@ export default {
     langKey: 'Язык',
     code: 'Код',
     numberOfRequests: 'Количество запросов',
-    password: 'Пароль',
+    password: 'Пароль'
   },
   actions: {
     addEmployee: 'Добавить нового сотрудника',
@@ -80,9 +87,11 @@ export default {
     downloadReviews: 'Скачать отзывы',
     downloadSearchHistory: 'Скачать историю поиска',
     downloadTickets: 'Скачать тикеты',
+    downloadAnswers: 'Скачать все ответы',
     deleteSelected: 'Удалить выбранное',
     selected: 'Выбранно',
     preview: 'Предпросмотр',
+    reset: 'Сбросить'
   },
   feedback: {
     MainTitle1: 'Вы находитесь в  административной панели Freedom Broker',
@@ -93,7 +102,7 @@ export default {
     ReviewDownload: 'Загрузить отзывы',
     averageRating: 'Средняя оценка',
     mark: 'Новая метка',
-    reviewsWith: 'Отзывы с оценкой',
+    reviewsWith: 'Отзывы с оценкой'
   },
   questionAnswer: {
     VisualInstruction: 'Визуальная инструкция',
@@ -102,12 +111,14 @@ export default {
     FindMistake: 'Нашли ошибку в тексте?',
     FixMistake: 'Выделите и нажмите CTRL+Enter',
     rateAnswer: 'Полезен ли был ответ?',
-    rateSubtitel: 'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
+    rateSubtitel:
+      'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
     rateButton: 'Оставить отзыв',
     comment: 'Ваш комментарий',
     characterLimit: 'Достигнут лимит символов',
     previewMessage: 'Вы перешли на предросмотр',
-    videoUrl: 'Url видео',
+    previewErrorMessage: 'Вы должны добавить ответ на трех языках',
+    videoUrl: 'Url видео'
   },
   menu: {
     addCategory: 'Добавить категорию',
@@ -117,20 +128,20 @@ export default {
     editQuestion: 'Редактировать вопрос',
     deleteQuestion: 'Удалить вопрос',
     openQuestion: 'Открыть вопрос',
-    enterName: 'Введите наименование',
+    enterName: 'Введите наименование'
   },
   rule: {
     nameRequired: 'Наименование обязательно',
     descriptionRequired: 'Описание обязательно',
     emailRequired: 'Почта обязательна',
     questionRequired: 'Тема вопроса обязательна',
-    answerRequired: 'Ответ обязателен',
+    answerRequired: 'Ответ обязателен'
   },
   newAnswer: {
     answer: 'Ответ',
     whatQuestion: 'Тема вопроса',
     inputEmail: 'Введите почту',
-    startTyping: 'Начните вводить...',
+    startTyping: 'Начните вводить...'
   },
   userProfile: {
     passwordUpdateNotification: 'Пароль успешно изменен!',
@@ -150,11 +161,11 @@ export default {
     loginLabel: 'Логин',
     firstNameLabel: 'Имя',
     lastNameLabel: 'Фамилия',
-    organizationLabel: 'Организация',
+    organizationLabel: 'Организация'
   },
   employeePage: {
     employeeDeletedNotification: 'Сотрудник удален!',
     employeeAddedNotification: 'Сотрудник добавлен!',
-    employeeEditedNotification: 'Сотрудник редактирован!',
-  },
+    employeeEditedNotification: 'Сотрудник редактирован!'
+  }
 };

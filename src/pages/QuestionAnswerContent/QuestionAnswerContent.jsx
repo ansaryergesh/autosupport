@@ -5,12 +5,20 @@ import Button from '../../components/Button/Button.jsx';
 import {
   editCategoryQuestion,
   getQuestionById,
-  getQuestions,
+  getQuestions
 } from '../../service/Question/index.js';
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
-import { Col, Dropdown, notification, Row, Menu, Empty, Typography } from 'antd';
+import {
+  Col,
+  Dropdown,
+  notification,
+  Row,
+  Menu,
+  Empty,
+  Typography
+} from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
@@ -28,7 +36,7 @@ import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
   editAnswerQuestion,
-  deleteAnswerById,
+  deleteAnswerById
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
@@ -39,12 +47,20 @@ const QuestionAnswerContent = () => {
   const [selectedResources, setSelectedResources] = useState([]);
   const [activeResource, setActiveResource] = useState({});
   const [questionInfo, setQuestionInfo] = useState({ initialQuestionDto });
-  const [instructionType, setInstructionType] = useState(INSTRUCTION_TYPE.VISUAL);
-  const [selectedKeyWords, setSelectedKeyWords] = useState(questionInfo?.keyWords || []);
+  const [instructionType, setInstructionType] = useState(
+    INSTRUCTION_TYPE.VISUAL
+  );
+  const [selectedKeyWords, setSelectedKeyWords] = useState(
+    questionInfo?.keyWords || []
+  );
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
-  const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
+  const [answerFormData, setAnswerFormData] = useState(
+    initialQuestionAnswerContent
+  );
   const [selectedQuestions, setSelectedQuestions] = useState([]);
+
+  const requiredCharacter = 25;
 
   useEffect(() => {
     localStorage.removeItem(LocalStorageKeys.ANSWER_FROM_DATA);
@@ -67,11 +83,11 @@ const QuestionAnswerContent = () => {
                 setActiveResource(finalResources);
               }
               setSelectedResources((prev) => [...prev, finalResources]);
-            }}
-          >
+            }}>
             {
-              resource.resourceContents.find((content) => content.langKey === selectedLanguage)
-                ?.name
+              resource.resourceContents.find(
+                (content) => content.langKey === selectedLanguage
+              )?.name
             }
           </Menu.Item>
         );
@@ -88,12 +104,14 @@ const QuestionAnswerContent = () => {
       });
       if (resource.isNew) {
         setSelectedResources((prev) =>
-          prev.filter((selectedResource) => selectedResource.id !== resource.id),
+          prev.filter((selectedResource) => selectedResource.id !== resource.id)
         );
       } else {
         deleteAnswerById(answerFormData.id).then((res) => {
           setSelectedResources((prev) =>
-            prev.filter((selectedResource) => selectedResource.id !== resource.id),
+            prev.filter(
+              (selectedResource) => selectedResource.id !== resource.id
+            )
           );
           console.log(res, 'deleted').catch((err) => console.log(err));
         });
@@ -104,8 +122,7 @@ const QuestionAnswerContent = () => {
         key={resource.id}
         onClick={() => {
           handleDelete();
-        }}
-      >
+        }}>
         {i18n.t('actions.delete')}
       </Menu.Item>
     );
@@ -152,7 +169,7 @@ const QuestionAnswerContent = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('questionAnswer.previewMessage'),
-      placement: 'top',
+      placement: 'top'
     });
   };
 
@@ -160,32 +177,44 @@ const QuestionAnswerContent = () => {
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
-      resource: activeResource,
+      resource: activeResource
     };
 
-    const finalQuestionInfo = {
-      ...questionInfo,
-      children: selectedQuestions,
-    };
-    delete finalQuestionInfo.resources;
-    editCategoryQuestion(finalQuestionInfo).then((res) => {
-      console.log(res);
-    });
-    if (answerFormData.id) {
-      editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
-        console.log(res);
-        saveNotification();
-        history.push(`/question/preview/${id}/${activeResource.id}`);
+    if (
+      finalDataAnswer.answerContents.some(
+        (item) => item.stepDescription.length < requiredCharacter
+      )
+    ) {
+      notification.info({
+        message: i18n.t('questionAnswer.previewErrorMessage')
       });
     } else {
-      delete finalDataAnswer['id'];
-      console.log(finalDataAnswer);
-      addAnswerToQuestion(finalDataAnswer).then((res) => {
+      const finalQuestionInfo = {
+        ...questionInfo,
+        children: selectedQuestions
+      };
+      delete finalQuestionInfo.resources;
+
+      editCategoryQuestion(finalQuestionInfo).then((res) => {
         console.log(res);
-        notification.info('Answer edited');
-        history.push(`/question/preview/${id}/${activeResource.id}`);
       });
+      if (answerFormData.id) {
+        editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
+          console.log(res);
+          saveNotification();
+          history.push(`/question/preview/${id}/${activeResource.id}`);
+        });
+      } else {
+        delete finalDataAnswer['id'];
+        console.log(finalDataAnswer);
+        addAnswerToQuestion(finalDataAnswer).then((res) => {
+          console.log(res);
+          notification.info('Answer edited');
+          history.push(`/question/preview/${id}/${activeResource.id}`);
+        });
+      }
     }
+    console.log(finalDataAnswer);
   };
 
   const handleChangeCounter = (counter) => {
@@ -194,13 +223,13 @@ const QuestionAnswerContent = () => {
     if (!isNaN(parsedCounter)) {
       const finalQuestion = {
         ...questionInfo,
-        counter: parsedCounter.toString(),
+        counter: parsedCounter.toString()
       };
       setQuestionInfo(finalQuestion);
     } else {
       const finalQuestion = {
         ...questionInfo,
-        counter: '',
+        counter: ''
       };
       setQuestionInfo(finalQuestion);
     }
@@ -221,31 +250,37 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
-        }}
-      >
+          gap: '8px'
+        }}>
         {selectedResources.map((resource, index) => (
           <Dropdown
             key={index}
             overlay={<Menu>{menuDelete(resource)}</Menu>}
-            trigger={'contextMenu'}
-          >
+            trigger={'contextMenu'}>
             <Button
               onClick={() => {
                 handleChangeResource(resource);
               }}
-              type={`${activeResource?.id === resource.id ? 'default-active' : 'default'}`}
-            >
+              type={`${
+                activeResource?.id === resource.id
+                  ? 'default-active'
+                  : 'default'
+              }`}>
               {
-                resource.resourceContents.find((content) => content.langKey === selectedLanguage)
-                  ?.name
+                resource.resourceContents.find(
+                  (content) => content.langKey === selectedLanguage
+                )?.name
               }
             </Button>
           </Dropdown>
         ))}
         {selectedResources.length < resources.length && (
           <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
-            <img title={i18n.t('actions.addResource')} style={{ cursor: 'pointer' }} src={Plus} />
+            <img
+              title={i18n.t('actions.addResource')}
+              style={{ cursor: 'pointer' }}
+              src={Plus}
+            />
           </Dropdown>
         )}
       </div>
@@ -254,15 +289,15 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
-        }}
-      >
+          gap: '8px'
+        }}>
         {Object.values(LANG_KEY).map((item) => (
           <Button
             key={item}
             onClick={() => setSelectedLanguage(item)}
-            type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
-          >
+            type={`${
+              selectedLanguage === item ? 'default-active' : 'default'
+            }`}>
             {item}
           </Button>
         ))}
@@ -272,10 +307,9 @@ const QuestionAnswerContent = () => {
         <>
           <Row
             style={{
-              marginRight: '24px',
+              marginRight: '24px'
             }}
-            gutter={[16, 24]}
-          >
+            gutter={[16, 24]}>
             <Col span={15}></Col>
 
             <Col span={15}>
@@ -285,8 +319,7 @@ const QuestionAnswerContent = () => {
                     <Typography.Paragraph
                       type="number"
                       className={styles.counter}
-                      editable={{ onChange: handleChangeCounter }}
-                    >
+                      editable={{ onChange: handleChangeCounter }}>
                       {questionInfo?.counter}
                     </Typography.Paragraph>
                   </Col>
@@ -313,8 +346,11 @@ const QuestionAnswerContent = () => {
                         <Button
                           key={item}
                           onClick={() => setInstructionType(item)}
-                          type={item === instructionType ? 'default-active' : 'active'}
-                        >
+                          type={
+                            item === instructionType
+                              ? 'default-active'
+                              : 'active'
+                          }>
                           {i18n.t(item)}
                         </Button>
                       ))}
