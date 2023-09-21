@@ -17,7 +17,8 @@ import {
   Row,
   Menu,
   Empty,
-  Typography
+  Typography,
+  Popconfirm
 } from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
@@ -173,7 +174,7 @@ const QuestionAnswerContent = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (withPreview = true) => {
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
@@ -201,8 +202,11 @@ const QuestionAnswerContent = () => {
       if (answerFormData.id) {
         editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
           console.log(res);
-          saveNotification();
-          history.push(`/question/preview/${id}/${activeResource.id}`);
+          if(withPreview) {
+            saveNotification();
+            history.push(`/question/preview/${id}/${activeResource.id}`);
+          }
+
         });
       } else {
         delete finalDataAnswer['id'];
@@ -210,7 +214,7 @@ const QuestionAnswerContent = () => {
         addAnswerToQuestion(finalDataAnswer).then((res) => {
           console.log(res);
           notification.info('Answer edited');
-          history.push(`/question/preview/${id}/${activeResource.id}`);
+          withPreview && history.push(`/question/preview/${id}/${activeResource.id}`);
         });
       }
     }
@@ -229,7 +233,7 @@ const QuestionAnswerContent = () => {
     } else {
       const finalQuestion = {
         ...questionInfo,
-        counter: ''
+        counter: questionInfo.counter
       };
       setQuestionInfo(finalQuestion);
     }
@@ -258,19 +262,40 @@ const QuestionAnswerContent = () => {
             overlay={<Menu>{menuDelete(resource)}</Menu>}
             trigger={'contextMenu'}>
             <Button
-              onClick={() => {
-                handleChangeResource(resource);
-              }}
-              type={`${
-                activeResource?.id === resource.id
-                  ? 'default-active'
-                  : 'default'
-              }`}>
-              {
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent the default click behavior
+                }}
+                type={
+                  activeResource?.id === resource.id ? 'default-active' : 'default'
+                }
+            >
+              {activeResource?.id === resource.id ?  <p>{
                 resource.resourceContents.find(
-                  (content) => content.langKey === selectedLanguage
+                    (content) => content.langKey === selectedLanguage
                 )?.name
-              }
+              }</p> : <Popconfirm
+                  title="При переходе не сохраненные данные будут удалены"
+                  onConfirm={() => {
+                    setAnswerFormData(initialQuestionAnswerContent);
+                    handleSubmit(false);
+                    handleChangeResource(resource);
+                  }}
+                  cancelButtonProps={{ className: 'button-default' }}
+                  okButtonProps={{ className: 'button-modal' }}
+                  onCancel={() => {
+                    setAnswerFormData(initialQuestionAnswerContent);
+                    handleChangeResource(resource)
+                  }}
+                  okText="Сохранить и перейти"
+                  cancelText="Перейти без сохранения данных"
+              >
+                {
+                  resource.resourceContents.find(
+                      (content) => content.langKey === selectedLanguage
+                  )?.name
+                }
+              </Popconfirm>}
+
             </Button>
           </Dropdown>
         ))}
