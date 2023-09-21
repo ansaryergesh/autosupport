@@ -37,6 +37,9 @@ export default {
   alreadyKeyword: 'Keyword already selected',
   alreadyTag: 'Tag already selected',
   alreadySimilar: 'Question already selected',
+  more: 'and',
+  moreQuestions: 'more questions',
+  allAnswers: 'All answers',
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',

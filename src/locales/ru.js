@@ -38,6 +38,9 @@ export default {
   alreadyKeyword: 'Ключевое слово уже выбрано',
   alreadyTag: 'Тэг уже выбран',
   alreadySimilar: 'Вопрос уже выбран',
+  more: 'еще',
+  moreQuestions: 'вопроса',
+  allAnswers: 'Все ответы',
   commons: {
     signIn: 'Вход',
     signOut: 'Выход',

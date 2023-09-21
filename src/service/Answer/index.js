@@ -1,7 +1,9 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 
 export const answerByQuestionAndResource = (questionId, resourceId) => {
-  return axiosInstanceWithHeader.get(`/api/admin/answers/${questionId}/${resourceId}`);
+  return axiosInstanceWithHeader.get(
+    `/api/admin/answers/${questionId}/${resourceId}`
+  );
 };
 
 export const addAnswerToQuestion = (data) => {
@@ -22,4 +24,10 @@ export const getAnswerById = (qId, rId) => {
 
 export const saveAnswer = (id, data) => {
   return axiosInstanceWithHeader.patch(`/api/admin/answers/${id}`, data);
+};
+
+export const getAnswersExcel = () => {
+  return axiosInstanceWithHeader.get('/api/export/answer', {
+    responseType: 'arraybuffer'
+  });
 };

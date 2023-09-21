@@ -12,6 +12,8 @@ import { StarFilled } from '@ant-design/icons';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
 import Button from '../../components/Button/Button.jsx';
+import { handleExport } from '../../helpers/downloadFile.js';
+import { getAnswersExcel } from '../../service/Answer/index.js';
 
 const backgroundColor = ['#13AD63', '#1A6B9F', '#FFD700', '#F9971B', '#F9541B'];
 const reversed = backgroundColor.slice().reverse();
@@ -97,7 +99,10 @@ const FeedbackAnalytics = () => {
         <StarFilled style={{ color: '#13AD63' }} />
       </p>
 
-      <Button type="primary" className={styles.btnDownload}>
+      <Button
+        onClick={() => handleExport(getAnswersExcel, i18n.t('allAnswers'))}
+        type="primary"
+        className={styles.btnDownload}>
         {i18n.t('actions.downloadAnswers')}
       </Button>
     </div>

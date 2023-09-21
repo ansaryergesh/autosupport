@@ -289,18 +289,28 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px'
+          gap: '16px'
         }}>
-        {Object.values(LANG_KEY).map((item) => (
-          <Button
-            key={item}
-            onClick={() => setSelectedLanguage(item)}
-            type={`${
-              selectedLanguage === item ? 'default-active' : 'default'
-            }`}>
-            {item}
-          </Button>
-        ))}
+        <div>
+          {Object.values(LANG_KEY).map((item) => (
+            <Button
+              key={item}
+              onClick={() => setSelectedLanguage(item)}
+              type={`${
+                selectedLanguage === item ? 'default-active' : 'default'
+              }`}>
+              {item}
+            </Button>
+          ))}
+        </div>
+
+        <Typography.Paragraph
+          type="number"
+          className={styles.counter}
+          editable={{ onChange: handleChangeCounter }}>
+          {questionInfo?.counter}
+        </Typography.Paragraph>
+
         <b>{answerFormData.status && i18n.t(answerFormData.status)}</b>
       </div>
       {selectedResources.length > 0 ? (
@@ -314,17 +324,6 @@ const QuestionAnswerContent = () => {
 
             <Col span={15}>
               <Row gutter={[16, 16]}>
-                {questionInfo?.counter !== 0 && (
-                  <Col span={5}>
-                    <Typography.Paragraph
-                      type="number"
-                      className={styles.counter}
-                      editable={{ onChange: handleChangeCounter }}>
-                      {questionInfo?.counter}
-                    </Typography.Paragraph>
-                  </Col>
-                )}
-
                 <Col span={24}>
                   <div className={styles.card}>
                     <TypographyHead
@@ -349,7 +348,7 @@ const QuestionAnswerContent = () => {
                           type={
                             item === instructionType
                               ? 'default-active'
-                              : 'active'
+                              : 'default'
                           }>
                           {i18n.t(item)}
                         </Button>

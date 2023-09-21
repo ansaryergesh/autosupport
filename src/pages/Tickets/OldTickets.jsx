@@ -2,7 +2,7 @@ import { Table, Empty } from 'antd';
 import JHeader from '../../components/JHeader/JHeader';
 import { i18n } from '../../utils/i18next';
 import { useEffect, useState } from 'react';
-import { getOldTickets, getTicketsExcel } from '../../service/Tickets';
+import { getOldTickets, getOldTicketsExcel } from '../../service/Tickets';
 import Button from '../../components/Button/Button';
 import SearchTickets from './SearchTickets';
 import { handleExport } from '../../helpers/downloadFile';
@@ -88,9 +88,7 @@ const OldTickets = () => {
       />
 
       <Button
-        onClick={() =>
-          handleExport(getTicketsExcel('CLOSED'), i18n.t('oldTickets'))
-        }
+        onClick={() => handleExport(getOldTicketsExcel, i18n.t('oldTickets'))}
         style={{ marginTop: '16px' }}
         type="primary">
         {i18n.t('actions.downloadTickets')}
