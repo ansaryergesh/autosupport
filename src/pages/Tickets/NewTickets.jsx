@@ -4,7 +4,7 @@ import { i18n } from '../../utils/i18next';
 import Button from '../../components/Button/Button';
 import {
   getNewTickets,
-  getTicketsExcel,
+  getNewTicketsExcel,
   updateTicketStatus
 } from '../../service/Tickets';
 import { useEffect, useState } from 'react';
@@ -115,7 +115,7 @@ const NewTickets = () => {
       <div className={styles.ticketBtns}>
         <Button
           onClick={() => {
-            handleExport(getTicketsExcel('NEW'), i18n.t('newTickets'));
+            handleExport(getNewTicketsExcel, i18n.t('newTickets'));
           }}
           style={{ marginTop: '16px' }}
           type="primary">

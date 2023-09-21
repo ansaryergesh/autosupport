@@ -37,6 +37,9 @@ export default {
   alreadyKeyword: 'Кілт сөзі таңдалған',
   alreadyTag: 'Тэг таңдалған',
   alreadySimilar: 'Сұрақ таңдалған',
+  more: 'тағы',
+  moreQuestions: 'сұрақ',
+  allAnswers: 'Барлық жауаптар',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',

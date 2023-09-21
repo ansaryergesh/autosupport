@@ -4,6 +4,8 @@ import styles from './index.module.less';
 import { Link } from 'react-router-dom';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
+import { i18n } from '../../utils/i18next';
+
 const CardComponent = (props) => {
   const { Text } = Typography;
   const questions = props.data?.questions;
@@ -26,9 +28,9 @@ const CardComponent = (props) => {
       </div>
       <div className={styles.content}>
         {questions?.slice(0, maxQuestionsToShow).map((q, index) => (
-          <p key={index} style={{ marginBottom: '11px' }}>
+          <p className={styles.question} key={index}>
             <Link to={`/question/admin/${q.id}`}>
-              <Text ellipsis={{ rows: 2, expandable: false }}>
+              <Text>
                 <TypographyHead
                   type={TypoGraphyType.LEVEL_2}
                   content={q.questionContents[0].title}
@@ -39,7 +41,8 @@ const CardComponent = (props) => {
         ))}
         {questions?.length > maxQuestionsToShow && (
           <Text className={styles.more}>
-            ...and {questions.length - maxQuestionsToShow} more questions
+            ... {i18n.t('more')} {questions.length - maxQuestionsToShow}{' '}
+            {i18n.t('moreQuestions')}
           </Text>
         )}
       </div>
