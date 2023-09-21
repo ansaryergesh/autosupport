@@ -62,10 +62,8 @@ axiosInstanceWithHeader.interceptors.response.use(
       notification.error(error);
     }
     if(error.response) {
-      console.log(error.response.data.message)
       notification.error({message: error.response.data.message});
     }
-    notification.error({message: error.status});
     throw error;
   },
 );
