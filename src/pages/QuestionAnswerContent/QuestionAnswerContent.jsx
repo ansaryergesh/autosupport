@@ -247,7 +247,7 @@ const QuestionAnswerContent = () => {
       finalDataAnswer.answerContents.some((item) => item.stepDescription.length < requiredCharacter)
     ) {
       notification.info({
-        message: i18n.t({'questionAnswer.previewErrorMessage'),
+        message: i18n.t('questionAnswer.previewErrorMessage')
       });
     } else {
       const finalQuestionInfo = {
@@ -450,6 +450,7 @@ const QuestionAnswerContent = () => {
                       ))}
                       {instructionType === INSTRUCTION_TYPE.VISUAL && (
                         <ImageUpload
+                          multiple={true}
                           setIsEdited={setIsEdited}
                           answerFormData={answerFormData}
                           setAnswerFormData={setAnswerFormData}
