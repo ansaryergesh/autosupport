@@ -10,8 +10,8 @@ export const getNewTickets = (pageCurrent, pageSize, search, params) => {
       pageSize,
       pageCurrent,
       search,
-      ...params
-    }
+      ...params,
+    },
   });
 };
 
@@ -22,8 +22,8 @@ export const getOldTickets = (pageCurrent, pageSize, search, params) => {
       pageSize,
       pageCurrent,
       search,
-      ...params
-    }
+      ...params,
+    },
   });
 };
 
@@ -34,13 +34,13 @@ export const updateTicketStatus = (data) => {
 export const getNewTicketsExcel = () => {
   return axiosInstanceWithHeader.get('/api/export/ticket', {
     params: { status: statusNew },
-    responseType: 'arraybuffer'
+    responseType: 'arraybuffer',
   });
 };
 
 export const getOldTicketsExcel = () => {
   return axiosInstanceWithHeader.get('/api/export/ticket', {
     params: { status: statusClosed },
-    responseType: 'arraybuffer'
+    responseType: 'arraybuffer',
   });
 };

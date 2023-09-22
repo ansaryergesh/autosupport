@@ -2,18 +2,12 @@ import React, { useState, useEffect } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 
-const MyComponent = ({
-  answerFormData,
-  setAnswerFormData,
-  selectedLanguage
-}) => {
+const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
 
-  const [editorContent, setEditorContent] = useState(
-    selectedLanguageItem?.stepDescription || ''
-  );
+  const [editorContent, setEditorContent] = useState(selectedLanguageItem?.stepDescription || '');
   useEffect(() => {
     handleContentChange(editorContent);
   }, [editorContent]);
@@ -25,7 +19,7 @@ const MyComponent = ({
   const handleContentChange = (value) => {
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
-      (content) => content.langKey === selectedLanguage
+      (content) => content.langKey === selectedLanguage,
     );
     if (index !== -1) {
       updatedAnswerContent.answerContents[index].stepDescription = value;
@@ -55,9 +49,9 @@ const MyComponent = ({
               'image',
               'strike',
               'blockquote',
-              'link'
-            ]
-          ]
+              'link',
+            ],
+          ],
         }}
       />
     </div>

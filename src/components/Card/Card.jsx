@@ -6,21 +6,21 @@ import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
 import { i18n } from '../../utils/i18next';
 
-const CardComponent = (props) => {
+const CardComponent = ({ data }) => {
   const { Text } = Typography;
-  const questions = props.data?.questions;
+  const questions = data?.questions;
   const maxQuestionsToShow = 4; // Maximum number of questions to show without ellipsis
 
   return (
     <div className={styles.card}>
       <div className={'my-heading-2'}>
         <div>
-          <Link to={`/category/${props.data?.id}`}>
+          <Link to={`/category/${data?.id}`}>
             <Text ellipsis={{ rows: 2, expandable: false }}>
               <TypographyHead
                 className={styles.title}
                 type={TypoGraphyType.SUB_HEAD}
-                content={props.data?.categorieContents?.name}
+                content={data?.categorieContents?.name}
               />
             </Text>
           </Link>
@@ -40,10 +40,11 @@ const CardComponent = (props) => {
           </p>
         ))}
         {questions?.length > maxQuestionsToShow && (
-          <Text className={styles.more}>
-            ... {i18n.t('more')} {questions.length - maxQuestionsToShow}{' '}
-            {i18n.t('moreQuestions')}
-          </Text>
+          <Link to={`/category/${data?.id}`}>
+            <Text className={styles.more}>
+              ... {i18n.t('more')} {questions.length - maxQuestionsToShow} {i18n.t('moreQuestions')}
+            </Text>
+          </Link>
         )}
       </div>
     </div>

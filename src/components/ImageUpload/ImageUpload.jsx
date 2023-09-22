@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Upload, Modal, Input, Progress, notification } from 'antd';
+import { Upload, Modal, Progress, notification } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosInstanceWithHeader, originAddress } from '../../api/api.js';
 import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
+import Input from '../Input/Input.jsx';
 
 const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
@@ -64,13 +65,13 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
     setEditingImage(file);
   };
 
-  const handleRemove = (file) => {
-    removeImage(file.id).then((res) => {
-      console.log(res);
-      const newFileList = fileList.filter((item) => item.id !== file.id);
-      setFileList(newFileList);
-    });
-  };
+  // const handleRemove = (file) => {
+  //   removeImage(file.id).then((res) => {
+  //     console.log(res);
+  //     const newFileList = fileList.filter((item) => item.id !== file.id);
+  //     setFileList(newFileList);
+  //   });
+  // };
 
   const uploadImage = async (options) => {
     const { onSuccess, onError, file, onProgress } = options;
@@ -144,6 +145,29 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
     });
   };
 
+  const handleRemove = (file) => {
+    const { confirm } = Modal;
+    return new Promise((resolve, reject) => {
+      confirm({
+        title: i18n.t('actions.sure'),
+        okButtonProps: { className: 'button-modal' },
+        cancelButtonProps: { className: 'button-default' },
+        onOk: () => {
+          resolve(true);
+
+          removeImage(file.id).then((res) => {
+            console.log(res);
+            const newFileList = fileList.filter((item) => item.id !== file.id);
+            setFileList(newFileList);
+          });
+        },
+        onCancel: () => {
+          reject(true);
+        },
+      });
+    });
+  };
+
   return (
     <div style={{ marginTop: '10px' }}>
       <Upload
@@ -159,6 +183,8 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
         {uploadButton}
       </Upload>
       <Modal
+        okButtonProps={{ className: 'button-modal' }}
+        cancelButtonProps={{ className: 'button-default' }}
         visible={previewVisible}
         cancelText={i18n.t('actions.cancel')}
         onCancel={handleCancel}

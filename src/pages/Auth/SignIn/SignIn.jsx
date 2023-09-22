@@ -17,17 +17,16 @@ const SignIn = () => {
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
 
-
   const onFinish = (values) => {
     setLoading(true);
     onLogin(values)
       .then((res) => {
         if (res) {
           if (res.data?.id_token) {
-            getCurrentAccount(res.data?.id_token).then(res=> {
+            getCurrentAccount(res.data?.id_token).then((res) => {
               location.reload();
               localStorage.setItem(LocalStorageKeys.ACCOUNT_DATA, JSON.stringify(res.data));
-            })
+            });
             localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
           }
           notification.success({ message: 'welcome' });

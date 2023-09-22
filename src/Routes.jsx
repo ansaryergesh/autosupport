@@ -20,7 +20,7 @@ import SearchHistory from './pages/SearchHistory/SearchHistory.jsx';
 import UserProfile from './pages/UserProfile/UserProfile.jsx';
 import NewTickets from './pages/Tickets/NewTickets.jsx';
 import OldTickets from './pages/Tickets/OldTickets.jsx';
-import Activate from "./pages/Auth/Activate/Activate.jsx";
+import Activate from './pages/Auth/Activate/Activate.jsx';
 
 function RouteWithLayout({ layout, component, isAuthLoading = false, ...rest }) {
   if (isAuthLoading) {

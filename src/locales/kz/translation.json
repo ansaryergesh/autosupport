@@ -116,7 +116,10 @@
     "characterLimit": "Таңбалар шегіне жетті",
     "previewMessage": "Сіз алдын ала қарау режиміне ауыстыңыз",
     "previewErrorMessage": "Үш тілде жауап қосу керек",
-    "videoUrl": "Бейне нұсқаудың url-і"
+    "videoUrl": "Бейне нұсқаудың url-і",
+    "titleSwitch": "Өту кезінде сақталмаған деректер жойылады",
+    "okSwitch": "Сақтау және өту",
+    "cancelSwitch": "Деректерді сақтамай өту"
   },
   "menu": {
     "addCategory": "Санат қосу",

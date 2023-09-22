@@ -119,7 +119,10 @@
     "characterLimit": "Character limit reached",
     "previewMessage": "You have switched to preview",
     "previewErrorMessage": "You must add an answer in three languages",
-    "videoUrl": "Video url"
+    "videoUrl": "Video url",
+    "titleSwitch": "When switching, unsaved data will be deleted",
+    "okSwitch": "Save and go",
+    "cancelSwitch": "Go without saving data"
   },
   "menu": {
     "addCategory": "Add category",
