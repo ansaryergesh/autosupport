@@ -1,9 +1,7 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 
 export const answerByQuestionAndResource = (questionId, resourceId) => {
-  return axiosInstanceWithHeader.get(
-    `/api/admin/answers/${questionId}/${resourceId}`
-  );
+  return axiosInstanceWithHeader.get(`/api/admin/answers/${questionId}/${resourceId}`);
 };
 
 export const addAnswerToQuestion = (data) => {
@@ -28,6 +26,6 @@ export const saveAnswer = (id, data) => {
 
 export const getAnswersExcel = () => {
   return axiosInstanceWithHeader.get('/api/export/answer', {
-    responseType: 'arraybuffer'
+    responseType: 'arraybuffer',
   });
 };

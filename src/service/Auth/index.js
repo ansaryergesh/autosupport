@@ -1,6 +1,6 @@
 import { axiosInstance } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
-import axios from "axios";
+import axios from 'axios';
 
 export const clearStorage = () => {
   console.log('clearStorage');
@@ -30,13 +30,13 @@ export const newPassword = (data) => {
 };
 
 export const activateUser = (data) => {
-  return axiosInstance.post(`/api/activate?key=${data.key}`, {password:data.password});
+  return axiosInstance.post(`/api/activate?key=${data.key}`, { password: data.password });
 };
 
-
 export const getCurrentAccount = (bearerToken) => {
-  return axios.get(checkerAddress+'/api/account', {
+  return axios.get(checkerAddress + '/api/account', {
     headers: {
       Authorization: 'Bearer ' + bearerToken,
-    },});
+    },
+  });
 };

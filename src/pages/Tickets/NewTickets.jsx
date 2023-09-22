@@ -2,11 +2,7 @@ import { Table, notification, Empty, Switch } from 'antd';
 import JHeader from '../../components/JHeader/JHeader';
 import { i18n } from '../../utils/i18next';
 import Button from '../../components/Button/Button';
-import {
-  getNewTickets,
-  getNewTicketsExcel,
-  updateTicketStatus
-} from '../../service/Tickets';
+import { getNewTickets, getNewTicketsExcel, updateTicketStatus } from '../../service/Tickets';
 import { useEffect, useState } from 'react';
 import { checkPermissions } from '../../helpers/checkPermission';
 import SearchTickets from './SearchTickets';
@@ -24,14 +20,14 @@ const NewTickets = () => {
   const handleTicketStatus = (id) => {
     const statusData = {
       id,
-      status: 'CLOSED'
+      status: 'CLOSED',
     };
     updateTicketStatus(statusData)
       .then((res) => {
         if (res.data) {
           notification.success({
             message: i18n.t('processed'),
-            placement: 'top'
+            placement: 'top',
           });
         }
         getNewTicketsList(1, 10);
@@ -43,11 +39,11 @@ const NewTickets = () => {
   const columns = [
     {
       title: i18n.t('newAnswer.whatQuestion'),
-      dataIndex: 'title'
+      dataIndex: 'title',
     },
     {
       title: i18n.t('columns.email'),
-      dataIndex: 'email'
+      dataIndex: 'email',
     },
     {
       title: i18n.t('actions.action'),
@@ -57,11 +53,12 @@ const NewTickets = () => {
           <Button
             onClick={() => {
               handleTicketStatus(record.id);
-            }}>
+            }}
+          >
             {i18n.t('processed')}
           </Button>
-        )
-    }
+        ),
+    },
   ];
 
   const getNewTicketsList = (pageCurrent, pageSize, search) => {
@@ -94,21 +91,18 @@ const NewTickets = () => {
         tableLayout="fixed"
         rowKey={(record) => record.id}
         expandable={{
-          expandedRowRender: (record) => (
-            <p style={{ margin: 0 }}>{record.text}</p>
-          )
+          expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.text}</p>,
         }}
         columns={columns}
         dataSource={data}
         pagination={{
           total: totalPages,
-          onChange: (page, pageSize) =>
-            getNewTicketsList(page, pageSize, inputValue),
-          position: ['bottomCenter']
+          onChange: (page, pageSize) => getNewTicketsList(page, pageSize, inputValue),
+          position: ['bottomCenter'],
         }}
         bordered
         locale={{
-          emptyText: <Empty description={i18n.t('noData')} />
+          emptyText: <Empty description={i18n.t('noData')} />,
         }}
       />
 
@@ -118,15 +112,13 @@ const NewTickets = () => {
             handleExport(getNewTicketsExcel, i18n.t('newTickets'));
           }}
           style={{ marginTop: '16px' }}
-          type="primary">
+          type="primary"
+        >
           {i18n.t('actions.downloadTickets')}
         </Button>
 
         <div className={styles.switchBox}>
-          <TypographyHead
-            content={i18n.t('toggleTickets')}
-            type={TypoGraphyType.LEVEL_2}
-          />
+          <TypographyHead content={i18n.t('toggleTickets')} type={TypoGraphyType.LEVEL_2} />
           <Switch
             defaultChecked={true}
             checkedChildren={<CheckOutlined />}

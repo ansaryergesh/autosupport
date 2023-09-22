@@ -12,28 +12,28 @@ const { RangePicker } = DatePicker;
 const rangePresets = [
   {
     label: 'Последние 7 дней',
-    value: []
+    value: [],
   },
   {
     label: 'Последние 14 дней',
-    value: []
+    value: [],
   },
   {
     label: 'Последний месяц',
-    value: []
+    value: [],
   },
   {
     label: 'Последние 3 месяца',
-    value: []
+    value: [],
   },
   {
     label: 'Последний год',
-    value: []
+    value: [],
   },
   {
     label: 'За все время',
-    value: []
-  }
+    value: [],
+  },
 ];
 
 const ReviewsList = () => {
@@ -52,18 +52,12 @@ const ReviewsList = () => {
 
   return (
     <div className={styles.box}>
-      <TypographyHead
-        content={i18n.t('feedback.ListTitle')}
-        type={TypoGraphyType.SECONDARY_HEAD}
-      />
+      <TypographyHead content={i18n.t('feedback.ListTitle')} type={TypoGraphyType.SECONDARY_HEAD} />
 
       <Row justify={'center'} gutter={[0, 16]}>
         {data?.length === 0 ? (
           <Col span={24}>
-            <Empty
-              imageStyle={{ height: '100%' }}
-              description={i18n.t('noData')}
-            />
+            <Empty imageStyle={{ height: '100%' }} description={i18n.t('noData')} />
           </Col>
         ) : (
           data?.map(
@@ -72,16 +66,13 @@ const ReviewsList = () => {
                 <Col span={24} className={styles.questionBox} key={q.id}>
                   <span>{q.text}</span>
                 </Col>
-              )
+              ),
           )
         )}
         {data?.length > 0 && (
           <>
             <Col>
-              <RangePicker
-                className={styles.datePicker}
-                presets={rangePresets}
-              />
+              <RangePicker className={styles.datePicker} presets={rangePresets} />
             </Col>
             <Col style={{ marginLeft: 'auto' }}>
               <Button type="primary" className={styles.btnDownload}>

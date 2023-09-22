@@ -1,7 +1,7 @@
 export const handleExport = (getData, fileName) => {
   getData().then((response) => {
     const blob = new Blob([response.data], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     });
 
     const url = window.URL.createObjectURL(blob);
