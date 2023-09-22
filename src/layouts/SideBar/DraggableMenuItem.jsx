@@ -13,7 +13,7 @@ const DraggableMenuItem = ({ index, item, isCategory = true, moveMenuItem, child
     item: { id: item.id },
   });
 
-  const [, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     accept: isCategory ? MenuItemTypes.MENU_ITEM : MenuItemTypes.QUESTION_ITEM,
     drop: (draggedItem) => {
       if (draggedItem.id !== item.id) {
@@ -21,9 +21,17 @@ const DraggableMenuItem = ({ index, item, isCategory = true, moveMenuItem, child
         draggedItem.index = index;
       }
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
   });
+
+  const dropAreaStyles = {
+    cursor: 'move',
+    backgroundColor: isOver ? 'rgba(195,196,199,0.25)' : 'transparent', // Change the background color when an item is dragged over.
+  };
   return (
-    <div ref={(node) => drag(drop(node))} style={{ cursor: 'move' }}>
+    <div ref={(node) => drag(drop(node))} style={dropAreaStyles}>
       {children}
     </div>
   );
