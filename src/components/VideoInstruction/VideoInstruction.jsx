@@ -3,11 +3,17 @@ import Input from '../Input/Input.jsx';
 import ReactPlayer from 'react-player';
 import { i18n } from '../../utils/i18next';
 
-export const VideoInstruction = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
+export const VideoInstruction = ({
+  answerFormData,
+  setAnswerFormData,
+  selectedLanguage,
+  setIsEdited,
+}) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
     (item) => item.langKey === selectedLanguage,
   );
   const handleChangeInput = (name, value) => {
+    setIsEdited(true);
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
       (content) => content.langKey === selectedLanguage,

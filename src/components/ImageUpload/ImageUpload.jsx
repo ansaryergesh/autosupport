@@ -6,7 +6,7 @@ import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
 import Input from '../Input/Input.jsx';
 
-const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
+const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
     (item) => item.langKey === selectedLanguage,
   );
@@ -18,7 +18,6 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
   const [progress, setProgress] = useState(0);
   const handleCancel = () => setPreviewVisible(false);
   const domainName = originAddress;
-  console.log(domainName);
   useEffect(() => {
     updateAnswerFormData();
   }, [fileList]);
@@ -59,7 +58,6 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-    // const inPreview = file.thumbUrl ? file.thumbUrl : file.url
     setPreviewImage(file.url || file.preview);
     setPreviewVisible(true);
     setEditingImage(file);
@@ -104,6 +102,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
         setFileList(newState);
         handlePreview(newFile);
       });
+      setIsEdited(true);
       onSuccess('Ok');
       console.log('server res: ', res);
     } catch (err) {
@@ -113,6 +112,8 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
   };
 
   const handleSaveDescription = (description) => {
+    setIsEdited(true);
+
     if (description) {
       const newFileList = fileList.map((item) => {
         if (item.id === editingImage.id) {
@@ -157,6 +158,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage }) 
 
           removeImage(file.id).then((res) => {
             console.log(res);
+            setIsEdited(true)
             const newFileList = fileList.filter((item) => item.id !== file.id);
             setFileList(newFileList);
           });

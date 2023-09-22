@@ -4,8 +4,7 @@ import { notification } from 'antd';
 import { clearStorage } from '../service/Auth/index.js';
 import { i18n } from '../utils/i18next';
 
-export const checkerAddress =
-  import.meta.env?.MODE === 'development' ? 'http://10.50.216.20' : '/';
+export const checkerAddress = import.meta.env?.MODE === 'development' ? 'http://10.50.216.20' : '/';
 
 export const originAddress =
   import.meta.env?.MODE === 'development' ? 'http://10.50.216.20' : window.location.origin;
@@ -26,7 +25,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error)
+    console.log(error);
     if (error?.status === 401) {
       notification.error({ message: i18n.t('commons.unauthorized') });
       clearStorage();
@@ -34,11 +33,11 @@ axiosInstance.interceptors.response.use(
       notification.error({
         message: i18n.t('commons.accessDenied'),
       });
-    }
-    else if(error.response) {
-      console.log(error.response.data.message)
+    } else if (error.response) {
+      console.log(error.response.data.message);
       notification.error({
-        message: error.response.data.message});
+        message: error.response.data.message,
+      });
     }
 
     throw error;
@@ -61,8 +60,8 @@ axiosInstanceWithHeader.interceptors.response.use(
     } else {
       notification.error(error);
     }
-    if(error.response) {
-      notification.error({message: error.response.data.message});
+    if (error.response) {
+      notification.error({ message: error.response.data.message });
     }
     throw error;
   },

@@ -139,13 +139,13 @@ export default {
     descriptionRequired: 'Описание обязательно',
     emailRequired: 'Почта обязательна',
     questionRequired: 'Тема вопроса обязательна',
-    answerRequired: 'Ответ обязателен',
+    answerRequired: 'Ответ обязателен'
   },
   newAnswer: {
     answer: 'Ответ',
     whatQuestion: 'Тема вопроса',
     inputEmail: 'Введите почту',
-    startTyping: 'Начните вводить...',
+    startTyping: 'Начните вводить...'
   },
   userProfile: {
     passwordUpdateNotification: 'Пароль успешно изменен!',
