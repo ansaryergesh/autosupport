@@ -10,7 +10,16 @@ import {
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
-import { Col, Dropdown, notification, Row, Menu, Empty, Typography, Popconfirm } from 'antd';
+import {
+  Col,
+  Dropdown,
+  notification,
+  Row,
+  Menu,
+  Empty,
+  Typography,
+  Popconfirm
+} from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
@@ -41,6 +50,7 @@ const QuestionAnswerContent = () => {
   const [questionInfo, setQuestionInfo] = useState({ initialQuestionDto });
   const [instructionType, setInstructionType] = useState(INSTRUCTION_TYPE.VISUAL);
   const [selectedKeyWords, setSelectedKeyWords] = useState(questionInfo?.keyWords || []);
+  const [isEdited, setIsEdited] = useState(false);
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
   const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
@@ -84,19 +94,21 @@ const QuestionAnswerContent = () => {
   };
 
   const menuDelete = (resource) => {
+    const filtered = (prev) =>
+      prev.filter((selectedResource) => selectedResource.id !== resource.id);
+
     const handleDelete = () => {
-      setAnswerFormData((prevState) => {
-        return { ...prevState, ...initialQuestionAnswerContent };
-      });
       if (resource.isNew) {
-        setSelectedResources((prev) =>
-          prev.filter((selectedResource) => selectedResource.id !== resource.id),
-        );
+        setSelectedResources((prev) => {
+          setActiveResource(filtered(prev) !== [] ? filtered(prev)[0] : {});
+          return filtered(prev);
+        });
       } else {
         deleteAnswerById(answerFormData.id).then((res) => {
-          setSelectedResources((prev) =>
-            prev.filter((selectedResource) => selectedResource.id !== resource.id),
-          );
+          setSelectedResources((prev) => {
+            setActiveResource(filtered(prev) !== [] ? filtered(prev)[0] : {});
+            return filtered(prev);
+          });
           console.log(res, 'deleted').catch((err) => console.log(err));
         });
       }
@@ -123,10 +135,81 @@ const QuestionAnswerContent = () => {
   }, [id]);
 
   useEffect(() => {
-    setAnswerFormData(initialQuestionAnswerContent);
     getQuestionById(id).then((res) => {
       setQuestionInfo(res.data);
       setSelectedQuestions(res.data?.children || []);
+    });
+  }, []);
+  useEffect(() => {
+    setIsEdited(false);
+    console.log('check active resource changed');
+    setAnswerFormData({
+      id: null,
+      question: {
+        id: 0,
+        orderNumber: 0,
+        counter: 0,
+        categorie: {
+          id: 0,
+          orderNumber: 0,
+          categorieContents: [
+            {
+              id: 0,
+              langKey: 'EN',
+              name: '',
+            },
+          ],
+        },
+        questionContents: [
+          {
+            id: 0,
+            langKey: 'EN',
+            title: '',
+            stepDescription: '',
+            tags: [
+              {
+                id: 0,
+                text: '',
+              },
+            ],
+            keyWords: [
+              {
+                id: 0,
+                text: '',
+              },
+            ],
+          },
+        ],
+      },
+      resource: {
+        id: 0,
+        code: '',
+        name: '',
+      },
+      answerContents: [
+        {
+          langKey: 'EN',
+          stepDescription: '',
+          videoUrl: '',
+          videoDescription: '',
+          images: [],
+        },
+        {
+          langKey: 'RU',
+          stepDescription: '',
+          videoUrl: '',
+          videoDescription: '',
+          images: [],
+        },
+        {
+          langKey: 'KZ',
+          stepDescription: '',
+          videoUrl: '',
+          videoDescription: '',
+          images: [],
+        },
+      ],
+      status: null,
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
@@ -135,18 +218,13 @@ const QuestionAnswerContent = () => {
         .then((res) => {
           console.log('resolved');
           setAnswerFormData(res.data);
-          console.log(res.data);
         })
         .catch((err) => {
           console.log('Error');
           console.error(err);
-          setAnswerFormData(initialQuestionAnswerContent);
         })
         .finally(() => {
-          getQuestionById(id).then((res) => {
-            setQuestionInfo(res.data);
-            setSelectedQuestions(res.data?.children || []);
-          });
+          console.log('final');
         });
     }
   }, [activeResource, id]);
@@ -169,7 +247,7 @@ const QuestionAnswerContent = () => {
       finalDataAnswer.answerContents.some((item) => item.stepDescription.length < requiredCharacter)
     ) {
       notification.info({
-        message: i18n.t('questionAnswer.previewErrorMessage'),
+        message: i18n.t({'questionAnswer.previewErrorMessage'),
       });
     } else {
       const finalQuestionInfo = {
@@ -246,7 +324,11 @@ const QuestionAnswerContent = () => {
           >
             <Button
               onClick={(e) => {
-                e.preventDefault(); // Prevent the default click behavior
+                if (!isEdited && activeResource?.id !== resource.id) {
+                  handleChangeResource(resource);
+                } else {
+                  e.preventDefault(); // Prevent the default click behavior
+                }
               }}
               type={activeResource?.id === resource.id ? 'default-active' : 'default'}
             >
@@ -258,22 +340,20 @@ const QuestionAnswerContent = () => {
                     )?.name
                   }
                 </p>
-              ) : (
+              ) : isEdited ? (
                 <Popconfirm
-                  title={i18n.t('questionAnswer.titleSwitch')}
+                  title="При переходе не сохраненные данные будут удалены"
                   onConfirm={() => {
-                    setAnswerFormData(initialQuestionAnswerContent);
                     handleSubmit(false);
                     handleChangeResource(resource);
                   }}
                   cancelButtonProps={{ className: 'button-default' }}
                   okButtonProps={{ className: 'button-modal' }}
                   onCancel={() => {
-                    setAnswerFormData(initialQuestionAnswerContent);
                     handleChangeResource(resource);
                   }}
-                  okText={i18n.t('questionAnswer.okSwitch')}
-                  cancelText={i18n.t('questionAnswer.cancelSwitch')}
+                  okText="Сохранить и перейти"
+                  cancelText="Перейти без сохранения данных"
                 >
                   {
                     resource.resourceContents.find(
@@ -281,13 +361,21 @@ const QuestionAnswerContent = () => {
                     )?.name
                   }
                 </Popconfirm>
+              ) : (
+                <p>
+                  {
+                    resource.resourceContents.find(
+                      (content) => content.langKey === selectedLanguage,
+                    )?.name
+                  }
+                </p>
               )}
             </Button>
           </Dropdown>
         ))}
         {selectedResources.length < resources.length && (
           <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
-            <img title={i18n.t('actions.addResource')} style={{ cursor: 'pointer' }} src={Plus} />
+            <img title={i18n.t({message:'actions.addResource'})} style={{ cursor: 'pointer' }} src={Plus} />
           </Dropdown>
         )}
       </div>
@@ -340,6 +428,7 @@ const QuestionAnswerContent = () => {
                       content={i18n.t('description')}
                     />
                     <SunEditor
+                      setIsEdited={setIsEdited}
                       enableAutoFocus={false}
                       answerFormData={answerFormData}
                       setAnswerFormData={setAnswerFormData}
@@ -361,6 +450,7 @@ const QuestionAnswerContent = () => {
                       ))}
                       {instructionType === INSTRUCTION_TYPE.VISUAL && (
                         <ImageUpload
+                          setIsEdited={setIsEdited}
                           answerFormData={answerFormData}
                           setAnswerFormData={setAnswerFormData}
                           selectedLanguage={selectedLanguage}
@@ -368,6 +458,7 @@ const QuestionAnswerContent = () => {
                       )}
                       {instructionType === INSTRUCTION_TYPE.VIDEO && (
                         <VideoInstruction
+                          setIsEdited={setIsEdited}
                           answerFormData={answerFormData}
                           setAnswerFormData={setAnswerFormData}
                           selectedLanguage={selectedLanguage}
