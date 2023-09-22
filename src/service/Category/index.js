@@ -1,4 +1,7 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 export const createCategory = (data) => {
   return axiosInstanceWithHeader.post('/api/admin/categories', data);
@@ -10,7 +13,10 @@ export const editCategory = (data) => {
 
 export const getCategories = (params) => {
   return axiosInstanceWithHeader.get('/api/admin/categories', {
-    params,
+    params: {
+      organizationCode: ACTIVE_ORGANIZATION,
+      ...params,
+    },
   });
 };
 

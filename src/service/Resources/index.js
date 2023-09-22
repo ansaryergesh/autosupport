@@ -1,4 +1,7 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 export const manageResources = (data) => {
   if (data.id) {
@@ -17,5 +20,9 @@ export const deleteResource = (id) => {
 };
 
 export const getResources = () => {
-  return axiosInstanceWithHeader.get('/api/admin/resources');
+  return axiosInstanceWithHeader.get('/api/admin/resources', {
+    params: {
+      organizationCode: ACTIVE_ORGANIZATION,
+    },
+  });
 };

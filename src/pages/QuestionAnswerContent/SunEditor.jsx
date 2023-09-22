@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { checkPermissions } from '../../helpers/checkPermission';
 
 const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
@@ -30,11 +31,14 @@ const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage }) =>
   return (
     <div style={{ padding: '16px 0' }}>
       <SunEditor
+        disable={checkPermissions(['ROLE_SUPER_ADMIN'])}
         height={'300px'}
         onChange={setEditorContent}
         setContents={editorContent} // Set initial content
         placeholder="Enter the content"
         setOptions={{
+          font: ['Arial'],
+          defaultStyle: 'font-family: Arial',
           buttonList: [
             [
               'bold',

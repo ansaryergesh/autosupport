@@ -50,9 +50,6 @@
   border-radius: 3px;
 }
 
-.sidebar-nav::before {
-}
-
 .submenu {
   width: 100%;
   position: relative;
