@@ -90,17 +90,19 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
     try {
       const res = await axiosInstanceWithHeader.post('/api/admin/image', fmData, config);
       setFileList((prevState) => {
+        console.log(prevState)
         const newFile = {
           uid: res.data.id,
           id: res.data.id,
           status: 'done',
           description: null,
-          imageOrder: prevState.length + 1,
+          imageOrder: fileList.length+1,
           url: res.data.url, // Replace with the URL of the uploaded image
         };
         const newState = [...prevState, newFile];
-        setFileList(newState);
         handlePreview(newFile);
+
+        return newState;
       });
       setIsEdited(true);
       onSuccess('Ok');
@@ -173,6 +175,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
   return (
     <div style={{ marginTop: '10px' }}>
       <Upload
+        multiple={true}
         accept={('image/jpeg', 'image/jpg', 'image/png')}
         maxCount={10}
         // action="//jsonplaceholder.typicode.com/posts/"

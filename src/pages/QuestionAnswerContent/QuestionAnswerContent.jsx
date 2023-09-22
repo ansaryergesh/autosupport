@@ -450,7 +450,6 @@ const QuestionAnswerContent = () => {
                       ))}
                       {instructionType === INSTRUCTION_TYPE.VISUAL && (
                         <ImageUpload
-                          multiple={true}
                           setIsEdited={setIsEdited}
                           answerFormData={answerFormData}
                           setAnswerFormData={setAnswerFormData}
