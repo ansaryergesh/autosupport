@@ -139,6 +139,8 @@ const Organizations = () => {
           </Button>
         </div>
         <Table
+          tableLayout="fixed"
+          bordered
           rowKey={(record) => record.code}
           pagination={false}
           rowSelection={rowSelection}

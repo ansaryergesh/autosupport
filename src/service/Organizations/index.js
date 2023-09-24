@@ -19,3 +19,7 @@ export const deleteOrganization = (code) => {
 export const getOrganizations = () => {
   return axiosInstanceWithHeader.get('/api/admin/organizations');
 };
+
+export const getOrganizationOpen = () => {
+  return axiosInstanceWithHeader.get('/api/v1/organizations');
+};

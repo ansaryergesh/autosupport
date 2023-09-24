@@ -32,6 +32,7 @@ import styles from './index.module.less';
 import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
 import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
 import { findByLangKey } from '../../helpers/findByLangKey.js';
+import Logo from 'images/logoHeader.svg';
 
 const { Sider } = Layout;
 
@@ -266,7 +267,13 @@ const SidebarNav = ({ isAdmin = true }) => {
   };
 
   return (
-    <Sider width={300} className="site-layout-background">
+    <Sider width={280} className="site-layout-background">
+      <div style={{ marginBottom: '16px' }}>
+        <Link to={'/'}>
+          <Image src={Logo} preview={false} />
+        </Link>
+      </div>
+
       <SearchInput />
       <Layout className={'navAdmin'}>
         {isAdmin &&
@@ -279,8 +286,7 @@ const SidebarNav = ({ isAdmin = true }) => {
       </Layout>
       <div
         style={{
-          marginTop: '10px',
-          marginBottom: '20px',
+          padding: '16px 12px 16px 0',
           background: 'transparent',
         }}
       >
@@ -293,6 +299,7 @@ const SidebarNav = ({ isAdmin = true }) => {
         }}
         className="custom-menu"
         style={{
+          padding: '0px 12px 16px 0',
           maxHeight: '100vh',
           borderRight: 0,
           width: '100%!important',
