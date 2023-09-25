@@ -3,12 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { i18n } from 'utils/i18next.js';
 
 const DraggableMenuItem = ({ handleAdd }) => {
   const constMenu = (
     <Menu>
       <Menu.Item key="addCategory" onClick={() => handleAdd()}>
-        Добавить новая категория
+        {i18n.t('menu.addCategory')}
       </Menu.Item>
     </Menu>
   );
@@ -24,10 +25,11 @@ const DraggableMenuItem = ({ handleAdd }) => {
             padding: '12px 0',
             fontSize: '14px',
             alignItems: 'center',
-            marginBottom: '8px'
-          }}>
+            marginBottom: '8px',
+          }}
+        >
           <Link className={` ${currentPath === '/' && 'activeLink'}`} to={`/`}>
-            <span>Главная</span>
+            <span>{i18n.t('home')}</span>
           </Link>
         </div>
       </Dropdown>
@@ -36,7 +38,7 @@ const DraggableMenuItem = ({ handleAdd }) => {
   );
 };
 DraggableMenuItem.propTypes = {
-  handleAdd: PropTypes.func
+  handleAdd: PropTypes.func,
 };
 
 export default DraggableMenuItem;

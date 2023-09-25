@@ -8,17 +8,17 @@ import eslint from 'vite-plugin-eslint';
 
 const common = [
   nodeResolve({
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.mjs', '.cjs', '.node']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.mjs', '.cjs', '.node'],
   }),
   viteTsconfigPaths(),
   i18nextLoader({
     paths: ['./src/locales'],
-    namespaceResolution: 'basename'
+    namespaceResolution: 'basename',
   }),
   svgr({
     exportAsDefault: false,
-    include: '**/*.svg'
-  })
+    include: '**/*.svg',
+  }),
 ];
 
 const dev = [
@@ -30,14 +30,11 @@ const dev = [
     overrideConfig: {
       rules: {
         'react/prop-types': 'off',
-        'no-unused-vars': [
-          'error',
-          { "varsIgnorePattern": "React|ChartJS" }
-        ]
-      }
-    }
+        'no-unused-vars': ['error', { varsIgnorePattern: 'React|ChartJS' }],
+      },
+    },
   }),
-  reactClickToComponent()
+  reactClickToComponent(),
 ];
 
 const prod = [];
@@ -45,5 +42,5 @@ const prod = [];
 export default {
   common,
   dev,
-  prod
+  prod,
 };

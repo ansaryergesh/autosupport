@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background-color);
 }
@@ -22,7 +26,6 @@ body {
 }
 
 .main-layout {
-  background-image: url('./assets/images/backgroundImg.jpg');
   background-size: cover;
   min-height: 100vh;
   overflow-y: hidden;
@@ -32,10 +35,8 @@ body {
 .sidebar-nav {
   position: relative;
   background-color: var(--background-color);
-  margin-top: 64px; /* Adjust this value according to the header's height */
   padding: 16px 40px;
-  padding-right: 15px;
-  margin-right: 25px;
+  padding-right: 32px;
   overflow: hidden;
   overflow-y: auto;
   overflow-x: hidden;
@@ -48,20 +49,20 @@ body {
   background: #dee0e3;
 }
 
-.sidebar-nav::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
+// .sidebar-nav::-webkit-scrollbar-thumb {
+//   background-color: rgba(0, 0, 0, 0.2);
+//   border-radius: 5px;
+// }
 
-.sidebar-nav::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -2px; /* Adjust the distance of the border from the right */
-  width: 2px; /* Adjust the width of the border */
-  background: @primary-color;
-}
+// .sidebar-nav::before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   right: -2px; /* Adjust the distance of the border from the right */
+//   width: 2px; /* Adjust the width of the border */
+//   background: @primary-color;
+// }
 
 .submenu {
   width: 100%;
@@ -73,15 +74,14 @@ body {
 
 .layout-content {
   background: var(--background-color);
-  padding: 74px 13px; /* Adjust this value according to the header's height */
 }
 
-.layout-content::-webkit-scrollbar {
-  position: absolute;
-  left: 0;
-  width: 2px;
-  background: #dee0e3;
-}
+// .layout-content::-webkit-scrollbar {
+//   position: absolute;
+//   left: 0;
+//   width: 2px;
+//   background: #dee0e3;
+// }
 
 .titleGradient {
   background-image: @primary-color;
@@ -296,6 +296,7 @@ body {
   border-radius: 5px;
 }
 
+.ant-checkbox-indeterminate .ant-checkbox-inner::after,
 .ant-checkbox-checked .ant-checkbox-inner,
 .ant-checkbox-checked .ant-checkbox-input:focus + .ant-checkbox-inner,
 .ant-checkbox:hover {
@@ -303,15 +304,9 @@ body {
   border-color: #13ad64 !important;
 }
 
+.ant-checkbox-indeterminate .ant-checkbox-inner::after,
 .ant-checkbox-input:hover + .ant-checkbox-inner {
   border-color: #13ad64 !important;
-}
-
-.ant-select-selector {
-  &:hover,
-  :focus {
-    border-color: #4ec202 !important;
-  }
 }
 
 .constMenu .ant-menu-submenu-arrow {
@@ -339,6 +334,7 @@ body {
   background-clip: text !important;
   color: transparent !important;
 }
+
 .ant-menu-item-selected {
   color: @gray-color-1;
 }
@@ -360,4 +356,28 @@ body {
     color: @gray-color-1;
     font-weight: 700;
   }
+}
+
+.ant-typography-edit {
+  color: @green-color-1!important;
+}
+
+.ant-pagination-item-active,
+.ant-pagination .ant-pagination-item-active a {
+  color: @green-color-1 !important;
+  border-color: @green-color-1 !important;
+}
+
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td,
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected:hover > td {
+  background-color: @green-color-4;
+}
+
+.ant-typography p,
+.ant-typography {
+  margin: 0 !important;
+}
+
+.ant-switch-checked {
+  background: @green-color-1 !important;
 }

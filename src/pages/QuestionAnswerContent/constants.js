@@ -1,6 +1,7 @@
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
 export const initialQuestionAnswerContent = {
   id: null,
-  status: 'status',
   question: {
     id: 0,
     orderNumber: 0,
@@ -12,35 +13,35 @@ export const initialQuestionAnswerContent = {
         {
           id: 0,
           langKey: 'EN',
-          name: 'string'
-        }
-      ]
+          name: '',
+        },
+      ],
     },
     questionContents: [
       {
         id: 0,
         langKey: 'EN',
-        title: 'string',
-        stepDescription: 'string',
+        title: '',
+        stepDescription: '',
         tags: [
           {
             id: 0,
-            text: 'string'
-          }
+            text: '',
+          },
         ],
         keyWords: [
           {
             id: 0,
-            text: 'string'
-          }
-        ]
-      }
-    ]
+            text: '',
+          },
+        ],
+      },
+    ],
   },
   resource: {
     id: 0,
-    code: 'string',
-    name: 'string'
+    code: '',
+    name: '',
   },
   answerContents: [
     {
@@ -48,21 +49,39 @@ export const initialQuestionAnswerContent = {
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: []
+      images: [],
     },
     {
       langKey: 'RU',
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: []
+      images: [],
     },
     {
       langKey: 'KZ',
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: []
-    }
-  ]
+      images: [],
+    },
+  ],
+  status: null,
+};
+
+export const saveAnswerNews = (answerFormData) => {
+  let answerFormDataList =
+    JSON.parse(localStorage.getItem(LocalStorageKeys.ANSWER_FROM_DATA)) || [];
+  const filtered = answerFormDataList.filter(
+    (item) => item.resource?.id !== answerFormData.resource?.id,
+  );
+  answerFormDataList = [...filtered, answerFormData];
+  localStorage.setItem(LocalStorageKeys.ANSWER_FROM_DATA, JSON.stringify(answerFormDataList));
+};
+
+export const getAnswerFormDataByResource = (resource) => {
+  let answerFormDataList =
+    JSON.parse(localStorage.getItem(LocalStorageKeys.ANSWER_FROM_DATA)) || [];
+  console.log(answerFormDataList.find((item) => item.resource.id === resource.id));
+  return answerFormDataList.find((item) => item.resource.id === resource.id) || null;
 };

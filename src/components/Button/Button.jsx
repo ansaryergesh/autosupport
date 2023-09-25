@@ -24,7 +24,8 @@ export default function Button({
       disabled={disabled}
       loading={loading}
       style={{ marginRight: withoutMargin ? 0 : '5px', ...style }}
-      {...otherProps}>
+      {...otherProps}
+    >
       {children}
       {iconButton}
     </ButtonAntd>

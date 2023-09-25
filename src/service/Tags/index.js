@@ -1,4 +1,7 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 export const manageTag = (data) => {
   if (data.id) {
@@ -13,9 +16,15 @@ export const deleteTag = (id) => {
 };
 
 export const getTags = () => {
-  return axiosInstanceWithHeader.get('/api/admin/tags');
+  return axiosInstanceWithHeader.get('/api/admin/tags', {
+    params: {
+      organizationCode: ACTIVE_ORGANIZATION,
+    },
+  });
 };
 
 export const searchTags = (params) => {
-  return axiosInstanceWithHeader.get('/api/admin/tags/_search',{params: {pageSize: 20, query: '', ...params}} )
-}
+  return axiosInstanceWithHeader.get('/api/admin/tags', {
+    params: { pageSize: 20, query: '', ...params },
+  });
+};

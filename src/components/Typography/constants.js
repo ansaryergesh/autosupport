@@ -6,7 +6,7 @@ export const TypoGraphyType = {
   LEVEL_1: 'LEVEL_1',
   LEVEL_2: 'LEVEL_2',
   LEVEL_2_BOLD: 'LEVEL_2_BOLD',
-  LEVEL_3: 'LEVEL_3'
+  LEVEL_3: 'LEVEL_3',
 };
 
 export const fontSize = (type) => {
@@ -66,6 +66,8 @@ export const paddingSize = (type) => {
   switch (type) {
     case TypoGraphyType.SECONDARY_HEAD:
       return 'var(--padding-secondary-head)';
+    case TypoGraphyType.SUB_HEAD:
+      return 'var(--padding-sub-head)';
     case TypoGraphyType.LEVEL_2_BOLD:
       return 'var(--padding-bold-level-2)';
     default:

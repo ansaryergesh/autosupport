@@ -8,6 +8,7 @@ import { DndProvider } from 'react-dnd';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+import { getOrganizationOpen } from '../../service/Organizations/index.js';
 
 const Main = (props) => {
   const { children } = props;
@@ -15,41 +16,54 @@ const Main = (props) => {
   const history = useHistory();
 
   const checkIfTokenIsValid = () => {
-    const currentToken = localStorage.getItem(
-      LocalStorageKeys.FREEDOM_ACCESS_TOKEN
-    );
+    const currentToken = localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
 
     return !!currentToken;
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     if (!checkIfTokenIsValid()) {
       history.push('/sign-in');
     }
   }, [pathname, history]);
 
+  useEffect(() => {
+    if (!localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION)) {
+      console.log('check');
+      getOrganizationOpen()
+        .then((res) => {
+          localStorage.setItem(LocalStorageKeys.ACTIVE_ORGANIZATION, res.data[0].code);
+          location.reload();
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={'main-layout'}>
-        <Layout style={{ minHeight: '100vh' }}>
-          <div className="sidebar-nav">
-            <SidebarNav />
-          </div>
-          <Layout>
-            <Header />
-            <Layout.Content className="layout-content">
-              {children}
-            </Layout.Content>
+        {checkIfTokenIsValid() && (
+          <Layout style={{ minHeight: '100vh' }}>
+            <div className="sidebar-nav">
+              <SidebarNav />
+            </div>
+            <Layout>
+              <Layout.Content className="layout-content">
+                <Header />
+                <div style={{ paddingRight: '40px' }}>{children}</div>
+              </Layout.Content>
+            </Layout>
           </Layout>
-        </Layout>
+        )}
       </div>
     </DndProvider>
   );
 };
 
 Main.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Main;

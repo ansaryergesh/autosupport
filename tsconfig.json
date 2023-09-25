@@ -9,7 +9,7 @@
       "utils/*": ["utils/*"],
       "helpers/*": ["helpers/*"],
       "views/*": ["views/*"],
-      "fonts/*": ["public/fonts/*"],
+      "fonts/*": ["public/fonts/*"]
     }
   }
 }

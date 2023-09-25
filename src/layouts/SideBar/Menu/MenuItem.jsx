@@ -1,11 +1,17 @@
 import DraggableMenuItem from '../DraggableMenuItem.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.module.less';
-import ArrowRight from 'images/arrowRight.svg';
-import ArrowDown from 'images/arrowDown.svg';
+// import ArrowRight from 'images/arrowRight.svg';
+// import ArrowDown from 'images/arrowDown.svg';
 import { SIDEBAR_BUTTON } from '../../../constants/index.js';
+import { MoreOutlined } from '@ant-design/icons';
+import { Dropdown, Menu, Popconfirm } from 'antd';
+import { i18n } from '../../../utils/i18next.js';
+import { findByLangKey } from '../../../helpers/findByLangKey';
+import { checkPermissions } from '../../../helpers/checkPermission.js';
+
 const MenuItem = ({
   category,
   question,
@@ -14,92 +20,167 @@ const MenuItem = ({
   handleDeleteCategory,
   handleEditCategory,
   handleAddQuestion,
-  setOrderModal,
   moveMenuItem,
   activeOpenedKeys,
   onMenuClick,
   handleDeleteQuestion,
   handleEditQuestion,
   moveMenuItemQuestion,
-  activeButton = SIDEBAR_BUTTON.ALL
+  activeButton = SIDEBAR_BUTTON.ALL,
 }) => {
+  const history = useHistory();
+  const menu = (id) => {
+    return (
+      <Menu>
+        {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <>
+            <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+              {i18n.t('menu.addCategory')}
+            </Menu.Item>
+            <Menu.Item key="edit" onClick={() => handleEditCategory(id)}>
+              {i18n.t('menu.editCategory')}
+            </Menu.Item>
+            <Menu.Item key="addQuestion" onClick={() => handleAddQuestion(id)}>
+              {i18n.t('menu.addQuestion')}
+            </Menu.Item>
+          </>
+        )}
+        <Menu.Item key="remove">
+          <Popconfirm
+            title={i18n.t('actions.sure')}
+            cancelText={i18n.t('actions.cancel')}
+            okButtonProps={{
+              className: 'button-modal',
+            }}
+            cancelButtonProps={{ className: 'button-default' }}
+            onConfirm={() => handleDeleteCategory(id)}
+            onOpenChange={() => console.log('open change')}
+          >
+            {i18n.t('menu.deleteCategory')}
+          </Popconfirm>
+        </Menu.Item>
+      </Menu>
+    );
+  };
+
+  const menuQuestion = (id) => {
+    return (
+      <Menu>
+        {checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
+          <>
+            <Menu.Item key="addCategory" onClick={() => handleAddCategory(id)}>
+              {i18n.t('menu.addCategory')}
+            </Menu.Item>
+            <Menu.Item key="edit" onClick={() => handleEditQuestion(id)}>
+              {i18n.t('menu.editQuestion')}
+            </Menu.Item>
+          </>
+        )}
+        <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
+          {i18n.t('menu.deleteQuestion')}
+        </Menu.Item>
+      </Menu>
+    );
+  };
+
   const AllMenuItem = () => {
     return (
       <div key={`category_${category?.id}`}>
         <DraggableMenuItem
           item={category}
           key={`category_${category?.id}`}
-          id={category?.id}
           index={index}
-          handleAdd={handleAddCategory}
-          handleDelete={() => handleDeleteCategory(category?.id)}
-          handleEdit={() => {
-            handleEditCategory(category?.id);
-          }}
-          handleAddQuestion={() => handleAddQuestion(category?.id)}
-          handleOrderChange={() => {
-            setOrderModal(true);
-          }}
-          moveMenuItem={moveMenuItem}>
+          moveMenuItem={moveMenuItem}
+        >
           <div>
             <div
               className={'mainMenu hoveredLink'}
               key={`submenu_${category?.id}`}
-              onClick={() => onMenuClick(category?.id)}
+              onClick={(e) => {
+                if (e.target.tagName !== 'svg' && e.target.classList.contains('linkName')) {
+                  onMenuClick(category?.id);
+                }
+              }}
               style={{
                 padding: '12px 0',
                 fontSize: '14px',
                 alignItems: 'center',
-                marginBottom: '8px'
-              }}>
-              <Link
+                marginBottom: '8px',
+              }}
+            >
+              <a
                 className={
                   location.pathname !== '/' &&
                   activeOpenedKeys?.includes(category.id) &&
                   'activeLink'
                 }
+                onClick={(e) => {
+                  if (e.target.tagName !== 'svg' && e.target.classList.contains('linkName')) {
+                    history.push(`/category/${category?.id}`);
+                  } else {
+                    e.preventDefault(); // Prevent the link from being triggered
+                  }
+                }}
                 style={{ display: 'flex', justifyContent: 'space-between' }}
-                to={`/category/${category?.id}`}>
-                <span>{category?.categorieContents?.name}</span>
-                {category?.questions?.length !== 0 && (
-                  <img
-                    src={
-                      activeOpenedKeys !== [] &&
-                      activeOpenedKeys?.includes(category.id)
-                        ? ArrowDown
-                        : ArrowRight
-                    }
-                  />
-                )}
-              </Link>
+              >
+                <span className="linkName">{category?.categorieContents?.name}</span>
+                <Dropdown overlay={menu(category.id)} trigger={['click']}>
+                  <MoreOutlined style={{ fontSize: '1.5em' }} />
+                </Dropdown>
+              </a>
             </div>
             {category?.questions?.map((q, qIndex) => (
               <div
                 key={q.id}
                 style={{
                   display:
-                    activeOpenedKeys !== [] &&
-                    activeOpenedKeys?.includes(category.id)
+                    activeOpenedKeys !== [] && activeOpenedKeys?.includes(category.id)
                       ? 'inherit'
-                      : 'none'
-                }}>
+                      : 'none',
+                }}
+              >
                 <DraggableMenuItem
                   item={q}
-                  handleDelete={() => handleDeleteQuestion(q.id)}
-                  handleAdd={handleAddCategory}
                   isCategory={false}
                   key={q.id}
-                  id={q.id}
-                  handleEdit={() => handleEditQuestion(q.id)}
                   moveMenuItem={moveMenuItemQuestion}
-                  index={index}>
+                  index={index}
+                >
                   <div
                     key={`question_${qIndex}_${q.id}`}
                     className={'hoveredLinkSecondary subMenu'}
-                    style={{ padding: '8px', marginBottom: '4px' }}>
-                    <Link to={`/question/admin/${q.id}`}>
-                      <span>{q?.questionContents?.title}</span>
-                    </Link>
+                    style={{ padding: '8px 2px 8px 8px', marginBottom: '4px' }}
+                  >
+                    <a
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}
+                      onClick={(e) => {
+                        if (
+                          e.target.tagName !== 'svg' &&
+                          !e.target.classList.contains('anticon') &&
+                          e.target.classList.contains('linkName')
+                        ) {
+                          history.push(`/question/admin/${q.id}`);
+                        } else {
+                          e.preventDefault(); // Prevent the link from being triggered
+                        }
+                      }}
+                    >
+                      <span className="linkName">
+                        {findByLangKey(q?.questionContents)
+                          ? findByLangKey(q?.questionContents).title
+                          : ''}
+                      </span>
+                      <Dropdown
+                        style={{ zIndex: '10' }}
+                        overlay={menuQuestion(q.id)}
+                        trigger={['click']}
+                      >
+                        <MoreOutlined style={{ fontSize: '1.5em' }} />
+                      </Dropdown>
+                    </a>
                   </div>
                 </DraggableMenuItem>
               </div>
@@ -123,13 +204,19 @@ const MenuItem = ({
           id={question?.id}
           handleEdit={() => handleEditQuestion(question?.id)}
           moveMenuItem={moveMenuItemQuestion}
-          index={index}>
+          index={index}
+        >
           <div
             key={`question_${index}_${question?.id}`}
             className={'hoveredLink mainMenu'}
-            style={{ padding: '8px', marginBottom: '4px' }}>
-            <Link to={`/detailedQuestionNewAdmin/${question?.id}`}>
-              <span>{question?.questionContents?.title}</span>
+            style={{ padding: '8px', marginBottom: '4px' }}
+          >
+            <Link to={`/question/admin/${question?.id}`}>
+              <span>
+                {findByLangKey(question?.questionContents)
+                  ? findByLangKey(question?.questionContents).title
+                  : ''}
+              </span>
             </Link>
           </div>
         </DraggableMenuItem>
@@ -139,9 +226,7 @@ const MenuItem = ({
   return (
     <React.Fragment>
       {activeButton === SIDEBAR_BUTTON.ALL && category && <AllMenuItem />}
-      {activeButton === SIDEBAR_BUTTON.POPULAR && question && (
-        <PopularMenuItem />
-      )}
+      {activeButton === SIDEBAR_BUTTON.POPULAR && question && <PopularMenuItem />}
     </React.Fragment>
   );
 };
@@ -159,7 +244,7 @@ MenuItem.prototype = {
   onMenuClick: PropTypes.any,
   handleDeleteQuestion: PropTypes.any,
   handleEditQuestion: PropTypes.any,
-  moveMenuItemQuestion: PropTypes.any
+  moveMenuItemQuestion: PropTypes.any,
 };
 
 export default MenuItem;

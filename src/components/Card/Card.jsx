@@ -4,43 +4,50 @@ import styles from './index.module.less';
 import { Link } from 'react-router-dom';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
-const CardComponent = (props) => {
+import { i18n } from '../../utils/i18next';
+
+const CardComponent = ({ data }) => {
   const { Text } = Typography;
-  const questions = props.data?.questions;
+  const questions = data?.questions;
   const maxQuestionsToShow = 4; // Maximum number of questions to show without ellipsis
 
   return (
-    <Link to={'/question/admin'}>
-      <div className={styles.card}>
-        <div className={'my-heading-2'}>
-          <div className={styles.title}>
+    <div className={styles.card}>
+      <div className={'my-heading-2'}>
+        <div>
+          <Link to={`/category/${data?.id}`}>
             <Text ellipsis={{ rows: 2, expandable: false }}>
               <TypographyHead
+                className={styles.title}
                 type={TypoGraphyType.SUB_HEAD}
-                content={props.data?.categorieContents.name}
+                content={data?.categorieContents?.name}
               />
             </Text>
-          </div>
-        </div>
-        <div className={styles.content}>
-          {questions?.slice(0, maxQuestionsToShow).map((q, index) => (
-            <p key={index} style={{ marginBottom: '11px' }}>
-              <Text ellipsis={{ rows: 2, expandable: false }}>
-                <TypographyHead
-                  type={TypoGraphyType.LEVEL_2}
-                  content={q.questionContents.title}
-                />
-              </Text>
-            </p>
-          ))}
-          {questions?.length > maxQuestionsToShow && (
-            <Text style={{ color: '#1890ff', cursor: 'pointer' }}>
-              ...and {questions.length - maxQuestionsToShow} more questions
-            </Text>
-          )}
+          </Link>
         </div>
       </div>
-    </Link>
+      <div className={styles.content}>
+        {questions?.slice(0, maxQuestionsToShow).map((q, index) => (
+          <p className={styles.question} key={index}>
+            <Link to={`/question/admin/${q.id}`}>
+              <Text>
+                <TypographyHead
+                  type={TypoGraphyType.LEVEL_2}
+                  content={q.questionContents[0].title}
+                />
+              </Text>
+            </Link>
+          </p>
+        ))}
+        {questions?.length > maxQuestionsToShow && (
+          <Link to={`/category/${data?.id}`}>
+            <Text className={styles.more}>
+              ... {i18n.t('more')} {questions.length - maxQuestionsToShow} {i18n.t('moreQuestions')}
+            </Text>
+          </Link>
+        )}
+      </div>
+    </div>
   );
 };
 

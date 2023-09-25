@@ -1,34 +1,27 @@
 import React from 'react';
 import NewLabels from '../NewLabels/NewLabels.jsx';
 import { Col, Row } from 'antd';
-import Title from 'antd/lib/typography/Title.js';
 import { i18n } from '../../utils/i18next';
+import TypographyHead from 'components/Typography/TypographyHead';
+import { TypoGraphyType } from 'components/Typography/constants';
 
 const NewLabelsList = () => {
+  const labelCounts = [5, 4, 3, 2, 1];
+
   return (
-    <div>
-      <Row gutter={[0, 16]}>
+    <div style={{ marginBottom: '24px' }}>
+      <Row gutter={[0, 18]}>
         <Col span={24}>
-          <Title level={3}>{i18n.t('Feedback.AddTicketTitle')}</Title>
+          <TypographyHead
+            content={i18n.t('feedback.AddTicketTitle')}
+            type={TypoGraphyType.SECONDARY_HEAD}
+          />
         </Col>
-        <Col span={24}>
-          <NewLabels num={5} />
-        </Col>
-        <Col span={24}>
-          <NewLabels num={4} />
-        </Col>
-
-        <Col span={24}>
-          <NewLabels num={3} />
-        </Col>
-
-        <Col span={24}>
-          <NewLabels num={2} />
-        </Col>
-
-        <Col span={24}>
-          <NewLabels num={1} />
-        </Col>
+        {labelCounts.map((count, index) => (
+          <Col key={index} span={24}>
+            <NewLabels num={count} />
+          </Col>
+        ))}
       </Row>
     </div>
   );

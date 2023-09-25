@@ -11,8 +11,9 @@ const TypographyHead = ({ content, type, className }) => {
           fontSize: fontSize(type),
           color: color(type),
           fontWeight: fontWeight(type),
-          paddingBottom: paddingSize(type)
-        }}>
+          paddingBottom: paddingSize(type),
+        }}
+      >
         {content}
       </p>
     </>
@@ -22,6 +23,6 @@ const TypographyHead = ({ content, type, className }) => {
 TypographyHead.propTypes = {
   content: PropTypes.string,
   type: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 export default TypographyHead;

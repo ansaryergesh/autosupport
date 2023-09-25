@@ -8,9 +8,8 @@ import { getLocale } from '../../utils/i18next';
 const Languages = () => {
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
-    console.log(language);
     localStorage.setItem('locale', language);
-    window.location.reload();
+    location.reload();
   };
   const [isHovered, setIsHovered] = useState(false);
 
@@ -26,7 +25,7 @@ const Languages = () => {
         dropdownStyle={{
           boxShadow: '0px 4px 20px 0px rgba(0, 0, 0, 0.10)',
           textAlign: 'center',
-          borderRadius: '16px'
+          borderRadius: '16px',
         }}
         suffixIcon={null}
         value={getCurrentLanguage}
@@ -35,7 +34,7 @@ const Languages = () => {
         options={[
           { value: 'ru', label: 'RU' },
           { value: 'kz', label: 'KZ' },
-          { value: 'en', label: 'ENG' }
+          { value: 'en', label: 'ENG' },
         ]}
       />
     </div>

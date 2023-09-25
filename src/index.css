@@ -13,7 +13,6 @@
 /*    font-family: 'Museo';*/
 /*}*/
 .main-layout {
-  background-image: url('./assets/images/backgroundImg.jpg');
   background-size: cover;
   min-height: 100vh;
   overflow-y: hidden;
@@ -43,21 +42,12 @@
   position: absolute;
   left: 0;
   width: 5px;
-  background: linear-gradient(
-    270deg,
-    #99a6f9 0%,
-    #1ccc9e 33.33%,
-    #1ae276 65.1%,
-    #80ff61 100%
-  );
+  background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.1%, #80ff61 100%);
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-}
-
-.sidebar-nav::before {
 }
 
 .submenu {
@@ -74,13 +64,7 @@
   left: 0;
   right: 0; /* Adjust the distance of the border from the right */
   height: 1px; /* Adjust the width of the border */
-  background: linear-gradient(
-    270deg,
-    #99a6f9 0%,
-    #1ccc9e 33.33%,
-    #1ae276 65.1%,
-    #80ff61 100%
-  );
+  background: linear-gradient(270deg, #99a6f9 0%, #1ccc9e 33.33%, #1ae276 65.1%, #80ff61 100%);
   width: 100%;
   /*content: '';*/
   /*position: absolute,*/

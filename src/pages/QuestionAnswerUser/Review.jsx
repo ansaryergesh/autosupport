@@ -5,28 +5,29 @@ import Button from '../../components/Button/Button';
 import InputTextArea from '../../components/Input/textArea';
 import TypographyHead from '../../components/Typography/TypographyHead';
 import { TypoGraphyType } from '../../components/Typography/constants';
+import { i18n } from '../../utils/i18next.js';
 
 const quickAnswers = [
   {
     id: 1,
-    text: 'Понятно'
+    text: 'Понятно',
   },
   {
     id: 2,
-    text: 'Удобный интерфейс'
+    text: 'Удобный интерфейс',
   },
   {
     id: 3,
-    text: 'Быстро'
+    text: 'Быстро',
   },
   {
     id: 4,
-    text: 'Видео инструкция'
+    text: 'Видео инструкция',
   },
   {
     id: 5,
-    text: 'Содержание'
-  }
+    text: 'Содержание',
+  },
 ];
 
 const Review = () => {
@@ -56,22 +57,16 @@ const Review = () => {
         <TypographyHead
           className={styles.reviewHead}
           type={TypoGraphyType.SECONDARY_HEAD}
-          content={'Полезен ли был ответ?'}
+          content={i18n.t('questionAnswer.rateAnswer')}
         />
         <TypographyHead
           type={TypoGraphyType.LEVEL_3}
-          content={
-            'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше'
-          }
+          content={i18n.t('questionAnswer.rateSubtitel')}
         />
 
         <Form onFinish={() => {}}>
           <Form.Item>
-            <Rate
-              value={rating}
-              onChange={handleRating}
-              className={styles.rate}
-            />
+            <Rate value={rating} onChange={handleRating} className={styles.rate} />
           </Form.Item>
 
           {rating > 0 && (
@@ -80,13 +75,10 @@ const Review = () => {
                 <div className={styles.quick}>
                   {quickAnswers.map((q) => (
                     <Button
-                      type={
-                        selectedAnswers?.includes(q.id)
-                          ? 'secondary-active'
-                          : 'secondary'
-                      }
+                      type={selectedAnswers?.includes(q.id) ? 'secondary-active' : 'secondary'}
                       key={q.id}
-                      onClick={() => handleAnswer(q.id)}>
+                      onClick={() => handleAnswer(q.id)}
+                    >
                       {q.text}
                     </Button>
                   ))}
@@ -98,12 +90,10 @@ const Review = () => {
                   value={text}
                   onChange={handleTextChange}
                   className={
-                    text.length === maxCharacterCount
-                      ? styles.textAreaLimit
-                      : styles.textArea
+                    text.length === maxCharacterCount ? styles.textAreaLimit : styles.textArea
                   }
                   autoSize={{ minRows: 5, maxRows: 5 }}
-                  placeholder="Ваш коментарий"
+                  placeholder={i18n.t('questionAnswer.comment')}
                   maxLength={150}
                 />
                 <span className={styles.characterCount}>
@@ -111,7 +101,7 @@ const Review = () => {
                 </span>
                 {text.length === maxCharacterCount && (
                   <span className={styles.characterLimitMessage}>
-                    Достигнут лимит символов
+                    {i18n.t('questionAnswer.characterLimit')}
                   </span>
                 )}
               </Form.Item>
@@ -123,8 +113,9 @@ const Review = () => {
               className={styles.reviewBtn}
               disabled={!rating > 0}
               type="third"
-              htmlType="submit">
-              Оставить отзыв
+              htmlType="submit"
+            >
+              {i18n.t('questionAnswer.rateButton')}
             </Button>
           </Form.Item>
         </Form>

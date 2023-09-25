@@ -16,26 +16,30 @@ import { initialQuestionAnswerContent } from '../QuestionAnswerContent/constants
 import { LANG_KEY } from '../../constants/index.js';
 import { i18n } from '../../utils/i18next.js';
 import { useHistory } from 'react-router';
+import JHeader from '../../components/JHeader/JHeader';
+import { getQuestionById } from '../../service/Question/index.js';
 
 const QuestionAnswerUser = () => {
   const { questionId, resourceId } = useParams();
   const history = useHistory();
   const [data, setData] = useState(initialQuestionAnswerContent);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
-
   const answerContentByLanguage = data.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
+  const [activeResource, setActiveResource] = useState(null);
+  const { videoUrl, videoDescription, images, stepDescription } = answerContentByLanguage;
 
-  const { videoUrl, videoDescription, images, stepDescription } =
-    answerContentByLanguage;
-
-  console.log(images.length);
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
-    images.length ? INSTRUCTION_TYPE.VIDEO : INSTRUCTION_TYPE.VISUAL
+    images.length ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO,
   );
 
   useEffect(() => {
+    getQuestionById(questionId).then((res) => {
+      const active = res.data?.resources?.find((item) => item.id === resourceId) || null;
+      setActiveResource(active);
+    });
+
     getAnswerById(questionId, resourceId).then((res) => {
       setData(res.data);
       console.log(res.data);
@@ -44,16 +48,15 @@ const QuestionAnswerUser = () => {
 
   const saveNotification = () => {
     notification.success({
-      message: 'Log out',
-      description: 'You have logged out',
-      placement: 'top'
+      message: i18n.t('actions.saved'),
+      placement: 'top',
     });
   };
 
   const handleSave = () => {
     const sendData = {
       id: data.id,
-      status: 'PUBLISHED'
+      status: 'PUBLISHED',
     };
     saveAnswer(data.id, sendData)
       .then((res) => {
@@ -66,22 +69,28 @@ const QuestionAnswerUser = () => {
 
   return (
     <div>
+      <JHeader pageTitle={i18n.t('actions.preview')} />
+
       <Row gutter={[16, 16]}>
+        <Col span={16}>
+          {activeResource && <Button type="default-active">{activeResource.name}</Button>}
+        </Col>
+
         <Col
           span={16}
           style={{
             marginLeft: '8px',
             padding: '12px 0',
             display: 'flex',
-            alignItems: 'center'
-          }}>
+            alignItems: 'center',
+          }}
+        >
           {Object.values(LANG_KEY).map((item) => (
             <Button
               key={item}
               onClick={() => setSelectedLanguage(item)}
-              type={`${
-                selectedLanguage === item ? 'default-active' : 'default'
-              }`}>
+              type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
+            >
               {item}
             </Button>
           ))}
@@ -89,28 +98,20 @@ const QuestionAnswerUser = () => {
 
         <Col span={16}>
           <div className={styles.card}>
-            <TypographyHead
-              type={TypoGraphyType.SECONDARY_HEAD}
-              content={'Description'}
-            />
+            <TypographyHead type={TypoGraphyType.SECONDARY_HEAD} content={i18n.t('description')} />
             <ShowHtmlContent htmlContent={stepDescription} />
-            {images === [] && videoUrl === '' ? null : (
+            {
               <>
-                {videoUrl &&
-                  images.length !== 0 &&
-                  Object.values(INSTRUCTION_TYPE).map((item) => (
-                    <Button
-                      className={styles.instructionBtn}
-                      key={item}
-                      onClick={() => setSelectedInstrcutionType(item)}
-                      type={
-                        item === selectedInstructionType
-                          ? 'default-active'
-                          : 'default'
-                      }>
-                      {i18n.t(item)}
-                    </Button>
-                  ))}
+                {Object.values(INSTRUCTION_TYPE).map((item) => (
+                  <Button
+                    className={styles.instructionBtn}
+                    key={item}
+                    onClick={() => setSelectedInstrcutionType(item)}
+                    type={item === selectedInstructionType ? 'default-active' : 'default'}
+                  >
+                    {i18n.t(item)}
+                  </Button>
+                ))}
                 <div>
                   {selectedInstructionType === INSTRUCTION_TYPE.VIDEO && (
                     <>
@@ -136,7 +137,7 @@ const QuestionAnswerUser = () => {
                   )}
                 </div>
               </>
-            )}
+            }
           </div>
         </Col>
 
@@ -145,8 +146,8 @@ const QuestionAnswerUser = () => {
         </Col>
 
         <Col span={16}>
-          <Button onClick={() => history.goBack()}>Отменить</Button>
-          <Button onClick={handleSave}>Сохранить</Button>
+          <Button onClick={() => history.goBack()}>{i18n.t('actions.back')}</Button>
+          <Button onClick={handleSave}>{i18n.t('actions.save')}</Button>
         </Col>
 
         <Col>
@@ -158,14 +159,3 @@ const QuestionAnswerUser = () => {
 };
 
 export default QuestionAnswerUser;
-
-{
-  /* <TypographyHead
-                type={TypoGraphyType.LEVEL_2_BOLD}
-                content={'Нашел ошибку в тексте?'}
-              />
-              <TypographyHead
-                type={TypoGraphyType.LEVEL_2}
-                content={'Выдели и нажми CTRL+Enter'}
-              /> */
-}
