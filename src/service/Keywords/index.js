@@ -1,4 +1,7 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 export const manageKeyword = (data) => {
   if (data.id) {
@@ -13,7 +16,11 @@ export const deleteKeyWord = (id) => {
 };
 
 export const getKeywords = () => {
-  return axiosInstanceWithHeader.get('/api/admin/keyWords');
+  return axiosInstanceWithHeader.get('/api/admin/keyWords', {
+    params: {
+      organizationCode: ACTIVE_ORGANIZATION,
+    },
+  });
 };
 
 export const searchKeyWords = (params) => {

@@ -1,4 +1,7 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 const statusNew = 'NEW';
 const statusClosed = 'CLOSED';
@@ -6,6 +9,7 @@ const statusClosed = 'CLOSED';
 export const getNewTickets = (pageCurrent, pageSize, search, params) => {
   return axiosInstanceWithHeader.get('/api/assist/tickets', {
     params: {
+      organizationCode: ACTIVE_ORGANIZATION,
       statusType: statusNew,
       pageSize,
       pageCurrent,
@@ -18,6 +22,7 @@ export const getNewTickets = (pageCurrent, pageSize, search, params) => {
 export const getOldTickets = (pageCurrent, pageSize, search, params) => {
   return axiosInstanceWithHeader.get('/api/assist/tickets', {
     params: {
+      organizationCode: ACTIVE_ORGANIZATION,
       statusType: statusClosed,
       pageSize,
       pageCurrent,

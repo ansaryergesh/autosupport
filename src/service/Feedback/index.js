@@ -1,8 +1,15 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 export const getAllReviews = () => {
   return axiosInstanceWithHeader.get('/api/admin/feedbacks', {
-    params: { pageSize: 5, pageCurrent: 0 },
+    params: {
+      pageSize: 5,
+      pageCurrent: 0,
+      organizationCode: ACTIVE_ORGANIZATION,
+    },
   });
 };
 
