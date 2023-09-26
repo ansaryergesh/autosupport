@@ -25,7 +25,7 @@ export const saveAnswer = (id, data) => {
 };
 
 export const getAnswersExcel = () => {
-  return axiosInstanceWithHeader.get('/api/export/answer', {
+  return axiosInstanceWithHeader.get('/api/export/answers', {
     responseType: 'arraybuffer',
   });
 };

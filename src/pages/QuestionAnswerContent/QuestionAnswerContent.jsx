@@ -130,16 +130,12 @@ const QuestionAnswerContent = () => {
   useEffect(() => {
     getQuestionById(id).then((res) => {
       setSelectedResources(res.data.resources || []);
+      setQuestionInfo(res.data);
       res.data.resources && setActiveResource(res.data.resources[0]);
     });
   }, [id]);
 
-  useEffect(() => {
-    getQuestionById(id).then((res) => {
-      setQuestionInfo(res.data);
-      setSelectedQuestions(res.data?.children || []);
-    });
-  }, []);
+
   useEffect(() => {
     setIsEdited(false);
     console.log('check active resource changed');
