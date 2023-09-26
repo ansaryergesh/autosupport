@@ -56,7 +56,7 @@ const QuestionAnswerContent = () => {
   const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
-  const requiredCharacter = 25;
+  // const requiredCharacter = 25;
 
   useEffect(() => {
     localStorage.removeItem(LocalStorageKeys.ANSWER_FROM_DATA);
@@ -243,13 +243,13 @@ const QuestionAnswerContent = () => {
       resource: activeResource,
     };
 
-    if (
-      finalDataAnswer.answerContents.some((item) => item.stepDescription.length < requiredCharacter)
-    ) {
-      notification.info({
-        message: i18n.t('questionAnswer.previewErrorMessage')
-      });
-    } else {
+    // if (
+    //   finalDataAnswer.answerContents.some((item) => item.stepDescription.length < requiredCharacter)
+    // ) {
+    //   notification.info({
+    //     message: i18n.t('questionAnswer.previewErrorMessage')
+    //   });
+    // } else {
       const finalQuestionInfo = {
         ...questionInfo,
         children: selectedQuestions,
@@ -276,7 +276,7 @@ const QuestionAnswerContent = () => {
           withPreview && history.push(`/question/preview/${id}/${activeResource.id}`);
         });
       }
-    }
+    // }
     console.log(finalDataAnswer);
   };
 
