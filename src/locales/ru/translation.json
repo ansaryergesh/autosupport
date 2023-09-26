@@ -139,7 +139,8 @@
     "descriptionRequired": "Описание обязательно",
     "emailRequired": "Почта обязательна",
     "questionRequired": "Тема вопроса обязательна",
-    "answerRequired": "Ответ обязателен"
+    "answerRequired": "Ответ обязателен",
+    "emailError": "Почта не валидная"
   },
   "newAnswer": {
     "answer": "Ответ",
@@ -171,5 +172,9 @@
     "employeeDeletedNotification": "Сотрудник удален!",
     "employeeAddedNotification": "Сотрудник добавлен!",
     "employeeEditedNotification": "Сотрудник редактирован!"
+  },
+  "error": {
+    "user_not_found": "Логин или пароль неправильный!",
+    "wrong": "Что то пошло не так!"
   }
 }

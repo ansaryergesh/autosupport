@@ -137,6 +137,7 @@ export default {
     emailRequired: 'Пошта міндетті',
     questionRequired: 'Сұрақтың тақырыбы міндетті',
     answerRequired: 'Жауаб міндетті',
+    emailError: 'Почтаны дұрыс теріңіз',
   },
   newAnswer: {
     answer: 'Жауабы',
@@ -169,4 +170,8 @@ export default {
     employeeAddedNotification: 'Қызметкер қосылды!',
     employeeEditedNotification: 'Қызметкер өңделді!',
   },
+  error: {
+    user_not_found: 'Логин немесе пароль қате терілді!',
+    wrong: 'Системалық қате!'
+  }
 };

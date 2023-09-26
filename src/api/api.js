@@ -4,10 +4,10 @@ import { notification } from 'antd';
 import { clearStorage } from '../service/Auth/index.js';
 import { i18n } from '../utils/i18next';
 
-export const checkerAddress = import.meta.env?.MODE === 'development' ? 'http://10.50.216.20' : '/';
+export const checkerAddress = import.meta.env?.MODE === 'development' ? 'https://dev-help.freedombroker.kz' : '/';
 
 export const originAddress =
-  import.meta.env?.MODE === 'development' ? 'http://10.50.216.20' : window.location.origin;
+  import.meta.env?.MODE === 'development' ? 'https://dev-help.freedombroker.kz' : window.location.origin;
 const axiosParams = {
   baseURL: checkerAddress,
 };
@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
     } else if (error.response) {
       console.log(error.response.data.message);
       notification.error({
-        message: error.response.data.message,
+        message: error.response.data.message || i18n.t('error.wrong'),
       });
     }
 
@@ -58,10 +58,12 @@ axiosInstanceWithHeader.interceptors.response.use(
         message: i18n.t('commons.accessDenied'),
       });
     } else {
-      notification.error(error);
+      console.log("error suka")
+      notification.error({ message: error });
     }
     if (error.response) {
-      notification.error({ message: error.response.data.message });
+      console.log("response")
+      notification.error({ message: error.response.data.message || "Error" });
     }
     throw error;
   },

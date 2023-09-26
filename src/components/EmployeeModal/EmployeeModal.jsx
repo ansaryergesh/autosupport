@@ -19,15 +19,15 @@ const initialData = {
   email: '',
   imageUrl: '',
   activated: true,
-  langKey: '',
+  langKey: undefined,
   createdBy: '',
   createdDate: '',
   lastModifiedBy: '',
   lastModifiedDate: '',
   authority: '',
   authOrganization: {
-    name: '',
-    code: '',
+    name: undefined,
+    code: undefined,
   },
   password: null,
 };
@@ -161,52 +161,9 @@ const EmployeeModal = ({
 
         {editPage ? null : (
           <>
-            <Form.Item
-              name="firstName"
-              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
-            >
-              <Input style={{ marginTop: '15px' }} placeholder={i18n.t('columns.firstName')} />
-            </Form.Item>
-            <Form.Item
-              name="lastName"
-              rules={[{ required: true, message: i18n.t('rule.lastNameRequired') }]}
-            >
-              <Input placeholder={i18n.t('columns.lastName')} />
-            </Form.Item>
-
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  type: 'email',
-                  message: i18n.t('rule.emailRequired'),
-                },
-              ]}
-            >
-              <Input placeholder={i18n.t('columns.email')} />
-            </Form.Item>
-
-            <Form.Item style={{ display: 'none' }} name="login" required>
-              <Input placeholder={i18n.t('columns.email')} />
-            </Form.Item>
-
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: i18n.t('rule.passwordRequired') }]}
-            >
-              <Input type="password" placeholder={i18n.t('columns.password')} />
-            </Form.Item>
-
-            <Form.Item
-              name="langKey"
-              rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
-            >
-              <Select name="langKey" options={langKey} />
-            </Form.Item>
-
             {checkPermissions(['ROLE_SUPER_ADMIN']) && (
               <Form.Item
+                label={i18n.t('columns.organization')}
                 name="authOrganization"
                 rules={[
                   {
@@ -225,6 +182,54 @@ const EmployeeModal = ({
                 </Select>
               </Form.Item>
             )}
+            <Form.Item
+              name="firstName"
+              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+            >
+              <Input style={{ marginTop: '15px' }} placeholder={i18n.t('columns.firstName')} />
+            </Form.Item>
+            <Form.Item
+              name="lastName"
+              rules={[{ required: true, message: i18n.t('rule.lastNameRequired') }]}
+            >
+              <Input placeholder={i18n.t('columns.lastName')} />
+            </Form.Item>
+
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  type: 'email',
+                  message: i18n.t('rule.emailError'),
+
+                },
+                {
+                  required: true,
+                  message: i18n.t('rule.emailRequired'),
+                }
+              ]}
+            >
+              <Input placeholder={i18n.t('columns.email')} />
+            </Form.Item>
+
+            <Form.Item style={{ display: 'none' }} name="login" required>
+              <Input placeholder={i18n.t('columns.email')} />
+            </Form.Item>
+
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: i18n.t('rule.passwordRequired') }]}
+            >
+              <Input type="password" placeholder={i18n.t('columns.password')} />
+            </Form.Item>
+
+            <Form.Item
+              label={''}
+              name="langKey"
+              rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
+            >
+              <Select name="langKey" options={langKey} placeholder={i18n.t('columns.langKey')} />
+            </Form.Item>
           </>
         )}
 

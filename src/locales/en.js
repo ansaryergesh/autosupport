@@ -144,6 +144,7 @@ export default {
     emailRequired: 'Email is required',
     questionRequired: 'Question is required',
     answerRequired: 'Answer is required ',
+    emailError: 'Email is not valid',
   },
   newAnswer: {
     answer: 'Answer',
@@ -176,4 +177,9 @@ export default {
     employeeAddedNotification: 'Employee added!',
     employeeEditedNotification: 'Employee edited!',
   },
+  error: {
+    user_not_found: 'Password or login is incorrect',
+    wrong: 'Something went wrong!'
+
+  }
 };
