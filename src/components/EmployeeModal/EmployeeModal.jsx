@@ -10,6 +10,7 @@ import {
 } from '../../service/Employee/index.js';
 import { LANG_KEY } from '../../constants/index.js';
 import { checkPermissions } from '../../helpers/checkPermission.js';
+import { getCurrentUserData } from '../../helpers/currentUser.js';
 
 const initialData = {
   id: null,
@@ -70,11 +71,17 @@ const EmployeeModal = ({
   }, [record, form]);
 
   const onFinish = (values) => {
-    console.log(values);
+    const finalOrg = () => {
+      try {
+        return JSON.parse(values.authOrganization);
+      } catch (err) {
+        return getCurrentUserData().authOrganization;
+      }
+    }
     const transformedValues = {
       ...values,
       login: values.email,
-      authOrganization: editPage ? null : JSON.parse(values.authOrganization),
+      authOrganization: editPage ? null : finalOrg(),
     };
 
     let finalData;
@@ -167,7 +174,7 @@ const EmployeeModal = ({
                 name="authOrganization"
                 rules={[
                   {
-                    required: true,
+                    required: checkPermissions(['ROLE_SUPER_ADMIN']),
                     message: i18n.t('rule.organizationRequired'),
                   },
                 ]}
