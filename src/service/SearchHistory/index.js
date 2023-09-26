@@ -22,7 +22,7 @@ export const getSearchHistory = (pageCurrent, pageSize, params) => {
 };
 
 export const getSearchHistoryExcel = () => {
-  return axiosInstanceWithHeader.get('/api/export/searchHistory', {
+  return axiosInstanceWithHeader.get('/api/export/search-histories', {
     responseType: 'arraybuffer',
   });
 };

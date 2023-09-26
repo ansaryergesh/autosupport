@@ -37,14 +37,14 @@ export const updateTicketStatus = (data) => {
 };
 
 export const getNewTicketsExcel = () => {
-  return axiosInstanceWithHeader.get('/api/export/ticket', {
+  return axiosInstanceWithHeader.get('/api/export/tickets', {
     params: { status: statusNew },
     responseType: 'arraybuffer',
   });
 };
 
 export const getOldTicketsExcel = () => {
-  return axiosInstanceWithHeader.get('/api/export/ticket', {
+  return axiosInstanceWithHeader.get('/api/export/tickets', {
     params: { status: statusClosed },
     responseType: 'arraybuffer',
   });

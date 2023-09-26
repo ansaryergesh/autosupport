@@ -58,7 +58,6 @@ axiosInstanceWithHeader.interceptors.response.use(
         message: i18n.t('commons.accessDenied'),
       });
     } else {
-      console.log("error suka")
       notification.error({ message: error });
     }
     if (error.response) {
