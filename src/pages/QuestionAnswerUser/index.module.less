@@ -7,9 +7,9 @@
 }
 
 .mediaBox {
+  position: relative;
   display: block;
   margin: 0 auto;
-  height: 580px;
   border: 1px solid #dee0e3;
   border-radius: 10px;
 }
@@ -63,11 +63,12 @@
   padding: 32px;
 }
 
-.similarHead {
-  margin-bottom: 24px;
-}
 .similarParagraph {
   margin-bottom: 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 
   &:hover {
     background: @primary-color !important;

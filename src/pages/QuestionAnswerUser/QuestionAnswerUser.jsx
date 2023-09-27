@@ -18,6 +18,7 @@ import { i18n } from '../../utils/i18next.js';
 import { useHistory } from 'react-router';
 import JHeader from '../../components/JHeader/JHeader';
 import { getQuestionById } from '../../service/Question/index.js';
+import { PlaySquareFilled } from '@ant-design/icons';
 
 const QuestionAnswerUser = () => {
   const { questionId, resourceId } = useParams();
@@ -25,18 +26,19 @@ const QuestionAnswerUser = () => {
   const [data, setData] = useState(initialQuestionAnswerContent);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
   const answerContentByLanguage = data.answerContents?.find(
-    (item) => item.langKey === selectedLanguage,
+    (item) => item.langKey === selectedLanguage
   );
   const [activeResource, setActiveResource] = useState(null);
-  const { videoUrl, videoDescription, images, stepDescription } = answerContentByLanguage;
+  const { videoUrl, images, stepDescription } = answerContentByLanguage;
 
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
-    images.length ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO,
+    images[0] ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO
   );
 
   useEffect(() => {
     getQuestionById(questionId).then((res) => {
-      const active = res.data?.resources?.find((item) => item.id === resourceId) || null;
+      const active =
+        res.data?.resources?.find((item) => item.id === resourceId) || null;
       setActiveResource(active);
     });
 
@@ -49,14 +51,14 @@ const QuestionAnswerUser = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('actions.saved'),
-      placement: 'top',
+      placement: 'top'
     });
   };
 
   const handleSave = () => {
     const sendData = {
       id: data.id,
-      status: 'PUBLISHED',
+      status: 'PUBLISHED'
     };
     saveAnswer(data.id, sendData)
       .then((res) => {
@@ -73,7 +75,9 @@ const QuestionAnswerUser = () => {
 
       <Row gutter={[16, 16]}>
         <Col span={16}>
-          {activeResource && <Button type="default-active">{activeResource.name}</Button>}
+          {activeResource && (
+            <Button type="default-active">{activeResource.name}</Button>
+          )}
         </Col>
 
         <Col
@@ -82,15 +86,15 @@ const QuestionAnswerUser = () => {
             marginLeft: '8px',
             padding: '12px 0',
             display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+            alignItems: 'center'
+          }}>
           {Object.values(LANG_KEY).map((item) => (
             <Button
               key={item}
               onClick={() => setSelectedLanguage(item)}
-              type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
-            >
+              type={`${
+                selectedLanguage === item ? 'default-active' : 'default'
+              }`}>
               {item}
             </Button>
           ))}
@@ -98,43 +102,59 @@ const QuestionAnswerUser = () => {
 
         <Col span={16}>
           <div className={styles.card}>
-            <TypographyHead type={TypoGraphyType.SECONDARY_HEAD} content={i18n.t('description')} />
+            <TypographyHead
+              type={TypoGraphyType.SECONDARY_HEAD}
+              content={i18n.t('description')}
+            />
             <ShowHtmlContent htmlContent={stepDescription} />
             {
               <>
-                {Object.values(INSTRUCTION_TYPE).map((item) => (
-                  <Button
-                    className={styles.instructionBtn}
-                    key={item}
-                    onClick={() => setSelectedInstrcutionType(item)}
-                    type={item === selectedInstructionType ? 'default-active' : 'default'}
-                  >
-                    {i18n.t(item)}
-                  </Button>
-                ))}
+                <div>
+                  {Object.values(INSTRUCTION_TYPE).map(
+                    (item) =>
+                      ((item === INSTRUCTION_TYPE.VISUAL && images[0]) ||
+                        (item === INSTRUCTION_TYPE.VIDEO && videoUrl)) && (
+                        <Button
+                          className={styles.instructionBtn}
+                          key={item}
+                          onClick={() => setSelectedInstrcutionType(item)}
+                          type={
+                            item === selectedInstructionType
+                              ? 'default-active'
+                              : 'default'
+                          }>
+                          {i18n.t(item)}
+                        </Button>
+                      )
+                  )}
+                </div>
                 <div>
                   {selectedInstructionType === INSTRUCTION_TYPE.VIDEO && (
-                    <>
-                      <TypographyHead
-                        type={TypoGraphyType.SUB_HEAD}
-                        content={videoDescription}
-                        className={styles.videoDescription}
-                      />
+                    <div
+                      style={{
+                        borderRadius: '24px',
+                        background: 'white'
+                      }}>
                       <ReactPlayer
+                        pip={true}
+                        progressInterval={12}
+                        playsinline={true}
+                        playIcon={PlaySquareFilled}
                         style={{ margin: 'auto' }}
-                        width={600}
-                        height={400}
+                        width={'100%'}
+                        height={450}
                         controls={true}
                         url={videoUrl}
                       />
-                    </>
-                  )}
-
-                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL && (
-                    <div className={styles.mediaBox}>
-                      <ImageSlider slides={images} sliderData={images} />
                     </div>
                   )}
+
+                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL &&
+                  images[0] ? (
+                    <div className={styles.mediaBox}>
+                      <ImageSlider slides={images || []} sliderData={images} />
+                    </div>
+                  ) : null}
                 </div>
               </>
             }
@@ -146,12 +166,14 @@ const QuestionAnswerUser = () => {
         </Col>
 
         <Col span={16}>
-          <Button onClick={() => history.goBack()}>{i18n.t('actions.back')}</Button>
+          <Button onClick={() => history.goBack()}>
+            {i18n.t('actions.back')}
+          </Button>
           <Button onClick={handleSave}>{i18n.t('actions.save')}</Button>
         </Col>
 
         <Col>
-          <SimilarQuestions />
+          <SimilarQuestions data={data} />
         </Col>
       </Row>
     </div>

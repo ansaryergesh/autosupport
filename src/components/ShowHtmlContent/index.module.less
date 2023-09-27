@@ -1,14 +1,39 @@
 @import url('src/assets/styles/variables');
 
+pre,
+code {
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+pre code {
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word;
+}
+
 .htmlContent {
-  margin-bottom: 16px;
+  overflow-wrap: break-word;
+  margin-bottom: 32px;
   p,
-  li {
+  span,
+  li,
+  pre,
+  code,
+  pre code {
     color: @gray-color-1;
     list-style-position: inside;
-    font-size: 18px;
+    font-size: 18px !important;
     overflow-wrap: break-word;
+    word-wrap: break-word;
   }
+
+  // .htmlContent p {
+  //   margin-bottom: 32px;
+  // }
 
   h1,
   h2,
@@ -16,6 +41,7 @@
   h4,
   h5,
   h6 {
+    width: 100%;
     overflow-wrap: break-word;
     margin-bottom: 16px;
     color: @black-color;

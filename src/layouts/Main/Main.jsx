@@ -52,7 +52,7 @@ const Main = (props) => {
             <Layout>
               <Layout.Content className="layout-content">
                 <Header />
-                <div style={{ paddingRight: '40px' }}>{children}</div>
+                <div style={{ paddingRight: '40px', paddingBottom: '40px' }}>{children}</div>
               </Layout.Content>
             </Layout>
           </Layout>

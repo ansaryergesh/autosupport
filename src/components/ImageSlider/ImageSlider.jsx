@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styles from './index.module.less';
 import { ReactComponent as RightArrowButton } from '../../assets/images/RightArrowButton.svg';
 import { ReactComponent as LeftArrowButton } from '../../assets/images/LeftArrowButton.svg';
@@ -10,35 +10,51 @@ const ImageSlider = ({ slides, sliderData }) => {
   const length = slides.length;
   const domainName = originAddress;
 
-  const previewImages = sliderData?.map((slide) => `${domainName}${slide.url}`);
-  console.log(previewImages);
+  const previewImages = useMemo(() => {
+    return sliderData?.map((slide) => `${domainName}${slide.url}`);
+  }, [sliderData, domainName]);
+
+  const [currentSlideUrl, setCurrentSlideUrl] = useState(previewImages[0]); // Store the current slide's URL
+
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
+    setCurrentSlideUrl(previewImages[current === length - 1 ? 0 : current + 1]); // Update the current slide's URL
   };
 
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
+    setCurrentSlideUrl(previewImages[current === 0 ? length - 1 : current - 1]); // Update the current slide's URL
   };
 
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
   }
+
   return (
-    <section className={styles.slider}>
+    <section className={styles.slider} style={{ position: 'relative' }}>
+      <div className={'forDesktop'}>
+        <LeftArrowButton className={styles.leftArrow} onClick={prevSlide} />
+        <RightArrowButton className={styles.rightArrow} onClick={nextSlide} />
+      </div>
       {sliderData?.map((slide, index) => {
         return (
           <div
             key={index}
-            className={index === current ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
-          >
+            className={
+              index === current
+                ? `${styles.slide} ${styles.active}`
+                : `${styles.slide}`
+            }>
             {index === current && (
-              <div style={{ position: 'relative' }}>
-                <LeftArrowButton className={styles.leftArrow} onClick={prevSlide} />
-                <RightArrowButton className={styles.rightArrow} onClick={nextSlide} />
-                <p className={styles.description}>{slide.description}</p>
+              <div>
+                <p className={styles.description}>
+                  {`${current + 1}` +
+                    '. ' +
+                    `${slide.description || 'Нет описания'}`}
+                </p>
                 <Image.PreviewGroup items={previewImages}>
                   <Image
-                    src={`${domainName}${slide.url}`}
+                    src={currentSlideUrl} // Use the current slide's URL
                     alt={styles.description}
                     className={styles.image}
                   />

@@ -3,9 +3,10 @@ import styles from './index.module.less';
 import { Col, Row, DatePicker, Empty } from 'antd';
 import Button from '../Button/Button.jsx';
 import { i18n } from '../../utils/i18next';
-import { getAllReviews } from '../../service/Feedback';
+import { getAllReviews, getFeedbackExcel } from '../../service/Feedback';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
+import { handleExport } from '../../helpers/downloadFile.js';
 
 const { RangePicker } = DatePicker;
 
@@ -37,7 +38,7 @@ const rangePresets = [
 ];
 
 const ReviewsList = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   const getReviewsList = () => {
     getAllReviews().then((res) => {
@@ -50,6 +51,7 @@ const ReviewsList = () => {
     getReviewsList();
   }, []);
 
+  const exportFeedback = () => getFeedbackExcel('2022-01-01', '2024-09-27');
   return (
     <div className={styles.box}>
       <TypographyHead content={i18n.t('feedback.ListTitle')} type={TypoGraphyType.SECONDARY_HEAD} />
@@ -75,7 +77,8 @@ const ReviewsList = () => {
               <RangePicker className={styles.datePicker} presets={rangePresets} />
             </Col>
             <Col style={{ marginLeft: 'auto' }}>
-              <Button type="primary" className={styles.btnDownload}>
+              <Button type="primary"  onClick={() => handleExport(exportFeedback, i18n.t('reviews'))}
+                      className={styles.btnDownload}>
                 {i18n.t('actions.downloadReviews')}
               </Button>
             </Col>

@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button.jsx';
 import {
   editCategoryQuestion,
   getQuestionById,
-  getQuestions,
+  getQuestions
 } from '../../service/Question/index.js';
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
@@ -18,7 +18,7 @@ import {
   Menu,
   Empty,
   Typography,
-  Popconfirm
+  Popconfirm, Spin
 } from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
@@ -37,7 +37,7 @@ import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
   editAnswerQuestion,
-  deleteAnswerById,
+  deleteAnswerById
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
@@ -48,23 +48,35 @@ const QuestionAnswerContent = () => {
   const [selectedResources, setSelectedResources] = useState([]);
   const [activeResource, setActiveResource] = useState({});
   const [questionInfo, setQuestionInfo] = useState({ initialQuestionDto });
-  const [instructionType, setInstructionType] = useState(INSTRUCTION_TYPE.VISUAL);
-  const [selectedKeyWords, setSelectedKeyWords] = useState(questionInfo?.keyWords || []);
+  const [instructionType, setInstructionType] = useState(
+    INSTRUCTION_TYPE.VISUAL
+  );
+  const [selectedKeyWords, setSelectedKeyWords] = useState(
+    questionInfo?.keyWords || []
+  );
   const [isEdited, setIsEdited] = useState(false);
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
-  const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
+  const [loading,setLoading] = useState(false);
+
+  const [answerFormData, setAnswerFormData] = useState(
+    initialQuestionAnswerContent
+  );
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
   // const requiredCharacter = 25;
 
   useEffect(() => {
+    setLoading(true);
     localStorage.removeItem(LocalStorageKeys.ANSWER_FROM_DATA);
     getResources()
       .then((res) => {
         setResources(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false)
+      })
   }, [id]);
 
   const menuResources = () => {
@@ -79,11 +91,11 @@ const QuestionAnswerContent = () => {
                 setActiveResource(finalResources);
               }
               setSelectedResources((prev) => [...prev, finalResources]);
-            }}
-          >
+            }}>
             {
-              resource.resourceContents.find((content) => content.langKey === selectedLanguage)
-                ?.name
+              resource.resourceContents.find(
+                (content) => content.langKey === selectedLanguage
+              )?.name
             }
           </Menu.Item>
         );
@@ -104,13 +116,13 @@ const QuestionAnswerContent = () => {
           return filtered(prev);
         });
       } else {
-        deleteAnswerById(answerFormData.id).then((res) => {
+        setLoading(true)
+        deleteAnswerById(answerFormData.id).then(() => {
           setSelectedResources((prev) => {
             setActiveResource(filtered(prev) !== [] ? filtered(prev)[0] : {});
             return filtered(prev);
           });
-          console.log(res, 'deleted').catch((err) => console.log(err));
-        });
+        }).finally(() => {setLoading(false)});
       }
     };
     return (
@@ -118,8 +130,7 @@ const QuestionAnswerContent = () => {
         key={resource.id}
         onClick={() => {
           handleDelete();
-        }}
-      >
+        }}>
         {i18n.t('actions.delete')}
       </Menu.Item>
     );
@@ -128,13 +139,15 @@ const QuestionAnswerContent = () => {
   const history = useHistory();
 
   useEffect(() => {
+    setLoading(true)
     getQuestionById(id).then((res) => {
       setSelectedResources(res.data.resources || []);
       setQuestionInfo(res.data);
       res.data.resources && setActiveResource(res.data.resources[0]);
+    }).finally(() => {
+      setLoading(false)
     });
   }, [id]);
-
 
   useEffect(() => {
     setIsEdited(false);
@@ -152,9 +165,9 @@ const QuestionAnswerContent = () => {
             {
               id: 0,
               langKey: 'EN',
-              name: '',
-            },
-          ],
+              name: ''
+            }
+          ]
         },
         questionContents: [
           {
@@ -165,22 +178,22 @@ const QuestionAnswerContent = () => {
             tags: [
               {
                 id: 0,
-                text: '',
-              },
+                text: ''
+              }
             ],
             keyWords: [
               {
                 id: 0,
-                text: '',
-              },
-            ],
-          },
-        ],
+                text: ''
+              }
+            ]
+          }
+        ]
       },
       resource: {
         id: 0,
         code: '',
-        name: '',
+        name: ''
       },
       answerContents: [
         {
@@ -188,27 +201,28 @@ const QuestionAnswerContent = () => {
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: [],
+          images: []
         },
         {
           langKey: 'RU',
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: [],
+          images: []
         },
         {
           langKey: 'KZ',
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: [],
-        },
+          images: []
+        }
       ],
-      status: null,
+      status: null
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
+      setLoading(true)
       console.log('activeResource changed');
       answerByQuestionAndResource(id, activeResource.id)
         .then((res) => {
@@ -220,6 +234,7 @@ const QuestionAnswerContent = () => {
           console.error(err);
         })
         .finally(() => {
+          setLoading(false)
           console.log('final');
         });
     }
@@ -228,7 +243,7 @@ const QuestionAnswerContent = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('questionAnswer.previewMessage'),
-      placement: 'top',
+      placement: 'top'
     });
   };
 
@@ -236,7 +251,7 @@ const QuestionAnswerContent = () => {
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
-      resource: activeResource,
+      resource: activeResource
     };
 
     // if (
@@ -246,32 +261,35 @@ const QuestionAnswerContent = () => {
     //     message: i18n.t('questionAnswer.previewErrorMessage')
     //   });
     // } else {
-      const finalQuestionInfo = {
-        ...questionInfo,
-        children: selectedQuestions,
-      };
-      delete finalQuestionInfo.resources;
+    const finalQuestionInfo = {
+      ...questionInfo,
+      children: selectedQuestions
+    };
+    delete finalQuestionInfo.resources;
 
-      editCategoryQuestion(finalQuestionInfo).then((res) => {
+    console.log(selectedQuestions);
+
+    editCategoryQuestion(finalQuestionInfo).then((res) => {
+      console.log(res);
+    });
+    if (answerFormData.id) {
+      editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
         console.log(res);
+        if (withPreview) {
+          saveNotification();
+          history.push(`/question/preview/${id}/${activeResource.id}`);
+        }
       });
-      if (answerFormData.id) {
-        editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
-          console.log(res);
-          if (withPreview) {
-            saveNotification();
-            history.push(`/question/preview/${id}/${activeResource.id}`);
-          }
-        });
-      } else {
-        delete finalDataAnswer['id'];
-        console.log(finalDataAnswer);
-        addAnswerToQuestion(finalDataAnswer).then((res) => {
-          console.log(res);
-          notification.info({ message: i18n.t('actions.edited') });
-          withPreview && history.push(`/question/preview/${id}/${activeResource.id}`);
-        });
-      }
+    } else {
+      delete finalDataAnswer['id'];
+      console.log(finalDataAnswer);
+      addAnswerToQuestion(finalDataAnswer).then((res) => {
+        console.log(res);
+        notification.info({ message: i18n.t('actions.edited') });
+        withPreview &&
+          history.push(`/question/preview/${id}/${activeResource.id}`);
+      });
+    }
     // }
     console.log(finalDataAnswer);
   };
@@ -282,13 +300,13 @@ const QuestionAnswerContent = () => {
     if (!isNaN(parsedCounter)) {
       const finalQuestion = {
         ...questionInfo,
-        counter: parsedCounter.toString(),
+        counter: parsedCounter.toString()
       };
       setQuestionInfo(finalQuestion);
     } else {
       const finalQuestion = {
         ...questionInfo,
-        counter: questionInfo.counter,
+        counter: questionInfo.counter
       };
       setQuestionInfo(finalQuestion);
     }
@@ -300,8 +318,8 @@ const QuestionAnswerContent = () => {
       setActiveResource(resource);
     }
   };
-
   return (
+    <Spin spinning={loading} >
     <div>
       <JHeader questionInfo={questionInfo} lang={selectedLanguage} />
       <div
@@ -309,15 +327,13 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
-        }}
-      >
+          gap: '8px'
+        }}>
         {selectedResources.map((resource, index) => (
           <Dropdown
             key={index}
             overlay={<Menu>{menuDelete(resource)}</Menu>}
-            trigger={'contextMenu'}
-          >
+            trigger={'contextMenu'}>
             <Button
               onClick={(e) => {
                 if (!isEdited && activeResource?.id !== resource.id) {
@@ -326,13 +342,16 @@ const QuestionAnswerContent = () => {
                   e.preventDefault(); // Prevent the default click behavior
                 }
               }}
-              type={activeResource?.id === resource.id ? 'default-active' : 'default'}
-            >
+              type={
+                activeResource?.id === resource.id
+                  ? 'default-active'
+                  : 'default'
+              }>
               {activeResource?.id === resource.id ? (
                 <p>
                   {
                     resource.resourceContents.find(
-                      (content) => content.langKey === selectedLanguage,
+                      (content) => content.langKey === selectedLanguage
                     )?.name
                   }
                 </p>
@@ -349,11 +368,10 @@ const QuestionAnswerContent = () => {
                     handleChangeResource(resource);
                   }}
                   okText="Сохранить и перейти"
-                  cancelText="Перейти без сохранения данных"
-                >
+                  cancelText="Перейти без сохранения данных">
                   {
                     resource.resourceContents.find(
-                      (content) => content.langKey === selectedLanguage,
+                      (content) => content.langKey === selectedLanguage
                     )?.name
                   }
                 </Popconfirm>
@@ -361,7 +379,7 @@ const QuestionAnswerContent = () => {
                 <p>
                   {
                     resource.resourceContents.find(
-                      (content) => content.langKey === selectedLanguage,
+                      (content) => content.langKey === selectedLanguage
                     )?.name
                   }
                 </p>
@@ -371,7 +389,11 @@ const QuestionAnswerContent = () => {
         ))}
         {selectedResources.length < resources.length && (
           <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
-            <img title={i18n.t({message:'actions.addResource'})} style={{ cursor: 'pointer' }} src={Plus} />
+            <img
+              title={i18n.t({ message: 'actions.addResource' })}
+              style={{ cursor: 'pointer' }}
+              src={Plus}
+            />
           </Dropdown>
         )}
       </div>
@@ -380,16 +402,16 @@ const QuestionAnswerContent = () => {
           padding: '12px 0',
           display: 'flex',
           alignItems: 'center',
-          gap: '16px',
-        }}
-      >
+          gap: '16px'
+        }}>
         <div>
           {Object.values(LANG_KEY).map((item) => (
             <Button
               key={item}
               onClick={() => setSelectedLanguage(item)}
-              type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
-            >
+              type={`${
+                selectedLanguage === item ? 'default-active' : 'default'
+              }`}>
               {item}
             </Button>
           ))}
@@ -398,8 +420,7 @@ const QuestionAnswerContent = () => {
         <Typography.Paragraph
           type="number"
           className={styles.counter}
-          editable={{ onChange: handleChangeCounter }}
-        >
+          editable={{ onChange: handleChangeCounter }}>
           {questionInfo?.counter}
         </Typography.Paragraph>
 
@@ -409,10 +430,9 @@ const QuestionAnswerContent = () => {
         <>
           <Row
             style={{
-              marginRight: '24px',
+              marginRight: '24px'
             }}
-            gutter={[16, 24]}
-          >
+            gutter={[16, 24]}>
             <Col span={15}></Col>
 
             <Col span={15}>
@@ -439,8 +459,11 @@ const QuestionAnswerContent = () => {
                         <Button
                           key={item}
                           onClick={() => setInstructionType(item)}
-                          type={item === instructionType ? 'default-active' : 'default'}
-                        >
+                          type={
+                            item === instructionType
+                              ? 'default-active'
+                              : 'default'
+                          }>
                           {i18n.t(item)}
                         </Button>
                       ))}
@@ -481,6 +504,7 @@ const QuestionAnswerContent = () => {
                       searchAction={getQuestions}
                       selectedItems={selectedQuestions}
                       setSelectedItems={setSelectedQuestions}
+                      questionInfo={questionInfo}
                     />
                   </div>
                 </Col>
@@ -522,6 +546,7 @@ const QuestionAnswerContent = () => {
         <Empty description={i18n.t('noContent')} />
       )}
     </div>
+    </Spin>
   );
 };
 
