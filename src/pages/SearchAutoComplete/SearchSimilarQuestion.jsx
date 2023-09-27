@@ -5,12 +5,18 @@ import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
 import styles from './index.module.less';
 import { findByLangKey } from '../../helpers/findByLangKey.js';
-import { i18n } from '../../utils/i18next.js';
+import { getLocale, i18n } from '../../utils/i18next.js';
 import Input from '../../components/Input/Input.jsx';
 import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
 import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
 
-const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title }) => {
+const SearchReference = ({
+  searchAction,
+  selectedItems,
+  setSelectedItems,
+  title,
+  questionInfo
+}) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
@@ -21,8 +27,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
             ? findByLangKey(item?.questionContents).title
             : '',
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
@@ -33,6 +39,14 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
   };
 
   useEffect(() => {
+    setSelectedItems(
+      questionInfo?.children?.filter((item) =>
+        item.questionContents.find((item2) => item2.langKey === getLocale())
+      )
+    );
+  }, []);
+
+  useEffect(() => {
     getOptionsDefault();
   }, []);
 
@@ -40,29 +54,26 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 20,
+      pageSize: 20
     };
     searchAction(params).then((response) => {
       setOptions(
         response?.data.map((item) => ({
-          value: findByLangKey(item?.questionContents)
-            ? findByLangKey(item?.questionContents).title
-            : '',
+          value: item?.questionContents ? item?.questionContents.title : '',
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
 
   const handleSelect = (value, option) => {
     const selectedItem = option.itemValue;
-    console.log(selectedItem);
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
       notification.info({ message: i18n.t('alreadySimilar') });
     } else {
       setSelectedItems([...selectedItems, selectedItem]);
-      console.log([...selectedItems, selectedItem]);
+      // console.log([...selectedItems, selectedItem]);
 
       setInputValue('');
       getOptionsDefault();
@@ -76,10 +87,8 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
     const newData = selectedItems?.filter((item) => item.id !== id);
     setSelectedItems(newData);
   };
-  //
-  // const selectedLanguageItemTitle = (questionItem) => {
-  //
-  // }
+
+  console.log(selectedItems);
 
   return (
     <div>
@@ -100,9 +109,11 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
           onSelect={handleSelect}
           onSearch={handleSearch}
           value={inputValue}
-          onChange={(value) => setInputValue(value)}
-        >
-          <Input className={styles.searchInput} placeholder={i18n.t('search')} />
+          onChange={(value) => setInputValue(value)}>
+          <Input
+            className={styles.searchInput}
+            placeholder={i18n.t('search')}
+          />
         </AutoComplete>
       </div>
 
@@ -117,13 +128,14 @@ const SearchReference = ({ searchAction, selectedItems, setSelectedItems, title 
                   padding: '18px',
                   justifyContent: 'space-between',
                   borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center',
-                }}
-              >
+                  alignItems: 'center'
+                }}>
                 <span key={item.id}>
-                  {findByLangKey(item?.questionContents)
-                    ? findByLangKey(item?.questionContents).title
-                    : ''}
+                  {
+                    item.questionContents?.find(
+                      (item) => item.langKey === getLocale()
+                    )?.title
+                  }
                 </span>
                 <CloseOutlined
                   className={styles.xBtn}

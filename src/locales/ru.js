@@ -12,7 +12,7 @@ export default {
   tag: 'Тэг',
   tags: 'Тэги',
   allTheme: 'Все темы',
-  popularTheme: 'Популярное',
+  popularTheme: 'Популярные',
   SearchQuestion: 'Что вы ищете?',
   employee: 'Сотрудники',
   reviews: 'Отзывы',
@@ -20,7 +20,8 @@ export default {
   home: 'Главная',
   description: 'Описание',
   similarRequests: 'Похожие запросы',
-  noContent: 'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
+  noContent:
+    'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
   counter: 'Счетчик кликов',
   searchHistory: 'История поиска',
   choice: 'Выберите куда присвоить текст',
@@ -48,7 +49,7 @@ export default {
     submit: 'Подтвердить',
     unauthorized: 'Не авторизован',
     accessDenied: 'Отказано в доступе',
-    signOutMessage: 'Вы вышли из аккаунта',
+    signOutMessage: 'Вы вышли из аккаунта'
   },
   columns: {
     name: 'Наименование',
@@ -60,7 +61,7 @@ export default {
     langKey: 'Язык',
     code: 'Код',
     numberOfRequests: 'Количество запросов',
-    password: 'Пароль',
+    password: 'Пароль'
   },
   actions: {
     addEmployee: 'Добавить нового сотрудника',
@@ -93,7 +94,7 @@ export default {
     deleteSelected: 'Удалить выбранное',
     selected: 'Выбранно',
     preview: 'Предпросмотр',
-    reset: 'Сбросить',
+    reset: 'Сбросить'
   },
   feedback: {
     MainTitle1: 'Вы находитесь в  административной панели Freedom Broker',
@@ -104,7 +105,7 @@ export default {
     ReviewDownload: 'Загрузить отзывы',
     averageRating: 'Средняя оценка',
     mark: 'Новая метка',
-    reviewsWith: 'Отзывы с оценкой',
+    reviewsWith: 'Отзывы с оценкой'
   },
   questionAnswer: {
     VisualInstruction: 'Визуальная инструкция',
@@ -113,7 +114,8 @@ export default {
     FindMistake: 'Нашли ошибку в тексте?',
     FixMistake: 'Выделите и нажмите CTRL+Enter',
     rateAnswer: 'Полезен ли был ответ?',
-    rateSubtitel: 'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
+    rateSubtitel:
+      'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
     rateButton: 'Оставить отзыв',
     comment: 'Ваш комментарий',
     characterLimit: 'Достигнут лимит символов',
@@ -122,7 +124,7 @@ export default {
     videoUrl: 'Url видео',
     titleSwitch: 'При переходе не сохраненные данные будут удалены',
     okSwitch: 'Сохранить и перейти',
-    cancelSwitch: 'Перейти без сохранения данных',
+    cancelSwitch: 'Перейти без сохранения данных'
   },
   menu: {
     addCategory: 'Добавить категорию',
@@ -132,7 +134,7 @@ export default {
     editQuestion: 'Редактировать вопрос',
     deleteQuestion: 'Удалить вопрос',
     openQuestion: 'Открыть вопрос',
-    enterName: 'Введите наименование',
+    enterName: 'Введите наименование'
   },
   rule: {
     nameRequired: 'Наименование обязательно',
@@ -140,7 +142,7 @@ export default {
     emailRequired: 'Почта обязательна',
     questionRequired: 'Тема вопроса обязательна',
     answerRequired: 'Ответ обязателен',
-    emailError: 'Почта не валидная',
+    emailError: 'Почта не валидная'
   },
   newAnswer: {
     answer: 'Ответ',
@@ -166,12 +168,12 @@ export default {
     loginLabel: 'Логин',
     firstNameLabel: 'Имя',
     lastNameLabel: 'Фамилия',
-    organizationLabel: 'Организация',
+    organizationLabel: 'Организация'
   },
   employeePage: {
     employeeDeletedNotification: 'Сотрудник удален!',
     employeeAddedNotification: 'Сотрудник добавлен!',
-    employeeEditedNotification: 'Сотрудник редактирован!',
+    employeeEditedNotification: 'Сотрудник редактирован!'
   },
   error: {
     user_not_found: 'Логин или пароль неправильный!',

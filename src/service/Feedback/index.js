@@ -1,5 +1,6 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+import { getLocale } from '../../utils/i18next.js';
 
 const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
@@ -34,10 +35,11 @@ export const manageMark = (data) => {
 };
 
 export const getFeedbackExcel = (startDate, endDate) => {
-  return axiosInstanceWithHeader.get('/api/export/feedBack', {
+  return axiosInstanceWithHeader.get('/api/export/feed-backs', {
     params: {
       startDate,
       endDate,
+      langKey: getLocale()
     },
     responseType: 'arraybuffer',
   });

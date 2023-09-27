@@ -2,30 +2,12 @@ import React from 'react';
 import styles from './index.module.less';
 import TypographyHead from '../../components/Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../../components/Typography/constants.js';
-import { i18n } from '../../utils/i18next.js';
-import { findByLangKey } from '../../helpers/findByLangKey.js';
-const dataSimilar = [
-  {
-    id: 1,
-    questionContents: {
-      title: 'Типы приказов',
-    },
-  },
-  {
-    id: 2,
-    questionContents: {
-      title: 'Сессия безопасности',
-    },
-  },
-  {
-    id: 3,
-    questionContents: {
-      title: 'Типы безопасности',
-    },
-  },
-];
+import { getLocale, i18n } from '../../utils/i18next.js';
+import { Link } from 'react-router-dom';
+// import { findByLangKey } from '../../helpers/findByLangKey.js';
 
-const SimilarQuestions = () => {
+const SimilarQuestions = ({ data }) => {
+  console.log('similar', data);
   return (
     <div className={styles.similarCard}>
       <div className={styles.similarTextBox}>
@@ -34,15 +16,20 @@ const SimilarQuestions = () => {
           type={TypoGraphyType.SUB_HEAD}
           content={i18n.t('similarRequests')}
         />
-        {dataSimilar?.map((q) => (
-          <TypographyHead
-            className={styles.similarParagraph}
-            key={q.id}
-            type={TypoGraphyType.LEVEL_2}
-            content={
-              findByLangKey(q?.questionContents) ? findByLangKey(q?.questionContents).title : ''
-            }
-          />
+        {data?.question.children?.map((q) => (
+          <Link to={`/question/admin/${q.id}`} key={q.id}>
+            <TypographyHead
+              className={styles.similarParagraph}
+              type={TypoGraphyType.LEVEL_2}
+              content={
+                q?.questionContents
+                  ? q?.questionContents.find(
+                      (item) => item.langKey === getLocale()
+                    )?.title
+                  : ''
+              }
+            />
+          </Link>
         ))}
       </div>
     </div>

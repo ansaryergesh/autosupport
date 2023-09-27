@@ -16,12 +16,7 @@ const Feedback = () => {
 
       <div className={styles.feedbackBox}>
         <Row gutter={[0, 24]}>
-          {/* <Col span={24}>
-            <TypographyHead
-              content={i18n.t('feedback.MainTitle1')}
-              type={TypoGraphyType.HEADER}
-            />
-          </Col> */}
+
 
           <Col span={24}>
             <NewLabelsList />
