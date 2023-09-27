@@ -224,19 +224,22 @@ const QuestionAnswerContent = () => {
     if (activeResource?.id && !activeResource.isNew) {
       setLoading(true)
       console.log('activeResource changed');
-      answerByQuestionAndResource(id, activeResource.id)
-        .then((res) => {
-          console.log('resolved');
-          setAnswerFormData(res.data);
-        })
-        .catch((err) => {
-          console.log('Error');
-          console.error(err);
-        })
-        .finally(() => {
-          setLoading(false)
-          console.log('final');
-        });
+      setTimeout(()=> {
+        answerByQuestionAndResource(id, activeResource.id)
+          .then((res) => {
+            console.log('resolved');
+            setAnswerFormData(res.data);
+          })
+          .catch((err) => {
+            console.log('Error');
+            console.error(err);
+          })
+          .finally(() => {
+            setLoading(false)
+            console.log('final');
+          });
+      },[500])
+
     }
   }, [activeResource, id]);
 

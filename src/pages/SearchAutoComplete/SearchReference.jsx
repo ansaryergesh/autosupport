@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { AutoComplete, notification } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
@@ -143,12 +144,6 @@ const SearchReference = ({
       <TypographyHead type={TypoGraphyType.SUB_HEAD} content={title} />
 
       <div className={styles.searchBox}>
-        {focus ? (
-          <SearchIconFocus className={styles.searchIcon} />
-        ) : (
-          <SearchIcon className={styles.searchIcon} />
-        )}
-
         <AutoComplete
           onFocus={() => handleFocus(true)}
           onBlur={() => handleFocus(false)}
@@ -159,7 +154,7 @@ const SearchReference = ({
           value={inputValue}
           onChange={(value) => setInputValue(value)}
         >
-          <Input
+          <Input.Search
             placeholder={i18n.t('search')}
             className={styles.searchInput}
             onKeyDown={handleEnter}
