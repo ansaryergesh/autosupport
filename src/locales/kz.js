@@ -40,6 +40,7 @@ export default {
   moreQuestions: 'сұрақ',
   allAnswers: 'Барлық жауаптар',
   chooseOrganization: 'Ұйымды таңдаңыз',
+  instruction: 'Нұсқаулық',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
@@ -173,5 +174,25 @@ export default {
   error: {
     user_not_found: 'Логин немесе пароль қате терілді!',
     wrong: 'Системалық қате!'
+  },
+  invalid: {
+    user_not_found_exception: 'Пайдаланушы табылмады',
+    not_found_exception: 'Табылмады',
+    email_is_already_in_use: 'Пошта бұрыннан пайдаланылуда',
+    password: 'Қате кілтсөз',
+    organization_not_found: 'Ұйым табылмады',
+    login_already_used: 'Пошта бұрыннан пайдаланылуда',
+    invalid_query_syntax: 'Сұрау синтаксисі жарамсыз',
+    user_is_not_authenticated: 'Пайдаланушы аутентификациялауға жеткізілмеді',
+    can_not_register_user_with_super_admin_role:
+      'Супер администратор рөлімен пайдаланушыны тіркеу мүмкін емес',
+    can_not_delete_user_with_super_admin_role:
+      'Супер администратор рөлімен пайдаланушыны жою мүмкін емес',
+    no_user_was_found_for_this_activation_key:
+      'Бұл активация кілті үшін пайдаланушы табылмады',
+    no_user_was_found_for_this_deactivation_key:
+      'Бұл деактивация кілті үшін пайдаланушы табылмады',
+    photo_not_deleted: 'Фотосурет жойылмады',
+    email_or_password: 'Жарамсыз пошта немесе кілтсөз'
   }
 };

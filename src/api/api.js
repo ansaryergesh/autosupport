@@ -4,19 +4,25 @@ import { notification } from 'antd';
 import { clearStorage } from '../service/Auth/index.js';
 import { i18n } from '../utils/i18next';
 
-export const checkerAddress = import.meta.env?.MODE === 'development' ? 'https://dev-help.freedombroker.kz' : '/';
+export const checkerAddress =
+  import.meta.env?.MODE === 'development'
+    ? 'https://dev-help.freedombroker.kz'
+    : '/';
 
 export const originAddress =
-  import.meta.env?.MODE === 'development' ? 'https://dev-help.freedombroker.kz' : window.location.origin;
+  import.meta.env?.MODE === 'development'
+    ? 'https://dev-help.freedombroker.kz'
+    : window.location.origin;
 const axiosParams = {
-  baseURL: checkerAddress,
+  baseURL: checkerAddress
 };
 
 const axiosParamsWithHeader = {
   baseURL: checkerAddress,
   headers: {
-    Authorization: 'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN),
-  },
+    Authorization:
+      'Bearer ' + localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN)
+  }
 };
 
 const axiosInstance = axios.create(axiosParams);
@@ -31,17 +37,17 @@ axiosInstance.interceptors.response.use(
       clearStorage();
     } else if (error?.status === '403') {
       notification.error({
-        message: i18n.t('commons.accessDenied'),
+        message: i18n.t('commons.accessDenied')
       });
     } else if (error.response) {
       console.log(error.response.data.message);
       notification.error({
-        message: error.response.data.message || i18n.t('error.wrong'),
+        message: error.response.data.message || i18n.t('error.wrong')
       });
     }
 
     throw error;
-  },
+  }
 );
 const axiosInstanceWithHeader = axios.create(axiosParamsWithHeader);
 axiosInstanceWithHeader.interceptors.response.use(
@@ -55,16 +61,21 @@ axiosInstanceWithHeader.interceptors.response.use(
       notification.error({ message: i18n.t('commons.unauthorized') });
     } else if (error.response?.status === 403) {
       notification.error({
-        message: i18n.t('commons.accessDenied'),
+        message: i18n.t('commons.accessDenied')
       });
     } else {
       notification.error({ message: error });
     }
     if (error.response) {
-      console.log("response")
-      notification.error({ message: error.response.data.message || "Error" });
+      console.log('response');
+      if (error.response.data.code) {
+        const errorCode = error.response.data.code.replace('-', '_');
+        notification.error({ message: i18n(errorCode) });
+      } else {
+        notification.error({ message: error.response.data.message || 'Error' });
+      }
     }
     throw error;
-  },
+  }
 );
 export { axiosInstance, axiosInstanceWithHeader };
