@@ -2,7 +2,7 @@ export default {
   VISUAL: 'Фотонұсқаулық',
   VIDEO: 'Бейненұсқаулық',
   DRAFT: 'Жоба',
-  PUBLISHED: 'Опубликован',
+  PUBLISHED: 'Жарияланған',
   keyword: 'Кілт сөзі',
   keywords: 'Кілт сөздер',
   resource: 'Ресурс',
@@ -41,6 +41,12 @@ export default {
   allAnswers: 'Барлық жауаптар',
   chooseOrganization: 'Ұйымды таңдаңыз',
   instruction: 'Нұсқаулық',
+  createNewPassword: 'Жаңа құпия сөзін ойлап табыңыз',
+  confirmNewPassword: 'Жаңа құпия сөзді растаңыз',
+  passwordsDoNotMatch: 'Құпия сөздер сәйкес келмейді',
+  passwordRecoveryTitle: 'Құпия сөзді ауыстыру',
+  passwordRecovery: 'Жаңа құпия сөзді енгізіп, растаңыз',
+  passwordUpdated: 'Құпия сөз жаңартылды',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
@@ -60,6 +66,7 @@ export default {
     code: 'Код',
     numberOfRequests: 'Сұраулар саны',
     langKey: 'Тіл',
+    organization: 'Ұйым',
     password: 'Құпия сөз'
   },
   actions: {
@@ -134,6 +141,11 @@ export default {
   },
   rule: {
     nameRequired: 'Аталуы міндетті',
+    lastNameRequired: 'Тегі міндетті',
+    passwordRequired: 'Құпия сөзі міндетті',
+    newPasswordRequired: 'Жаңа құпия сөзі міндетті',
+    roleRequired: 'Рөль міндетті',
+    langKeyRequired: 'Тіл кілті міндетті',
     descriptionRequired: 'Сипаттамасы міндетті',
     emailRequired: 'Пошта міндетті',
     questionRequired: 'Сұрақтың тақырыбы міндетті',
