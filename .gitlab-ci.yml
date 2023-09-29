@@ -1,8 +1,25 @@
 stages:
+  - build
   - docker-build
   - deploy
   - cleanup
   - manual
+
+build:
+  image: node:16.16-alpine
+  stage: build
+  tags:
+      - docker
+  script:
+    - npm install --legacy-peer-deps
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+  only:
+    - master
+    - main
 
 docker-build:
   stage: docker-build
@@ -34,23 +51,46 @@ docker-build:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+    - ssh-keyscan -H "$SSH_TEST_HOST" >> ~/.ssh/known_hosts
 #  after_script:
-#    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"${CHAT_ID}\", \"text\": \"CI: ${CI_PROJECT_NAME} ${MESSAGE}\"}" https://api.telegram.org/bot${BOT_TOKEN}/sendMessage'
+#    - 'curl -X POST -H "Content-Type: application/json" -d "{\"chat_id\": \"${CHAT_ID}\", \"text\": \"CI: front-admin ${MESSAGE}\"}" https://api.telegram.org/bot${BOT_TOKEN}/sendMessage'
 
-deploy:
+deploy-test:
   <<: *deploy_configuration
   stage: deploy
   tags:
-    - docker
+    - deploy
   variables:
     MESSAGE: 'updated and deployed to server'
   script:
-    - echo $CI_PROJECT_NAME
-    #    - ansible all -i "$SSH_HOSOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd $PROJECT_PATH; docker-compose pull $CI_PROJECT_NAME; docker-compose up -d --build --remove-orphans $CI_PROJECT_NAME"
-    - ssh $SSH_USER@$SSH_HOST "cd $PROJECT_PATH; docker compose pull $CI_PROJECT_NAME; docker compose up -d --build --remove-orphans $CI_PROJECT_NAME"
+    - echo front-admin
+    #    - ansible all -i "$SSH_HOSOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose pull front-admin; docker-compose up -d --build --remove-orphans front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose pull front-admin; docker compose up -d --build --remove-orphans front-admin"
   only:
     - master
     - main
+  when: manual
+
+deploy-prod:
+  <<: *deploy_configuration
+  dependencies:
+    - build
+  stage: manual
+  tags:
+    - deploy
+  script:
+#    - echo front-admin
+#    - scp build/libs/*.jar $SSH_USER@$SSH_HOST:/opt/autosupport/app.jar
+#    - ssh $SSH_USER@$SSH_HOST "sudo systemctl restart autosupport"
+    - echo "Updating packages and installing rsync on the server..."
+    - ansible -i "${SSH_HOST}," -u "${SSH_USER}" -m raw -a "apt-get update && apt-get install -y rsync" --private-key=<(echo "$SSH_PRIVATE_KEY") all
+    - echo "Deploying front-admin to the server with versioning..."
+    - export RELEASE_VERSION=$(git rev-parse --short HEAD)
+    - ansible -i "${SSH_HOST}," -u "${SSH_USER}" -m synchronize -a "src=./dist/ dest=/usr/share/nginx/releases/admin/$RELEASE_VERSION delete=yes" --private-key=<(echo "$SSH_PRIVATE_KEY") all
+    - ansible -i "${SSH_HOST}," -u "${SSH_USER}" -m file -a "path=/usr/share/nginx/admin src=/var/www/team/public_html/releases/$RELEASE_VERSION state=link" --private-key=<(echo "$SSH_PRIVATE_KEY") all
+  only:
+    - main
+    - master
   when: manual
 
 restart:
@@ -59,10 +99,10 @@ restart:
     MESSAGE: 'service restarted'
   stage: manual
   tags:
-    - docker
+    - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd $PROJECT_PATH; docker-compose restart ${CI_PROJECT_NAME}"
-    - ssh $SSH_USER@$SSH_HOST "cd $PROJECT_PATH; docker compose restart $CI_PROJECT_NAME"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose restart front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose restart front-admin"
 
   when: manual
 
@@ -72,10 +112,10 @@ stop:
     MESSAGE: 'service stopped'
   stage: manual
   tags:
-    - docker
+    - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd $PROJECT_PATH; docker-compose stop ${CI_PROJECT_NAME}"
-    - ssh $SSH_USER@$SSH_HOST "cd $PROJECT_PATH; docker compose stop ${CI_PROJECT_NAME}"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose stop front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose stop front-admin"
   when: manual
 
 cleanup:
@@ -84,10 +124,10 @@ cleanup:
     MESSAGE: 'service cleaned'
   stage: manual
   tags:
-    - docker
+    - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd $PROJECT_PATH; docker-compose down ${CI_PROJECT_NAME}"
-    - ssh $SSH_USER@$SSH_HOST "cd $PROJECT_PATH; docker compose down ${CI_PROJECT_NAME}"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose down front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose down front-admin"
   when: manual
 
 purge:
@@ -96,8 +136,8 @@ purge:
     MESSAGE: 'service purged'
   stage: manual
   tags:
-    - docker
+    - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd $PROJECT_PATH; docker-compose down -v ${CI_PROJECT_NAME}"
-    - ssh $SSH_USER@$SSH_HOST "cd $PROJECT_PATH; docker compose down -v ${CI_PROJECT_NAME}"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose down -v front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose down -v front-admin"
   when: manual
