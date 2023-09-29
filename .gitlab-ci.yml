@@ -45,7 +45,7 @@ docker-build:
   variables:
     MESSAGE: 'template'
   before_script:
-    - apk update && apk add openssh && apk add curl && apk add rsync
+    - apk update && apk add openssh && apk add curl && apk add rsync && apk add git
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
@@ -65,7 +65,7 @@ deploy-test:
   script:
     - echo front-admin
     #    - ansible all -i "$SSH_HOSOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose pull front-admin; docker-compose up -d --build --remove-orphans front-admin"
-    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose pull front-admin; docker compose up -d --build --remove-orphans front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd /home/pam/test-swand; docker compose pull front-admin; docker compose up -d --build --remove-orphans front-admin"
   only:
     - master
     - main
@@ -101,8 +101,8 @@ restart:
   tags:
     - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose restart front-admin"
-    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose restart front-admin"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd /home/pam/test-swand; docker-compose restart front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd /home/pam/test-swand; docker compose restart front-admin"
 
   when: manual
 
@@ -114,8 +114,8 @@ stop:
   tags:
     - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose stop front-admin"
-    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose stop front-admin"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd /home/pam/test-swand; docker-compose stop front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd /home/pam/test-swand; docker compose stop front-admin"
   when: manual
 
 cleanup:
@@ -126,8 +126,8 @@ cleanup:
   tags:
     - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose down front-admin"
-    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose down front-admin"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd /home/pam/test-swand; docker-compose down front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd /home/pam/test-swand; docker compose down front-admin"
   when: manual
 
 purge:
@@ -138,6 +138,6 @@ purge:
   tags:
     - deploy
   script:
-    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd test-swand; docker-compose down -v front-admin"
-    - ssh $SSH_USER@$SSH_TEST_HOST "cd test-swand; docker compose down -v front-admin"
+    #    - ansible all -i "$SSH_HOST," --user "$SSH_USER" -m ansible.builtin.shell -a "cd /home/pam/test-swand; docker-compose down -v front-admin"
+    - ssh $SSH_USER@$SSH_TEST_HOST "cd /home/pam/test-swand; docker compose down -v front-admin"
   when: manual
