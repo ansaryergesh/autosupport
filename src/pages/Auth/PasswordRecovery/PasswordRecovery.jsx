@@ -1,4 +1,4 @@
-import { Col, Form, Image, Row } from 'antd';
+import { Col, Form, Image, notification, Row } from 'antd';
 import styles from '../index.module.less';
 import Logo from 'images/logoFreedom.svg';
 import ArrowLeft from 'images/ArrowLeft.svg';
@@ -6,12 +6,17 @@ import Title from 'antd/lib/typography/Title.js';
 import Button from 'components/Button/Button.jsx';
 import Input from 'components/Input/Input.jsx';
 import { sendMail } from '../../../service/Auth';
+import { useHistory } from 'react-router-dom';
 
 const PasswordRecovery = () => {
+  const history = useHistory()
+
   const onFinish = (values) => {
     console.log(values);
-    sendMail(values.email).then((res) => {
-      console.log(res);
+    sendMail(values.email).then(() => {
+      notification.success({message: "Проверьте пожалуйста почту, " +
+          "вам в почту отправлено письмо со ссылкой для сброса пароля!"})
+      history.push('/')
     });
   };
 
