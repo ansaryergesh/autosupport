@@ -45,7 +45,7 @@ docker-build:
   variables:
     MESSAGE: 'template'
   before_script:
-    - apk update && apk add openssh && apk add curl
+    - apk update && apk add openssh && apk add curl && apk add rsync
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
