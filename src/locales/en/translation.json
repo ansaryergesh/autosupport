@@ -40,6 +40,7 @@
   "moreQuestions": "more questions",
   "allAnswers": "All answers",
   "chooseOrganization": "Choose organization",
+  "instruction": "Instruction",
   "commons": {
     "signIn": "Sign in",
     "signOut": "Sign out",
@@ -177,5 +178,21 @@
   "error": {
     "user_not_found": "Password or login is incorrect",
     "wrong": "Something went wrong!"
+  },
+  "invalid": {
+    "user_not_found_exception": "User not found",
+    "not_found_exception": "Not found",
+    "email_is_already_in_use": "Email is already in use",
+    "password": "Invalid password",
+    "organization_not_found": "Organization not found",
+    "login_already_used": "Login already used",
+    "invalid_query_syntax": "Invalid query syntax",
+    "user_is_not_authenticated": "User is not authenticated",
+    "can_not_register_user_with_super_admin_role": "Cannot register user with super admin role",
+    "can_not_delete_user_with_super_admin_role": "Cannot delete user with super admin role",
+    "no_user_was_found_for_this_activation_key": "No user was found for this activation key",
+    "no_user_was_found_for_this_deactivation_key": "No user was found for this deactivation key",
+    "photo_not_deleted": "Photo not deleted",
+    "email_or_password": "Invalid email or password"
   }
 }
