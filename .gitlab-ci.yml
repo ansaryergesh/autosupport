@@ -87,7 +87,7 @@ deploy-prod:
     - echo "Deploying front-admin to the server with versioning..."
     - export RELEASE_VERSION=$(git rev-parse --short HEAD)
     - ansible -i "${SSH_HOST}," -u "${SSH_USER}" -m synchronize -a "src=./dist/ dest=/usr/share/nginx/releases/admin/$RELEASE_VERSION delete=yes" --private-key=<(echo "$SSH_PRIVATE_KEY") all
-    - ansible -i "${SSH_HOST}," -u "${SSH_USER}" -m file -a "path=/usr/share/nginx/admin src=/usr/share/nginx/releases/admin/$RELEASE_VERSION state=link" --private-key=<(echo "$SSH_PRIVATE_KEY") all
+    - ansible -i "${SSH_HOST}," -u "${SSH_USER}" -m file -a "path=/usr/share/nginx/admin/current src=/usr/share/nginx/releases/admin/$RELEASE_VERSION state=link" --private-key=<(echo "$SSH_PRIVATE_KEY") all
   only:
     - main
     - master
