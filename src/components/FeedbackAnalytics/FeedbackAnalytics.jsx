@@ -11,9 +11,9 @@ import { getAnalytics } from '../../service/Feedback/index.js';
 import { StarFilled } from '@ant-design/icons';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
-import Button from '../../components/Button/Button.jsx';
-import { handleExport } from '../../helpers/downloadFile.js';
-import { getAnswersExcel } from '../../service/Answer/index.js';
+// import Button from '../../components/Button/Button.jsx';
+// import { handleExport } from '../../helpers/downloadFile.js';
+// import { getAnswersExcel } from '../../service/Answer/index.js';
 
 const backgroundColor = ['#13AD63', '#1A6B9F', '#FFD700', '#F9971B', '#F9541B'];
 const reversed = backgroundColor.slice().reverse();
@@ -40,12 +40,12 @@ const FeedbackAnalytics = () => {
             const dataset = context.dataset;
             const dataValue = dataset.data[context.dataIndex];
             return dataValue + '%';
-          },
-        },
-      },
+          }
+        }
+      }
     },
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: false
   };
 
   return (
@@ -65,9 +65,9 @@ const FeedbackAnalytics = () => {
               datasets: [
                 {
                   data: data?.percents.map((item) => item.percent),
-                  backgroundColor: reversed,
-                },
-              ],
+                  backgroundColor: reversed
+                }
+              ]
             }}
             options={chartOptions}
           />
@@ -77,9 +77,12 @@ const FeedbackAnalytics = () => {
           split={false}
           dataSource={dataList}
           renderItem={(item, index) => (
-            <List.Item style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <List.Item
+              style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Typography.Text mark>
-                <div className={styles.circle} style={{ background: backgroundColor[index] }}></div>
+                <div
+                  className={styles.circle}
+                  style={{ background: backgroundColor[index] }}></div>
               </Typography.Text>
               <TypographyHead
                 className={styles.rateText}
@@ -96,13 +99,13 @@ const FeedbackAnalytics = () => {
         <StarFilled style={{ color: '#13AD63' }} />
       </p>
 
-      <Button
+      {/* <Button
         onClick={() => handleExport(getAnswersExcel, i18n.t('allAnswers'))}
         type="primary"
         className={styles.btnDownload}
       >
         {i18n.t('actions.downloadAnswers')}
-      </Button>
+      </Button> */}
     </div>
   );
 };

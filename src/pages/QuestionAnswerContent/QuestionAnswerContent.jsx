@@ -18,7 +18,8 @@ import {
   Menu,
   Empty,
   Typography,
-  Popconfirm, Spin
+  Popconfirm,
+  Spin
 } from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
@@ -57,7 +58,7 @@ const QuestionAnswerContent = () => {
   const [isEdited, setIsEdited] = useState(false);
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [answerFormData, setAnswerFormData] = useState(
     initialQuestionAnswerContent
@@ -75,8 +76,8 @@ const QuestionAnswerContent = () => {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        setLoading(false)
-      })
+        setLoading(false);
+      });
   }, [id]);
 
   const menuResources = () => {
@@ -116,13 +117,17 @@ const QuestionAnswerContent = () => {
           return filtered(prev);
         });
       } else {
-        setLoading(true)
-        deleteAnswerById(answerFormData.id).then(() => {
-          setSelectedResources((prev) => {
-            setActiveResource(filtered(prev) !== [] ? filtered(prev)[0] : {});
-            return filtered(prev);
+        setLoading(true);
+        deleteAnswerById(answerFormData.id)
+          .then(() => {
+            setSelectedResources((prev) => {
+              setActiveResource(filtered(prev) !== [] ? filtered(prev)[0] : {});
+              return filtered(prev);
+            });
+          })
+          .finally(() => {
+            setLoading(false);
           });
-        }).finally(() => {setLoading(false)});
       }
     };
     return (
@@ -139,14 +144,16 @@ const QuestionAnswerContent = () => {
   const history = useHistory();
 
   useEffect(() => {
-    setLoading(true)
-    getQuestionById(id).then((res) => {
-      setSelectedResources(res.data.resources || []);
-      setQuestionInfo(res.data);
-      res.data.resources && setActiveResource(res.data.resources[0]);
-    }).finally(() => {
-      setLoading(false)
-    });
+    setLoading(true);
+    getQuestionById(id)
+      .then((res) => {
+        setSelectedResources(res.data.resources || []);
+        setQuestionInfo(res.data);
+        res.data.resources && setActiveResource(res.data.resources[0]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [id]);
 
   useEffect(() => {
@@ -222,9 +229,9 @@ const QuestionAnswerContent = () => {
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
-      setLoading(true)
+      setLoading(true);
       console.log('activeResource changed');
-      setTimeout(()=> {
+      setTimeout(() => {
         answerByQuestionAndResource(id, activeResource.id)
           .then((res) => {
             console.log('resolved');
@@ -235,11 +242,10 @@ const QuestionAnswerContent = () => {
             console.error(err);
           })
           .finally(() => {
-            setLoading(false)
+            setLoading(false);
             console.log('final');
           });
-      },[500])
-
+      }, [500]);
     }
   }, [activeResource, id]);
 
@@ -322,233 +328,235 @@ const QuestionAnswerContent = () => {
     }
   };
   return (
-    <Spin spinning={loading} >
-    <div>
-      <JHeader questionInfo={questionInfo} lang={selectedLanguage} />
-      <div
-        style={{
-          padding: '12px 0',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-        {selectedResources.map((resource, index) => (
-          <Dropdown
-            key={index}
-            overlay={<Menu>{menuDelete(resource)}</Menu>}
-            trigger={'contextMenu'}>
-            <Button
-              onClick={(e) => {
-                if (!isEdited && activeResource?.id !== resource.id) {
-                  handleChangeResource(resource);
-                } else {
-                  e.preventDefault(); // Prevent the default click behavior
-                }
+    <Spin spinning={loading}>
+      <div>
+        <JHeader questionInfo={questionInfo} lang={selectedLanguage} />
+        <div
+          style={{
+            padding: '12px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+          {selectedResources.map((resource, index) => (
+            <Dropdown
+              key={index}
+              overlay={<Menu>{menuDelete(resource)}</Menu>}
+              trigger={'contextMenu'}>
+              <Button
+                onClick={(e) => {
+                  if (!isEdited && activeResource?.id !== resource.id) {
+                    handleChangeResource(resource);
+                  } else {
+                    e.preventDefault(); // Prevent the default click behavior
+                  }
+                }}
+                type={
+                  activeResource?.id === resource.id
+                    ? 'default-active'
+                    : 'default'
+                }>
+                {activeResource?.id === resource.id ? (
+                  <p>
+                    {
+                      resource.resourceContents.find(
+                        (content) => content.langKey === selectedLanguage
+                      )?.name
+                    }
+                  </p>
+                ) : isEdited ? (
+                  <Popconfirm
+                    title="При переходе не сохраненные данные будут удалены"
+                    onConfirm={() => {
+                      handleSubmit(false);
+                      handleChangeResource(resource);
+                    }}
+                    cancelButtonProps={{ className: 'button-default' }}
+                    okButtonProps={{ className: 'button-modal' }}
+                    onCancel={() => {
+                      handleChangeResource(resource);
+                    }}
+                    okText="Сохранить и перейти"
+                    cancelText="Перейти без сохранения данных">
+                    {
+                      resource.resourceContents.find(
+                        (content) => content.langKey === selectedLanguage
+                      )?.name
+                    }
+                  </Popconfirm>
+                ) : (
+                  <p>
+                    {
+                      resource.resourceContents.find(
+                        (content) => content.langKey === selectedLanguage
+                      )?.name
+                    }
+                  </p>
+                )}
+              </Button>
+            </Dropdown>
+          ))}
+          {selectedResources.length < resources.length && (
+            <Dropdown
+              overlay={<Menu>{menuResources()}</Menu>}
+              trigger={'click'}>
+              <img
+                title={i18n.t({ message: 'actions.addResource' })}
+                style={{ cursor: 'pointer' }}
+                src={Plus}
+              />
+            </Dropdown>
+          )}
+        </div>
+        <div
+          style={{
+            padding: '12px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px'
+          }}>
+          <div>
+            {Object.values(LANG_KEY).map((item) => (
+              <Button
+                key={item}
+                onClick={() => setSelectedLanguage(item)}
+                type={`${
+                  selectedLanguage === item ? 'default-active' : 'default'
+                }`}>
+                {item}
+              </Button>
+            ))}
+          </div>
+
+          <Typography.Paragraph
+            type="number"
+            className={styles.counter}
+            editable={{ onChange: handleChangeCounter }}>
+            {questionInfo?.counter}
+          </Typography.Paragraph>
+
+          <b>{answerFormData.status && i18n.t(answerFormData.status)}</b>
+        </div>
+        {selectedResources.length > 0 ? (
+          <>
+            <Row
+              style={{
+                marginRight: '24px'
               }}
-              type={
-                activeResource?.id === resource.id
-                  ? 'default-active'
-                  : 'default'
-              }>
-              {activeResource?.id === resource.id ? (
-                <p>
-                  {
-                    resource.resourceContents.find(
-                      (content) => content.langKey === selectedLanguage
-                    )?.name
-                  }
-                </p>
-              ) : isEdited ? (
-                <Popconfirm
-                  title="При переходе не сохраненные данные будут удалены"
-                  onConfirm={() => {
-                    handleSubmit(false);
-                    handleChangeResource(resource);
-                  }}
-                  cancelButtonProps={{ className: 'button-default' }}
-                  okButtonProps={{ className: 'button-modal' }}
-                  onCancel={() => {
-                    handleChangeResource(resource);
-                  }}
-                  okText="Сохранить и перейти"
-                  cancelText="Перейти без сохранения данных">
-                  {
-                    resource.resourceContents.find(
-                      (content) => content.langKey === selectedLanguage
-                    )?.name
-                  }
-                </Popconfirm>
-              ) : (
-                <p>
-                  {
-                    resource.resourceContents.find(
-                      (content) => content.langKey === selectedLanguage
-                    )?.name
-                  }
-                </p>
-              )}
-            </Button>
-          </Dropdown>
-        ))}
-        {selectedResources.length < resources.length && (
-          <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
-            <img
-              title={i18n.t({ message: 'actions.addResource' })}
-              style={{ cursor: 'pointer' }}
-              src={Plus}
-            />
-          </Dropdown>
+              gutter={[16, 24]}>
+              <Col span={15}></Col>
+
+              <Col span={15}>
+                <Row gutter={[16, 16]}>
+                  <Col span={24}>
+                    <div className={styles.card}>
+                      <TypographyHead
+                        type={TypoGraphyType.SUB_HEAD}
+                        content={i18n.t('questionAnswer.descriptionTitle')}
+                      />
+                      <SunEditor
+                        setIsEdited={setIsEdited}
+                        enableAutoFocus={false}
+                        answerFormData={answerFormData}
+                        setAnswerFormData={setAnswerFormData}
+                        selectedLanguage={selectedLanguage}
+                      />
+                    </div>
+                  </Col>
+                  <Col span={24}>
+                    <div className={styles.card}>
+                      <div style={{ padding: '16px 0' }}>
+                        {Object.values(INSTRUCTION_TYPE).map((item) => (
+                          <Button
+                            key={item}
+                            onClick={() => setInstructionType(item)}
+                            type={
+                              item === instructionType
+                                ? 'default-active'
+                                : 'default'
+                            }>
+                            {i18n.t(item)}
+                          </Button>
+                        ))}
+                        {instructionType === INSTRUCTION_TYPE.VISUAL && (
+                          <ImageUpload
+                            setIsEdited={setIsEdited}
+                            answerFormData={answerFormData}
+                            setAnswerFormData={setAnswerFormData}
+                            selectedLanguage={selectedLanguage}
+                          />
+                        )}
+                        {instructionType === INSTRUCTION_TYPE.VIDEO && (
+                          <VideoInstruction
+                            setIsEdited={setIsEdited}
+                            answerFormData={answerFormData}
+                            setAnswerFormData={setAnswerFormData}
+                            selectedLanguage={selectedLanguage}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </Col>
+
+                  <Col span={10}>
+                    <Button type={'primary'} onClick={() => handleSubmit()}>
+                      {i18n.t('actions.preview')}
+                    </Button>
+                  </Col>
+                </Row>
+              </Col>
+
+              <Col span={9}>
+                <Row gutter={[16, 16]}>
+                  <Col span={24}>
+                    <div className={styles.card}>
+                      <SearchSimilarQuestion
+                        title={i18n.t('actions.addSimilar')}
+                        searchAction={getQuestions}
+                        selectedItems={selectedQuestions}
+                        setSelectedItems={setSelectedQuestions}
+                        questionInfo={questionInfo}
+                      />
+                    </div>
+                  </Col>
+                  <Col span={24}>
+                    <div className={styles.card}>
+                      <SearchReference
+                        keyItem={'keyWords'}
+                        setQuestionInfo={setQuestionInfo}
+                        questionInfo={questionInfo}
+                        title={i18n.t('actions.addKeyword')}
+                        searchAction={searchKeyWords}
+                        selectedItems={selectedKeyWords}
+                        setSelectedItems={setSelectedKeyWords}
+                        addNewRecords={manageKeyword}
+                        selectedLanguage={selectedLanguage}
+                      />
+                    </div>
+                  </Col>
+                  <Col span={24}>
+                    <div className={styles.card}>
+                      <SearchReference
+                        keyItem={'tags'}
+                        setQuestionInfo={setQuestionInfo}
+                        questionInfo={questionInfo}
+                        title={i18n.t('actions.addTag')}
+                        searchAction={searchTags}
+                        selectedItems={selectedTags}
+                        setSelectedItems={setSelectedTags}
+                        addNewRecords={manageTag}
+                        selectedLanguage={selectedLanguage}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </>
+        ) : (
+          <Empty description={i18n.t('noContent')} />
         )}
       </div>
-      <div
-        style={{
-          padding: '12px 0',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px'
-        }}>
-        <div>
-          {Object.values(LANG_KEY).map((item) => (
-            <Button
-              key={item}
-              onClick={() => setSelectedLanguage(item)}
-              type={`${
-                selectedLanguage === item ? 'default-active' : 'default'
-              }`}>
-              {item}
-            </Button>
-          ))}
-        </div>
-
-        <Typography.Paragraph
-          type="number"
-          className={styles.counter}
-          editable={{ onChange: handleChangeCounter }}>
-          {questionInfo?.counter}
-        </Typography.Paragraph>
-
-        <b>{answerFormData.status && i18n.t(answerFormData.status)}</b>
-      </div>
-      {selectedResources.length > 0 ? (
-        <>
-          <Row
-            style={{
-              marginRight: '24px'
-            }}
-            gutter={[16, 24]}>
-            <Col span={15}></Col>
-
-            <Col span={15}>
-              <Row gutter={[16, 16]}>
-                <Col span={24}>
-                  <div className={styles.card}>
-                    <TypographyHead
-                      type={TypoGraphyType.SUB_HEAD}
-                      content={i18n.t('description')}
-                    />
-                    <SunEditor
-                      setIsEdited={setIsEdited}
-                      enableAutoFocus={false}
-                      answerFormData={answerFormData}
-                      setAnswerFormData={setAnswerFormData}
-                      selectedLanguage={selectedLanguage}
-                    />
-                  </div>
-                </Col>
-                <Col span={24}>
-                  <div className={styles.card}>
-                    <div style={{ padding: '16px 0' }}>
-                      {Object.values(INSTRUCTION_TYPE).map((item) => (
-                        <Button
-                          key={item}
-                          onClick={() => setInstructionType(item)}
-                          type={
-                            item === instructionType
-                              ? 'default-active'
-                              : 'default'
-                          }>
-                          {i18n.t(item)}
-                        </Button>
-                      ))}
-                      {instructionType === INSTRUCTION_TYPE.VISUAL && (
-                        <ImageUpload
-                          setIsEdited={setIsEdited}
-                          answerFormData={answerFormData}
-                          setAnswerFormData={setAnswerFormData}
-                          selectedLanguage={selectedLanguage}
-                        />
-                      )}
-                      {instructionType === INSTRUCTION_TYPE.VIDEO && (
-                        <VideoInstruction
-                          setIsEdited={setIsEdited}
-                          answerFormData={answerFormData}
-                          setAnswerFormData={setAnswerFormData}
-                          selectedLanguage={selectedLanguage}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </Col>
-
-                <Col span={10}>
-                  <Button type={'primary'} onClick={() => handleSubmit()}>
-                    {i18n.t('actions.preview')}
-                  </Button>
-                </Col>
-              </Row>
-            </Col>
-
-            <Col span={9}>
-              <Row gutter={[16, 16]}>
-                <Col span={24}>
-                  <div className={styles.card}>
-                    <SearchSimilarQuestion
-                      title={i18n.t('actions.addSimilar')}
-                      searchAction={getQuestions}
-                      selectedItems={selectedQuestions}
-                      setSelectedItems={setSelectedQuestions}
-                      questionInfo={questionInfo}
-                    />
-                  </div>
-                </Col>
-                <Col span={24}>
-                  <div className={styles.card}>
-                    <SearchReference
-                      keyItem={'keyWords'}
-                      setQuestionInfo={setQuestionInfo}
-                      questionInfo={questionInfo}
-                      title={i18n.t('actions.addKeyword')}
-                      searchAction={searchKeyWords}
-                      selectedItems={selectedKeyWords}
-                      setSelectedItems={setSelectedKeyWords}
-                      addNewRecords={manageKeyword}
-                      selectedLanguage={selectedLanguage}
-                    />
-                  </div>
-                </Col>
-                <Col span={24}>
-                  <div className={styles.card}>
-                    <SearchReference
-                      keyItem={'tags'}
-                      setQuestionInfo={setQuestionInfo}
-                      questionInfo={questionInfo}
-                      title={i18n.t('actions.addTag')}
-                      searchAction={searchTags}
-                      selectedItems={selectedTags}
-                      setSelectedItems={setSelectedTags}
-                      addNewRecords={manageTag}
-                      selectedLanguage={selectedLanguage}
-                    />
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </>
-      ) : (
-        <Empty description={i18n.t('noContent')} />
-      )}
-    </div>
     </Spin>
   );
 };

@@ -1,6 +1,6 @@
 export default {
-  VISUAL: 'Фото нұсқау',
-  VIDEO: 'Бейне нұсқау',
+  VISUAL: 'Фотонұсқаулық',
+  VIDEO: 'Бейненұсқаулық',
   DRAFT: 'Жоба',
   PUBLISHED: 'Опубликован',
   keyword: 'Кілт сөзі',
@@ -11,15 +11,14 @@ export default {
   organizations: 'Ұйымдар',
   tag: 'Тэг',
   tags: 'Тэгтер',
-  allTheme: 'Барлық',
+  allTheme: 'Барлық тақырыптар',
   popularTheme: 'Танымал',
-  SearchQuestion: 'Не іздедіңіз?',
   employee: 'Қызметкерлер',
   reviews: 'Пікірлер',
   categories: 'Санаттар',
   home: 'Басты бет',
   description: 'Сипаттама',
-  similarRequests: 'Ұқсас сұрақтар',
+  similarRequests: 'Ұқсас сұранымдар',
   noContent: 'Контент жоқ, ресурсты қосу таңбасы арқылы қосыңыз',
   counter: 'Кликтер саны',
   newTickets: 'Жаңа тикеттер',
@@ -40,6 +39,7 @@ export default {
   more: 'тағы',
   moreQuestions: 'сұрақ',
   allAnswers: 'Барлық жауаптар',
+  chooseOrganization: 'Ұйымды таңдаңыз',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',
@@ -48,18 +48,18 @@ export default {
     forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
     submit: 'Растау',
     unauthorized: 'Авторизациядан өтпеген',
-    accessDenied: 'Рұқсат жоқ',
+    accessDenied: 'Рұқсат жоқ'
   },
   columns: {
     name: 'Аталуы',
     firstName: 'Аты',
     lastName: 'Тегі',
     email: 'Пошта',
-    role: 'Рөль',
+    role: 'Қызметкерлердің рөлдері',
     code: 'Код',
     numberOfRequests: 'Сұраулар саны',
     langKey: 'Тіл',
-    password: 'Құпия сөз',
+    password: 'Құпия сөз'
   },
   actions: {
     addEmployee: 'Жаңа жұмысшыны қосу',
@@ -92,25 +92,25 @@ export default {
     deleteSelected: 'Таңдалғандарды өшіру',
     selected: 'Таңдалған',
     preview: 'Тексеру',
-    reset: 'Тазарту',
+    reset: 'Тазарту'
   },
   feedback: {
     MainTitle1: 'Сіз Freedom Broker әкімшілік панеліндесіз',
     MainTitle2: 'Билеттермен жұмыс істеу нұсқаулары:',
     ResponseAnalytics: 'Жауаптар аналитикасы',
     AddTicketTitle: 'Жаңа белгілерді қосу функционалдығы',
-    ListTitle: 'Барлық пікірлер тізімі',
-    ReviewDownload: 'Айғақтарды жүктеп алыңыз',
+    ListTitle: 'Барлық пікірлер',
     averageRating: 'Орташа рейтинг',
     mark: 'Жаңа метка',
-    reviewsWith: 'Пікірдің балы',
+    reviewsWith: 'Пікірдің балы'
   },
   questionAnswer: {
-    DescriptionTitle: 'Қадамдардың сипаттамасы',
+    descriptionTitle: 'Қажетті қадамдар',
     FindMistake: 'Мәтіннен қате таптыңыз ба?',
     FixMistake: 'Таңдап, CTRL+Enter пернелерін басыңыз',
     rateAnswer: 'Жауап пайдалы болды ма?',
-    rateSubtitel: 'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
+    rateSubtitel:
+      'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
     rateButton: 'Пікір қалдыру',
     comment: 'Сіздің пікіріңіз',
     characterLimit: 'Таңбалар шегіне жетті',
@@ -119,7 +119,7 @@ export default {
     videoUrl: 'Бейне нұсқаудың url-і',
     titleSwitch: 'Өту кезінде сақталмаған деректер жойылады',
     okSwitch: 'Сақтау және өту',
-    cancelSwitch: 'Деректерді сақтамай өту',
+    cancelSwitch: 'Деректерді сақтамай өту'
   },
   menu: {
     addCategory: 'Санат қосу',
@@ -129,7 +129,7 @@ export default {
     editQuestion: 'Сұрақты өзгерту',
     deleteQuestion: 'Сұрақты өшіру',
     openQuestion: 'Сұрақты ашу',
-    enterName: 'Аталуын жазыңыз',
+    enterName: 'Аталуын жазыңыз'
   },
   rule: {
     nameRequired: 'Аталуы міндетті',
@@ -137,13 +137,13 @@ export default {
     emailRequired: 'Пошта міндетті',
     questionRequired: 'Сұрақтың тақырыбы міндетті',
     answerRequired: 'Жауаб міндетті',
-    emailError: 'Почтаны дұрыс теріңіз',
+    emailError: 'Почтаны дұрыс теріңіз'
   },
   newAnswer: {
     answer: 'Жауабы',
     whatQuestion: 'Сұрақтың тақырыбы',
     inputEmail: 'Поштаңызды жазыңыз',
-    startTyping: 'Теруді бастаңыз...',
+    startTyping: 'Теруді бастаңыз...'
   },
   userProfile: {
     passwordUpdateNotification: 'Құпия сөз сәтті өзгертілді!',
@@ -163,12 +163,12 @@ export default {
     loginLabel: 'Логин',
     firstNameLabel: 'Аты',
     lastNameLabel: 'Тегі',
-    organizationLabel: 'Ұйымдастыру',
+    organizationLabel: 'Ұйымдастыру'
   },
   employeePage: {
     employeeDeletedNotification: 'Қызметкер жойылған!',
     employeeAddedNotification: 'Қызметкер қосылды!',
-    employeeEditedNotification: 'Қызметкер өңделді!',
+    employeeEditedNotification: 'Қызметкер өңделді!'
   },
   error: {
     user_not_found: 'Логин немесе пароль қате терілді!',
