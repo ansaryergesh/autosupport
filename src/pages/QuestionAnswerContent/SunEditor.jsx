@@ -3,7 +3,7 @@ import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { checkPermissions } from '../../helpers/checkPermission';
 
-const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
+const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited, isNew=false }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
     (item) => item.langKey === selectedLanguage,
   );
@@ -12,7 +12,7 @@ const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setI
   useEffect(() => {
     console.log(editorContent);
     console.log(selectedLanguageItem?.stepDescription);
-    if (editorContent !== selectedLanguageItem?.stepDescription) {
+    if (!isNew && editorContent !== selectedLanguageItem?.stepDescription) {
       setIsEdited(true);
     }
     handleContentChange(editorContent);
@@ -23,6 +23,7 @@ const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setI
   }, [answerFormData, selectedLanguageItem]);
 
   const handleContentChange = (value) => {
+    setIsEdited(true);
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
       (content) => content.langKey === selectedLanguage,

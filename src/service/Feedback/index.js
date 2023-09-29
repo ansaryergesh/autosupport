@@ -35,12 +35,14 @@ export const manageMark = (data) => {
 };
 
 export const getFeedbackExcel = (startDate, endDate) => {
-  return axiosInstanceWithHeader.get('/api/export/feed-backs', {
-    params: {
-      startDate,
-      endDate,
-      langKey: getLocale()
-    },
+  let params = {
+    startDate,
+    endDate,
+    langKey: getLocale()
+  }
+
+    return axiosInstanceWithHeader.get('/api/export/feed-backs', {
+    params,
     responseType: 'arraybuffer',
   });
 };

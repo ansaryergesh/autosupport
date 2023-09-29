@@ -455,6 +455,7 @@ const QuestionAnswerContent = () => {
                         content={i18n.t('questionAnswer.descriptionTitle')}
                       />
                       <SunEditor
+                        isNew={activeResource.isNew}
                         setIsEdited={setIsEdited}
                         enableAutoFocus={false}
                         answerFormData={answerFormData}

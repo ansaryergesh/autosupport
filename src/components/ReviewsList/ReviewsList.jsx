@@ -7,39 +7,40 @@ import { getAllReviews, getFeedbackExcel } from '../../service/Feedback';
 import TypographyHead from '../Typography/TypographyHead.jsx';
 import { TypoGraphyType } from '../Typography/constants.js';
 import { handleExport } from '../../helpers/downloadFile.js';
+import dayjs from 'dayjs';
 
 const { RangePicker } = DatePicker;
 
 const rangePresets = [
   {
     label: 'Последние 7 дней',
-    value: [],
+    value: [dayjs().add(-7, 'd'), dayjs()],
   },
   {
     label: 'Последние 14 дней',
-    value: [],
+    value: [dayjs().add(-14, 'd'), dayjs()],
   },
   {
     label: 'Последний месяц',
-    value: [],
+    value: [dayjs().add(-30, 'd'), dayjs()],
   },
   {
     label: 'Последние 3 месяца',
-    value: [],
+    value: [dayjs().add(-90, 'd'), dayjs()],
   },
   {
     label: 'Последний год',
-    value: [],
+    value: [dayjs().add(-365, 'd'), dayjs()],
   },
   {
     label: 'За все время',
-    value: [],
+    value: [dayjs(), dayjs()],
   },
 ];
 
 const ReviewsList = () => {
   const [data, setData] = useState([]);
-
+  const [period,setPeriod] = useState([]);
   const getReviewsList = () => {
     getAllReviews().then((res) => {
       setData(res.data);
@@ -51,12 +52,29 @@ const ReviewsList = () => {
     getReviewsList();
   }, []);
 
-  const exportFeedback = () => getFeedbackExcel('2022-01-01', '2024-09-27');
+
+
+  const exportFeedback = () => getFeedbackExcel(
+      period?.[0] ? dayjs(period[0]).toISOString() : '2022-01-01',
+      period?.[1] ? dayjs(period[1]).toISOString(): dayjs().toISOString()
+    );
+
   return (
     <div className={styles.box}>
       <TypographyHead content={i18n.t('feedback.ListTitle')} type={TypoGraphyType.SECONDARY_HEAD} />
-
+      <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '16px'}}>
+        <RangePicker className={styles.datePicker} value={period} onChange={(value) => {
+          console.log(value)
+          setPeriod(value)
+        }} presets={rangePresets} />
+        <Button type="primary"  onClick={() => handleExport(exportFeedback, i18n.t('reviews'))}
+                className={styles.btnDownload}>
+          {i18n.t('actions.downloadReviews')}
+        </Button>
+      </div>
       <Row justify={'center'} gutter={[0, 16]}>
+
+
         {data?.length === 0 ? (
           <Col span={24}>
             <Empty imageStyle={{ height: '100%' }} description={i18n.t('noData')} />
@@ -73,14 +91,8 @@ const ReviewsList = () => {
         )}
         {data?.length > 0 && (
           <>
-            <Col>
-              <RangePicker className={styles.datePicker} presets={rangePresets} />
-            </Col>
             <Col style={{ marginLeft: 'auto' }}>
-              <Button type="primary"  onClick={() => handleExport(exportFeedback, i18n.t('reviews'))}
-                      className={styles.btnDownload}>
-                {i18n.t('actions.downloadReviews')}
-              </Button>
+
             </Col>
           </>
         )}
