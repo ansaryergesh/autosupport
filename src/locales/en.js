@@ -1,6 +1,6 @@
 export default {
-  VISUAL: 'Photo instruction',
-  VIDEO: 'Video instruction',
+  VISUAL: 'Photo guide',
+  VIDEO: 'Video guide',
   DRAFT: 'Draft',
   PUBLISHED: 'Опубликован',
   keyword: 'Keyword',
@@ -11,15 +11,14 @@ export default {
   organizations: 'Organizations',
   tag: 'Tag',
   tags: 'Tags',
-  allTheme: 'All theme',
+  allTheme: 'All topics',
   popularTheme: 'Popular',
-  SearchQuestion: 'What are you looking for?',
   employee: 'Employees',
   reviews: 'Feedback',
   categories: 'Categories',
   home: 'Home',
   description: 'Description',
-  similarRequests: 'Similar requests',
+  similarRequests: 'Related queries',
   noContent: 'No content yet, please add resource by clicking plus button',
   counter: 'Counter',
   newTickets: 'New tickets',
@@ -33,13 +32,14 @@ export default {
   noQuestion: 'There are currently no related questions for this category',
   searchTickets: 'Search by tickets',
   toggleTickets: 'Ability to send tickets',
-  search: 'Search',
+  search: 'Find',
   alreadyKeyword: 'Keyword already selected',
   alreadyTag: 'Tag already selected',
   alreadySimilar: 'Question already selected',
   more: 'and',
   moreQuestions: 'more questions',
   allAnswers: 'All answers',
+  chooseOrganization: 'Choose organization',
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',
@@ -48,19 +48,19 @@ export default {
     forgetPassword: 'Forgot your password?',
     submit: 'Submit',
     unauthorized: 'Unauthorized',
-    accessDenied: 'Access denied',
+    accessDenied: 'Access denied'
   },
   columns: {
     name: 'Name',
     firstName: 'First name',
     lastName: 'Last name',
     email: 'Email',
-    role: 'Role',
+    role: 'Staff role',
     code: 'Code',
     numberOfRequests: 'Number of requests',
     langKey: 'Language',
     organization: 'Organization',
-    password: 'Password',
+    password: 'Password'
   },
   actions: {
     addEmployee: 'Add new employee',
@@ -93,27 +93,25 @@ export default {
     deleteSelected: 'Delete selected',
     selected: 'Selected',
     preview: 'Preview',
-    reset: 'Reset',
+    reset: 'Reset'
   },
   feedback: {
     MainTitle1: 'You are in the Freedom Broker administration panel',
     MainTitle2: 'Ticket Instructions:',
     ResponseAnalytics: 'Response analytics',
     AddTicketTitle: 'Functionality of adding new marks',
-    ListTitle: 'List of all reviews',
-    ReviewDownload: 'Download reviews',
+    ListTitle: 'All feedback',
     averageRating: 'Average rating',
     mark: 'New mark',
-    reviewsWith: 'Reviews with rating',
+    reviewsWith: 'Reviews with rating'
   },
   questionAnswer: {
-    VisualInstruction: 'Visual Instruction',
-    VideoInstruction: 'Video Instruction',
-    DescriptionTitle: 'Step description',
+    descriptionTitle: 'Necessary steps',
     FindMistake: 'Did you find a mistake in the text?',
     FixMistake: 'Highlight and press CTRL+Enter',
     rateAnswer: 'Was the answer helpful?',
-    rateSubtitel: 'Please rate the answer on a 5 point scale, it will help us to be better',
+    rateSubtitel:
+      'Please rate the answer on a 5 point scale, it will help us to be better',
     rateButton: 'Leave a review',
     comment: 'Your comment',
     characterLimit: 'Character limit reached',
@@ -122,7 +120,7 @@ export default {
     videoUrl: 'Video url',
     titleSwitch: 'When switching, unsaved data will be deleted',
     okSwitch: 'Save and go',
-    cancelSwitch: 'Go without saving data',
+    cancelSwitch: 'Go without saving data'
   },
   menu: {
     addCategory: 'Add category',
@@ -132,7 +130,7 @@ export default {
     editQuestion: 'Edit question',
     deleteQuestion: 'Delete question',
     openQuestion: 'Open question',
-    enterName: 'Enter name',
+    enterName: 'Enter name'
   },
   rule: {
     nameRequired: 'Name is required',
@@ -144,13 +142,13 @@ export default {
     emailRequired: 'Email is required',
     questionRequired: 'Question is required',
     answerRequired: 'Answer is required ',
-    emailError: 'Email is not valid',
+    emailError: 'Email is not valid'
   },
   newAnswer: {
     answer: 'Answer',
     whatQuestion: 'Question topic',
     inputEmail: 'Enter your email',
-    startTyping: 'Start typing...',
+    startTyping: 'Start typing...'
   },
   userProfile: {
     passwordUpdateNotification: 'Password updated succsesfully!',
@@ -170,16 +168,15 @@ export default {
     loginLabel: 'Login',
     firstNameLabel: 'First name',
     lastNameLabel: 'Last name',
-    organizationLabel: 'Organization',
+    organizationLabel: 'Organization'
   },
   employeePage: {
     employeeDeletedNotification: 'Employee deleted!',
     employeeAddedNotification: 'Employee added!',
-    employeeEditedNotification: 'Employee edited!',
+    employeeEditedNotification: 'Employee edited!'
   },
   error: {
     user_not_found: 'Password or login is incorrect',
     wrong: 'Something went wrong!'
-
   }
 };

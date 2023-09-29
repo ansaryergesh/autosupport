@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { SIDEBAR_BUTTON } from '../../constants/index.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 import { i18n } from 'utils/i18next.js';
+import { getLocale } from '../../utils/i18next.js';
 
 const SideBarButtons = ({ activeButton, setActiveButton }) => {
   const handleRadioChange = (e) => {
@@ -17,14 +18,22 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     borderRadius: '10px',
     padding: '12px 24px',
     flexDirection: 'row',
+    fontWeight: '500',
     width: '50%',
     color: '#000',
     justifyContent: 'center',
     textAlign: 'center',
-    display: 'flex', // Center the content horizontally
-    alignItems: 'center', // Center the content vertically
+    display: 'flex',
+    alignItems: 'center',
     border: 'none',
-    transition: '.2s', // Remove border
+    transition: '.2s',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    userSelect: 'none',
+    webkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    msUserSelect: 'none'
   };
 
   const inactiveStyle = {
@@ -32,6 +41,7 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     borderRadius: '0px 10px 10px 0px',
     padding: '12px 24px',
     justifyContent: 'center',
+    fontWeight: '500',
     textAlign: 'center',
     width: '50%',
     flexDirection: 'row',
@@ -39,7 +49,19 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     display: 'flex', // Center the content horizontally
     alignItems: 'center', // Center the content vertically
     border: 'none',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    userSelect: 'none',
+    webkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    msUserSelect: 'none'
   };
+
+  if (getLocale() === 'KZ') {
+    activeStyle.fontSize = '12px';
+    inactiveStyle.fontSize = '12px';
+  }
 
   const switchContainer = {
     borderRadius: '10px',
@@ -47,7 +69,7 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     width: '100%',
     display: 'flex', // Center the buttons horizontally
     justifyContent: 'center',
-    border: 'none!important', // Center the buttons horizontally
+    border: 'none!important' // Center the buttons horizontally
   };
 
   return (
@@ -56,18 +78,21 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
         className="switch-container"
         style={switchContainer}
         value={activeButton}
-        onChange={handleRadioChange}
-      >
+        onChange={handleRadioChange}>
         <Radio.Button
           value={SIDEBAR_BUTTON.ALL}
-          style={activeButton === SIDEBAR_BUTTON.ALL ? activeStyle : inactiveStyle}
-        >
+          style={
+            activeButton === SIDEBAR_BUTTON.ALL ? activeStyle : inactiveStyle
+          }>
           {i18n.t('allTheme')}
         </Radio.Button>
         <Radio.Button
           value={SIDEBAR_BUTTON.POPULAR}
-          style={activeButton === SIDEBAR_BUTTON.POPULAR ? activeStyle : inactiveStyle}
-        >
+          style={
+            activeButton === SIDEBAR_BUTTON.POPULAR
+              ? activeStyle
+              : inactiveStyle
+          }>
           {i18n.t('popularTheme')}
         </Radio.Button>
       </Radio.Group>
@@ -77,6 +102,6 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
 
 SideBarButtons.prototype = {
   activeButton: PropTypes.string,
-  setActiveButton: PropTypes.func,
+  setActiveButton: PropTypes.func
 };
 export default SideBarButtons;

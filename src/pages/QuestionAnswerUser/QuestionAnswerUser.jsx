@@ -104,7 +104,7 @@ const QuestionAnswerUser = () => {
           <div className={styles.card}>
             <TypographyHead
               type={TypoGraphyType.SECONDARY_HEAD}
-              content={i18n.t('description')}
+              content={i18n.t('questionAnswer.descriptionTitle')}
             />
             <ShowHtmlContent htmlContent={stepDescription} />
             {

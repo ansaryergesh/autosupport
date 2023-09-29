@@ -7,6 +7,7 @@ import { getOrganizationOpen } from '../../service/Organizations/index';
 import { LocalStorageKeys } from '../../storage/localStorageKey';
 import { checkPermissions } from '../../helpers/checkPermission';
 import { getCurrentUserData } from '../../helpers/currentUser';
+import { i18n } from 'utils/i18next.js';
 
 const Header = () => {
   const { Header } = Layout;
@@ -14,7 +15,8 @@ const Header = () => {
   const [activeOrganization, setActiveOrganization] = useState(
     !checkPermissions(['ROLE_SUPER_ADMIN'])
       ? getCurrentUserData()?.authOrganization?.name
-      : localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION) || 'Choose organization',
+      : localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION) ||
+          i18n.t('chooseOrganization')
   );
   useEffect(() => {
     if (checkPermissions(['ROLE_SUPER_ADMIN'])) {
@@ -26,7 +28,7 @@ const Header = () => {
 
   const items = organizations?.map((organization) => ({
     label: organization.name,
-    value: organization.code,
+    value: organization.code
   }));
   return (
     <div>
@@ -43,7 +45,10 @@ const Header = () => {
                 options={items}
                 onChange={(value) => {
                   setActiveOrganization(value);
-                  localStorage.setItem(LocalStorageKeys.ACTIVE_ORGANIZATION, value);
+                  localStorage.setItem(
+                    LocalStorageKeys.ACTIVE_ORGANIZATION,
+                    value
+                  );
                   location.reload();
                 }}
               />
