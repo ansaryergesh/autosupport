@@ -7,6 +7,7 @@ import Input from 'components/Input/Input.jsx';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { newPassword } from '../../../service/Auth';
+import { i18n } from '../../../utils/i18next';
 
 const NewPassword = () => {
   const history = useHistory();
@@ -15,12 +16,12 @@ const NewPassword = () => {
     const key = queryParams.key;
     const data = {
       key,
-      newPassword: values.newPassword,
+      newPassword: values.newPassword
     };
     console.log(data);
     newPassword(data).then((res) => {
       console.log(res);
-      notification.info({ message: 'Password is updated' });
+      notification.info({ message: i18n.t('passwordUpdated') });
       history.push('/sign-in');
     });
   };
@@ -37,26 +38,29 @@ const NewPassword = () => {
           </div>
         </div>
 
-        <Title level={2}>Смена пароля</Title>
-        <span>Введите новый пароль и подтвердите</span>
+        <Title level={2}>{i18n.t('passwordRecoveryTitle')}</Title>
+        <span>{i18n.t('passwordRecovery')}</span>
         <Form
           name="basic"
           style={{ maxWidth: 550 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
+          autoComplete="off">
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
                 name="password"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-              >
+                rules={[
+                  {
+                    required: true,
+                    message: i18n.t('rules.newPasswordRequired')
+                  }
+                ]}>
                 <Input
                   type="password"
                   size={'large'}
-                  placeholder="Придумайте новый пароль"
+                  placeholder={i18n.t('createNewPassword')}
                   className={styles.inputItem}
                 />
               </Form.Item>
@@ -67,32 +71,37 @@ const NewPassword = () => {
                 name="newPassword"
                 dependencies={['password']}
                 rules={[
-                  { required: true, message: 'Please input your password!' },
+                  {
+                    required: true,
+                    message: i18n.t('rules.newPasswordRequired')
+                  },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                       }
                       return Promise.reject(
-                        new Error('The new password that you entered do not match!'),
+                        new Error(i18n.t('passwordsDoNotMatch'))
                       );
-                    },
-                  }),
-                ]}
-              >
+                    }
+                  })
+                ]}>
                 <Input
                   type="password"
                   size={'large'}
                   className={styles.inputItem}
-                  placeholder="Подтвердите новый пароль"
+                  placeholder={i18n.t('confirmNewPassword')}
                 />
               </Form.Item>
             </Col>
 
             <Col span={24}>
               <Form.Item>
-                <Button className={styles.inputButton} type="submit" htmlType="submit">
-                  Сохранить
+                <Button
+                  type="primary"
+                  className={styles.inputButton}
+                  htmlType="submit">
+                  {i18n.t('actions.save')}
                 </Button>
               </Form.Item>
             </Col>
