@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run copy-files",
+    "copy-files": "cp src/assets/*.pdf dist/",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "formatter": "prettier --config \"./.prettierrc.json\" --ignore-path \"./.prettierignore\" --write \"**.{js,jsx,ts,tsx,json,css,md,yml,html,mdx}\" \"**/*.{js,jsx,ts,tsx,json,css,md,yml,html,mdx}\" || true"

@@ -72,6 +72,7 @@ const Routes = () => {
         <RouteWithLayout exact layout={Main} component={NewTickets} path={'/new-tickets'} />
         <RouteWithLayout exact layout={Main} component={OldTickets} path={'/old-tickets'} />
         <RouteWithLayout exact layout={Main} component={UserProfile} path={'/user-profile'} />
+        <RouteWithLayout layout={Main} path='*' component={NotFound} />
       </Switch>
     </React.Fragment>
   );
