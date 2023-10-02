@@ -1,5 +1,11 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 import { getLocale } from '../../utils/i18next';
+import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+import { checkPermissions } from '../../helpers/checkPermission.js';
+
+const ACTIVE_ORGANIZATION = localStorage.getItem(
+  LocalStorageKeys.ACTIVE_ORGANIZATION
+);
 
 export const createCategoryQuestion = (data) => {
   return axiosInstanceWithHeader.post('/api/admin/questions', data);
@@ -27,13 +33,17 @@ export const getQuestions = (params) => {
       pageSize: 20,
       query: '',
       langKey: getLocale().toUpperCase(),
-      ...params,
-    },
+      organizationCode:
+        checkPermissions(['ROLE_SUPER_ADMIN']) && ACTIVE_ORGANIZATION,
+      ...params
+    }
   });
 };
 
 export const changeQuestionOrder = (questionId, orderNumber) => {
-  return axiosInstanceWithHeader.patch(`/api/admin/questions/${questionId}/orders/${orderNumber}`);
+  return axiosInstanceWithHeader.patch(
+    `/api/admin/questions/${questionId}/orders/${orderNumber}`
+  );
 };
 
 export const searchQuestions = (params) => {
@@ -42,7 +52,9 @@ export const searchQuestions = (params) => {
       pageSize: params.pageSize,
       query: params.query,
       langKey: getLocale().toUpperCase(),
-      ...params,
-    },
+      organizationCode:
+        checkPermissions(['ROLE_SUPER_ADMIN']) && ACTIVE_ORGANIZATION,
+      ...params
+    }
   });
 };
