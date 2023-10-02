@@ -50,7 +50,7 @@
 .description {
   text-align: center;
   font-weight: 700;
-  margin: 16px;
+  margin: var(--pd-1);
   color: @gray-color-1;
 }
 
@@ -74,18 +74,19 @@
 
 .right-arrow {
   top: 50%;
-  right: 45px;
+  right:45px;
   position: absolute;
   font-size: 3rem;
   color: #000;
   z-index: 10;
   cursor: pointer;
   user-select: none;
-  opacity: 0.6;
+  opacity: .6;
+
 }
 
 .left-arrow {
-  opacity: 0.6;
+  opacity: .6;
   top: 50%;
   left: 45px;
   position: absolute;
@@ -107,18 +108,18 @@
   transform: scale(1.08);
 }
 
-// @media (max-width: 768px) {
-//   .right-arrow {
-//     bottom: 0;
-//     right: 50%;
-//   }
+@media (max-width:768px) {
+  .right-arrow {
+    bottom: 0;
+    right:50%
+  }
 
-//   .slider {
-//     padding: 16px 10px;
-//   }
+  .slider {
+    padding: 16px 10px;
+  }
 
-//   .left-arrow {
-//     bottom: 0;
-//     left: 50%;
-//   }
-// }
+  .left-arrow {
+    bottom: 0;
+    left: 50%;
+  }
+}
