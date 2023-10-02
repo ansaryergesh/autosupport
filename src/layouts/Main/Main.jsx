@@ -55,7 +55,7 @@ const Main = (props) => {
                 <Header />
                 <div style={{ paddingRight: '40px', paddingBottom: '40px' }}>
                   {children}
-                  {currentPath !== '/' && <InfoHelp />}
+                  {currentPath !== '/' || !currentPath.includes('question/preview') && <InfoHelp />}
                 </div>
               </Layout.Content>
             </Layout>

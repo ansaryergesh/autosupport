@@ -4,7 +4,8 @@ import { ReactComponent as RightArrowButton } from '../../assets/images/RightArr
 import { ReactComponent as LeftArrowButton } from '../../assets/images/LeftArrowButton.svg';
 import { originAddress } from '../../api/api';
 import { Image } from 'antd';
-
+import LazyLoad from 'react-lazyload';
+import NoPhoto from '../../assets/images/noFoto.png'
 const ImageSlider = ({ slides, sliderData }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
@@ -32,10 +33,13 @@ const ImageSlider = ({ slides, sliderData }) => {
 
   return (
     <section className={styles.slider} style={{ position: 'relative' }}>
-      <div className={'forDesktop'}>
-        <LeftArrowButton className={styles.leftArrow} onClick={prevSlide} />
-        <RightArrowButton className={styles.rightArrow} onClick={nextSlide} />
-      </div>
+      {
+        <div className={'forDesktop'}>
+          <LeftArrowButton className={styles.leftArrow} onClick={prevSlide} />
+          <RightArrowButton className={styles.rightArrow} onClick={nextSlide} />
+        </div>
+      }
+
       {sliderData?.map((slide, index) => {
         return (
           <div
@@ -52,13 +56,41 @@ const ImageSlider = ({ slides, sliderData }) => {
                     '. ' +
                     `${slide.description || 'Нет описания'}`}
                 </p>
-                <Image.PreviewGroup items={previewImages}>
-                  <Image
-                    src={currentSlideUrl} // Use the current slide's URL
-                    alt={styles.description}
-                    className={styles.image}
-                  />
+                <Image.PreviewGroup
+                  preview={{
+                    height: 2000 // Set the desired height
+                  }}
+                  items={previewImages}>
+                  <LazyLoad height={200} offset={100}>
+                    <Image
+                      placeholder={
+                        <>
+                          ...Loading
+                          <Image
+                            alt={'loading'}
+                            preview={false}
+                            src={NoPhoto}
+                            height={300}
+                          />
+                        </>
+
+                      }
+                      src={currentSlideUrl} // Use the current slide's URL
+                      alt={styles.description}
+                      className={styles.image}
+                    />
+                  </LazyLoad>
                 </Image.PreviewGroup>
+                <div className={'forMobile'}>
+                  <div
+                    style={{
+                      margin: '16px 0',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      gap: '8px'
+                    }}>
+                  </div>
+                </div>
               </div>
             )}
           </div>
