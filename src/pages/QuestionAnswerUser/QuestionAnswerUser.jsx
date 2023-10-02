@@ -69,12 +69,21 @@ const QuestionAnswerUser = () => {
       .catch((err) => console.log(err));
   };
 
+  const similarQuestionExist = data?.question?.children?.length > 0;
+
   return (
     <div>
-      <JHeader pageTitle={i18n.t('actions.preview')} />
+      <Row>
+        <Col span={similarQuestionExist ? 17 : 24}>
+          <JHeader pageTitle={i18n.t('actions.preview')} />
+        </Col>
+        {similarQuestionExist && <SimilarQuestions data={data} />
+        }
+
+      </Row>
 
       <Row gutter={[16, 16]}>
-        <Col span={16}>
+        <Col span={17}>
           {activeResource && (
             <Button type="default-active">{activeResource.name}</Button>
           )}
@@ -100,7 +109,7 @@ const QuestionAnswerUser = () => {
           ))}
         </Col>
 
-        <Col span={16}>
+        <Col span={similarQuestionExist ? 18 : 24}>
           <div className={styles.card}>
             <TypographyHead
               type={TypoGraphyType.SECONDARY_HEAD}
@@ -161,19 +170,15 @@ const QuestionAnswerUser = () => {
           </div>
         </Col>
 
-        <Col span={16}>
+        <Col span={similarQuestionExist ? 18 : 24}>
           <Review />
         </Col>
 
-        <Col span={16}>
+        <Col span={similarQuestionExist ? 18 : 24}>
           <Button onClick={() => history.goBack()}>
             {i18n.t('actions.back')}
           </Button>
           <Button onClick={handleSave}>{i18n.t('actions.save')}</Button>
-        </Col>
-
-        <Col>
-          <SimilarQuestions data={data} />
         </Col>
       </Row>
     </div>
