@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FloatButton } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { dataText } from './constants';
-import { i18n } from '../../utils/i18next';
+import { getLocale, i18n } from '../../utils/i18next';
 import styles from './index.module.less';
 import { CloseOutlined } from '@ant-design/icons';
 const InfoHelp = () => {
@@ -33,6 +33,9 @@ const InfoHelp = () => {
     if (path.includes('/question/admin')) {
       return i18n.t('menu.editQuestion');
     }
+    if (path.includes('/category')) {
+      return i18n.t('categories');
+    }
 
     return null;
   };
@@ -40,26 +43,33 @@ const InfoHelp = () => {
   const text = () => {
     const path = history.location.pathname;
 
+    const dataForCurrentLang = dataText.find(
+      (text) => text.langKey === getLocale()
+    );
+
     if (path.includes('/employees')) {
-      return dataText.employees;
+      return dataForCurrentLang.employees;
     }
     if (path.includes('/feedback')) {
-      return dataText.feedback;
+      return dataForCurrentLang.feedback;
     }
     if (path.includes('/search-history')) {
-      return dataText.searchHistory;
+      return dataForCurrentLang.searchHistory;
     }
     if (path.includes('/resources')) {
-      return dataText.resources;
+      return dataForCurrentLang.resources;
     }
     if (path.includes('/new-tickets')) {
-      return dataText.newTickets;
+      return dataForCurrentLang.newTickets;
     }
     if (path.includes('/old-tickets')) {
-      return dataText.oldTickets;
+      return dataForCurrentLang.oldTickets;
     }
     if (path.includes('/question/admin')) {
-      return dataText.answer;
+      return dataForCurrentLang.answer;
+    }
+    if (path.includes('/category')) {
+      return dataForCurrentLang.category;
     }
 
     return null;
