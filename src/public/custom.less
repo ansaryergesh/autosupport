@@ -385,3 +385,10 @@ iframe,
 #player {
   border-radius: 24px;
 }
+
+@supports (-webkit-overflow-scrolling: touch) {
+  .ant-image {
+    width: auto !important; /* Force original width */
+    height: auto !important; /* Force original height */
+  }
+}
