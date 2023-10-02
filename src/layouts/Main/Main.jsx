@@ -41,7 +41,7 @@ const Main = (props) => {
         .catch((err) => console.log(err));
     }
   }, []);
-
+  const currentPath = history.location.pathname;
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={'main-layout'}>
@@ -55,7 +55,7 @@ const Main = (props) => {
                 <Header />
                 <div style={{ paddingRight: '40px', paddingBottom: '40px' }}>
                   {children}
-                  <InfoHelp />
+                  {currentPath !== '/' && <InfoHelp />}
                 </div>
               </Layout.Content>
             </Layout>

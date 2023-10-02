@@ -54,7 +54,6 @@ const SearchInput = () => {
   };
 
   const handleSearch = (value) => {
-    console.log(value);
     if (searchValue.length >= 2) {
       const params = {
         query: value,

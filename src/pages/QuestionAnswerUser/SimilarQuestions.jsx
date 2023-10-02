@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 // import { findByLangKey } from '../../helpers/findByLangKey.js';
 
 const SimilarQuestions = ({ data }) => {
-  console.log('similar', data);
   return (
     <div className={styles.similarCard}>
       <div className={styles.similarTextBox}>

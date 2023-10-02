@@ -74,7 +74,7 @@ const QuestionAnswerContent = () => {
       .then((res) => {
         setResources(res.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(() => {
         setLoading(false);
       });
@@ -158,7 +158,6 @@ const QuestionAnswerContent = () => {
 
   useEffect(() => {
     setIsEdited(false);
-    console.log('check active resource changed');
     setAnswerFormData({
       id: null,
       question: {
@@ -230,20 +229,16 @@ const QuestionAnswerContent = () => {
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
       setLoading(true);
-      console.log('activeResource changed');
       setTimeout(() => {
         answerByQuestionAndResource(id, activeResource.id)
           .then((res) => {
-            console.log('resolved');
             setAnswerFormData(res.data);
           })
           .catch((err) => {
-            console.log('Error');
             console.error(err);
           })
           .finally(() => {
             setLoading(false);
-            console.log('final');
           });
       }, [500]);
     }
@@ -263,27 +258,16 @@ const QuestionAnswerContent = () => {
       resource: activeResource
     };
 
-    // if (
-    //   finalDataAnswer.answerContents.some((item) => item.stepDescription.length < requiredCharacter)
-    // ) {
-    //   notification.info({
-    //     message: i18n.t('questionAnswer.previewErrorMessage')
-    //   });
-    // } else {
     const finalQuestionInfo = {
       ...questionInfo,
       children: selectedQuestions
     };
     delete finalQuestionInfo.resources;
 
-    console.log(selectedQuestions);
-
-    editCategoryQuestion(finalQuestionInfo).then((res) => {
-      console.log(res);
+    editCategoryQuestion(finalQuestionInfo).then(() => {
     });
     if (answerFormData.id) {
-      editAnswerQuestion(finalDataAnswer, answerFormData.id).then((res) => {
-        console.log(res);
+      editAnswerQuestion(finalDataAnswer, answerFormData.id).then(() => {
         if (withPreview) {
           saveNotification();
           history.push(`/question/preview/${id}/${activeResource.id}`);
@@ -291,16 +275,12 @@ const QuestionAnswerContent = () => {
       });
     } else {
       delete finalDataAnswer['id'];
-      console.log(finalDataAnswer);
-      addAnswerToQuestion(finalDataAnswer).then((res) => {
-        console.log(res);
+      addAnswerToQuestion(finalDataAnswer).then(() => {
         notification.info({ message: i18n.t('actions.edited') });
         withPreview &&
           history.push(`/question/preview/${id}/${activeResource.id}`);
       });
     }
-    // }
-    console.log(finalDataAnswer);
   };
 
   const handleChangeCounter = (counter) => {
