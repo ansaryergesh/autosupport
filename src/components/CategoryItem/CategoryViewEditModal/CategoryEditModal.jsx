@@ -11,7 +11,7 @@ const CategoryCreateModal = ({
   isModalOpen = false,
   handleModal,
   categoryInfo,
-  getCategoryAll,
+  getCategoryAll
 }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
@@ -19,8 +19,7 @@ const CategoryCreateModal = ({
   const handleSubmit = (values) => {
     setLoading(true);
     editCategory({ ...categoryInfo, ...values })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         handleModal();
         getCategoryAll();
         form.resetFields();
@@ -33,20 +32,21 @@ const CategoryCreateModal = ({
 
   const mergedCategories = initialCategoryContents?.map((initialCategory) => {
     const existingCategory = categorieContents?.find(
-      (item) => item.langKey === initialCategory.langKey,
+      (item) => item.langKey === initialCategory.langKey
     );
 
     if (existingCategory) {
       return {
         ...initialCategory,
         name: existingCategory.name,
-        id: existingCategory.id,
+        id: existingCategory.id
       };
     }
 
     return initialCategory;
   });
-  const finalContent = categoryInfo !== {} ? mergedCategories : initialCategoryContents;
+  const finalContent =
+    categoryInfo !== {} ? mergedCategories : initialCategoryContents;
 
   return (
     <Modal
@@ -57,37 +57,36 @@ const CategoryCreateModal = ({
       onCancel={() => {
         handleModal();
         form.resetFields();
-      }}
-    >
+      }}>
       <Form
         form={form}
         layout="vertical"
         initialValues={{ finalContent }}
         onFinish={handleSubmit}
-        autoComplete="off"
-      >
+        autoComplete="off">
         {finalContent?.map((content, index) => (
-          <Form.Item key={index} label={`${i18n.t('columns.name')} ${content.langKey}`}>
+          <Form.Item
+            key={index}
+            label={`${i18n.t('columns.name')} ${content.langKey}`}>
             <Form.Item
               initialValue={content?.name}
               name={['categorieContents', index, 'name']}
               rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
-              style={{ marginBottom: 0 }}
-            >
-              <Input placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`} />
+              style={{ marginBottom: 0 }}>
+              <Input
+                placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`}
+              />
             </Form.Item>
             <Form.Item
               name={['categorieContents', index, 'langKey']}
               initialValue={content.langKey}
-              style={{ display: 'none' }}
-            >
+              style={{ display: 'none' }}>
               <Input type="hidden" />
             </Form.Item>
             <Form.Item
               initialValue={content?.id}
               name={['categorieContents', index, 'id']}
-              style={{ marginBottom: 0, display: 'none' }}
-            >
+              style={{ marginBottom: 0, display: 'none' }}>
               <Input />
             </Form.Item>
           </Form.Item>
@@ -106,6 +105,6 @@ CategoryCreateModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   categoryInfo: PropTypes.object,
-  getCategoryAll: PropTypes.func,
+  getCategoryAll: PropTypes.func
 };
 export default CategoryCreateModal;

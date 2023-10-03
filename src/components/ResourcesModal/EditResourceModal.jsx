@@ -18,8 +18,7 @@ const EditResourceModal = ({
 
   const handleSubmit = (values) => {
     setLoading(true);
-    manageResources({ ...resourceInfo, ...values }).then((res) => {
-      console.log(res);
+    manageResources({ ...resourceInfo, ...values }).then(() => {
       handleEdit();
       getList();
       form.resetFields();
@@ -42,8 +41,7 @@ const EditResourceModal = ({
         handleEdit();
         form.resetFields();
       }}
-      cancelButtonProps={{ className: 'button-default' }}
-      >
+      cancelButtonProps={{ className: 'button-default' }}>
       <Form
         form={form}
         layout="vertical"

@@ -19,7 +19,7 @@ const Activate = () => {
     const key = queryParams.key;
     const data = {
       key,
-      password: values.password,
+      password: values.password
     };
 
     activateUser(data).then(() => {
@@ -27,9 +27,6 @@ const Activate = () => {
       history.push('/sign-in');
       notification.success({ message: 'Activated' });
     });
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -48,15 +45,14 @@ const Activate = () => {
           style={{ maxWidth: 550 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
+          autoComplete="off">
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-              >
+                rules={[
+                  { required: true, message: 'Please input your password!' }
+                ]}>
                 <Input
                   type="password"
                   size={'large'}
@@ -68,7 +64,10 @@ const Activate = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Button className={styles.inputButton} type="submit" htmlType="submit">
+                <Button
+                  className={styles.inputButton}
+                  type="submit"
+                  htmlType="submit">
                   Сохранить
                 </Button>
               </Form.Item>

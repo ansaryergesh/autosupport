@@ -5,9 +5,8 @@ import { Form, Modal } from 'antd';
 import Button from '../../Button/Button.jsx';
 const CategoryCreateModal = ({ isModalOpen = false, handleModal }) => {
   const [loading, setLoading] = useState(false);
-  const handleSubmit = (values) => {
+  const handleSubmit = () => {
     setLoading(true);
-    console.log(values);
   };
 
   return (
@@ -16,10 +15,15 @@ const CategoryCreateModal = ({ isModalOpen = false, handleModal }) => {
       confirmLoading={loading}
       open={isModalOpen}
       footer={null}
-      onCancel={handleModal}
-    >
-      <Form labelCol={{ span: 8 }} layout="vertical" onFinish={handleSubmit} autoComplete="off">
-        <Form.Item name={'order'} rules={[{ required: true, message: 'order is required' }]}>
+      onCancel={handleModal}>
+      <Form
+        labelCol={{ span: 8 }}
+        layout="vertical"
+        onFinish={handleSubmit}
+        autoComplete="off">
+        <Form.Item
+          name={'order'}
+          rules={[{ required: true, message: 'order is required' }]}>
           <Input />
         </Form.Item>
         <Form.Item labelAlign={'right'} wrapperCol={{ span: 16 }}>
@@ -33,6 +37,6 @@ const CategoryCreateModal = ({ isModalOpen = false, handleModal }) => {
 };
 CategoryCreateModal.propTypes = {
   isModalOpen: PropTypes.bool,
-  handleModal: PropTypes.func,
+  handleModal: PropTypes.func
 };
 export default CategoryCreateModal;

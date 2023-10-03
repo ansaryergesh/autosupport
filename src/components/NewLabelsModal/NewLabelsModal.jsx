@@ -4,7 +4,12 @@ import Input from '../Input/Input';
 import { i18n } from '../../utils/i18next';
 import { manageMark } from '../../service/Feedback';
 
-const NewLabelsModal = ({ isModalOpen, handleModal, modalData, getAllMarksList }) => {
+const NewLabelsModal = ({
+  isModalOpen,
+  handleModal,
+  modalData,
+  getAllMarksList
+}) => {
   const [loading, setLoading] = useState(false);
   const editMark = modalData?.id;
   const [form] = Form.useForm();
@@ -12,20 +17,17 @@ const NewLabelsModal = ({ isModalOpen, handleModal, modalData, getAllMarksList }
   const handleSubmit = (values) => {
     setLoading(true);
     manageMark(values)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         handleModal();
         getAllMarksList();
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(setLoading(false));
   };
 
   useEffect(() => {
     form.setFieldValue(modalData);
   }, [modalData, form]);
-
-  console.log(handleSubmit);
 
   return (
     <Modal
@@ -36,23 +38,24 @@ const NewLabelsModal = ({ isModalOpen, handleModal, modalData, getAllMarksList }
       okButtonProps={{
         className: 'button-modal',
         htmlType: 'submit',
-        form: 'form',
+        form: 'form'
       }}
       onCancel={() => {
         form.resetFields();
         handleModal();
       }}
-      cancelText={i18n.t('actions.cancel')}
-    >
+      cancelText={i18n.t('actions.cancel')}>
       <Form
         layout="vertical"
         id="form"
         form={form}
         initialValues={modalData}
-        onFinish={handleSubmit}
-      >
+        onFinish={handleSubmit}>
         {editMark ? (
-          <Form.Item name="id" initialValue={modalData?.id} style={{ display: 'none' }}>
+          <Form.Item
+            name="id"
+            initialValue={modalData?.id}
+            style={{ display: 'none' }}>
             <Input />
           </Form.Item>
         ) : null}
@@ -62,20 +65,22 @@ const NewLabelsModal = ({ isModalOpen, handleModal, modalData, getAllMarksList }
         </Form.Item>
 
         {modalData?.markContents?.map((content, i) => (
-          <Form.Item key={i} label={`${i18n.t('columns.name')} ${content.langKey}`}>
+          <Form.Item
+            key={i}
+            label={`${i18n.t('columns.name')} ${content.langKey}`}>
             <Form.Item
               rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
               name={['markContents', i, 'text']}
-              initialValue={content.text}
-            >
-              <Input placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`} />
+              initialValue={content.text}>
+              <Input
+                placeholder={`${i18n.t('menu.enterName')} ${content.langKey}`}
+              />
             </Form.Item>
 
             <Form.Item
               name={['markContents', i, 'langKey']}
               initialValue={content.langKey}
-              style={{ display: 'none' }}
-            >
+              style={{ display: 'none' }}>
               <Input type="hidden" />
             </Form.Item>
 
@@ -83,8 +88,7 @@ const NewLabelsModal = ({ isModalOpen, handleModal, modalData, getAllMarksList }
               <Form.Item
                 initialValue={content?.id}
                 name={['markContents', i, 'id']}
-                style={{ display: 'none' }}
-              >
+                style={{ display: 'none' }}>
                 <Input />
               </Form.Item>
             ) : null}

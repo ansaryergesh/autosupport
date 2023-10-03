@@ -18,8 +18,6 @@ const MyComponent = ({
     selectedLanguageItem?.stepDescription || ''
   );
   useEffect(() => {
-    console.log(editorContent);
-    console.log(selectedLanguageItem?.stepDescription);
     if (!isNew && editorContent !== selectedLanguageItem?.stepDescription) {
       setIsEdited(true);
     }

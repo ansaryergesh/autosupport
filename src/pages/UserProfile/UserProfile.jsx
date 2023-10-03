@@ -5,22 +5,19 @@ import UserData from './DataPagesComponents/UserData';
 import { i18n } from '../../utils/i18next.js';
 
 const UserProfile = () => {
-  const onChange = (key) => {
-    console.log(key);
-  };
   const items = [
     {
       key: '1',
       label: `${i18n.t('userProfile.userProfileSelector')}`,
-      children: <UserData />,
+      children: <UserData />
     },
     {
       key: '2',
       label: `${i18n.t('userProfile.accountSettingsSelector')}`,
-      children: <AccountData />,
-    },
+      children: <AccountData />
+    }
   ];
-  return <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+  return <Tabs defaultActiveKey="1" items={items} />;
 };
 
 export default UserProfile;

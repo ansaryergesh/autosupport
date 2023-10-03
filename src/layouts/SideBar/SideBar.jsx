@@ -60,7 +60,6 @@ const SearchInput = () => {
         pageSize: 5
       };
       searchQuestions(params).then((res) => {
-        console.log(res.data);
         setOptions(
           res?.data.map((item) => ({
             value: findByLangKey(item?.questionContents)
@@ -81,7 +80,6 @@ const SearchInput = () => {
   };
 
   const handleSelect = (value, option) => {
-    console.log('selected', option);
     setSearchValue(value);
     history.push(`/question/admin/${option.id}`);
     setSearchValue('');
@@ -114,7 +112,7 @@ const SearchInput = () => {
 const SidebarNav = ({ isAdmin = true }) => {
   const history = useHistory();
   const currentPath = history.location.pathname;
-  const pathnameParts = currentPath.split("/");
+  const pathnameParts = currentPath.split('/');
   const idQuestion = pathnameParts[pathnameParts.length - 1];
   const [allCategories, setAllCategories] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
@@ -168,7 +166,6 @@ const SidebarNav = ({ isAdmin = true }) => {
   };
 
   const getAllQuestions = () => {
-    console.log(allQuestions);
     const params = {
       langKey: getLocale().toUpperCase(),
       pageSize: 20
@@ -181,18 +178,15 @@ const SidebarNav = ({ isAdmin = true }) => {
   // eslint-disable-next-line no-unused-vars
   const moveMenuItem = (draggedItemId, orderNumber) => {
     if (orderNumber) {
-      changeOrderCategory(draggedItemId, orderNumber).then((res) => {
-        console.log(res);
+      changeOrderCategory(draggedItemId, orderNumber).then(() => {
         getCategoryAll();
       });
     }
   };
 
   const moveMenuItemQuestion = (draggedItemId, orderNumber) => {
-    console.log(orderNumber);
     if (orderNumber) {
-      changeQuestionOrder(draggedItemId, orderNumber).then((res) => {
-        console.log(res);
+      changeQuestionOrder(draggedItemId, orderNumber).then(() => {
         getCategoryAll();
       });
     }
@@ -204,8 +198,7 @@ const SidebarNav = ({ isAdmin = true }) => {
 
   // eslint-disable-next-line no-unused-vars
   const handleDeleteCategory = (categoryId) => {
-    deleteCategory(categoryId).then((res) => {
-      console.log(res);
+    deleteCategory(categoryId).then(() => {
       history.push('/');
       notification.success({
         message: i18n.t('actions.deleted')
@@ -215,8 +208,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   };
 
   const handleDeleteQuestion = (questionId) => {
-    deleteQuestion(questionId).then((res) => {
-      console.log(res);
+    deleteQuestion(questionId).then(() => {
       notification.success({
         message: i18n.t('actions.deleted')
       });
@@ -233,7 +225,6 @@ const SidebarNav = ({ isAdmin = true }) => {
   // eslint-disable-next-line no-unused-vars
   const handleEditCategory = (categoryId) => {
     getCategoryById(categoryId).then((res) => {
-      console.log(res);
       setCategoryInfo({});
       setCategoryInfo(res.data);
       setCategoryEditModal(true);
@@ -243,7 +234,6 @@ const SidebarNav = ({ isAdmin = true }) => {
   const handleEditQuestion = (questionId) => {
     setQuestionInfo({});
     getQuestionById(questionId).then((res) => {
-      console.log(res);
       setQuestionInfo(res.data);
       setQuestionEditModal(true);
     });

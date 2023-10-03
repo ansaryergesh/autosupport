@@ -31,7 +31,6 @@ const UserData = () => {
       setData(res.data);
     });
   }, []);
-  console.log(data);
 
   useEffect(() => {
     form.setFieldsValue(data);

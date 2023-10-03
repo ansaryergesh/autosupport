@@ -8,16 +8,13 @@ import { Link } from 'react-router-dom';
 const { Title, Paragraph } = Typography;
 
 function CategoryItem({ editQuestion, getAllQuestion, data }) {
-  console.log(data);
   const handleEditQuestion = (value) => {
     const finalQuestionContent = {
       ...data,
       questionContents: [{ ...data.questionContents[0], title: value }]
     };
 
-    console.log(finalQuestionContent);
-    editQuestion(finalQuestionContent).then((res) => {
-      console.log(res);
+    editQuestion(finalQuestionContent).then(() => {
       notification.info({ message: i18n.t('actions.edited') });
       getAllQuestion();
     });

@@ -18,15 +18,10 @@ const NewPassword = () => {
       key,
       newPassword: values.newPassword
     };
-    console.log(data);
-    newPassword(data).then((res) => {
-      console.log(res);
+    newPassword(data).then(() => {
       notification.info({ message: i18n.t('passwordUpdated') });
       history.push('/sign-in');
     });
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -45,7 +40,6 @@ const NewPassword = () => {
           style={{ maxWidth: 550 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off">
           <Row gutter={[16]}>
             <Col span={24}>

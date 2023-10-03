@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
+    console.error(error);
     if (error?.status === 401) {
       notification.error({ message: i18n.t('commons.unauthorized') });
       clearStorage();
@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
         message: i18n.t('commons.accessDenied')
       });
     } else if (error.response) {
-      console.log(error.response.data.message);
+      console.error(error.response.data.message);
       notification.error({
         message: error.response.data.message || i18n.t('error.wrong')
       });
@@ -67,7 +67,7 @@ axiosInstanceWithHeader.interceptors.response.use(
       notification.error({ message: error });
     }
     if (error.response) {
-      console.log('response');
+      console.error('response');
       if (error.response.data.code) {
         const errorCode = error.response.data.code.replace('-', '_');
         notification.error({ message: i18n(errorCode) });

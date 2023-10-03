@@ -74,7 +74,6 @@ const SearchReference = ({
       notification.info({ message: i18n.t('alreadySimilar') });
     } else {
       setSelectedItems([...selectedItems, selectedItem]);
-      // console.log([...selectedItems, selectedItem]);
 
       setInputValue('');
       getOptionsDefault();
@@ -89,15 +88,11 @@ const SearchReference = ({
     setSelectedItems(newData);
   };
 
-  console.log(selectedItems);
-
   return (
     <div>
       <TypographyHead type={TypoGraphyType.SUB_HEAD} content={title} />
 
       <div className={styles.searchBox}>
-
-
         <AutoComplete
           onFocus={() => handleFocus(true)}
           onBlur={() => handleFocus(false)}

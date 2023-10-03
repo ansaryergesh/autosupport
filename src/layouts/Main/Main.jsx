@@ -34,7 +34,6 @@ const Main = (props) => {
 
   useEffect(() => {
     if (!localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION)) {
-      console.log('check');
       getOrganizationOpen()
         .then((res) => {
           localStorage.setItem(
@@ -43,7 +42,7 @@ const Main = (props) => {
           );
           location.reload();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   }, []);
   const currentPath = history.location.pathname;
