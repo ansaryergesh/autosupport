@@ -112,6 +112,10 @@ const SearchInput = () => {
 };
 
 const SidebarNav = ({ isAdmin = true }) => {
+  const history = useHistory();
+  const currentPath = history.location.pathname;
+  const pathnameParts = currentPath.split("/");
+  const idQuestion = pathnameParts[pathnameParts.length - 1];
   const [allCategories, setAllCategories] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
 
@@ -132,8 +136,6 @@ const SidebarNav = ({ isAdmin = true }) => {
     localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) ||
       SIDEBAR_BUTTON.ALL
   );
-
-  const history = useHistory();
 
   useEffect(() => {
     setOpenKeys([]);
@@ -340,6 +342,7 @@ const SidebarNav = ({ isAdmin = true }) => {
             onMenuClick={handleSubMenuClick}
             handleEditQuestion={handleEditQuestion}
             moveMenuItemQuestion={moveMenuItemQuestion}
+            openQuestionKey={parseInt(idQuestion)}
           />
         ))}
         {allQuestions?.map((question, index) => (
@@ -363,6 +366,7 @@ const SidebarNav = ({ isAdmin = true }) => {
             onMenuClick={handleSubMenuClick}
             handleEditQuestion={handleEditQuestion}
             moveMenuItemQuestion={() => {}}
+            openQuestionKey={parseInt(idQuestion)}
           />
         ))}
       </div>
