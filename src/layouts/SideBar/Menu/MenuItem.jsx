@@ -27,6 +27,7 @@ const MenuItem = ({
   handleEditQuestion,
   moveMenuItemQuestion,
   activeButton = SIDEBAR_BUTTON.ALL,
+  openQuestionKey,
 }) => {
   const history = useHistory();
   const menu = (id) => {
@@ -208,7 +209,8 @@ const MenuItem = ({
         >
           <div
             key={`question_${index}_${question?.id}`}
-            className={'hoveredLink mainMenu'}
+            className={openQuestionKey && openQuestionKey === question?.id
+              ? 'activeLink mainMenu' : 'hoveredLink mainMenu'}
             style={{ padding: '8px', marginBottom: '4px' }}
           >
             <Link to={`/question/admin/${question?.id}`}>
