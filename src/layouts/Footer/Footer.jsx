@@ -8,14 +8,14 @@ const Footer = () => {
 
   return (
     <div className={styles.footer}>
-      <a href="#" onClick={() => openLinks('/confidential.pdf')}>
+      <a href="#" onClick={() => openLinks('/confidential2.pdf')}>
         <p>Политика конфиденциальности АО «Фридом Финанс»</p>
       </a>
       <p>
         050040, г. Алматы, проспект Аль-Фараби 77/7, БЦ Esentai Tower: 3, 7 этаж
       </p>
 
-      <a href="#" onClick={() => openLinks('/confidential2.pdf')}>
+      <a href="#" onClick={() => openLinks('/confidential1.pdf')}>
         <p>Политика конфиденциальности ПК «Freedom Finance Global PLC»</p>
       </a>
       <p>
