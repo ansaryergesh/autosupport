@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Col, Row, notification } from 'antd';
 import ReactPlayer from 'react-player';
-import TypographyHead from 'components/Typography/TypographyHead.jsx';
-import { TypoGraphyType } from 'components/Typography/constants.js';
+// import TypographyHead from 'components/Typography/TypographyHead.jsx';
+// import { TypoGraphyType } from 'components/Typography/constants.js';
 import Button from 'components/Button/Button.jsx';
 import ImageSlider from 'components/ImageSlider/ImageSlider.jsx';
 import ShowHtmlContent from 'components/ShowHtmlContent/ShowHtmlContent.jsx';
@@ -77,9 +77,7 @@ const QuestionAnswerUser = () => {
         <Col span={similarQuestionExist ? 17 : 24}>
           <JHeader pageTitle={i18n.t('actions.preview')} />
         </Col>
-        {similarQuestionExist && <SimilarQuestions data={data} />
-        }
-
+        {similarQuestionExist && <SimilarQuestions data={data} />}
       </Row>
 
       <Row gutter={[16, 16]}>
@@ -111,10 +109,10 @@ const QuestionAnswerUser = () => {
 
         <Col span={similarQuestionExist ? 18 : 24}>
           <div className={styles.card}>
-            <TypographyHead
+            {/* <TypographyHead
               type={TypoGraphyType.SECONDARY_HEAD}
               content={i18n.t('questionAnswer.descriptionTitle')}
-            />
+            /> */}
             <ShowHtmlContent htmlContent={stepDescription} />
             {
               <>

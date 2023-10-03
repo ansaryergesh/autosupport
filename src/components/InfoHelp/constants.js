@@ -1,5 +1,7 @@
 export const dataText = [
   {
+    preview: `Вы находитесь на странице предпросмотра. Здесь можно увидеть как текст будет отображаться в клиентской части сайта`,
+
     employees: `Функционал Добавить нового сотрудника:
    - Открывается окно с полями для заполнения:
    1. Имя
@@ -88,6 +90,8 @@ export const dataText = [
     langKey: 'RU'
   },
   {
+    preview: `Сіз алдын ала қарау бетіндесіз. Бұл жерде тексттің сайттың клиенттік бөлігінде қалай бейнеленетінін көруге болады`,
+
     employees: `"Функционал Жаңа қызметкерді қосу" - толтыру үшін өрістері бар терезе ашылады:
     1.	Аты
     2.	Тегі
@@ -179,6 +183,8 @@ export const dataText = [
     langKey: 'KZ'
   },
   {
+    preview: `You are on the preview page. Here you can see how the text will be displayed in the client part of the site`,
+
     employees: `"Add a new employee" Functionality - a window opens with fields to complete:
     1. Name
     2. Surname
@@ -238,7 +244,7 @@ export const dataText = [
     By clicking “Option to send tickets”, you can enable or disable the option to send tickets from the customer side
     By clicking “Download tickets”, the user can download all tickets
     
-    By clicking on the pencil, the user can add the number of clicks to raise the answer in the list of popular topics. The largest number of clicks determines the answer to the first place in popularity. You can also reduce the number of clicks if the answer is no longer relevant.
+    If the customer has not found an answer to the question, customer may leave a request describing the question, which will be saved on the “New tickets” page for further processing by the manager, and will also be sent to the call center e-mail callcenter@ffin.kz, from where the customer will receive a response. Communication with the customer is carried out via e-mail.
     `,
 
     oldTickets: `The user can search by topic and e-mail
@@ -250,7 +256,8 @@ export const dataText = [
     You can attach a similar request, tag, or keyword to a question that will simplify the search for the question for the customer and the admin user
     From the admin area you can add “Photo guidance” by uploading explanatory pictures from your computer. By pressing “+ Upload” button, Windows Explorer opens with files saved on the computer.
     Pictures must be up to 2 MB and in png format.
-    In Explorer, select a photo and add a description to each photo. For example: How to open an account. Step 1.
+    In Explorer, select a photo and add a description to each photo. For example: How to open an account.
+    Step 1.
     You can also add Video guidance. To do this, you need to paste the URL format link into a special field. Next, you need to add a description to the video.
     After filling out the necessary data for photo and video guidances, you must click on the “Preview” button.
     After switching to preview, you can check how the new page will be displayed and check whether all the data was entered correctly.
