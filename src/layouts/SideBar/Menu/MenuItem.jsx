@@ -75,9 +75,11 @@ const MenuItem = ({
             </Menu.Item>
           </>
         )}
-        <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
-          {i18n.t('menu.deleteQuestion')}
-        </Menu.Item>
+        {checkPermissions(['ROLE_WATCHER']) ? null : (
+          <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
+            {i18n.t('menu.deleteQuestion')}
+          </Menu.Item>
+        )}
       </Menu>
     );
   };

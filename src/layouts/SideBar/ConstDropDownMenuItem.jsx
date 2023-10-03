@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { i18n } from 'utils/i18next.js';
 import { MoreOutlined } from '@ant-design/icons';
+import { checkPermissions } from '../../helpers/checkPermission.js';
 
 const DraggableMenuItem = ({ handleAdd }) => {
   const constMenu = (
@@ -29,9 +30,11 @@ const DraggableMenuItem = ({ handleAdd }) => {
       <Link className={` ${currentPath === '/' && 'activeLink'}`} to={`/`}>
         <span>{i18n.t('home')}</span>
       </Link>
-      <Dropdown overlay={constMenu} trigger={['click']}>
-        <MoreOutlined style={{ fontSize: '1.5em' }} />
-      </Dropdown>
+      {checkPermissions(['ROLE_MANAGER', 'ROLE_WATCHER']) ? null : (
+        <Dropdown overlay={constMenu} trigger={['click']}>
+          <MoreOutlined style={{ fontSize: '1.5em' }} />
+        </Dropdown>
+      )}
     </div>
   );
 };
