@@ -62,7 +62,6 @@ const MyComponent = ({
               'align',
               'font',
               'fontSize',
-              'fontColor',
               'hiliteColor',
               'formatBlock',
               'image',
