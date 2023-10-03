@@ -81,7 +81,7 @@ const SearchHistory = () => {
       title: i18n.t('actions.action'),
       key: 'action',
       render: (_, record) =>
-        checkPermissions(['ROLE_SUPER_ADMIN']) ? null : (
+        checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) ? null : (
           <Button
             onClick={() => {
               setRecord(record);
