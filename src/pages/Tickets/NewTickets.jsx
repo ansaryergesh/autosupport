@@ -42,9 +42,8 @@ const NewTickets = () => {
           });
         }
         getNewTicketsList(1, 10);
-        console.log(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const columns = [
@@ -79,7 +78,7 @@ const NewTickets = () => {
         setData(res.data);
         setTotalPages(res.headers['x-total-count']);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleSwitch = (checked) => {
@@ -92,11 +91,10 @@ const NewTickets = () => {
 
     updateTicketSettings(updatedDataOfSettings)
       .then((res) => {
-        console.log(res.data);
         const { publicVar } = res.data;
         setSwitchStatus(publicVar);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   };
 
@@ -106,13 +104,10 @@ const NewTickets = () => {
       .then((res) => {
         const [{ publicVar }] = res.data;
         setDataOfSettings(res.data);
-        console.log(publicVar);
         setSwitchStatus(publicVar);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, []);
-
-  console.log(dataOfSettings);
 
   return (
     <div>

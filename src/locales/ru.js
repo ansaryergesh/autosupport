@@ -90,7 +90,7 @@ export default {
     editOrganization: 'Редактировать организацию',
     addOrganization: 'Добавить организацию',
     editText: 'Редактировать текст',
-    addSimilar: 'Добавить похожи запрос',
+    addSimilar: 'Добавить похожий запрос',
     save: 'Сохранить',
     saved: 'Сохранено',
     back: 'Назад',

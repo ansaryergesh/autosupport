@@ -44,7 +44,6 @@ const QuestionAnswerUser = () => {
 
     getAnswerById(questionId, resourceId).then((res) => {
       setData(res.data);
-      console.log(res.data);
     });
   }, [questionId, resourceId]);
 
@@ -61,12 +60,11 @@ const QuestionAnswerUser = () => {
       status: 'PUBLISHED'
     };
     saveAnswer(data.id, sendData)
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
         history.push('/');
         saveNotification();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const similarQuestionExist = data?.question?.children?.length > 0;

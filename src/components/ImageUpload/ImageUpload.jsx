@@ -6,11 +6,15 @@ import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
 import Input from '../Input/Input.jsx';
 
-const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
+const ImageUploader = ({
+  answerFormData,
+  setAnswerFormData,
+  selectedLanguage,
+  setIsEdited
+}) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
-    (item) => item.langKey === selectedLanguage,
+    (item) => item.langKey === selectedLanguage
   );
-  console.log(selectedLanguageItem?.images);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState(selectedLanguageItem?.images || []);
@@ -33,7 +37,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
   const updateAnswerFormData = () => {
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
-      (content) => content.langKey === selectedLanguage,
+      (content) => content.langKey === selectedLanguage
     );
     if (index !== -1) {
       updatedAnswerContent.answerContents[index].images = fileList;
@@ -48,7 +52,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
         return {
           ...file,
           uid: file.id,
-          url: `${domainName}${file.url}`, // Append domain name to the URL
+          url: `${domainName}${file.url}` // Append domain name to the URL
         };
       }
       return file;
@@ -63,14 +67,6 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
     setEditingImage(file);
   };
 
-  // const handleRemove = (file) => {
-  //   removeImage(file.id).then((res) => {
-  //     console.log(res);
-  //     const newFileList = fileList.filter((item) => item.id !== file.id);
-  //     setFileList(newFileList);
-  //   });
-  // };
-
   const uploadImage = async (options) => {
     const { onSuccess, onError, file, onProgress } = options;
 
@@ -84,20 +80,23 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
           setTimeout(() => setProgress(0), 1000);
         }
         onProgress({ percent: (event.loaded / event.total) * 100 });
-      },
+      }
     };
     fmData.append('file', file);
     try {
-      const res = await axiosInstanceWithHeader.post('/api/admin/image', fmData, config);
+      const res = await axiosInstanceWithHeader.post(
+        '/api/admin/image',
+        fmData,
+        config
+      );
       setFileList((prevState) => {
-        console.log(prevState)
         const newFile = {
           uid: res.data.id,
           id: res.data.id,
           status: 'done',
           description: null,
-          imageOrder: fileList.length+1,
-          url: res.data.url, // Replace with the URL of the uploaded image
+          imageOrder: fileList.length + 1,
+          url: res.data.url // Replace with the URL of the uploaded image
         };
         const newState = [...prevState, newFile];
         handlePreview(newFile);
@@ -106,9 +105,8 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
       });
       setIsEdited(true);
       onSuccess('Ok');
-      console.log('server res: ', res);
     } catch (err) {
-      console.log('Error: ', err);
+      console.error('Error: ', err);
       onError({ err });
     }
   };
@@ -158,16 +156,15 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
         onOk: () => {
           resolve(true);
 
-          removeImage(file.id).then((res) => {
-            console.log(res);
-            setIsEdited(true)
+          removeImage(file.id).then(() => {
+            setIsEdited(true);
             const newFileList = fileList.filter((item) => item.id !== file.id);
             setFileList(newFileList);
           });
         },
         onCancel: () => {
           reject(true);
-        },
+        }
       });
     });
   };
@@ -183,8 +180,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
         listType="picture-card"
         fileList={displayFileList}
         onPreview={handlePreview}
-        onRemove={handleRemove}
-      >
+        onRemove={handleRemove}>
         {uploadButton}
       </Upload>
       <Modal
@@ -194,12 +190,15 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
         cancelText={i18n.t('actions.cancel')}
         onCancel={handleCancel}
         okText={i18n.t('actions.save')}
-        onOk={() => handleSaveDescription(editingImage.description)}
-      >
+        onOk={() => handleSaveDescription(editingImage.description)}>
         <img
           alt="Preview"
           style={{ width: '100%' }}
-          src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`}
+          src={
+            previewImage?.includes('http')
+              ? previewImage
+              : `${domainName}${previewImage}`
+          }
         />
         <Input
           placeHolder={i18n.t('description')}
@@ -208,7 +207,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
             if (editingImage) {
               const newEditingImage = {
                 ...editingImage,
-                description: e.target.value,
+                description: e.target.value
               };
               setEditingImage(newEditingImage);
             }

@@ -41,7 +41,6 @@ const SignIn = () => {
 
       .finally(() => {
         setLoading(false);
-        console.log('finally');
       });
   };
 
@@ -50,10 +49,6 @@ const SignIn = () => {
       history.push('/');
     }
   }, []);
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
 
   const IconSend = () => {
     return <Image src={Send} preview={false} />;
@@ -73,7 +68,6 @@ const SignIn = () => {
           style={{ maxWidth: 550 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off">
           <Row gutter={[16]}>
             <Col span={24}>

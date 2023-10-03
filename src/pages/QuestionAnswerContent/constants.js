@@ -13,9 +13,9 @@ export const initialQuestionAnswerContent = {
         {
           id: 0,
           langKey: 'EN',
-          name: '',
-        },
-      ],
+          name: ''
+        }
+      ]
     },
     questionContents: [
       {
@@ -26,22 +26,22 @@ export const initialQuestionAnswerContent = {
         tags: [
           {
             id: 0,
-            text: '',
-          },
+            text: ''
+          }
         ],
         keyWords: [
           {
             id: 0,
-            text: '',
-          },
-        ],
-      },
-    ],
+            text: ''
+          }
+        ]
+      }
+    ]
   },
   resource: {
     id: 0,
     code: '',
-    name: '',
+    name: ''
   },
   answerContents: [
     {
@@ -49,39 +49,43 @@ export const initialQuestionAnswerContent = {
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: [],
+      images: []
     },
     {
       langKey: 'RU',
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: [],
+      images: []
     },
     {
       langKey: 'KZ',
       stepDescription: '',
       videoUrl: '',
       videoDescription: '',
-      images: [],
-    },
+      images: []
+    }
   ],
-  status: null,
+  status: null
 };
 
 export const saveAnswerNews = (answerFormData) => {
   let answerFormDataList =
     JSON.parse(localStorage.getItem(LocalStorageKeys.ANSWER_FROM_DATA)) || [];
   const filtered = answerFormDataList.filter(
-    (item) => item.resource?.id !== answerFormData.resource?.id,
+    (item) => item.resource?.id !== answerFormData.resource?.id
   );
   answerFormDataList = [...filtered, answerFormData];
-  localStorage.setItem(LocalStorageKeys.ANSWER_FROM_DATA, JSON.stringify(answerFormDataList));
+  localStorage.setItem(
+    LocalStorageKeys.ANSWER_FROM_DATA,
+    JSON.stringify(answerFormDataList)
+  );
 };
 
 export const getAnswerFormDataByResource = (resource) => {
   let answerFormDataList =
     JSON.parse(localStorage.getItem(LocalStorageKeys.ANSWER_FROM_DATA)) || [];
-  console.log(answerFormDataList.find((item) => item.resource.id === resource.id));
-  return answerFormDataList.find((item) => item.resource.id === resource.id) || null;
+  return (
+    answerFormDataList.find((item) => item.resource.id === resource.id) || null
+  );
 };

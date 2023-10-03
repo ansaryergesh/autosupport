@@ -22,7 +22,7 @@ const Header = () => {
     if (checkPermissions(['ROLE_SUPER_ADMIN'])) {
       getOrganizationOpen()
         .then((res) => setOrganizations(res.data))
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   }, []);
 

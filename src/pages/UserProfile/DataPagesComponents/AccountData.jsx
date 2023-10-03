@@ -37,30 +37,22 @@ const AccountData = () => {
     form.setFieldsValue(data);
   }, [data, form]);
 
-  console.log(data);
-
   const onFinish = (values) => {
-    console.log(values);
     const data = {
       currentPassword: values.currentPassword,
       newPassword: values.newPassword
     };
-    console.log(data);
-    changePassword(data).then((res) => {
-      console.log(res);
+    changePassword(data).then(() => {
       notification.info({
         message: `${i18n.t('userProfile.passwordUpdateNotification')}`
       });
     });
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+
   return (
     <Form
       form={form}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       layout="vertical"
       initialValues={data}>
       <Col span={12}>

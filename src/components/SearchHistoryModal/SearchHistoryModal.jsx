@@ -7,7 +7,12 @@ import { manageTag } from '../../service/Tags';
 import { deleteSearchHistoryItems } from '../../service/SearchHistory';
 import PropTypes from 'prop-types';
 
-const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearchHistoryList }) => {
+const SearchHistoryModal = ({
+  isModalOpen = false,
+  handleModal,
+  record,
+  getSearchHistoryList
+}) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
@@ -32,11 +37,11 @@ const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearc
 
       if (res.data) {
         notification.success({
-          message: i18n.t('actions.added'),
+          message: i18n.t('actions.added')
         });
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       await getSearchHistoryList(1, 10);
       setLoading(false);
@@ -61,10 +66,9 @@ const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearc
       okButtonProps={{
         className: 'button-modal',
         htmlType: 'submit',
-        form: 'form',
+        form: 'form'
       }}
-      cancelButtonProps={{ className: 'button-default' }}
-    >
+      cancelButtonProps={{ className: 'button-default' }}>
       <Form
         id="form"
         form={form}
@@ -72,8 +76,7 @@ const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearc
         initialValues={record}
         autoComplete="off"
         requiredMark={false}
-        layout="vertical"
-      >
+        layout="vertical">
         <Form.Item style={{ display: 'none' }} name="id">
           <Input />
         </Form.Item>
@@ -81,8 +84,7 @@ const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearc
         <Form.Item
           label={i18n.t('actions.editText')}
           name="text"
-          rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
-        >
+          rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
           <Input placeholder={i18n.t('newAnswer.startTyping')} />
         </Form.Item>
 
@@ -100,6 +102,6 @@ SearchHistoryModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   record: PropTypes.object,
-  getSearchHistoryList: PropTypes.func,
+  getSearchHistoryList: PropTypes.func
 };
 export default SearchHistoryModal;

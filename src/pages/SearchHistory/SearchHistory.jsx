@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 import {
   deleteSearchHistoryItems,
   getSearchHistory,
-  getSearchHistoryExcel,
+  getSearchHistoryExcel
 } from '../../service/SearchHistory';
 import SearchHistoryModal from '../../components/SearchHistoryModal/SearchHistoryModal';
 // import { initialValues } from './constants';
@@ -43,7 +43,7 @@ const SearchHistory = () => {
         setData(res.data);
         setTotalPages(res.headers['x-total-count']);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleDeleteSelected = () => {
@@ -55,12 +55,12 @@ const SearchHistory = () => {
         }
         setSelectedRowKeys([]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange,
+    onChange: onSelectChange
   };
 
   useEffect(() => {
@@ -70,11 +70,11 @@ const SearchHistory = () => {
   const columns = [
     {
       title: i18n.t('columns.name'),
-      dataIndex: 'text',
+      dataIndex: 'text'
     },
     {
       title: i18n.t('columns.numberOfRequests'),
-      dataIndex: 'count',
+      dataIndex: 'count'
     },
 
     {
@@ -86,12 +86,11 @@ const SearchHistory = () => {
             onClick={() => {
               setRecord(record);
               handleModal();
-            }}
-          >
+            }}>
             {i18n.t('actions.add')}
           </Button>
-        ),
-    },
+        )
+    }
   ];
 
   return (
@@ -104,12 +103,17 @@ const SearchHistory = () => {
           okButtonProps={{ className: 'button-modal' }}
           title={i18n.t('actions.sure')}
           cancelText={i18n.t('actions.cancel')}
-          onConfirm={handleDeleteSelected}
-        >
-          <Button disabled={!hasSelected}>{i18n.t('actions.deleteSelected')}</Button>
+          onConfirm={handleDeleteSelected}>
+          <Button disabled={!hasSelected}>
+            {i18n.t('actions.deleteSelected')}
+          </Button>
         </Popconfirm>
 
-        <span>{hasSelected ? `${i18n.t('actions.selected')} ${selectedRowKeys.length} ` : ''}</span>
+        <span>
+          {hasSelected
+            ? `${i18n.t('actions.selected')} ${selectedRowKeys.length} `
+            : ''}
+        </span>
       </div>
 
       <Table
@@ -122,18 +126,19 @@ const SearchHistory = () => {
         pagination={{
           total: totalPages,
           onChange: (page, pageSize) => getSearchHistoryList(page, pageSize),
-          position: ['bottomCenter'],
+          position: ['bottomCenter']
         }}
         locale={{
-          emptyText: <Empty description={i18n.t('noData')} />,
+          emptyText: <Empty description={i18n.t('noData')} />
         }}
       />
 
       <Button
-        onClick={() => handleExport(getSearchHistoryExcel, i18n.t('searchHistory'))}
+        onClick={() =>
+          handleExport(getSearchHistoryExcel, i18n.t('searchHistory'))
+        }
         style={{ marginTop: '16px' }}
-        type="primary"
-      >
+        type="primary">
         {i18n.t('actions.downloadSearchHistory')}
       </Button>
 
