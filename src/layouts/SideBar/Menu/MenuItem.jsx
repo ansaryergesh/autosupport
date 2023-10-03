@@ -75,11 +75,10 @@ const MenuItem = ({
             </Menu.Item>
           </>
         )}
-        {checkPermissions(['ROLE_WATCHER']) ? null : (
-          <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
-            {i18n.t('menu.deleteQuestion')}
-          </Menu.Item>
-        )}
+
+        <Menu.Item key="remove" onClick={() => handleDeleteQuestion(id)}>
+          {i18n.t('menu.deleteQuestion')}
+        </Menu.Item>
       </Menu>
     );
   };
@@ -130,9 +129,11 @@ const MenuItem = ({
                 <span className="linkName">
                   {category?.categorieContents?.name}
                 </span>
-                <Dropdown overlay={menu(category.id)} trigger={['click']}>
-                  <MoreOutlined style={{ fontSize: '1.5em' }} />
-                </Dropdown>
+                {checkPermissions(['ROLE_WATCHER']) ? null : (
+                  <Dropdown overlay={menu(category.id)} trigger={['click']}>
+                    <MoreOutlined style={{ fontSize: '1.5em' }} />
+                  </Dropdown>
+                )}
               </a>
             </div>
             {category?.questions?.map((q, qIndex) => (
@@ -176,12 +177,14 @@ const MenuItem = ({
                           ? findByLangKey(q?.questionContents).title
                           : ''}
                       </span>
-                      <Dropdown
-                        style={{ zIndex: '10' }}
-                        overlay={menuQuestion(q.id)}
-                        trigger={['click']}>
-                        <MoreOutlined style={{ fontSize: '1.5em' }} />
-                      </Dropdown>
+                      {checkPermissions(['ROLE_WATCHER']) ? null : (
+                        <Dropdown
+                          style={{ zIndex: '10' }}
+                          overlay={menuQuestion(q.id)}
+                          trigger={['click']}>
+                          <MoreOutlined style={{ fontSize: '1.5em' }} />
+                        </Dropdown>
+                      )}
                     </a>
                   </div>
                 </DraggableMenuItem>
