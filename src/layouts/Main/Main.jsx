@@ -17,7 +17,9 @@ const Main = (props) => {
   const history = useHistory();
 
   const checkIfTokenIsValid = () => {
-    const currentToken = localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
+    const currentToken = localStorage.getItem(
+      LocalStorageKeys.FREEDOM_ACCESS_TOKEN
+    );
 
     return !!currentToken;
   };
@@ -35,7 +37,10 @@ const Main = (props) => {
       console.log('check');
       getOrganizationOpen()
         .then((res) => {
-          localStorage.setItem(LocalStorageKeys.ACTIVE_ORGANIZATION, res.data[0].code);
+          localStorage.setItem(
+            LocalStorageKeys.ACTIVE_ORGANIZATION,
+            res.data[0].code
+          );
           location.reload();
         })
         .catch((err) => console.log(err));
@@ -55,7 +60,7 @@ const Main = (props) => {
                 <Header />
                 <div style={{ paddingRight: '40px', paddingBottom: '40px' }}>
                   {children}
-                  {currentPath !== '/' || !currentPath.includes('question/preview') && <InfoHelp />}
+                  {currentPath !== '/' && <InfoHelp />}
                 </div>
               </Layout.Content>
             </Layout>
@@ -67,7 +72,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default Main;

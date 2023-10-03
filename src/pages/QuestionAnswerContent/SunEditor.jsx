@@ -3,12 +3,20 @@ import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { checkPermissions } from '../../helpers/checkPermission';
 
-const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited, isNew=false }) => {
+const MyComponent = ({
+  answerFormData,
+  setAnswerFormData,
+  selectedLanguage,
+  setIsEdited,
+  isNew = false
+}) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
-    (item) => item.langKey === selectedLanguage,
+    (item) => item.langKey === selectedLanguage
   );
 
-  const [editorContent, setEditorContent] = useState(selectedLanguageItem?.stepDescription || '');
+  const [editorContent, setEditorContent] = useState(
+    selectedLanguageItem?.stepDescription || ''
+  );
   useEffect(() => {
     console.log(editorContent);
     console.log(selectedLanguageItem?.stepDescription);
@@ -26,7 +34,7 @@ const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setI
     setIsEdited(true);
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
-      (content) => content.langKey === selectedLanguage,
+      (content) => content.langKey === selectedLanguage
     );
     if (index !== -1) {
       updatedAnswerContent.answerContents[index].stepDescription = value;
@@ -54,14 +62,15 @@ const MyComponent = ({ answerFormData, setAnswerFormData, selectedLanguage, setI
               'align',
               'font',
               'fontSize',
+              'fontColor',
               'hiliteColor',
               'formatBlock',
               'image',
               'strike',
               'blockquote',
-              'link',
-            ],
-          ],
+              'link'
+            ]
+          ]
         }}
       />
     </div>

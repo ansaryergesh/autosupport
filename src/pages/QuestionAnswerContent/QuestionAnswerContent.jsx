@@ -23,8 +23,8 @@ import {
 } from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
-import TypographyHead from '../../components/Typography/TypographyHead.jsx';
-import { TypoGraphyType } from '../../components/Typography/constants.js';
+// import TypographyHead from '../../components/Typography/TypographyHead.jsx';
+// import { TypoGraphyType } from '../../components/Typography/constants.js';
 import { INSTRUCTION_TYPE, LANG_KEY } from '../../constants/index.js';
 import { i18n } from '../../utils/i18next.js';
 import ImageUpload from '../../components/ImageUpload/ImageUpload.jsx';
@@ -264,8 +264,7 @@ const QuestionAnswerContent = () => {
     };
     delete finalQuestionInfo.resources;
 
-    editCategoryQuestion(finalQuestionInfo).then(() => {
-    });
+    editCategoryQuestion(finalQuestionInfo).then(() => {});
     if (answerFormData.id) {
       editAnswerQuestion(finalDataAnswer, answerFormData.id).then(() => {
         if (withPreview) {
@@ -430,10 +429,10 @@ const QuestionAnswerContent = () => {
                 <Row gutter={[16, 16]}>
                   <Col span={24}>
                     <div className={styles.card}>
-                      <TypographyHead
+                      {/* <TypographyHead
                         type={TypoGraphyType.SUB_HEAD}
                         content={i18n.t('questionAnswer.descriptionTitle')}
-                      />
+                      /> */}
                       <SunEditor
                         isNew={activeResource.isNew}
                         setIsEdited={setIsEdited}

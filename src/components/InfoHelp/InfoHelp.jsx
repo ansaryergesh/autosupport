@@ -36,6 +36,9 @@ const InfoHelp = () => {
     if (path.includes('/category')) {
       return i18n.t('categories');
     }
+    if (path.includes('/question/preview')) {
+      return i18n.t('actions.preview');
+    }
 
     return null;
   };
@@ -70,6 +73,9 @@ const InfoHelp = () => {
     }
     if (path.includes('/category')) {
       return dataForCurrentLang.category;
+    }
+    if (path.includes('/question/preview')) {
+      return dataForCurrentLang.preview;
     }
 
     return null;
