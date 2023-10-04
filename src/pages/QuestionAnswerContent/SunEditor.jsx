@@ -49,6 +49,7 @@ const MyComponent = ({
         setContents={editorContent} // Set initial content
         placeholder="Enter the content"
         setOptions={{
+          formats: ['p', 'blockquote', 'h2'],
           font: ['Arial'],
           defaultStyle: 'font-family: Arial',
           buttonList: [
@@ -59,7 +60,6 @@ const MyComponent = ({
               'list',
               'align',
               'font',
-              'fontSize',
               'hiliteColor',
               'formatBlock',
               'image',
