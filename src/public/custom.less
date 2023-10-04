@@ -15,9 +15,6 @@ body {
   background: var(--background-color);
 }
 
-/*body {*/
-/*    font-family: 'Museo';*/
-/*}*/
 .ant-layout {
   background: transparent !important;
 }
@@ -49,21 +46,6 @@ body {
   background: #dee0e3;
 }
 
-// .sidebar-nav::-webkit-scrollbar-thumb {
-//   background-color: rgba(0, 0, 0, 0.2);
-//   border-radius: 5px;
-// }
-
-// .sidebar-nav::before {
-//   content: '';
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   right: -2px; /* Adjust the distance of the border from the right */
-//   width: 2px; /* Adjust the width of the border */
-//   background: @primary-color;
-// }
-
 .submenu {
   width: 100%;
   position: relative;
@@ -75,13 +57,6 @@ body {
 .layout-content {
   background: var(--background-color);
 }
-
-// .layout-content::-webkit-scrollbar {
-//   position: absolute;
-//   left: 0;
-//   width: 2px;
-//   background: #dee0e3;
-// }
 
 .titleGradient {
   background-image: @primary-color;
@@ -388,7 +363,11 @@ iframe,
 
 @supports (-webkit-overflow-scrolling: touch) {
   .ant-image {
-    width: auto !important; /* Force original width */
-    height: auto !important; /* Force original height */
+    width: auto !important;
+    height: auto !important;
   }
+}
+
+.ant-image-preview-img {
+  max-height: 105% !important;
 }
