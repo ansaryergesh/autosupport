@@ -1,52 +1,5 @@
 @import url('src/assets/styles/variables');
 
-// .slider {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 100px 100px 0 100px;
-//   position: relative;
-// }
-
-// .image {
-//   max-width: 100%;
-//   max-height: 480px;
-//   border-radius: 10px;
-// }
-
-// .rightArrow {
-//   transform: translateX(-50px);
-//   position: absolute;
-//   top: 50%;
-//   z-index: 10;
-//   cursor: pointer;
-//   user-select: none;
-// }
-
-// .leftArrow {
-//   position: absolute;
-//   transform: translateX(50px);
-//   top: 50%;
-//   z-index: 10;
-//   cursor: pointer;
-//   user-select: none;
-// }
-
-// .imageBlock {
-//   margin: auto;
-// }
-
-// .slide {
-//   opacity: 0;
-//   transition-duration: 1s ease;
-// }
-
-// .slide.active {
-//   opacity: 1;
-//   transition-duration: 1s;
-//   transform: scale(1.08);
-// }
-
 .description {
   text-align: center;
   font-weight: 700;
@@ -75,19 +28,18 @@
 
 .right-arrow {
   top: 50%;
-  right:45px;
+  right: 45px;
   position: absolute;
   font-size: 3rem;
   color: #000;
   z-index: 10;
   cursor: pointer;
   user-select: none;
-  opacity: .6;
-
+  opacity: 0.6;
 }
 
 .left-arrow {
-  opacity: .6;
+  opacity: 0.6;
   top: 50%;
   left: 45px;
   position: absolute;
@@ -109,10 +61,10 @@
   transform: scale(1.08);
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .right-arrow {
     bottom: 0;
-    right:50%
+    right: 50%;
   }
 
   .slider {
