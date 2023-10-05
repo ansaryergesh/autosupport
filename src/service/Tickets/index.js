@@ -1,7 +1,9 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 
-const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
+const ACTIVE_ORGANIZATION = localStorage.getItem(
+  LocalStorageKeys.ACTIVE_ORGANIZATION
+);
 
 const statusNew = 'NEW';
 const statusClosed = 'CLOSED';
@@ -14,8 +16,8 @@ export const getNewTickets = (pageCurrent, pageSize, search, params) => {
       pageSize,
       pageCurrent,
       search,
-      ...params,
-    },
+      ...params
+    }
   });
 };
 
@@ -27,8 +29,8 @@ export const getOldTickets = (pageCurrent, pageSize, search, params) => {
       pageSize,
       pageCurrent,
       search,
-      ...params,
-    },
+      ...params
+    }
   });
 };
 
@@ -39,13 +41,17 @@ export const updateTicketStatus = (data) => {
 export const getNewTicketsExcel = () => {
   return axiosInstanceWithHeader.get('/api/export/tickets', {
     params: { status: statusNew },
-    responseType: 'arraybuffer',
+    responseType: 'arraybuffer'
   });
 };
 
 export const getOldTicketsExcel = () => {
   return axiosInstanceWithHeader.get('/api/export/tickets', {
     params: { status: statusClosed },
-    responseType: 'arraybuffer',
+    responseType: 'arraybuffer'
   });
+};
+
+export const getNewTicketsCount = () => {
+  return axiosInstanceWithHeader.get('/api/assist/tickets/count');
 };
