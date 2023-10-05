@@ -42,6 +42,7 @@ import { findByLangKey } from '../../helpers/findByLangKey.js';
 import Logo from 'images/logoHeader.svg';
 import { getNewTicketsCount } from '../../service/Tickets/index.js';
 import { getSearchHistoryCount } from '../../service/SearchHistory/index.js';
+import { checkPermissions } from '../../helpers/checkPermission.js';
 
 const { Sider } = Layout;
 
@@ -300,7 +301,9 @@ const SidebarNav = ({ isAdmin = true }) => {
             <Link to={item.path} className={'navAdminItem'} key={index}>
               <Image src={item.icon} preview={false} />
               <Typography>{i18n.t(item.name)}</Typography>
-              {item.name === 'newTickets' || item.name === 'searchHistory' ? (
+              {(!checkPermissions(['ROLE_SUPER_ADMIN', 'ROLE_WATCHER']) &&
+                item.name === 'newTickets') ||
+              item.name === 'searchHistory' ? (
                 <div className={styles.count}>
                   {item.name === 'newTickets' ? newTicketsCount : null}
                   {item.name === 'searchHistory' ? seacrhHistoryCount : null}
