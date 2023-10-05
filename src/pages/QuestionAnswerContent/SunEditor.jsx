@@ -65,7 +65,8 @@ const MyComponent = ({
               'image',
               'strike',
               'blockquote',
-              'link'
+              'link',
+              'table'
             ]
           ]
         }}

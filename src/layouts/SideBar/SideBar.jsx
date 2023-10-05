@@ -40,6 +40,8 @@ import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
 import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
 import { findByLangKey } from '../../helpers/findByLangKey.js';
 import Logo from 'images/logoHeader.svg';
+import { getNewTicketsCount } from '../../service/Tickets/index.js';
+import { getSearchHistoryCount } from '../../service/SearchHistory/index.js';
 
 const { Sider } = Layout;
 
@@ -134,6 +136,8 @@ const SidebarNav = ({ isAdmin = true }) => {
     localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) ||
       SIDEBAR_BUTTON.ALL
   );
+  const [newTicketsCount, setNewTicketsCount] = useState();
+  const [seacrhHistoryCount, setSeacrhHistoryCount] = useState();
 
   useEffect(() => {
     setOpenKeys([]);
@@ -271,6 +275,16 @@ const SidebarNav = ({ isAdmin = true }) => {
     }
   };
 
+  useEffect(() => {
+    getNewTicketsCount().then((res) => {
+      setNewTicketsCount(res.data);
+    });
+
+    getSearchHistoryCount().then((res) => {
+      setSeacrhHistoryCount(res.data);
+    });
+  }, []);
+
   return (
     <Sider width={280} className="site-layout-background">
       <div style={{ marginBottom: '16px' }}>
@@ -286,6 +300,12 @@ const SidebarNav = ({ isAdmin = true }) => {
             <Link to={item.path} className={'navAdminItem'} key={index}>
               <Image src={item.icon} preview={false} />
               <Typography>{i18n.t(item.name)}</Typography>
+              {item.name === 'newTickets' || item.name === 'searchHistory' ? (
+                <div className={styles.count}>
+                  {item.name === 'newTickets' ? newTicketsCount : null}
+                  {item.name === 'searchHistory' ? seacrhHistoryCount : null}
+                </div>
+              ) : null}
             </Link>
           ))}
       </Layout>
