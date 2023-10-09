@@ -2,15 +2,19 @@ import { axiosInstanceWithHeader } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 import { getLocale } from '../../utils/i18next.js';
 
-const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
+const ACTIVE_ORGANIZATION = localStorage.getItem(
+  LocalStorageKeys.ACTIVE_ORGANIZATION
+);
 
-export const getAllReviews = () => {
+export const getAllReviews = (startDate, endDate) => {
   return axiosInstanceWithHeader.get('/api/admin/feedbacks', {
     params: {
       pageSize: 5,
       pageCurrent: 0,
       organizationCode: ACTIVE_ORGANIZATION,
-    },
+      startDate,
+      endDate
+    }
   });
 };
 
@@ -39,10 +43,10 @@ export const getFeedbackExcel = (startDate, endDate) => {
     startDate,
     endDate,
     langKey: getLocale()
-  }
+  };
 
-    return axiosInstanceWithHeader.get('/api/export/feed-backs', {
+  return axiosInstanceWithHeader.get('/api/export/feed-backs', {
     params,
-    responseType: 'arraybuffer',
+    responseType: 'arraybuffer'
   });
 };

@@ -14,48 +14,56 @@ const { RangePicker } = DatePicker;
 const rangePresets = [
   {
     label: 'Последние 7 дней',
-    value: [dayjs().add(-7, 'd'), dayjs()]
+    value: [dayjs().subtract(7, 'd'), dayjs()]
   },
   {
     label: 'Последние 14 дней',
-    value: [dayjs().add(-14, 'd'), dayjs()]
+    value: [dayjs().subtract(14, 'd'), dayjs()]
   },
   {
     label: 'Последний месяц',
-    value: [dayjs().add(-30, 'd'), dayjs()]
+    value: [dayjs().subtract(1, 'M'), dayjs()]
   },
   {
     label: 'Последние 3 месяца',
-    value: [dayjs().add(-90, 'd'), dayjs()]
+    value: [dayjs().subtract(3, 'M'), dayjs()]
   },
   {
     label: 'Последний год',
-    value: [dayjs().add(-365, 'd'), dayjs()]
+    value: [dayjs().subtract(1, 'y'), dayjs()]
   },
   {
     label: 'За все время',
-    value: [dayjs(), dayjs()]
+    value: [dayjs(0), dayjs()]
   }
 ];
 
 const ReviewsList = () => {
   const [data, setData] = useState([]);
   const [period, setPeriod] = useState([]);
-  const getReviewsList = () => {
-    getAllReviews().then((res) => {
+
+  const getReviewsList = (startDate, endDate) => {
+    getAllReviews(startDate, endDate).then((res) => {
       setData(res.data);
     });
   };
-
-  useEffect(() => {
-    getReviewsList();
-  }, []);
 
   const exportFeedback = () =>
     getFeedbackExcel(
       period?.[0] ? dayjs(period[0]).toISOString() : '2022-01-01',
       period?.[1] ? dayjs(period[1]).toISOString() : dayjs().toISOString()
     );
+
+  const handleDateChange = (value) => {
+    setPeriod(value);
+    const startDate = value[0]?.toISOString();
+    const endDate = value[1]?.toISOString();
+    getReviewsList(startDate, endDate);
+  };
+
+  useEffect(() => {
+    getReviewsList();
+  }, []);
 
   return (
     <div className={styles.box}>
@@ -72,9 +80,7 @@ const ReviewsList = () => {
         <RangePicker
           className={styles.datePicker}
           value={period}
-          onChange={(value) => {
-            setPeriod(value);
-          }}
+          onChange={handleDateChange}
           presets={rangePresets}
         />
         <Button
