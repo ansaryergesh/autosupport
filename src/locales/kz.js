@@ -90,6 +90,7 @@ export default {
     addOrganization: 'Ұйымды қосу',
     editText: 'Текстті өзгерту',
     addSimilar: 'Ұқсас сұрақты қосу',
+    addSimilarQuestion: 'Ұқсас сұрақты жауабымен қосу',
     save: 'Сақтау',
     saved: 'Сақталды',
     back: 'Артқа',

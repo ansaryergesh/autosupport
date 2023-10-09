@@ -64,7 +64,7 @@ const QuestionAnswerContent = () => {
     initialQuestionAnswerContent
   );
   const [selectedQuestions, setSelectedQuestions] = useState([]);
-
+  const [selectedSimilarQuestion,setSelectedSimilarQuestion] = useState([])
   // const requiredCharacter = 25;
 
   useEffect(() => {
@@ -252,10 +252,12 @@ const QuestionAnswerContent = () => {
   };
 
   const handleSubmit = (withPreview = true) => {
+    const similarQuestionsIds = selectedSimilarQuestion.map(item=>item?.id);
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
-      resource: activeResource
+      resource: activeResource,
+      similarQuestionsIds,
     };
 
     const finalQuestionInfo = {
@@ -503,6 +505,17 @@ const QuestionAnswerContent = () => {
                         selectedItems={selectedQuestions}
                         setSelectedItems={setSelectedQuestions}
                         questionInfo={questionInfo}
+                      />
+                    </div>
+                  </Col>
+                  <Col span={24}>
+                    <div className={styles.card}>
+                      <SearchSimilarQuestion
+                        title={i18n.t('actions.addSimilarQuestion')}
+                        searchAction={getQuestions}
+                        selectedItems={selectedSimilarQuestion}
+                        setSelectedItems={setSelectedSimilarQuestion}
+                        questionInfo={null}
                       />
                     </div>
                   </Col>

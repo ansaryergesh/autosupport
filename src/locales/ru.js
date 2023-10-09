@@ -91,6 +91,7 @@ export default {
     addOrganization: 'Добавить организацию',
     editText: 'Редактировать текст',
     addSimilar: 'Добавить похожий запрос',
+    addSimilarQuestion: 'Добавить похожий вопрос',
     save: 'Сохранить',
     saved: 'Сохранено',
     back: 'Назад',
