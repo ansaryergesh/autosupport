@@ -128,7 +128,8 @@ export default {
     videoUrl: 'Url видео',
     titleSwitch: 'При переходе не сохраненные данные будут удалены',
     okSwitch: 'Сохранить и перейти',
-    cancelSwitch: 'Перейти без сохранения данных'
+    cancelSwitch: 'Перейти без сохранения данных',
+    lastModified: 'Последние изменения были внесены'
   },
   menu: {
     addCategory: 'Добавить категорию',

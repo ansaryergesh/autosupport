@@ -127,7 +127,8 @@ export default {
     videoUrl: 'Бейне нұсқаудың url-і',
     titleSwitch: 'Өту кезінде сақталмаған деректер жойылады',
     okSwitch: 'Сақтау және өту',
-    cancelSwitch: 'Деректерді сақтамай өту'
+    cancelSwitch: 'Деректерді сақтамай өту',
+    lastModified: 'Соңғы өзгерістер енгізілді'
   },
   menu: {
     addCategory: 'Санат қосу',

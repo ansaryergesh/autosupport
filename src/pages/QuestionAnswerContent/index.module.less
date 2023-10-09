@@ -1,4 +1,7 @@
+@import url('src/assets/styles/variables');
+
 .card {
+  position: relative;
   background: var(--block-color) !important;
   padding: 32px !important;
   border-radius: 32px;
@@ -11,4 +14,11 @@
   display: flex;
   padding: 0 15px;
   justify-content: space-between;
+}
+
+.modifiedInfo {
+  color: @gray-color-1;
+  position: absolute;
+  bottom: 16px;
+  right: 38px;
 }
