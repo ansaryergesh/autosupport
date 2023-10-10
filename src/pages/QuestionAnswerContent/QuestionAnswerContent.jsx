@@ -42,6 +42,7 @@ import {
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
+import CloneAnswerModal from '../../components/CloneAnswerModal/CloneAnswerModal.jsx';
 
 const QuestionAnswerContent = () => {
   const { id } = useParams();
@@ -64,7 +65,8 @@ const QuestionAnswerContent = () => {
     initialQuestionAnswerContent
   );
   const [selectedQuestions, setSelectedQuestions] = useState([]);
-  const [selectedSimilarQuestion,setSelectedSimilarQuestion] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSimilarQuestion, setSelectedSimilarQuestion] = useState([]);
   // const requiredCharacter = 25;
 
   useEffect(() => {
@@ -252,12 +254,12 @@ const QuestionAnswerContent = () => {
   };
 
   const handleSubmit = (withPreview = true) => {
-    const similarQuestionsIds = selectedSimilarQuestion.map(item=>item?.id);
+    const similarQuestionsIds = selectedSimilarQuestion.map((item) => item?.id);
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
       resource: activeResource,
-      similarQuestionsIds,
+      similarQuestionsIds
     };
 
     const finalQuestionInfo = {
@@ -347,7 +349,7 @@ const QuestionAnswerContent = () => {
                   </p>
                 ) : isEdited ? (
                   <Popconfirm
-                    title="При переходе не сохраненные данные будут удалены"
+                    title={i18n.t('questionAnswer.titleSwitch')}
                     onConfirm={() => {
                       handleSubmit(false);
                       handleChangeResource(resource);
@@ -357,8 +359,8 @@ const QuestionAnswerContent = () => {
                     onCancel={() => {
                       handleChangeResource(resource);
                     }}
-                    okText="Сохранить и перейти"
-                    cancelText="Перейти без сохранения данных">
+                    okText={i18n.t('questionAnswer.okSwitch')}
+                    cancelText={i18n.t('questionAnswer.cancelSwitch')}>
                     {
                       resource.resourceContents.find(
                         (content) => content.langKey === selectedLanguage
@@ -394,9 +396,16 @@ const QuestionAnswerContent = () => {
             padding: '12px 0',
             display: 'flex',
             alignItems: 'center',
-            gap: '16px'
+            gap: '16px',
+            justifyContent: 'space-between'
           }}>
-          <div>
+          <div
+            style={{
+              padding: '12px 0',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
             {Object.values(LANG_KEY).map((item) => (
               <Button
                 key={item}
@@ -407,17 +416,34 @@ const QuestionAnswerContent = () => {
                 {item}
               </Button>
             ))}
+
+            <Typography.Paragraph
+              type="number"
+              className={styles.counter}
+              editable={{ onChange: handleChangeCounter }}>
+              {questionInfo?.counter}
+            </Typography.Paragraph>
+
+            <b>{answerFormData.status && i18n.t(answerFormData.status)}</b>
           </div>
 
-          <Typography.Paragraph
-            type="number"
-            className={styles.counter}
-            editable={{ onChange: handleChangeCounter }}>
-            {questionInfo?.counter}
-          </Typography.Paragraph>
+          <Button
+            onClick={() => setIsModalOpen(!isModalOpen)}
+            style={{ marginRight: '34px' }}
+            type="modal">
+            {i18n.t('questionAnswer.cloneAnswer')}
+          </Button>
 
-          <b>{answerFormData.status && i18n.t(answerFormData.status)}</b>
+          {activeResource.id ? (
+            <CloneAnswerModal
+              activeResource={activeResource}
+              setAnswerFormData={setAnswerFormData}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            />
+          ) : null}
         </div>
+
         {selectedResources.length > 0 ? (
           <>
             <Row

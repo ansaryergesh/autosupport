@@ -129,7 +129,9 @@ export default {
     titleSwitch: 'Өту кезінде сақталмаған деректер жойылады',
     okSwitch: 'Сақтау және өту',
     cancelSwitch: 'Деректерді сақтамай өту',
-    lastModified: 'Соңғы өзгерістер енгізілді'
+    lastModified: 'Соңғы өзгерістер енгізілді',
+    cloneAnswer: 'Жауапты клондау',
+    question: 'Сұрақ'
   },
   menu: {
     addCategory: 'Санат қосу',

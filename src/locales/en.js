@@ -129,7 +129,9 @@ export default {
     titleSwitch: 'When switching, unsaved data will be deleted',
     okSwitch: 'Save and go',
     cancelSwitch: 'Go without saving data',
-    lastModified: 'The latest changes have been made'
+    lastModified: 'The latest changes have been made',
+    cloneAnswer: 'Clone answer',
+    question: 'Question'
   },
   menu: {
     addCategory: 'Add category',
