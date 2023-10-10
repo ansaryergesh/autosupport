@@ -25,15 +25,9 @@ const SignIn = () => {
           if (res.data?.id_token) {
             getCurrentAccount(res.data?.id_token).then((res) => {
               location.reload();
-              localStorage.setItem(
-                LocalStorageKeys.ACCOUNT_DATA,
-                JSON.stringify(res.data)
-              );
+              localStorage.setItem(LocalStorageKeys.ACCOUNT_DATA, JSON.stringify(res.data));
             });
-            localStorage.setItem(
-              LocalStorageKeys.FREEDOM_ACCESS_TOKEN,
-              res.data?.id_token
-            );
+            localStorage.setItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN, res.data?.id_token);
           }
           notification.success({ message: 'Добро пожаловать' });
         }
@@ -68,28 +62,23 @@ const SignIn = () => {
           style={{ maxWidth: 550 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          autoComplete="off">
+          autoComplete="off"
+        >
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
                 name="username"
-                rules={[
-                  { required: true, message: 'Пожалуйста введите свою почту!' }
-                ]}>
-                <Input
-                  size={'large'}
-                  placeholder="Почта"
-                  className={styles.inputItem}
-                />
+                rules={[{ required: true, message: 'Пожалуйста введите свою почту!' }]}
+              >
+                <Input size={'large'} placeholder="Почта" className={styles.inputItem} />
               </Form.Item>
             </Col>
 
             <Col span={24}>
               <Form.Item
                 name="password"
-                rules={[
-                  { required: true, message: 'Пожалуйста введите свой пароль!' }
-                ]}>
+                rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
+              >
                 <Input
                   type="password"
                   size={'large'}
@@ -108,7 +97,8 @@ const SignIn = () => {
                   className={styles.inputButton}
                   loading={loading}
                   iconButton={isHovered ? <IconSendHover /> : <IconSend />}
-                  htmlType="submit">
+                  htmlType="submit"
+                >
                   <span>Войти</span>
                 </Button>
               </Form.Item>

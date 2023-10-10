@@ -46,9 +46,7 @@ const InfoHelp = () => {
   const text = () => {
     const path = history.location.pathname;
 
-    const dataForCurrentLang = dataText.find(
-      (text) => text.langKey === getLocale()
-    );
+    const dataForCurrentLang = dataText.find((text) => text.langKey === getLocale());
 
     if (path.includes('/employees')) {
       return dataForCurrentLang.employees;

@@ -43,9 +43,7 @@ const UserData = () => {
         <Form.Item name="login" label={i18n.t('userProfile.loginLabel')}>
           <Input defaultValue={data?.login} readOnly />
         </Form.Item>
-        <Form.Item
-          name="firstName"
-          label={i18n.t('userProfile.firstNameLabel')}>
+        <Form.Item name="firstName" label={i18n.t('userProfile.firstNameLabel')}>
           <Input defaultValue={data?.firstName} readOnly />
         </Form.Item>
         <Form.Item name="lastName" label={i18n.t('userProfile.lastNameLabel')}>
@@ -53,7 +51,8 @@ const UserData = () => {
         </Form.Item>
         <Form.Item
           name={['authOrganization', 'name']}
-          label={i18n.t('userProfile.organizationLabel')}>
+          label={i18n.t('userProfile.organizationLabel')}
+        >
           <Input defaultValue={data?.authOrganization.name} readOnly />
         </Form.Item>
       </Col>

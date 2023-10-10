@@ -26,19 +26,18 @@ const QuestionAnswerUser = () => {
   const [data, setData] = useState(initialQuestionAnswerContent);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
   const answerContentByLanguage = data.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
   const [activeResource, setActiveResource] = useState(null);
   const { videoUrl, images, stepDescription } = answerContentByLanguage;
 
   const [selectedInstructionType, setSelectedInstrcutionType] = useState(
-    images[0] ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO
+    images[0] ? INSTRUCTION_TYPE.VISUAL : INSTRUCTION_TYPE.VIDEO,
   );
 
   useEffect(() => {
     getQuestionById(questionId).then((res) => {
-      const active =
-        res.data?.resources?.find((item) => item.id === resourceId) || null;
+      const active = res.data?.resources?.find((item) => item.id === resourceId) || null;
       setActiveResource(active);
     });
 
@@ -50,14 +49,14 @@ const QuestionAnswerUser = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('actions.saved'),
-      placement: 'top'
+      placement: 'top',
     });
   };
 
   const handleSave = () => {
     const sendData = {
       id: data.id,
-      status: 'PUBLISHED'
+      status: 'PUBLISHED',
     };
     saveAnswer(data.id, sendData)
       .then(() => {
@@ -80,9 +79,7 @@ const QuestionAnswerUser = () => {
 
       <Row gutter={[16, 16]}>
         <Col span={17}>
-          {activeResource && (
-            <Button type="default-active">{activeResource.name}</Button>
-          )}
+          {activeResource && <Button type="default-active">{activeResource.name}</Button>}
         </Col>
 
         <Col
@@ -91,15 +88,15 @@ const QuestionAnswerUser = () => {
             marginLeft: '8px',
             padding: '12px 0',
             display: 'flex',
-            alignItems: 'center'
-          }}>
+            alignItems: 'center',
+          }}
+        >
           {Object.values(LANG_KEY).map((item) => (
             <Button
               key={item}
               onClick={() => setSelectedLanguage(item)}
-              type={`${
-                selectedLanguage === item ? 'default-active' : 'default'
-              }`}>
+              type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
+            >
               {item}
             </Button>
           ))}
@@ -123,14 +120,11 @@ const QuestionAnswerUser = () => {
                           className={styles.instructionBtn}
                           key={item}
                           onClick={() => setSelectedInstrcutionType(item)}
-                          type={
-                            item === selectedInstructionType
-                              ? 'default-active'
-                              : 'default'
-                          }>
+                          type={item === selectedInstructionType ? 'default-active' : 'default'}
+                        >
                           {i18n.t(item)}
                         </Button>
-                      )
+                      ),
                   )}
                 </div>
                 <div>
@@ -138,8 +132,9 @@ const QuestionAnswerUser = () => {
                     <div
                       style={{
                         borderRadius: '24px',
-                        background: 'white'
-                      }}>
+                        background: 'white',
+                      }}
+                    >
                       <ReactPlayer
                         pip={true}
                         progressInterval={12}
@@ -154,8 +149,7 @@ const QuestionAnswerUser = () => {
                     </div>
                   )}
 
-                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL &&
-                  images[0] ? (
+                  {selectedInstructionType === INSTRUCTION_TYPE.VISUAL && images[0] ? (
                     <div className={styles.mediaBox}>
                       <ImageSlider slides={images || []} sliderData={images} />
                     </div>
@@ -171,9 +165,7 @@ const QuestionAnswerUser = () => {
         </Col>
 
         <Col span={similarQuestionExist ? 18 : 24}>
-          <Button onClick={() => history.goBack()}>
-            {i18n.t('actions.back')}
-          </Button>
+          <Button onClick={() => history.goBack()}>{i18n.t('actions.back')}</Button>
           <Button onClick={handleSave}>{i18n.t('actions.save')}</Button>
         </Col>
       </Row>

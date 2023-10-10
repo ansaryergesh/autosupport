@@ -19,8 +19,7 @@ export default {
   home: 'Главная',
   description: 'Описание',
   similarRequests: 'Похожие запросы',
-  noContent:
-    'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
+  noContent: 'Нет контента, пожалуйста нажмите на кнопку плюс и добавьте ресурс ',
   counter: 'Счетчик кликов',
   newTickets: 'Новые тикеты',
   oldTickets: 'Обработанные тикеты',
@@ -56,7 +55,8 @@ export default {
     forgetPassword: 'Забыли ваш пароль?',
     submit: 'Подтвердить',
     unauthorized: 'Не авторизован',
-    accessDenied: 'Отказано в доступе'
+    accessDenied: 'Отказано в доступе',
+    notFound: 'По запросу ничего не найдено',
   },
   columns: {
     name: 'Наименование',
@@ -68,7 +68,7 @@ export default {
     numberOfRequests: 'Количество запросов',
     langKey: 'Язык',
     organization: 'Организация',
-    password: 'Пароль'
+    password: 'Пароль',
   },
   actions: {
     addEmployee: 'Добавить нового сотрудника',
@@ -102,7 +102,7 @@ export default {
     deleteSelected: 'Удалить выбранное',
     selected: 'Выбранно',
     preview: 'Предпросмотр',
-    reset: 'Сбросить'
+    reset: 'Сбросить',
   },
   feedback: {
     MainTitle1: 'Вы находитесь в  административной панели Freedom Broker',
@@ -112,15 +112,14 @@ export default {
     ListTitle: 'Все отзывы',
     averageRating: 'Средняя оценка',
     mark: 'Новая метка',
-    reviewsWith: 'Отзывы с оценкой'
+    reviewsWith: 'Отзывы с оценкой',
   },
   questionAnswer: {
     descriptionTitle: 'Необходимые шаги',
     FindMistake: 'Нашли ошибку в тексте?',
     FixMistake: 'Выделите и нажмите CTRL+Enter',
     rateAnswer: 'Полезен ли был ответ?',
-    rateSubtitel:
-      'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
+    rateSubtitel: 'Просьба оценить ответ по 5-и бальной шкале, это поможет нам стать лучше',
     rateButton: 'Оставить отзыв',
     comment: 'Ваш комментарий',
     characterLimit: 'Достигнут лимит символов',
@@ -133,7 +132,7 @@ export default {
     lastModified: 'Последние изменения были внесены',
     cloneAnswer: 'Клонировать ответ',
     question: 'Вопрос',
-    resourceClone: 'Клонировать ответ с'
+    resourceClone: 'Клонировать ответ с',
   },
   menu: {
     addCategory: 'Добавить категорию',
@@ -143,7 +142,7 @@ export default {
     editQuestion: 'Редактировать вопрос',
     deleteQuestion: 'Удалить вопрос',
     openQuestion: 'Открыть вопрос',
-    enterName: 'Введите наименование'
+    enterName: 'Введите наименование',
   },
   rule: {
     nameRequired: 'Наименование обязательно',
@@ -156,13 +155,13 @@ export default {
     emailRequired: 'Почта обязательна',
     questionRequired: 'Тема вопроса обязательна',
     answerRequired: 'Ответ обязателен',
-    emailError: 'Почта не валидная'
+    emailError: 'Почта не валидная',
   },
   newAnswer: {
     answer: 'Ответ',
     whatQuestion: 'Тема вопроса',
     inputEmail: 'Введите почту',
-    startTyping: 'Начните вводить...'
+    startTyping: 'Начните вводить...',
   },
   userProfile: {
     passwordUpdateNotification: 'Пароль успешно изменен!',
@@ -182,16 +181,16 @@ export default {
     loginLabel: 'Логин',
     firstNameLabel: 'Имя',
     lastNameLabel: 'Фамилия',
-    organizationLabel: 'Организация'
+    organizationLabel: 'Организация',
   },
   employeePage: {
     employeeDeletedNotification: 'Сотрудник удален!',
     employeeAddedNotification: 'Сотрудник добавлен!',
-    employeeEditedNotification: 'Сотрудник редактирован!'
+    employeeEditedNotification: 'Сотрудник редактирован!',
   },
   error: {
     user_not_found: 'Логин или пароль неправильный!',
-    wrong: 'Что то пошло не так!'
+    wrong: 'Что то пошло не так!',
   },
   invalid: {
     user_not_found_exception: 'Пользователь не найден',
@@ -206,11 +205,11 @@ export default {
       'Нельзя зарегистрировать пользователя с ролью супер-администратора',
     can_not_delete_user_with_super_admin_role:
       'Нельзя удалить пользователя с ролью супер-администратора',
-    no_user_was_found_for_this_activation_key:
-      'Пользователь не найден для этого ключа активации',
+    no_user_was_found_for_this_activation_key: 'Пользователь не найден для этого ключа активации',
     no_user_was_found_for_this_deactivation_key:
       'Пользователь не найден для этого ключа деактивации',
     photo_not_deleted: 'Фотография не удалена',
-    email_or_password: 'Неверная почта или пароль'
-  }
+    email_or_password: 'Неверная почта или пароль',
+  },
+  resourceQuestionNotFound: 'У вопроса нет данного ресурса',
 };

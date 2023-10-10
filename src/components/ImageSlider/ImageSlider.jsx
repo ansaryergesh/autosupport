@@ -42,24 +42,15 @@ const ImageSlider = ({ slides, sliderData }) => {
         return (
           <div
             key={index}
-            className={
-              index === current
-                ? `${styles.slide} ${styles.active}`
-                : `${styles.slide}`
-            }>
+            className={index === current ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
+          >
             {index === current && (
               <div>
                 <p className={styles.description}>
-                  {`${current + 1}` +
-                    '. ' +
-                    `${slide.description || 'Нет описания'}`}
+                  {`${current + 1}` + '. ' + `${slide.description || 'Нет описания'}`}
                 </p>
                 <Image.PreviewGroup items={previewImages}>
-                  <Image
-                    src={currentSlideUrl}
-                    alt={styles.description}
-                    className={styles.image}
-                  />
+                  <Image src={currentSlideUrl} alt={styles.description} className={styles.image} />
                 </Image.PreviewGroup>
                 <div className={'forMobile'}>
                   <div
@@ -67,8 +58,9 @@ const ImageSlider = ({ slides, sliderData }) => {
                       margin: '16px 0',
                       display: 'flex',
                       justifyContent: 'center',
-                      gap: '8px'
-                    }}></div>
+                      gap: '8px',
+                    }}
+                  ></div>
                 </div>
               </div>
             )}

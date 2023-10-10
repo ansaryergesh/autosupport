@@ -6,7 +6,7 @@ import {
   getAllOrganizations,
   getAllRoles,
   getEmployeeData,
-  manageEmployee
+  manageEmployee,
 } from '../../service/Employee/index.js';
 import { LANG_KEY } from '../../constants/index.js';
 import { checkPermissions } from '../../helpers/checkPermission.js';
@@ -28,21 +28,21 @@ const initialData = {
   authority: '',
   authOrganization: {
     name: undefined,
-    code: undefined
+    code: undefined,
   },
-  password: null
+  password: null,
 };
 const langKey = [
   { label: LANG_KEY.RU, value: LANG_KEY.RU },
   { label: LANG_KEY.KZ, value: LANG_KEY.KZ },
-  { label: LANG_KEY.EN, value: LANG_KEY.EN }
+  { label: LANG_KEY.EN, value: LANG_KEY.EN },
 ];
 
 const EmployeeModal = ({
   record = initialData,
   handleModal,
   isModalOpen = false,
-  getEmployeeList
+  getEmployeeList,
 }) => {
   const [roles, setRoles] = useState();
   const [organizations, setOrganizations] = useState();
@@ -81,7 +81,7 @@ const EmployeeModal = ({
     const transformedValues = {
       ...values,
       login: values.email,
-      authOrganization: editPage ? null : finalOrg()
+      authOrganization: editPage ? null : finalOrg(),
     };
 
     let finalData;
@@ -96,11 +96,11 @@ const EmployeeModal = ({
       .then(() => {
         if (editPage) {
           notification.success({
-            message: i18n.t('actions.edited')
+            message: i18n.t('actions.edited'),
           });
         } else {
           notification.success({
-            message: i18n.t('actions.added')
+            message: i18n.t('actions.added'),
           });
         }
         handleModal();
@@ -115,7 +115,7 @@ const EmployeeModal = ({
     getAllRoles().then((res) => {
       const optionRole = res.data.map((option) => ({
         label: option,
-        value: option
+        value: option,
       }));
       setRoles(optionRole);
     });
@@ -138,28 +138,25 @@ const EmployeeModal = ({
       okButtonProps={{
         className: 'button-modal',
         form: 'form',
-        htmlType: 'submit'
+        htmlType: 'submit',
       }}
-      cancelButtonProps={{ className: 'button-default' }}>
+      cancelButtonProps={{ className: 'button-default' }}
+    >
       <Form
         autocomplete="off"
         form={form}
         id="form"
         onFinish={onFinish}
         initialValues={record}
-        layout="vertical">
+        layout="vertical"
+      >
         {editPage ? (
           <>
             <Form.Item
               name="langKey"
-              rules={[
-                { required: true, message: i18n.t('rule.langKeyRequired') }
-              ]}>
-              <Select
-                name="langKey"
-                style={{ marginTop: '15px' }}
-                options={langKey}
-              />
+              rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
+            >
+              <Select name="langKey" style={{ marginTop: '15px' }} options={langKey} />
             </Form.Item>
 
             <Form.Item style={{ display: 'none' }} name="id">
@@ -177,15 +174,14 @@ const EmployeeModal = ({
                 rules={[
                   {
                     required: checkPermissions(['ROLE_SUPER_ADMIN']),
-                    message: i18n.t('rule.organizationRequired')
-                  }
-                ]}>
+                    message: i18n.t('rule.organizationRequired'),
+                  },
+                ]}
+              >
                 <Select placeholder={i18n.t('columns.organization')}>
                   {organizations &&
                     organizations.map((item) => (
-                      <Select.Option
-                        key={item.code}
-                        value={JSON.stringify(item)}>
+                      <Select.Option key={item.code} value={JSON.stringify(item)}>
                         {item.name}
                       </Select.Option>
                     ))}
@@ -194,19 +190,14 @@ const EmployeeModal = ({
             )}
             <Form.Item
               name="firstName"
-              rules={[
-                { required: true, message: i18n.t('rule.nameRequired') }
-              ]}>
-              <Input
-                style={{ marginTop: '15px' }}
-                placeholder={i18n.t('columns.firstName')}
-              />
+              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+            >
+              <Input style={{ marginTop: '15px' }} placeholder={i18n.t('columns.firstName')} />
             </Form.Item>
             <Form.Item
               name="lastName"
-              rules={[
-                { required: true, message: i18n.t('rule.lastNameRequired') }
-              ]}>
+              rules={[{ required: true, message: i18n.t('rule.lastNameRequired') }]}
+            >
               <Input placeholder={i18n.t('columns.lastName')} />
             </Form.Item>
 
@@ -215,13 +206,14 @@ const EmployeeModal = ({
               rules={[
                 {
                   type: 'email',
-                  message: i18n.t('rule.emailError')
+                  message: i18n.t('rule.emailError'),
                 },
                 {
                   required: true,
-                  message: i18n.t('rule.emailRequired')
-                }
-              ]}>
+                  message: i18n.t('rule.emailRequired'),
+                },
+              ]}
+            >
               <Input placeholder={i18n.t('columns.email')} />
             </Form.Item>
 
@@ -231,37 +223,28 @@ const EmployeeModal = ({
 
             <Form.Item
               name="password"
-              rules={[
-                { required: true, message: i18n.t('rule.passwordRequired') }
-              ]}>
+              rules={[{ required: true, message: i18n.t('rule.passwordRequired') }]}
+            >
               <Input type="password" placeholder={i18n.t('columns.password')} />
             </Form.Item>
 
             <Form.Item
               label={''}
               name="langKey"
-              rules={[
-                { required: true, message: i18n.t('rule.langKeyRequired') }
-              ]}>
-              <Select
-                name="langKey"
-                options={langKey}
-                placeholder={i18n.t('columns.langKey')}
-              />
+              rules={[{ required: true, message: i18n.t('rule.langKeyRequired') }]}
+            >
+              <Select name="langKey" options={langKey} placeholder={i18n.t('columns.langKey')} />
             </Form.Item>
           </>
         )}
 
         <Form.Item
           name="authority"
-          rules={[{ required: true, message: i18n.t('rule.roleRequired') }]}>
+          rules={[{ required: true, message: i18n.t('rule.roleRequired') }]}
+        >
           <Select
             placeholder={i18n.t('columns.role')}
-            options={
-              (roles &&
-                roles.filter((role) => role.value !== 'ROLE_SUPER_ADMIN')) ||
-              []
-            }
+            options={(roles && roles.filter((role) => role.value !== 'ROLE_SUPER_ADMIN')) || []}
           />
         </Form.Item>
       </Form>

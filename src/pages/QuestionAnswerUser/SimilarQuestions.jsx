@@ -22,9 +22,7 @@ const SimilarQuestions = ({ data }) => {
               type={TypoGraphyType.LEVEL_2}
               content={
                 q?.questionContents
-                  ? q?.questionContents.find(
-                      (item) => item.langKey === getLocale()
-                    )?.title
+                  ? q?.questionContents.find((item) => item.langKey === getLocale())?.title
                   : ''
               }
             />

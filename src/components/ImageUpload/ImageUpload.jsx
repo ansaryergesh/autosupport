@@ -6,14 +6,9 @@ import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
 import Input from '../Input/Input.jsx';
 
-const ImageUploader = ({
-  answerFormData,
-  setAnswerFormData,
-  selectedLanguage,
-  setIsEdited
-}) => {
+const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -37,7 +32,7 @@ const ImageUploader = ({
   const updateAnswerFormData = () => {
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
-      (content) => content.langKey === selectedLanguage
+      (content) => content.langKey === selectedLanguage,
     );
     if (index !== -1) {
       updatedAnswerContent.answerContents[index].images = fileList;
@@ -52,7 +47,7 @@ const ImageUploader = ({
         return {
           ...file,
           uid: file.id,
-          url: `${domainName}${file.url}` // Append domain name to the URL
+          url: `${domainName}${file.url}`, // Append domain name to the URL
         };
       }
       return file;
@@ -80,15 +75,11 @@ const ImageUploader = ({
           setTimeout(() => setProgress(0), 1000);
         }
         onProgress({ percent: (event.loaded / event.total) * 100 });
-      }
+      },
     };
     fmData.append('file', file);
     try {
-      const res = await axiosInstanceWithHeader.post(
-        '/api/admin/image',
-        fmData,
-        config
-      );
+      const res = await axiosInstanceWithHeader.post('/api/admin/image', fmData, config);
       setFileList((prevState) => {
         const newFile = {
           uid: res.data.id,
@@ -96,7 +87,7 @@ const ImageUploader = ({
           status: 'done',
           description: null,
           imageOrder: fileList.length + 1,
-          url: res.data.url // Replace with the URL of the uploaded image
+          url: res.data.url, // Replace with the URL of the uploaded image
         };
         const newState = [...prevState, newFile];
         handlePreview(newFile);
@@ -164,7 +155,7 @@ const ImageUploader = ({
         },
         onCancel: () => {
           reject(true);
-        }
+        },
       });
     });
   };
@@ -180,7 +171,8 @@ const ImageUploader = ({
         listType="picture-card"
         fileList={displayFileList}
         onPreview={handlePreview}
-        onRemove={handleRemove}>
+        onRemove={handleRemove}
+      >
         {uploadButton}
       </Upload>
       <Modal
@@ -190,15 +182,12 @@ const ImageUploader = ({
         cancelText={i18n.t('actions.cancel')}
         onCancel={handleCancel}
         okText={i18n.t('actions.save')}
-        onOk={() => handleSaveDescription(editingImage.description)}>
+        onOk={() => handleSaveDescription(editingImage.description)}
+      >
         <img
           alt="Preview"
           style={{ width: '100%' }}
-          src={
-            previewImage?.includes('http')
-              ? previewImage
-              : `${domainName}${previewImage}`
-          }
+          src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`}
         />
         <Input
           placeHolder={i18n.t('description')}
@@ -207,7 +196,7 @@ const ImageUploader = ({
             if (editingImage) {
               const newEditingImage = {
                 ...editingImage,
-                description: e.target.value
+                description: e.target.value,
               };
               setEditingImage(newEditingImage);
             }

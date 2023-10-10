@@ -33,7 +33,7 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     userSelect: 'none',
     webkitUserSelect: 'none',
     MozUserSelect: 'none',
-    msUserSelect: 'none'
+    msUserSelect: 'none',
   };
 
   const inactiveStyle = {
@@ -55,7 +55,7 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     userSelect: 'none',
     webkitUserSelect: 'none',
     MozUserSelect: 'none',
-    msUserSelect: 'none'
+    msUserSelect: 'none',
   };
 
   if (getLocale() === 'KZ') {
@@ -69,7 +69,7 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
     width: '100%',
     display: 'flex', // Center the buttons horizontally
     justifyContent: 'center',
-    border: 'none!important' // Center the buttons horizontally
+    border: 'none!important', // Center the buttons horizontally
   };
 
   return (
@@ -78,21 +78,18 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
         className="switch-container"
         style={switchContainer}
         value={activeButton}
-        onChange={handleRadioChange}>
+        onChange={handleRadioChange}
+      >
         <Radio.Button
           value={SIDEBAR_BUTTON.ALL}
-          style={
-            activeButton === SIDEBAR_BUTTON.ALL ? activeStyle : inactiveStyle
-          }>
+          style={activeButton === SIDEBAR_BUTTON.ALL ? activeStyle : inactiveStyle}
+        >
           {i18n.t('allTheme')}
         </Radio.Button>
         <Radio.Button
           value={SIDEBAR_BUTTON.POPULAR}
-          style={
-            activeButton === SIDEBAR_BUTTON.POPULAR
-              ? activeStyle
-              : inactiveStyle
-          }>
+          style={activeButton === SIDEBAR_BUTTON.POPULAR ? activeStyle : inactiveStyle}
+        >
           {i18n.t('popularTheme')}
         </Radio.Button>
       </Radio.Group>
@@ -102,6 +99,6 @@ const SideBarButtons = ({ activeButton, setActiveButton }) => {
 
 SideBarButtons.prototype = {
   activeButton: PropTypes.string,
-  setActiveButton: PropTypes.func
+  setActiveButton: PropTypes.func,
 };
 export default SideBarButtons;

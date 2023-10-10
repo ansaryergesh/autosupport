@@ -16,8 +16,6 @@ const Feedback = () => {
 
       <div className={styles.feedbackBox}>
         <Row gutter={[0, 24]}>
-
-
           <Col span={24}>
             <NewLabelsList />
           </Col>

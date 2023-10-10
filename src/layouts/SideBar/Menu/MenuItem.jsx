@@ -27,7 +27,7 @@ const MenuItem = ({
   handleEditQuestion,
   moveMenuItemQuestion,
   activeButton = SIDEBAR_BUTTON.ALL,
-  openQuestionKey
+  openQuestionKey,
 }) => {
   const history = useHistory();
   const menu = (id) => {
@@ -51,10 +51,11 @@ const MenuItem = ({
             title={i18n.t('actions.sure')}
             cancelText={i18n.t('actions.cancel')}
             okButtonProps={{
-              className: 'button-modal'
+              className: 'button-modal',
             }}
             cancelButtonProps={{ className: 'button-default' }}
-            onConfirm={() => handleDeleteCategory(id)}>
+            onConfirm={() => handleDeleteCategory(id)}
+          >
             {i18n.t('menu.deleteCategory')}
           </Popconfirm>
         </Menu.Item>
@@ -90,16 +91,14 @@ const MenuItem = ({
           item={category}
           key={`category_${category?.id}`}
           index={index}
-          moveMenuItem={moveMenuItem}>
+          moveMenuItem={moveMenuItem}
+        >
           <div>
             <div
               className={'mainMenu hoveredLink'}
               key={`submenu_${category?.id}`}
               onClick={(e) => {
-                if (
-                  e.target.tagName !== 'svg' &&
-                  e.target.classList.contains('linkName')
-                ) {
+                if (e.target.tagName !== 'svg' && e.target.classList.contains('linkName')) {
                   onMenuClick(category?.id);
                 }
               }}
@@ -107,8 +106,9 @@ const MenuItem = ({
                 padding: '12px 0',
                 fontSize: '14px',
                 alignItems: 'center',
-                marginBottom: '8px'
-              }}>
+                marginBottom: '8px',
+              }}
+            >
               <a
                 className={
                   location.pathname !== '/' &&
@@ -116,19 +116,15 @@ const MenuItem = ({
                   'activeLink'
                 }
                 onClick={(e) => {
-                  if (
-                    e.target.tagName !== 'svg' &&
-                    e.target.classList.contains('linkName')
-                  ) {
+                  if (e.target.tagName !== 'svg' && e.target.classList.contains('linkName')) {
                     history.push(`/category/${category?.id}`);
                   } else {
                     e.preventDefault(); // Prevent the link from being triggered
                   }
                 }}
-                style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span className="linkName">
-                  {category?.categorieContents?.name}
-                </span>
+                style={{ display: 'flex', justifyContent: 'space-between' }}
+              >
+                <span className="linkName">{category?.categorieContents?.name}</span>
                 {checkPermissions(['ROLE_WATCHER']) ? null : (
                   <Dropdown overlay={menu(category.id)} trigger={['click']}>
                     <MoreOutlined style={{ fontSize: '1.5em' }} />
@@ -141,25 +137,27 @@ const MenuItem = ({
                 key={q.id}
                 style={{
                   display:
-                    activeOpenedKeys !== [] &&
-                    activeOpenedKeys?.includes(category.id)
+                    activeOpenedKeys !== [] && activeOpenedKeys?.includes(category.id)
                       ? 'inherit'
-                      : 'none'
-                }}>
+                      : 'none',
+                }}
+              >
                 <DraggableMenuItem
                   item={q}
                   isCategory={false}
                   key={q.id}
                   moveMenuItem={moveMenuItemQuestion}
-                  index={index}>
+                  index={index}
+                >
                   <div
                     key={`question_${qIndex}_${q.id}`}
                     className={'hoveredLinkSecondary subMenu'}
-                    style={{ padding: '8px 2px 8px 8px', marginBottom: '4px' }}>
+                    style={{ padding: '8px 2px 8px 8px', marginBottom: '4px' }}
+                  >
                     <a
                       style={{
                         display: 'flex',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
                       }}
                       onClick={(e) => {
                         if (
@@ -171,7 +169,8 @@ const MenuItem = ({
                         } else {
                           e.preventDefault(); // Prevent the link from being triggered
                         }
-                      }}>
+                      }}
+                    >
                       <span className="linkName">
                         {findByLangKey(q?.questionContents)
                           ? findByLangKey(q?.questionContents).title
@@ -181,7 +180,8 @@ const MenuItem = ({
                         <Dropdown
                           style={{ zIndex: '10' }}
                           overlay={menuQuestion(q.id)}
-                          trigger={['click']}>
+                          trigger={['click']}
+                        >
                           <MoreOutlined style={{ fontSize: '1.5em' }} />
                         </Dropdown>
                       )}
@@ -209,7 +209,8 @@ const MenuItem = ({
           id={question?.id}
           handleEdit={() => handleEditQuestion(question?.id)}
           moveMenuItem={moveMenuItemQuestion}
-          index={index}>
+          index={index}
+        >
           <div
             key={`question_${index}_${question?.id}`}
             className={
@@ -217,7 +218,8 @@ const MenuItem = ({
                 ? 'activeLink mainMenu'
                 : 'hoveredLink mainMenu'
             }
-            style={{ padding: '8px', marginBottom: '4px' }}>
+            style={{ padding: '8px', marginBottom: '4px' }}
+          >
             <Link to={`/question/admin/${question?.id}`}>
               <span>
                 {findByLangKey(question?.questionContents)
@@ -233,9 +235,7 @@ const MenuItem = ({
   return (
     <React.Fragment>
       {activeButton === SIDEBAR_BUTTON.ALL && category && <AllMenuItem />}
-      {activeButton === SIDEBAR_BUTTON.POPULAR && question && (
-        <PopularMenuItem />
-      )}
+      {activeButton === SIDEBAR_BUTTON.POPULAR && question && <PopularMenuItem />}
     </React.Fragment>
   );
 };
@@ -253,7 +253,7 @@ MenuItem.prototype = {
   onMenuClick: PropTypes.any,
   handleDeleteQuestion: PropTypes.any,
   handleEditQuestion: PropTypes.any,
-  moveMenuItemQuestion: PropTypes.any
+  moveMenuItemQuestion: PropTypes.any,
 };
 
 export default MenuItem;

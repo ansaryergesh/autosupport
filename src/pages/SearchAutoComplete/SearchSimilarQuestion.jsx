@@ -16,7 +16,7 @@ const SearchReference = ({
   selectedItems,
   setSelectedItems,
   title,
-  questionInfo
+  questionInfo,
 }) => {
   const [options, setOptions] = useState([]);
 
@@ -28,8 +28,8 @@ const SearchReference = ({
             ? findByLangKey(item?.questionContents).title
             : '',
           id: item.questionContents?.id,
-          itemValue: item
-        }))
+          itemValue: item,
+        })),
       );
     });
   };
@@ -40,11 +40,11 @@ const SearchReference = ({
   };
 
   useEffect(() => {
-    if(questionInfo) {
+    if (questionInfo) {
       setSelectedItems(
         questionInfo?.children?.filter((item) =>
-          item.questionContents.find((item2) => item2.langKey === getLocale())
-        ) || []
+          item.questionContents.find((item2) => item2.langKey === getLocale()),
+        ) || [],
       );
     }
   }, []);
@@ -57,7 +57,7 @@ const SearchReference = ({
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 5
+      pageSize: 5,
     };
     searchAction(params).then((response) => {
       setOptions(
@@ -66,8 +66,8 @@ const SearchReference = ({
             ? findByLangKey(item?.questionContents).title
             : '',
           id: item.questionContents?.id,
-          itemValue: item
-        }))
+          itemValue: item,
+        })),
       );
     });
   };
@@ -83,7 +83,6 @@ const SearchReference = ({
       getOptionsDefault();
     }
     setInputValue('');
-
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -105,11 +104,9 @@ const SearchReference = ({
           onSelect={handleSelect}
           onSearch={handleSearch}
           value={inputValue}
-          onChange={(value) => setInputValue(value)}>
-          <Input.Search
-            className={styles.searchInput}
-            placeholder={i18n.t('search')}
-          />
+          onChange={(value) => setInputValue(value)}
+        >
+          <Input.Search className={styles.searchInput} placeholder={i18n.t('search')} />
         </AutoComplete>
       </div>
 
@@ -124,14 +121,11 @@ const SearchReference = ({
                   padding: '18px',
                   justifyContent: 'space-between',
                   borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center'
-                }}>
+                  alignItems: 'center',
+                }}
+              >
                 <span key={item.id}>
-                  {
-                    item.questionContents?.find(
-                      (item) => item.langKey === getLocale()
-                    )?.title
-                  }
+                  {item.questionContents?.find((item) => item.langKey === getLocale())?.title}
                 </span>
                 <CloseOutlined
                   className={styles.xBtn}

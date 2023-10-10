@@ -11,7 +11,7 @@ const ResourcesModal = ({
   handleModal = () => {},
   getList = () => {},
   record = initialValues,
-  setRecord = () => {}
+  setRecord = () => {},
 }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
@@ -29,7 +29,7 @@ const ResourcesModal = ({
         getList();
         if (res.data) {
           notification.success({
-            message: i18n.t('actions.added')
+            message: i18n.t('actions.added'),
           });
         }
       })
@@ -52,9 +52,10 @@ const ResourcesModal = ({
         okButtonProps={{
           className: 'button-modal',
           htmlType: 'submit',
-          form: 'form'
+          form: 'form',
         }}
-        cancelButtonProps={{ className: 'button-default' }}>
+        cancelButtonProps={{ className: 'button-default' }}
+      >
         <Form
           form={form}
           id="form"
@@ -62,10 +63,9 @@ const ResourcesModal = ({
           onFinish={(values) => {
             handleSubmit(values);
           }}
-          initialValues={record}>
-          <Form.Item
-            name="code"
-            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
+          initialValues={record}
+        >
+          <Form.Item name="code" rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
             <Input placeholder={i18n.t('columns.code')} />
           </Form.Item>
 
@@ -74,21 +74,16 @@ const ResourcesModal = ({
               <Form.Item
                 key={index}
                 name={['resourceContents', index, 'name']}
-                rules={[
-                  { required: true, message: i18n.t('rule.nameRequired') }
-                ]}>
-                <Input
-                  placeholder={`${i18n.t('resource')} ${resLang.langKey}`}
-                />
+                rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+              >
+                <Input placeholder={`${i18n.t('resource')} ${resLang.langKey}`} />
               </Form.Item>
               <Form.Item
                 key={index}
                 style={{ display: 'none' }}
-                name={['resourceContents', index, 'langKey']}>
-                <Input
-                  type="hidden"
-                  placeholder={`${i18n.t('resource')} ${resLang.langKey}`}
-                />
+                name={['resourceContents', index, 'langKey']}
+              >
+                <Input type="hidden" placeholder={`${i18n.t('resource')} ${resLang.langKey}`} />
               </Form.Item>
             </>
           ))}
@@ -103,7 +98,7 @@ ResourcesModal.propTypes = {
   handleModal: PropTypes.func,
   getList: PropTypes.func,
   record: PropTypes.object,
-  setRecord: PropTypes.func
+  setRecord: PropTypes.func,
 };
 
 export default ResourcesModal;

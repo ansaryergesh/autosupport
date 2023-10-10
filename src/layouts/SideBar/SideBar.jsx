@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Image,
-  Input,
-  Layout,
-  notification,
-  Typography,
-  AutoComplete
-} from 'antd';
+import { Image, Input, Layout, notification, Typography, AutoComplete } from 'antd';
 import { i18n } from 'utils/i18next.js';
 import { adminNavItems } from './constants.js';
 import { Link } from 'react-router-dom';
@@ -17,14 +10,14 @@ import {
   changeOrderCategory,
   deleteCategory,
   getCategories,
-  getCategoryById
+  getCategoryById,
 } from '../../service/Category/index.js';
 import {
   changeQuestionOrder,
   deleteQuestion,
   getQuestionById,
   getQuestions,
-  searchQuestions
+  searchQuestions,
 } from '../../service/Question/index.js';
 import MenuItem from './Menu/MenuItem.jsx';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
@@ -60,7 +53,7 @@ const SearchInput = () => {
     if (searchValue.length >= 2) {
       const params = {
         query: value,
-        pageSize: 5
+        pageSize: 5,
       };
       searchQuestions(params).then((res) => {
         setOptions(
@@ -68,8 +61,8 @@ const SearchInput = () => {
             value: findByLangKey(item?.questionContents)
               ? findByLangKey(item?.questionContents).title
               : '',
-            id: item.id
-          }))
+            id: item.id,
+          })),
         );
       });
     }
@@ -101,7 +94,8 @@ const SearchInput = () => {
         onBlur={() => handleFocus(false)}
         options={options}
         value={searchValue}
-        onChange={(value) => setSearchValue(value)}>
+        onChange={(value) => setSearchValue(value)}
+      >
         <Input
           className={styles.searchInput}
           placeholder={i18n.t('search')}
@@ -134,8 +128,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const [totalCount, setTotalCount] = useState(0);
   const defaultPageSize = 20;
   const [activeButton, setActiveButton] = useState(
-    localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) ||
-      SIDEBAR_BUTTON.ALL
+    localStorage.getItem(LocalStorageKeys.ACTIVE_SIDEBAR_BUTTON) || SIDEBAR_BUTTON.ALL,
   );
   const [newTicketsCount, setNewTicketsCount] = useState();
   const [seacrhHistoryCount, setSeacrhHistoryCount] = useState();
@@ -153,7 +146,7 @@ const SidebarNav = ({ isAdmin = true }) => {
     getCategories({
       pageCurrent: 0,
       pageSize: defaultPageSize,
-      langKey: getLocale()?.toUpperCase() || LANG_KEY.RU
+      langKey: getLocale()?.toUpperCase() || LANG_KEY.RU,
     }).then((res) => {
       setAllCategories(res.data);
       setTotalCount(res.headers['x-total-count']);
@@ -164,7 +157,7 @@ const SidebarNav = ({ isAdmin = true }) => {
     getCategories({
       pageCurrent,
       pageSize: defaultPageSize,
-      langKey: getLocale()?.toUpperCase() || LANG_KEY.RU
+      langKey: getLocale()?.toUpperCase() || LANG_KEY.RU,
     }).then((res) => {
       setAllCategories((prevState) => [...prevState, ...res.data]);
     });
@@ -173,7 +166,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const getAllQuestions = () => {
     const params = {
       langKey: getLocale().toUpperCase(),
-      pageSize: 20
+      pageSize: 20,
     };
     getQuestions(params).then((res) => {
       setAllQuestions(res.data);
@@ -206,7 +199,7 @@ const SidebarNav = ({ isAdmin = true }) => {
     deleteCategory(categoryId).then(() => {
       history.push('/');
       notification.success({
-        message: i18n.t('actions.deleted')
+        message: i18n.t('actions.deleted'),
       });
       getCategoryAll();
     });
@@ -215,7 +208,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   const handleDeleteQuestion = (questionId) => {
     deleteQuestion(questionId).then(() => {
       notification.success({
-        message: i18n.t('actions.deleted')
+        message: i18n.t('actions.deleted'),
       });
       getCategoryAll();
     });
@@ -254,7 +247,7 @@ const SidebarNav = ({ isAdmin = true }) => {
 
   const logOutNotification = () => {
     notification.info({
-      message: i18n.t('commons.signOutMessage')
+      message: i18n.t('commons.signOutMessage'),
     });
   };
 
@@ -265,10 +258,7 @@ const SidebarNav = ({ isAdmin = true }) => {
   };
 
   const handleScroll = (e) => {
-    if (
-      checkIfBottomScrolled(e) &&
-      Math.ceil(totalCount / defaultPageSize) >= pageCurrent + 1
-    ) {
+    if (checkIfBottomScrolled(e) && Math.ceil(totalCount / defaultPageSize) >= pageCurrent + 1) {
       setPageCurrent((prevState) => {
         getCategoryOnScroll(prevState + 1);
         return prevState + 1;
@@ -315,12 +305,10 @@ const SidebarNav = ({ isAdmin = true }) => {
       <div
         style={{
           padding: '16px 12px 16px 0',
-          background: 'transparent'
-        }}>
-        <SideBarButtons
-          activeButton={activeButton}
-          setActiveButton={setActiveButton}
-        />
+          background: 'transparent',
+        }}
+      >
+        <SideBarButtons activeButton={activeButton} setActiveButton={setActiveButton} />
       </div>
       <ConstDropDownMenuItem handleAdd={handleAddCategory} />
       <div
@@ -332,8 +320,9 @@ const SidebarNav = ({ isAdmin = true }) => {
           padding: '0px 12px 16px 0',
           maxHeight: '100vh',
           borderRight: 0,
-          width: '100%!important'
-        }}>
+          width: '100%!important',
+        }}
+      >
         {allCategories?.map((m, index) => (
           <MenuItem
             activeButton={activeButton}
@@ -401,9 +390,7 @@ const SidebarNav = ({ isAdmin = true }) => {
         setOrderModal={setOrderModal}
       />
 
-      <div
-        onClick={handleLogOut}
-        style={{ padding: '26px 0', cursor: 'pointer' }}>
+      <div onClick={handleLogOut} style={{ padding: '26px 0', cursor: 'pointer' }}>
         <LogoutOutlined /> <span>{i18n.t('commons.signOut')}</span>
       </div>
 

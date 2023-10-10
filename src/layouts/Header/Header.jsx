@@ -15,8 +15,7 @@ const Header = () => {
   const [activeOrganization, setActiveOrganization] = useState(
     !checkPermissions(['ROLE_SUPER_ADMIN'])
       ? getCurrentUserData()?.authOrganization?.name
-      : localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION) ||
-          i18n.t('chooseOrganization')
+      : localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION) || i18n.t('chooseOrganization'),
   );
   useEffect(() => {
     if (checkPermissions(['ROLE_SUPER_ADMIN'])) {
@@ -28,7 +27,7 @@ const Header = () => {
 
   const items = organizations?.map((organization) => ({
     label: organization.name,
-    value: organization.code
+    value: organization.code,
   }));
   return (
     <div>
@@ -45,10 +44,7 @@ const Header = () => {
                 options={items}
                 onChange={(value) => {
                   setActiveOrganization(value);
-                  localStorage.setItem(
-                    LocalStorageKeys.ACTIVE_ORGANIZATION,
-                    value
-                  );
+                  localStorage.setItem(LocalStorageKeys.ACTIVE_ORGANIZATION, value);
                   location.reload();
                 }}
               />

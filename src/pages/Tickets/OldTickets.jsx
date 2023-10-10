@@ -21,22 +21,22 @@ const OldTickets = () => {
   const columns = [
     {
       title: i18n.t('newAnswer.whatQuestion'),
-      dataIndex: 'title'
+      dataIndex: 'title',
     },
     {
       title: i18n.t('columns.email'),
-      dataIndex: 'email'
+      dataIndex: 'email',
     },
     {
       title: i18n.t('processedBy'),
       dataIndex: 'lastModifiedBy',
-      render: (_, record) => <p>{record.lastModifiedBy}</p>
+      render: (_, record) => <p>{record.lastModifiedBy}</p>,
     },
     {
       title: i18n.t('processedWhen'),
       dataIndex: 'closedDate',
-      render: (_, record) => <p>{formatDate(record.closedDate)}</p>
-    }
+      render: (_, record) => <p>{formatDate(record.closedDate)}</p>,
+    },
   ];
 
   const getOldTicketsList = (pageCurrent, pageSize, search) => {
@@ -68,28 +68,26 @@ const OldTickets = () => {
         tableLayout="fixed"
         rowKey={(record) => record.id}
         expandable={{
-          expandedRowRender: (record) => (
-            <p style={{ margin: 0 }}>{record.text}</p>
-          )
+          expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.text}</p>,
         }}
         columns={columns}
         dataSource={data}
         pagination={{
           total: totalPages,
-          onChange: (page, pageSize) =>
-            getOldTicketsList(page, pageSize, inputValue),
-          position: ['bottomCenter']
+          onChange: (page, pageSize) => getOldTicketsList(page, pageSize, inputValue),
+          position: ['bottomCenter'],
         }}
         bordered
         locale={{
-          emptyText: <Empty description={i18n.t('noData')} />
+          emptyText: <Empty description={i18n.t('noData')} />,
         }}
       />
 
       <Button
         onClick={() => handleExport(getOldTicketsExcel, i18n.t('oldTickets'))}
         style={{ marginTop: '16px' }}
-        type="primary">
+        type="primary"
+      >
         {i18n.t('actions.downloadTickets')}
       </Button>
     </div>

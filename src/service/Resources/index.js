@@ -1,15 +1,13 @@
 import { axiosInstanceWithHeader } from '../../api/api.js';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
 
-const ACTIVE_ORGANIZATION = localStorage.getItem(
-  LocalStorageKeys.ACTIVE_ORGANIZATION
-);
+const ACTIVE_ORGANIZATION = localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION);
 
 export const manageResources = (data) => {
   if (data.id) {
-    return axiosInstanceWithHeader.put(`/api/admin/resources/${data.id}`, data,{
+    return axiosInstanceWithHeader.put(`/api/admin/resources/${data.id}`, data, {
       params: {
-        id: data.id
+        id: data.id,
       },
     });
   } else {
@@ -28,7 +26,7 @@ export const deleteResource = (id) => {
 export const getResources = () => {
   return axiosInstanceWithHeader.get('/api/admin/resources', {
     params: {
-      organizationCode: ACTIVE_ORGANIZATION
-    }
+      organizationCode: ACTIVE_ORGANIZATION,
+    },
   });
 };

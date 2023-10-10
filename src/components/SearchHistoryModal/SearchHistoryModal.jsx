@@ -7,12 +7,7 @@ import { manageTag } from '../../service/Tags';
 import { deleteSearchHistoryItems } from '../../service/SearchHistory';
 import PropTypes from 'prop-types';
 
-const SearchHistoryModal = ({
-  isModalOpen = false,
-  handleModal,
-  record,
-  getSearchHistoryList
-}) => {
+const SearchHistoryModal = ({ isModalOpen = false, handleModal, record, getSearchHistoryList }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
@@ -37,7 +32,7 @@ const SearchHistoryModal = ({
 
       if (res.data) {
         notification.success({
-          message: i18n.t('actions.added')
+          message: i18n.t('actions.added'),
         });
       }
     } catch (err) {
@@ -66,9 +61,10 @@ const SearchHistoryModal = ({
       okButtonProps={{
         className: 'button-modal',
         htmlType: 'submit',
-        form: 'form'
+        form: 'form',
       }}
-      cancelButtonProps={{ className: 'button-default' }}>
+      cancelButtonProps={{ className: 'button-default' }}
+    >
       <Form
         id="form"
         form={form}
@@ -76,7 +72,8 @@ const SearchHistoryModal = ({
         initialValues={record}
         autoComplete="off"
         requiredMark={false}
-        layout="vertical">
+        layout="vertical"
+      >
         <Form.Item style={{ display: 'none' }} name="id">
           <Input />
         </Form.Item>
@@ -84,7 +81,8 @@ const SearchHistoryModal = ({
         <Form.Item
           label={i18n.t('actions.editText')}
           name="text"
-          rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}>
+          rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+        >
           <Input placeholder={i18n.t('newAnswer.startTyping')} />
         </Form.Item>
 
@@ -102,6 +100,6 @@ SearchHistoryModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   record: PropTypes.object,
-  getSearchHistoryList: PropTypes.func
+  getSearchHistoryList: PropTypes.func,
 };
 export default SearchHistoryModal;

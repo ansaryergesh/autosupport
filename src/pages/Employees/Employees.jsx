@@ -23,9 +23,9 @@ const initialData = {
   authority: undefined,
   authOrganization: {
     name: undefined,
-    code: undefined
+    code: undefined,
   },
-  password: ''
+  password: '',
 };
 
 const Employees = () => {
@@ -56,7 +56,7 @@ const Employees = () => {
       const newData = data.filter((item) => item.id !== key);
       setData(newData);
       notification.info({
-        message: `${i18n.t('employeePage.employeeDeletedNotification')}`
+        message: `${i18n.t('employeePage.employeeDeletedNotification')}`,
       });
     });
   };
@@ -65,30 +65,28 @@ const Employees = () => {
     {
       title: `${i18n.t('columns.name')}`,
       key: 'name',
-      render: (_, record) => (
-        <span>{`${record.firstName} ${record.lastName}`}</span>
-      )
+      render: (_, record) => <span>{`${record.firstName} ${record.lastName}`}</span>,
     },
     {
       title: `${i18n.t('columns.email')}`,
       dataIndex: 'email',
-      key: 'email'
+      key: 'email',
     },
     {
       title: `${i18n.t('columns.role')}`,
       dataIndex: 'authority',
-      key: 'authority'
+      key: 'authority',
     },
     {
       title: `${i18n.t('columns.organization')}`,
       dataIndex: `authOrganization`,
       key: 'authOrganization',
-      render: (authOrganization) => <span>{authOrganization.name}</span>
+      render: (authOrganization) => <span>{authOrganization.name}</span>,
     },
     {
       title: `${i18n.t('columns.langKey')}`,
       dataIndex: 'langKey',
-      key: 'langKey'
+      key: 'langKey',
     },
     {
       title: `${i18n.t('actions.action')}`,
@@ -100,7 +98,8 @@ const Employees = () => {
               onClick={() => {
                 setRecord(record);
                 handleModal();
-              }}>
+              }}
+            >
               {i18n.t('actions.edit')}
             </Button>
 
@@ -109,12 +108,13 @@ const Employees = () => {
               cancelText={i18n.t('actions.cancel')}
               okButtonProps={{ className: 'button-modal' }}
               title={i18n.t('actions.sure')}
-              onConfirm={() => handleDelete(record.id)}>
+              onConfirm={() => handleDelete(record.id)}
+            >
               <Button>{i18n.t('actions.delete')}</Button>
             </Popconfirm>
           </Space>
-        )
-    }
+        ),
+    },
   ];
 
   return (
@@ -136,7 +136,8 @@ const Employees = () => {
             getEmployeeData();
             handleModal();
           }}
-          style={{ marginBottom: '10px' }}>
+          style={{ marginBottom: '10px' }}
+        >
           {i18n.t('actions.addEmployee')}
         </Button>
       )}
@@ -145,12 +146,12 @@ const Employees = () => {
         pagination={{
           total: totalPages,
           onChange: (page, pageSize) => getEmployeeList(page, pageSize),
-          position: ['bottomCenter']
+          position: ['bottomCenter'],
         }}
         columns={columns}
         dataSource={data}
         locale={{
-          emptyText: <Empty description={i18n.t('noData')} />
+          emptyText: <Empty description={i18n.t('noData')} />,
         }}
       />
     </div>

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Col, Empty, Row } from 'antd';
 import CategoryItem from 'components/CategoryItem/CategoryItem';
 import { useParams } from 'react-router';
-import {
-  editCategoryQuestionPatch,
-  getQuestions
-} from '../../service/Question/index.js';
+import { editCategoryQuestionPatch, getQuestions } from '../../service/Question/index.js';
 import { getLocale, i18n } from '../../utils/i18next.js';
 import { useHistory } from 'react-router-dom';
 import { getCategoryById } from '../../service/Category/index.js';
@@ -30,14 +27,14 @@ function Сategory() {
 
   // eslint-disable-next-line no-unused-vars
   const selectedLanguageTitle = categoryInfo.categorieContents?.find(
-    (item) => (item.langKey = getLocale())
+    (item) => (item.langKey = getLocale()),
   );
 
   const getAllQuestion = () => {
     const params = {
       langKey: getLocale().toUpperCase(),
       categorieId: id,
-      pageSize: 10
+      pageSize: 10,
     };
     getQuestions(params)
       .then((res) => {
@@ -70,7 +67,7 @@ function Сategory() {
         {!questions.length && (
           <Empty
             style={{
-              margin: '0 auto'
+              margin: '0 auto',
             }}
             description={i18n.t('noQuestion')}
           />

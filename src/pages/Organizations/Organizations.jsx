@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, Space, Popconfirm, notification } from 'antd';
 import Button from 'components/Button/Button';
 import OrganizationsModal from 'components/OrganizationsModal/OrganizationsModal.jsx';
-import {
-  getOrganizations,
-  deleteOrganization
-} from '../../service/Organizations/index.js';
+import { getOrganizations, deleteOrganization } from '../../service/Organizations/index.js';
 import { initialValues } from './constants.js';
 import { i18n } from '../../utils/i18next';
 import JHeader from '../../components/JHeader/JHeader.jsx';
@@ -54,8 +51,8 @@ const Organizations = () => {
               notification.success({ message: i18n.t('actions.deleted') });
               getOrganizationsList();
             }
-          })
-        )
+          }),
+        ),
       );
       setSelectedRowKeys([]);
     } catch (error) {
@@ -65,7 +62,7 @@ const Organizations = () => {
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange
+    onChange: onSelectChange,
   };
 
   const hasSelected = selectedRowKeys.length > 0;
@@ -73,11 +70,11 @@ const Organizations = () => {
   const columns = [
     {
       title: i18n.t('columns.code'),
-      dataIndex: 'code'
+      dataIndex: 'code',
     },
     {
       title: i18n.t('columns.name'),
-      dataIndex: 'name'
+      dataIndex: 'name',
     },
 
     {
@@ -89,7 +86,8 @@ const Organizations = () => {
             onClick={() => {
               setRecord(record);
               handleModal();
-            }}>
+            }}
+          >
             {i18n.t('actions.edit')}
           </Button>
           <Popconfirm
@@ -97,12 +95,13 @@ const Organizations = () => {
             okButtonProps={{ className: 'button-modal' }}
             title={i18n.t('actions.sure')}
             cancelText={i18n.t('actions.cancel')}
-            onConfirm={() => handleDelete(record.code)}>
+            onConfirm={() => handleDelete(record.code)}
+          >
             <Button>{i18n.t('actions.delete')}</Button>
           </Popconfirm>
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -113,26 +112,25 @@ const Organizations = () => {
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            marginBottom: 16
-          }}>
+            marginBottom: 16,
+          }}
+        >
           <div>
             <Popconfirm
               cancelButtonProps={{ className: 'button-default' }}
               okButtonProps={{ className: 'button-modal' }}
               title={i18n.t('actions.sure')}
               cancelText={i18n.t('actions.cancel')}
-              onConfirm={handleDeleteSelected}>
-              <Button disabled={!hasSelected}>
-                {i18n.t('actions.deleteSelected')}
-              </Button>
+              onConfirm={handleDeleteSelected}
+            >
+              <Button disabled={!hasSelected}>{i18n.t('actions.deleteSelected')}</Button>
             </Popconfirm>
             <span
               style={{
-                marginLeft: 8
-              }}>
-              {hasSelected
-                ? `${i18n.t('actions.selected')} ${selectedRowKeys.length}`
-                : ''}
+                marginLeft: 8,
+              }}
+            >
+              {hasSelected ? `${i18n.t('actions.selected')} ${selectedRowKeys.length}` : ''}
             </span>
           </div>
           <Button type="modal" onClick={handleModal}>

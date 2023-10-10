@@ -9,13 +9,13 @@ const UserProfile = () => {
     {
       key: '1',
       label: `${i18n.t('userProfile.userProfileSelector')}`,
-      children: <UserData />
+      children: <UserData />,
     },
     {
       key: '2',
       label: `${i18n.t('userProfile.accountSettingsSelector')}`,
-      children: <AccountData />
-    }
+      children: <AccountData />,
+    },
   ];
   return <Tabs defaultActiveKey="1" items={items} />;
 };

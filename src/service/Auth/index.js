@@ -21,8 +21,8 @@ export const onLogin = (data) => {
 export const sendMail = (email) => {
   return axiosInstance.post('/api/account/reset-password/init', email, {
     headers: {
-      'Content-Type': 'text/plain' // Set the content type to text/plain
-    }
+      'Content-Type': 'text/plain', // Set the content type to text/plain
+    },
   });
 };
 
@@ -32,14 +32,14 @@ export const newPassword = (data) => {
 
 export const activateUser = (data) => {
   return axiosInstance.post(`/api/activate?key=${data.key}`, {
-    password: data.password
+    password: data.password,
   });
 };
 
 export const getCurrentAccount = (bearerToken) => {
   return axios.get(checkerAddress + '/api/account', {
     headers: {
-      Authorization: 'Bearer ' + bearerToken
-    }
+      Authorization: 'Bearer ' + bearerToken,
+    },
   });
 };

@@ -47,7 +47,7 @@ const Home = () => {
       <JHeader isQuestion={false} />
       <Row gutter={[24, 24]}>
         {allCategories.map((item, index) => (
-          <Col key={index}  lg={8} xs={24} md={12}>
+          <Col key={index} lg={8} xs={24} md={12}>
             <CardComponent data={item} />
           </Col>
         ))}

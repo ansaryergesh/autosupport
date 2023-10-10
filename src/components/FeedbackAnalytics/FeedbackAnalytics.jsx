@@ -40,12 +40,12 @@ const FeedbackAnalytics = () => {
             const dataset = context.dataset;
             const dataValue = dataset.data[context.dataIndex];
             return dataValue + '%';
-          }
-        }
-      }
+          },
+        },
+      },
     },
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
   };
 
   return (
@@ -65,9 +65,9 @@ const FeedbackAnalytics = () => {
               datasets: [
                 {
                   data: data?.percents.map((item) => item.percent),
-                  backgroundColor: reversed
-                }
-              ]
+                  backgroundColor: reversed,
+                },
+              ],
             }}
             options={chartOptions}
           />
@@ -77,12 +77,9 @@ const FeedbackAnalytics = () => {
           split={false}
           dataSource={dataList}
           renderItem={(item, index) => (
-            <List.Item
-              style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <List.Item style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Typography.Text mark>
-                <div
-                  className={styles.circle}
-                  style={{ background: backgroundColor[index] }}></div>
+                <div className={styles.circle} style={{ background: backgroundColor[index] }}></div>
               </Typography.Text>
               <TypographyHead
                 className={styles.rateText}

@@ -92,7 +92,7 @@ export const dataText = [
     category: `Страница Тем с подвопросами с описанием, нажав на карандаш пользователь может отредактировать название вопроса и описание вопроса
 Так выглядит редактирование вопроса и его описания после нажатия на кнопку редактирования (Карандаш). Отредактированные данные сохраняются сразу после нажатия кнопки “Enter”.`,
 
-    langKey: 'RU'
+    langKey: 'RU',
   },
   {
     preview: `Сіз алдын ала қарау бетіндесіз. Бұл жерде тексттің сайттың клиенттік бөлігінде қалай бейнеленетінін көруге болады`,
@@ -185,7 +185,7 @@ export const dataText = [
     category: `Шағын сұрақтар мен сипаттаманы қамтитын Тақырыптар беті қарындашты басу арқылы пайдаланушы сұрақтың атауын және сұрақтың сипаттамасын өңдей алады
 Сұрақ пен оның сипаттамасын өңдеу түймешігін (Қарындаш) басқаннан кейін редакциялау осылай көрінеді. Реттелген деректер "Enter" түймешігін басқаннан кейін бірден сақталады.`,
 
-    langKey: 'KZ'
+    langKey: 'KZ',
   },
   {
     preview: `You are on the preview page. Here you can see how the text will be displayed in the client part of the site`,
@@ -280,6 +280,6 @@ Tags are intended for quick and easy search of answers by users of the administr
 This is what editing a question and its description looks like after clicking on the edit button (Pencil).
 The edited data is saved immediately after pressing the “Enter” button.`,
 
-    langKey: 'EN'
-  }
+    langKey: 'EN',
+  },
 ];

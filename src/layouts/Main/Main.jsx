@@ -17,9 +17,7 @@ const Main = (props) => {
   const history = useHistory();
 
   const checkIfTokenIsValid = () => {
-    const currentToken = localStorage.getItem(
-      LocalStorageKeys.FREEDOM_ACCESS_TOKEN
-    );
+    const currentToken = localStorage.getItem(LocalStorageKeys.FREEDOM_ACCESS_TOKEN);
 
     return !!currentToken;
   };
@@ -36,10 +34,7 @@ const Main = (props) => {
     if (!localStorage.getItem(LocalStorageKeys.ACTIVE_ORGANIZATION)) {
       getOrganizationOpen()
         .then((res) => {
-          localStorage.setItem(
-            LocalStorageKeys.ACTIVE_ORGANIZATION,
-            res.data[0].code
-          );
+          localStorage.setItem(LocalStorageKeys.ACTIVE_ORGANIZATION, res.data[0].code);
           location.reload();
         })
         .catch((err) => console.error(err));
@@ -71,7 +66,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Main;

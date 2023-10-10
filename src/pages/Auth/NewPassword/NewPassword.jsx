@@ -16,7 +16,7 @@ const NewPassword = () => {
     const key = queryParams.key;
     const data = {
       key,
-      newPassword: values.newPassword
+      newPassword: values.newPassword,
     };
     newPassword(data).then(() => {
       notification.info({ message: i18n.t('passwordUpdated') });
@@ -40,7 +40,8 @@ const NewPassword = () => {
           style={{ maxWidth: 550 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          autoComplete="off">
+          autoComplete="off"
+        >
           <Row gutter={[16]}>
             <Col span={24}>
               <Form.Item
@@ -48,9 +49,10 @@ const NewPassword = () => {
                 rules={[
                   {
                     required: true,
-                    message: i18n.t('rules.newPasswordRequired')
-                  }
-                ]}>
+                    message: i18n.t('rules.newPasswordRequired'),
+                  },
+                ]}
+              >
                 <Input
                   type="password"
                   size={'large'}
@@ -67,19 +69,18 @@ const NewPassword = () => {
                 rules={[
                   {
                     required: true,
-                    message: i18n.t('rules.newPasswordRequired')
+                    message: i18n.t('rules.newPasswordRequired'),
                   },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(
-                        new Error(i18n.t('passwordsDoNotMatch'))
-                      );
-                    }
-                  })
-                ]}>
+                      return Promise.reject(new Error(i18n.t('passwordsDoNotMatch')));
+                    },
+                  }),
+                ]}
+              >
                 <Input
                   type="password"
                   size={'large'}
@@ -91,10 +92,7 @@ const NewPassword = () => {
 
             <Col span={24}>
               <Form.Item>
-                <Button
-                  type="primary"
-                  className={styles.inputButton}
-                  htmlType="submit">
+                <Button type="primary" className={styles.inputButton} htmlType="submit">
                   {i18n.t('actions.save')}
                 </Button>
               </Form.Item>

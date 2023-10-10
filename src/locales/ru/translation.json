@@ -55,7 +55,8 @@
     "forgetPassword": "Забыли ваш пароль?",
     "submit": "Подтвердить",
     "unauthorized": "Не авторизован",
-    "accessDenied": "Отказано в доступе"
+    "accessDenied": "Отказано в доступе",
+    "notFound": "По запросу ничего не найдено"
   },
   "columns": {
     "name": "Наименование",
@@ -206,5 +207,6 @@
     "no_user_was_found_for_this_deactivation_key": "Пользователь не найден для этого ключа деактивации",
     "photo_not_deleted": "Фотография не удалена",
     "email_or_password": "Неверная почта или пароль"
-  }
+  },
+  "resourceQuestionNotFound": "У вопроса нет данного ресурса"
 }

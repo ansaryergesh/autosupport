@@ -11,7 +11,7 @@ function CategoryItem({ editQuestion, getAllQuestion, data }) {
   const handleEditQuestion = (value) => {
     const finalQuestionContent = {
       ...data,
-      questionContents: [{ ...data.questionContents[0], title: value }]
+      questionContents: [{ ...data.questionContents[0], title: value }],
     };
 
     editQuestion(finalQuestionContent).then(() => {
@@ -23,9 +23,7 @@ function CategoryItem({ editQuestion, getAllQuestion, data }) {
   const handleEditQuestionDesc = (value) => {
     const finalQuestionContent = {
       ...data,
-      questionContents: [
-        { ...data?.questionContents[0], stepDescription: value }
-      ]
+      questionContents: [{ ...data?.questionContents[0], stepDescription: value }],
     };
 
     editQuestion(finalQuestionContent).then(() => {
@@ -51,7 +49,8 @@ function CategoryItem({ editQuestion, getAllQuestion, data }) {
             title={titleText}
             level={5}
             editable={{ onChange: handleEditQuestion }}
-            className={styles.title}>
+            className={styles.title}
+          >
             {titleText}
           </Title>
         </Link>
@@ -59,7 +58,8 @@ function CategoryItem({ editQuestion, getAllQuestion, data }) {
           ellipsis={{ rows: 1, expandable: false }}
           title={stepDescriptionText}
           editable={{ onChange: handleEditQuestionDesc }}
-          className={styles.paragraph}>
+          className={styles.paragraph}
+        >
           {stepDescriptionText}
         </Paragraph>
       </div>

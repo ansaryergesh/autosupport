@@ -25,8 +25,9 @@ const DraggableMenuItem = ({ handleAdd }) => {
         padding: '12px 12px 12px 0',
         display: 'flex',
         justifyContent: 'space-between',
-        marginBottom: '8px'
-      }}>
+        marginBottom: '8px',
+      }}
+    >
       <Link className={` ${currentPath === '/' && 'activeLink'}`} to={`/`}>
         <span>{i18n.t('home')}</span>
       </Link>
@@ -39,7 +40,7 @@ const DraggableMenuItem = ({ handleAdd }) => {
   );
 };
 DraggableMenuItem.propTypes = {
-  handleAdd: PropTypes.func
+  handleAdd: PropTypes.func,
 };
 
 export default DraggableMenuItem;

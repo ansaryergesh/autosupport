@@ -5,22 +5,12 @@ import Button from '../../components/Button/Button.jsx';
 import {
   editCategoryQuestion,
   getQuestionById,
-  getQuestions
+  getQuestions,
 } from '../../service/Question/index.js';
 import JHeader from '../../components/JHeader/JHeader.jsx';
 import { initialQuestionDto } from '../../components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
-import {
-  Col,
-  Dropdown,
-  notification,
-  Row,
-  Menu,
-  Empty,
-  Typography,
-  Popconfirm,
-  Spin
-} from 'antd';
+import { Col, Dropdown, notification, Row, Menu, Empty, Typography, Popconfirm, Spin } from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
 // import TypographyHead from '../../components/Typography/TypographyHead.jsx';
@@ -38,7 +28,7 @@ import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
   editAnswerQuestion,
-  deleteAnswerById
+  deleteAnswerById,
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
@@ -50,20 +40,14 @@ const QuestionAnswerContent = () => {
   const [selectedResources, setSelectedResources] = useState([]);
   const [activeResource, setActiveResource] = useState({});
   const [questionInfo, setQuestionInfo] = useState({ initialQuestionDto });
-  const [instructionType, setInstructionType] = useState(
-    INSTRUCTION_TYPE.VISUAL
-  );
-  const [selectedKeyWords, setSelectedKeyWords] = useState(
-    questionInfo?.keyWords || []
-  );
+  const [instructionType, setInstructionType] = useState(INSTRUCTION_TYPE.VISUAL);
+  const [selectedKeyWords, setSelectedKeyWords] = useState(questionInfo?.keyWords || []);
   const [isEdited, setIsEdited] = useState(false);
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
   const [loading, setLoading] = useState(false);
 
-  const [answerFormData, setAnswerFormData] = useState(
-    initialQuestionAnswerContent
-  );
+  const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSimilarQuestion, setSelectedSimilarQuestion] = useState([]);
@@ -94,11 +78,11 @@ const QuestionAnswerContent = () => {
                 setActiveResource(finalResources);
               }
               setSelectedResources((prev) => [...prev, finalResources]);
-            }}>
+            }}
+          >
             {
-              resource.resourceContents.find(
-                (content) => content.langKey === selectedLanguage
-              )?.name
+              resource.resourceContents.find((content) => content.langKey === selectedLanguage)
+                ?.name
             }
           </Menu.Item>
         );
@@ -138,7 +122,7 @@ const QuestionAnswerContent = () => {
         setAnswerFormData((prev) => {
           const resultData = res.data.answerContents.map((item) => {
             const matchedPrevId = prev.answerContents.find(
-              (item2) => item.langKey === item2.langKey
+              (item2) => item.langKey === item2.langKey,
             )?.id;
             return { ...item, id: matchedPrevId };
           });
@@ -153,7 +137,8 @@ const QuestionAnswerContent = () => {
           key={resource.id}
           onClick={() => {
             handleDelete();
-          }}>
+          }}
+        >
           {i18n.t('actions.delete')}
         </Menu.Item>
 
@@ -165,13 +150,10 @@ const QuestionAnswerContent = () => {
                   key={res.id}
                   onClick={() => {
                     handleCopy(res.id);
-                  }}>
+                  }}
+                >
                   {`${i18n.t('questionAnswer.resourceClone')} 
-            "${
-              res.resourceContents.find(
-                (item) => item.langKey === selectedLanguage
-              )?.name
-            }"`}
+            "${res.resourceContents.find((item) => item.langKey === selectedLanguage)?.name}"`}
                 </Menu.Item>
               );
             }
@@ -212,9 +194,9 @@ const QuestionAnswerContent = () => {
             {
               id: 0,
               langKey: 'EN',
-              name: ''
-            }
-          ]
+              name: '',
+            },
+          ],
         },
         questionContents: [
           {
@@ -225,22 +207,22 @@ const QuestionAnswerContent = () => {
             tags: [
               {
                 id: 0,
-                text: ''
-              }
+                text: '',
+              },
             ],
             keyWords: [
               {
                 id: 0,
-                text: ''
-              }
-            ]
-          }
-        ]
+                text: '',
+              },
+            ],
+          },
+        ],
       },
       resource: {
         id: 0,
         code: '',
-        name: ''
+        name: '',
       },
       answerContents: [
         {
@@ -248,24 +230,24 @@ const QuestionAnswerContent = () => {
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: []
+          images: [],
         },
         {
           langKey: 'RU',
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: []
+          images: [],
         },
         {
           langKey: 'KZ',
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: []
-        }
+          images: [],
+        },
       ],
-      status: null
+      status: null,
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
@@ -288,7 +270,7 @@ const QuestionAnswerContent = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('questionAnswer.previewMessage'),
-      placement: 'top'
+      placement: 'top',
     });
   };
 
@@ -298,12 +280,12 @@ const QuestionAnswerContent = () => {
       ...answerFormData,
       question: { id: questionInfo.id },
       resource: activeResource,
-      similarQuestionsIds
+      similarQuestionsIds,
     };
 
     const finalQuestionInfo = {
       ...questionInfo,
-      children: selectedQuestions
+      children: selectedQuestions,
     };
     delete finalQuestionInfo.resources;
 
@@ -319,8 +301,7 @@ const QuestionAnswerContent = () => {
       delete finalDataAnswer['id'];
       addAnswerToQuestion(finalDataAnswer).then(() => {
         notification.info({ message: i18n.t('actions.edited') });
-        withPreview &&
-          history.push(`/question/preview/${id}/${activeResource.id}`);
+        withPreview && history.push(`/question/preview/${id}/${activeResource.id}`);
       });
     }
   };
@@ -331,13 +312,13 @@ const QuestionAnswerContent = () => {
     if (!isNaN(parsedCounter)) {
       const finalQuestion = {
         ...questionInfo,
-        counter: parsedCounter.toString()
+        counter: parsedCounter.toString(),
       };
       setQuestionInfo(finalQuestion);
     } else {
       const finalQuestion = {
         ...questionInfo,
-        counter: questionInfo.counter
+        counter: questionInfo.counter,
       };
       setQuestionInfo(finalQuestion);
     }
@@ -358,13 +339,11 @@ const QuestionAnswerContent = () => {
             padding: '12px 0',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
-          }}>
+            gap: '8px',
+          }}
+        >
           {selectedResources.map((resource, index) => (
-            <Dropdown
-              key={index}
-              overlay={<Menu>{menu(resource)}</Menu>}
-              trigger={'contextMenu'}>
+            <Dropdown key={index} overlay={<Menu>{menu(resource)}</Menu>} trigger={'contextMenu'}>
               <Button
                 onClick={(e) => {
                   if (!isEdited && activeResource?.id !== resource.id) {
@@ -373,16 +352,13 @@ const QuestionAnswerContent = () => {
                     e.preventDefault(); // Prevent the default click behavior
                   }
                 }}
-                type={
-                  activeResource?.id === resource.id
-                    ? 'default-active'
-                    : 'default'
-                }>
+                type={activeResource?.id === resource.id ? 'default-active' : 'default'}
+              >
                 {activeResource?.id === resource.id ? (
                   <p>
                     {
                       resource.resourceContents.find(
-                        (content) => content.langKey === selectedLanguage
+                        (content) => content.langKey === selectedLanguage,
                       )?.name
                     }
                   </p>
@@ -399,10 +375,11 @@ const QuestionAnswerContent = () => {
                       handleChangeResource(resource);
                     }}
                     okText={i18n.t('questionAnswer.okSwitch')}
-                    cancelText={i18n.t('questionAnswer.cancelSwitch')}>
+                    cancelText={i18n.t('questionAnswer.cancelSwitch')}
+                  >
                     {
                       resource.resourceContents.find(
-                        (content) => content.langKey === selectedLanguage
+                        (content) => content.langKey === selectedLanguage,
                       )?.name
                     }
                   </Popconfirm>
@@ -410,7 +387,7 @@ const QuestionAnswerContent = () => {
                   <p>
                     {
                       resource.resourceContents.find(
-                        (content) => content.langKey === selectedLanguage
+                        (content) => content.langKey === selectedLanguage,
                       )?.name
                     }
                   </p>
@@ -419,9 +396,7 @@ const QuestionAnswerContent = () => {
             </Dropdown>
           ))}
           {selectedResources.length < resources.length && (
-            <Dropdown
-              overlay={<Menu>{menuResources()}</Menu>}
-              trigger={'click'}>
+            <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
               <img
                 title={i18n.t({ message: 'actions.addResource' })}
                 style={{ cursor: 'pointer' }}
@@ -436,22 +411,23 @@ const QuestionAnswerContent = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '16px',
-            justifyContent: 'space-between'
-          }}>
+            justifyContent: 'space-between',
+          }}
+        >
           <div
             style={{
               padding: '12px 0',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
-            }}>
+              gap: '8px',
+            }}
+          >
             {Object.values(LANG_KEY).map((item) => (
               <Button
                 key={item}
                 onClick={() => setSelectedLanguage(item)}
-                type={`${
-                  selectedLanguage === item ? 'default-active' : 'default'
-                }`}>
+                type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
+              >
                 {item}
               </Button>
             ))}
@@ -459,7 +435,8 @@ const QuestionAnswerContent = () => {
             <Typography.Paragraph
               type="number"
               className={styles.counter}
-              editable={{ onChange: handleChangeCounter }}>
+              editable={{ onChange: handleChangeCounter }}
+            >
               {questionInfo?.counter}
             </Typography.Paragraph>
 
@@ -469,7 +446,8 @@ const QuestionAnswerContent = () => {
           <Button
             onClick={() => setIsModalOpen(!isModalOpen)}
             style={{ marginRight: '34px' }}
-            type="modal">
+            type="modal"
+          >
             {i18n.t('questionAnswer.cloneAnswer')}
           </Button>
 
@@ -487,9 +465,10 @@ const QuestionAnswerContent = () => {
           <>
             <Row
               style={{
-                marginRight: '24px'
+                marginRight: '24px',
               }}
-              gutter={[16, 24]}>
+              gutter={[16, 24]}
+            >
               <Col span={15}></Col>
 
               <Col span={15}>
@@ -512,9 +491,7 @@ const QuestionAnswerContent = () => {
                     <span className={styles.modifiedInfo}>
                       {`${i18n.t('questionAnswer.lastModified')}
                       ${answerFormData.modifiedInfo?.email}
-                      ${new Date(
-                        answerFormData.modifiedInfo?.data
-                      ).toLocaleString()}`}
+                      ${new Date(answerFormData.modifiedInfo?.data).toLocaleString()}`}
                     </span>
                   </Col>
                   <Col span={24}>
@@ -524,11 +501,8 @@ const QuestionAnswerContent = () => {
                           <Button
                             key={item}
                             onClick={() => setInstructionType(item)}
-                            type={
-                              item === instructionType
-                                ? 'default-active'
-                                : 'default'
-                            }>
+                            type={item === instructionType ? 'default-active' : 'default'}
+                          >
                             {i18n.t(item)}
                           </Button>
                         ))}

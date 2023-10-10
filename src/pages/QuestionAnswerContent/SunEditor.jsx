@@ -8,15 +8,13 @@ const MyComponent = ({
   setAnswerFormData,
   selectedLanguage,
   setIsEdited,
-  isNew = false
+  isNew = false,
 }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
-    (item) => item.langKey === selectedLanguage
+    (item) => item.langKey === selectedLanguage,
   );
 
-  const [editorContent, setEditorContent] = useState(
-    selectedLanguageItem?.stepDescription || ''
-  );
+  const [editorContent, setEditorContent] = useState(selectedLanguageItem?.stepDescription || '');
   useEffect(() => {
     if (!isNew && editorContent !== selectedLanguageItem?.stepDescription) {
       setIsEdited(true);
@@ -32,7 +30,7 @@ const MyComponent = ({
     setIsEdited(true);
     const updatedAnswerContent = { ...answerFormData };
     const index = answerFormData?.answerContents.findIndex(
-      (content) => content.langKey === selectedLanguage
+      (content) => content.langKey === selectedLanguage,
     );
     if (index !== -1) {
       updatedAnswerContent.answerContents[index].stepDescription = value;
@@ -66,9 +64,9 @@ const MyComponent = ({
               'strike',
               'blockquote',
               'link',
-              'table'
-            ]
-          ]
+              'table',
+            ],
+          ],
         }}
       />
     </div>

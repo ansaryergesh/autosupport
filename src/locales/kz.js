@@ -55,7 +55,8 @@ export default {
     forgetPassword: 'Құпия сөзіңізді ұмыттыңыз ба?',
     submit: 'Растау',
     unauthorized: 'Авторизациядан өтпеген',
-    accessDenied: 'Рұқсат жоқ'
+    accessDenied: 'Рұқсат жоқ',
+    notFound: 'Сұрау бойынша ақпарат табылмады',
   },
   columns: {
     name: 'Аталуы',
@@ -67,7 +68,7 @@ export default {
     numberOfRequests: 'Сұраулар саны',
     langKey: 'Тіл',
     organization: 'Ұйым',
-    password: 'Құпия сөз'
+    password: 'Құпия сөз',
   },
   actions: {
     addEmployee: 'Жаңа жұмысшыны қосу',
@@ -101,7 +102,7 @@ export default {
     deleteSelected: 'Таңдалғандарды өшіру',
     selected: 'Таңдалған',
     preview: 'Тексеру',
-    reset: 'Тазарту'
+    reset: 'Тазарту',
   },
   feedback: {
     MainTitle1: 'Сіз Freedom Broker әкімшілік панеліндесіз',
@@ -111,15 +112,14 @@ export default {
     ListTitle: 'Барлық пікірлер',
     averageRating: 'Орташа рейтинг',
     mark: 'Жаңа метка',
-    reviewsWith: 'Пікірдің балы'
+    reviewsWith: 'Пікірдің балы',
   },
   questionAnswer: {
     descriptionTitle: 'Қажетті қадамдар',
     FindMistake: 'Мәтіннен қате таптыңыз ба?',
     FixMistake: 'Таңдап, CTRL+Enter пернелерін басыңыз',
     rateAnswer: 'Жауап пайдалы болды ма?',
-    rateSubtitel:
-      'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
+    rateSubtitel: 'Жауапты 5 балдық жүйемен бағалаңыз, бұл бізге жақсырақ болуға көмектеседі',
     rateButton: 'Пікір қалдыру',
     comment: 'Сіздің пікіріңіз',
     characterLimit: 'Таңбалар шегіне жетті',
@@ -132,7 +132,7 @@ export default {
     lastModified: 'Соңғы өзгерістер енгізілді',
     cloneAnswer: 'Жауапты клондау',
     question: 'Сұрақ',
-    resourceClone: 'Жауапты клондау'
+    resourceClone: 'Жауапты клондау',
   },
   menu: {
     addCategory: 'Санат қосу',
@@ -142,7 +142,7 @@ export default {
     editQuestion: 'Сұрақты өзгерту',
     deleteQuestion: 'Сұрақты өшіру',
     openQuestion: 'Сұрақты ашу',
-    enterName: 'Аталуын жазыңыз'
+    enterName: 'Аталуын жазыңыз',
   },
   rule: {
     nameRequired: 'Аталуы міндетті',
@@ -155,13 +155,13 @@ export default {
     emailRequired: 'Пошта міндетті',
     questionRequired: 'Сұрақтың тақырыбы міндетті',
     answerRequired: 'Жауаб міндетті',
-    emailError: 'Почтаны дұрыс теріңіз'
+    emailError: 'Почтаны дұрыс теріңіз',
   },
   newAnswer: {
     answer: 'Жауабы',
     whatQuestion: 'Сұрақтың тақырыбы',
     inputEmail: 'Поштаңызды жазыңыз',
-    startTyping: 'Теруді бастаңыз...'
+    startTyping: 'Теруді бастаңыз...',
   },
   userProfile: {
     passwordUpdateNotification: 'Құпия сөз сәтті өзгертілді!',
@@ -181,16 +181,16 @@ export default {
     loginLabel: 'Логин',
     firstNameLabel: 'Аты',
     lastNameLabel: 'Тегі',
-    organizationLabel: 'Ұйымдастыру'
+    organizationLabel: 'Ұйымдастыру',
   },
   employeePage: {
     employeeDeletedNotification: 'Қызметкер жойылған!',
     employeeAddedNotification: 'Қызметкер қосылды!',
-    employeeEditedNotification: 'Қызметкер өңделді!'
+    employeeEditedNotification: 'Қызметкер өңделді!',
   },
   error: {
     user_not_found: 'Логин немесе пароль қате терілді!',
-    wrong: 'Системалық қате!'
+    wrong: 'Системалық қате!',
   },
   invalid: {
     user_not_found_exception: 'Пайдаланушы табылмады',
@@ -205,11 +205,10 @@ export default {
       'Супер администратор рөлімен пайдаланушыны тіркеу мүмкін емес',
     can_not_delete_user_with_super_admin_role:
       'Супер администратор рөлімен пайдаланушыны жою мүмкін емес',
-    no_user_was_found_for_this_activation_key:
-      'Бұл активация кілті үшін пайдаланушы табылмады',
-    no_user_was_found_for_this_deactivation_key:
-      'Бұл деактивация кілті үшін пайдаланушы табылмады',
+    no_user_was_found_for_this_activation_key: 'Бұл активация кілті үшін пайдаланушы табылмады',
+    no_user_was_found_for_this_deactivation_key: 'Бұл деактивация кілті үшін пайдаланушы табылмады',
     photo_not_deleted: 'Фотосурет жойылмады',
-    email_or_password: 'Жарамсыз пошта немесе кілтсөз'
-  }
+    email_or_password: 'Жарамсыз пошта немесе кілтсөз',
+  },
+  resourceQuestionNotFound: 'Сұрақта бұл ресурс табылмады',
 };

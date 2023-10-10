@@ -55,7 +55,8 @@ export default {
     forgetPassword: 'Forgot your password?',
     submit: 'Submit',
     unauthorized: 'Unauthorized',
-    accessDenied: 'Access denied'
+    accessDenied: 'Access denied',
+    notFound: 'Not found request',
   },
   columns: {
     name: 'Name',
@@ -67,7 +68,7 @@ export default {
     numberOfRequests: 'Number of requests',
     langKey: 'Language',
     organization: 'Organization',
-    password: 'Password'
+    password: 'Password',
   },
   actions: {
     addEmployee: 'Add new employee',
@@ -101,7 +102,7 @@ export default {
     deleteSelected: 'Delete selected',
     selected: 'Selected',
     preview: 'Preview',
-    reset: 'Reset'
+    reset: 'Reset',
   },
   feedback: {
     MainTitle1: 'You are in the Freedom Broker administration panel',
@@ -111,15 +112,14 @@ export default {
     ListTitle: 'All feedback',
     averageRating: 'Average rating',
     mark: 'New mark',
-    reviewsWith: 'Reviews with rating'
+    reviewsWith: 'Reviews with rating',
   },
   questionAnswer: {
     descriptionTitle: 'Necessary steps',
     FindMistake: 'Did you find a mistake in the text?',
     FixMistake: 'Highlight and press CTRL+Enter',
     rateAnswer: 'Was the answer helpful?',
-    rateSubtitel:
-      'Please rate the answer on a 5 point scale, it will help us to be better',
+    rateSubtitel: 'Please rate the answer on a 5 point scale, it will help us to be better',
     rateButton: 'Leave a review',
     comment: 'Your comment',
     characterLimit: 'Character limit reached',
@@ -132,7 +132,7 @@ export default {
     lastModified: 'The latest changes have been made',
     cloneAnswer: 'Clone answer',
     question: 'Question',
-    resourceClone: 'Clone answer from'
+    resourceClone: 'Clone answer from',
   },
   menu: {
     addCategory: 'Add category',
@@ -142,7 +142,7 @@ export default {
     editQuestion: 'Edit question',
     deleteQuestion: 'Delete question',
     openQuestion: 'Open question',
-    enterName: 'Enter name'
+    enterName: 'Enter name',
   },
   rule: {
     nameRequired: 'Name is required',
@@ -155,13 +155,13 @@ export default {
     emailRequired: 'Email is required',
     questionRequired: 'Question is required',
     answerRequired: 'Answer is required ',
-    emailError: 'Email is not valid'
+    emailError: 'Email is not valid',
   },
   newAnswer: {
     answer: 'Answer',
     whatQuestion: 'Question topic',
     inputEmail: 'Enter your email',
-    startTyping: 'Start typing...'
+    startTyping: 'Start typing...',
   },
   userProfile: {
     passwordUpdateNotification: 'Password updated succsesfully!',
@@ -181,16 +181,16 @@ export default {
     loginLabel: 'Login',
     firstNameLabel: 'First name',
     lastNameLabel: 'Last name',
-    organizationLabel: 'Organization'
+    organizationLabel: 'Organization',
   },
   employeePage: {
     employeeDeletedNotification: 'Employee deleted!',
     employeeAddedNotification: 'Employee added!',
-    employeeEditedNotification: 'Employee edited!'
+    employeeEditedNotification: 'Employee edited!',
   },
   error: {
     user_not_found: 'Password or login is incorrect',
-    wrong: 'Something went wrong!'
+    wrong: 'Something went wrong!',
   },
   invalid: {
     user_not_found_exception: 'User not found',
@@ -201,15 +201,12 @@ export default {
     login_already_used: 'Login already used',
     invalid_query_syntax: 'Invalid query syntax',
     user_is_not_authenticated: 'User is not authenticated',
-    can_not_register_user_with_super_admin_role:
-      'Cannot register user with super admin role',
-    can_not_delete_user_with_super_admin_role:
-      'Cannot delete user with super admin role',
-    no_user_was_found_for_this_activation_key:
-      'No user was found for this activation key',
-    no_user_was_found_for_this_deactivation_key:
-      'No user was found for this deactivation key',
+    can_not_register_user_with_super_admin_role: 'Cannot register user with super admin role',
+    can_not_delete_user_with_super_admin_role: 'Cannot delete user with super admin role',
+    no_user_was_found_for_this_activation_key: 'No user was found for this activation key',
+    no_user_was_found_for_this_deactivation_key: 'No user was found for this deactivation key',
     photo_not_deleted: 'Photo not deleted',
-    email_or_password: 'Invalid email or password'
-  }
+    email_or_password: 'Invalid email or password',
+  },
+  resourceQuestionNotFound: 'Resource to clone not found for that question',
 };

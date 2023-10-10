@@ -40,36 +40,26 @@ const AccountData = () => {
   const onFinish = (values) => {
     const data = {
       currentPassword: values.currentPassword,
-      newPassword: values.newPassword
+      newPassword: values.newPassword,
     };
     changePassword(data).then(() => {
       notification.info({
-        message: `${i18n.t('userProfile.passwordUpdateNotification')}`
+        message: `${i18n.t('userProfile.passwordUpdateNotification')}`,
       });
     });
   };
 
   return (
-    <Form
-      form={form}
-      onFinish={onFinish}
-      layout="vertical"
-      initialValues={data}>
+    <Form form={form} onFinish={onFinish} layout="vertical" initialValues={data}>
       <Col span={12}>
         <Title level={2}>{i18n.t('userProfile.accountDataTitle')}</Title>
         <Form.Item name="id" label={i18n.t('userProfile.idLabel')}>
-          <Input
-            defaultValue={data?.id}
-            readOnly
-            className={styles.customPlaceholder}
-          />
+          <Input defaultValue={data?.id} readOnly className={styles.customPlaceholder} />
         </Form.Item>
         <Form.Item name="email" label={i18n.t('userProfile.emailLabel')}>
           <Input defaultValue={data?.email} readOnly />
         </Form.Item>
-        <Form.Item
-          name="langKey"
-          label={i18n.t('userProfile.languageKeyLabel')}>
+        <Form.Item name="langKey" label={i18n.t('userProfile.languageKeyLabel')}>
           <Input defaultValue={data?.langKey} readOnly />
         </Form.Item>
         <Form.Item name="createdBy" label={i18n.t('userProfile.creatorLabel')}>
@@ -78,7 +68,8 @@ const AccountData = () => {
         <Form.Item
           name="currentPassword"
           label={i18n.t('userProfile.currentPasswordLabel')}
-          rules={[{ message: 'Please input your password!' }]}>
+          rules={[{ message: 'Please input your password!' }]}
+        >
           <Input.Password
             type="password"
             placeholder={i18n.t('userProfile.currentPasswordPlaceholder')}
@@ -88,7 +79,8 @@ const AccountData = () => {
           name="newPassword"
           label={i18n.t('userProfile.newPasswordLabel')}
           dependencies={['password']}
-          rules={[{ message: 'Please input your password!' }]}>
+          rules={[{ message: 'Please input your password!' }]}
+        >
           <Input.Password
             type="password"
             placeholder={i18n.t('userProfile.newPasswordPlaceholder')}
@@ -98,7 +90,8 @@ const AccountData = () => {
           style={{ float: 'right' }}
           className={styles.inputButton}
           type="submit"
-          htmlType="submit">
+          htmlType="submit"
+        >
           {i18n.t('userProfile.saveButton')}
         </Button>
       </Col>

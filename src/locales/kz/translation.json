@@ -55,7 +55,8 @@
     "forgetPassword": "Құпия сөзіңізді ұмыттыңыз ба?",
     "submit": "Растау",
     "unauthorized": "Авторизациядан өтпеген",
-    "accessDenied": "Рұқсат жоқ"
+    "accessDenied": "Рұқсат жоқ",
+    "notFound": "Сұрау бойынша ақпарат табылмады"
   },
   "columns": {
     "name": "Аталуы",
@@ -206,5 +207,6 @@
     "no_user_was_found_for_this_deactivation_key": "Бұл деактивация кілті үшін пайдаланушы табылмады",
     "photo_not_deleted": "Фотосурет жойылмады",
     "email_or_password": "Жарамсыз пошта немесе кілтсөз"
-  }
+  },
+  "resourceQuestionNotFound": "Сұрақта бұл ресурс табылмады"
 }

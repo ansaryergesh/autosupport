@@ -55,7 +55,8 @@
     "forgetPassword": "Forgot your password?",
     "submit": "Submit",
     "unauthorized": "Unauthorized",
-    "accessDenied": "Access denied"
+    "accessDenied": "Access denied",
+    "notFound": "Not found request"
   },
   "columns": {
     "name": "Name",
@@ -206,5 +207,6 @@
     "no_user_was_found_for_this_deactivation_key": "No user was found for this deactivation key",
     "photo_not_deleted": "Photo not deleted",
     "email_or_password": "Invalid email or password"
-  }
+  },
+  "resourceQuestionNotFound": "Resource to clone not found for that question"
 }
