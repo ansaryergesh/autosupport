@@ -130,7 +130,8 @@
     "cancelSwitch": "Go without saving data",
     "lastModified": "The latest changes have been made",
     "cloneAnswer": "Clone answer",
-    "question": "Question"
+    "question": "Question",
+    "resourceClone": "Clone answer from"
   },
   "menu": {
     "addCategory": "Add category",

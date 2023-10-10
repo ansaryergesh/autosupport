@@ -132,7 +132,8 @@ export default {
     cancelSwitch: 'Перейти без сохранения данных',
     lastModified: 'Последние изменения были внесены',
     cloneAnswer: 'Клонировать ответ',
-    question: 'Вопрос'
+    question: 'Вопрос',
+    resourceClone: 'Клонировать ответ с'
   },
   menu: {
     addCategory: 'Добавить категорию',
