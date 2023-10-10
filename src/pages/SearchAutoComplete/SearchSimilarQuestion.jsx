@@ -40,11 +40,13 @@ const SearchReference = ({
   };
 
   useEffect(() => {
-    setSelectedItems(
-      questionInfo?.children?.filter((item) =>
-        item.questionContents.find((item2) => item2.langKey === getLocale())
-      )
-    );
+    if(questionInfo) {
+      setSelectedItems(
+        questionInfo?.children?.filter((item) =>
+          item.questionContents.find((item2) => item2.langKey === getLocale())
+        ) || []
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -55,12 +57,14 @@ const SearchReference = ({
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 20
+      pageSize: 5
     };
     searchAction(params).then((response) => {
       setOptions(
         response?.data.map((item) => ({
-          value: item?.questionContents ? item?.questionContents.title : '',
+          value: findByLangKey(item?.questionContents)
+            ? findByLangKey(item?.questionContents).title
+            : '',
           id: item.questionContents?.id,
           itemValue: item
         }))
@@ -73,13 +77,13 @@ const SearchReference = ({
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
       notification.info({ message: i18n.t('alreadySimilar') });
     } else {
-      setSelectedItems([...selectedItems, selectedItem]);
+      setSelectedItems(selectedItems ? [...selectedItems, selectedItem] : [selectedItem]);
 
       setInputValue('');
       getOptionsDefault();
-      setInputValue(value);
     }
     setInputValue('');
+
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -96,7 +100,7 @@ const SearchReference = ({
         <AutoComplete
           onFocus={() => handleFocus(true)}
           onBlur={() => handleFocus(false)}
-          style={{ width: '100%', paddingTop: '16px' }}
+          style={{ width: '100%', paddingTop: '16px', marginBottom: '15px' }}
           options={options}
           onSelect={handleSelect}
           onSearch={handleSearch}

@@ -30,7 +30,7 @@ export const deleteQuestion = (id) => {
 export const getQuestions = (params) => {
   return axiosInstanceWithHeader.get('/api/admin/questions', {
     params: {
-      pageSize: 20,
+      pageSize: 5,
       query: '',
       langKey: getLocale().toUpperCase(),
       organizationCode:

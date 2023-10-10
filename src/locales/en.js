@@ -90,7 +90,7 @@ export default {
     addOrganization: 'Add organization',
     editText: 'Edit text',
     addSimilar: 'Add similar request',
-    addSimilarQuestion: 'Add similar question',
+    addSimilarQuestion: 'Link similar question',
     save: 'Save',
     saved: 'Saved',
     back: 'Back',
