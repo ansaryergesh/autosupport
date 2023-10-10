@@ -39,6 +39,10 @@ axiosInstance.interceptors.response.use(
       notification.error({
         message: i18n.t('commons.accessDenied')
       });
+    } else if (error?.status === '404') {
+      notification.error({
+        message: i18n.t('commons.notFound')
+      });
     } else if (error.response) {
       console.error(error.response.data.message);
       notification.error({
