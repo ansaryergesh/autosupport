@@ -131,7 +131,8 @@ export default {
     cancelSwitch: 'Деректерді сақтамай өту',
     lastModified: 'Соңғы өзгерістер енгізілді',
     cloneAnswer: 'Жауапты клондау',
-    question: 'Сұрақ'
+    question: 'Сұрақ',
+    resourceClone: 'Жауапты клондау'
   },
   menu: {
     addCategory: 'Санат қосу',

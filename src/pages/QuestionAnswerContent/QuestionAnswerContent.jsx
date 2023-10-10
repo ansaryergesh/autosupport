@@ -108,7 +108,7 @@ const QuestionAnswerContent = () => {
     });
   };
 
-  const menuDelete = (resource) => {
+  const menu = (resource) => {
     const filtered = (prev) =>
       prev.filter((selectedResource) => selectedResource.id !== resource.id);
 
@@ -132,16 +132,55 @@ const QuestionAnswerContent = () => {
           });
       }
     };
+
+    const handleCopy = (resourceId) => {
+      answerByQuestionAndResource(id, resourceId).then((res) => {
+        setAnswerFormData((prev) => {
+          const resultData = res.data.answerContents.map((item) => {
+            const matchedPrevId = prev.answerContents.find(
+              (item2) => item.langKey === item2.langKey
+            )?.id;
+            return { ...item, id: matchedPrevId };
+          });
+
+          return { ...prev, answerContents: resultData };
+        });
+      });
+    };
     return (
-      <Menu.Item
-        key={resource.id}
-        onClick={() => {
-          handleDelete();
-        }}>
-        {i18n.t('actions.delete')}
-      </Menu.Item>
+      <>
+        <Menu.Item
+          key={resource.id}
+          onClick={() => {
+            handleDelete();
+          }}>
+          {i18n.t('actions.delete')}
+        </Menu.Item>
+
+        {resource.id === activeResource.id &&
+          selectedResources?.map((res) => {
+            if (res.id !== activeResource.id) {
+              return (
+                <Menu.Item
+                  key={res.id}
+                  onClick={() => {
+                    handleCopy(res.id);
+                  }}>
+                  {`${i18n.t('questionAnswer.resourceClone')} 
+            "${
+              res.resourceContents.find(
+                (item) => item.langKey === selectedLanguage
+              )?.name
+            }"`}
+                </Menu.Item>
+              );
+            }
+          })}
+      </>
     );
   };
+
+  console.log(selectedResources);
 
   const history = useHistory();
 
@@ -324,7 +363,7 @@ const QuestionAnswerContent = () => {
           {selectedResources.map((resource, index) => (
             <Dropdown
               key={index}
-              overlay={<Menu>{menuDelete(resource)}</Menu>}
+              overlay={<Menu>{menu(resource)}</Menu>}
               trigger={'contextMenu'}>
               <Button
                 onClick={(e) => {
