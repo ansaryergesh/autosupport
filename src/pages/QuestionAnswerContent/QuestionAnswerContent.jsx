@@ -488,11 +488,15 @@ const QuestionAnswerContent = () => {
                         selectedLanguage={selectedLanguage}
                       />
                     </div>
-                    <span className={styles.modifiedInfo}>
-                      {`${i18n.t('questionAnswer.lastModified')}
+                    {activeResource.isNew ? null : (
+                      <span className={styles.modifiedInfo}>
+                        {`${i18n.t('questionAnswer.lastModified')}
                       ${answerFormData.modifiedInfo?.email}
-                      ${new Date(answerFormData.modifiedInfo?.data).toLocaleString()}`}
-                    </span>
+                      ${new Date(
+                        answerFormData.modifiedInfo?.data
+                      ).toLocaleString()}`}
+                      </span>
+                    )}
                   </Col>
                   <Col span={24}>
                     <div className={styles.card}>

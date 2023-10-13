@@ -132,6 +132,7 @@ const CloneAnswerModal = ({ isModalOpen, setIsModalOpen, activeResource, setAnsw
           total: totalPages,
           onChange: (page) => getQuestionsList(page, 5, inputValue),
           position: ['bottomCenter'],
+          pageSize: 5
         }}
       />
     </Modal>
