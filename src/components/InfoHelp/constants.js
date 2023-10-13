@@ -82,6 +82,12 @@ export const dataText = [
   
 При нажатии на карандаш пользователь может добавить количество кликов для поднятия ответа в списке популярных тем. Самое большое количество кликов определяет ответ на первое место по популярности. Также можно уменьшить количество кликов, если ответ уже не актуален.  
   
+Связать похожий вопрос
+Вопрос можно связать с другим вопросом и перенести всю информацию с текущего вопроса в другой расположенный в том же Ресурсе найдя и выбрав в поисковой строке нужный вопрос.
+Информацию, заполненную в другом вопросе на том же Ресурсе можно скопировать (клонировать), нажав на кнопку клонировать ответ.
+При нажатии на кнопку клонировать ответ всплывает модульное окно, в котором можно найти ответ, из которого будет переноситься информация.
+При добавлении нового Ресурса в вопросе и переходе на созданный Ресурс можно нажать левую кнопку мыши и всплывет модульное окно, в котором можно будет выбрать клонировать информацию уже из созданных вопросов других Ресурсов.
+
 Похожий запрос – это блок, который видят клиенты заходя в любой ответ. Сюда добавляются подходящие по смыслу и логике ответы. Например, пользователь читает ответ про то, что такое Акции. Логично в блок Похожие Запросы добавить вопросы, которые спровоцируют клиента пойти дальше: Как начать инвестировать? Как открыть счет? И так далее.
   
 Ключевые слова – это то, как клиент ищет свой вопрос на сайте. Каждое ключевое слово, по которому не был найден, ответ падает в раздел История поиска. Выбираем нужное слово и добавляем его в ключевые слова. 
@@ -92,7 +98,7 @@ export const dataText = [
     category: `Страница Тем с подвопросами с описанием, нажав на карандаш пользователь может отредактировать название вопроса и описание вопроса
 Так выглядит редактирование вопроса и его описания после нажатия на кнопку редактирования (Карандаш). Отредактированные данные сохраняются сразу после нажатия кнопки “Enter”.`,
 
-    langKey: 'RU',
+    langKey: 'RU'
   },
   {
     preview: `Сіз алдын ала қарау бетіндесіз. Бұл жерде тексттің сайттың клиенттік бөлігінде қалай бейнеленетінін көруге болады`,
@@ -174,6 +180,13 @@ export const dataText = [
   
 Қарындашты басқан кезде пайдаланушы танымал тақырыптар тізімінде жауапты көтеру үшін түймешіктер санын қоса алады. Ең көп перне басу танымалдылығы бойынша бірінші орындағы жауапты анықтайды. Егер жауап өзекті болмаса, перне басулар санын азайтуға болады.  
   
+Ұқсас сұрақты байланыстыру
+Іздеу жолағында қажетті сұрақты тауып, таңдау арқылы сұрақты басқа сұраққа байланыстырып, барлық ақпаратты ағымдағы сұрақтан сол Ресурста орналасқан басқасына тасымалдауға болады.
+Сол Ресурстағы басқа сұрақта толтырылған ақпаратты жауапты клондау түймесін басу арқылы көшіруге (клондауға) болады.
+Жауапты клондау түймешігін басқан кезде ақпарат тасымалданатын жауапты табуға болатын модульдік терезе қалқып шығады.
+Сұрақта жаңа Ресурс қосылғанда және жасалған Ресурсқа көшкенде тінтуірдің сол жақ түймешігін басуға болады және басқа Ресурстардың жасалған сұрақтарынан ақпаратты клондауды таңдауға болатын модульдік терезе қалқып шығады.
+
+
 Ұқсас сұрау - клиенттер кез келген жауапқа кіргенде көретін блок. Бұл жерге мағынасы мен қисыны жағынан лайықты жауаптар қосылады. Мысалы, пайдаланушы Акциялардың не екені туралы жауап оқиды. Осыған ұқсас Сұраулар блогына клиентті ары қарай жүруге итермелейтін мәселелерді қосу қисынды: Инвестициялауды қалай бастауға болады? Шотты қалай ашуға болады? Және тағы сондай сондай.
   
 Түйінді сөздер - клиенттің өз мәселесін сайттан қалай іздеуі. Табылмаған әрбір түйінді сөз Іздеу тарихы бөліміне түседі. Қажетті сөзді таңдап, түйінді сөздерге қосамыз.
@@ -185,7 +198,7 @@ export const dataText = [
     category: `Шағын сұрақтар мен сипаттаманы қамтитын Тақырыптар беті қарындашты басу арқылы пайдаланушы сұрақтың атауын және сұрақтың сипаттамасын өңдей алады
 Сұрақ пен оның сипаттамасын өңдеу түймешігін (Қарындаш) басқаннан кейін редакциялау осылай көрінеді. Реттелген деректер "Enter" түймешігін басқаннан кейін бірден сақталады.`,
 
-    langKey: 'KZ',
+    langKey: 'KZ'
   },
   {
     preview: `You are on the preview page. Here you can see how the text will be displayed in the client part of the site`,
@@ -269,6 +282,10 @@ After switching to preview, you can check how the new page will be displayed and
   
 By clicking on the pencil, the user can add the number of clicks to raise the answer in the list of popular topics. The largest number of clicks determines the answer to the first place in popularity. You can also reduce the number of clicks if the answer is no longer relevant. 
   
+Link similar question
+You can link a question to another question and transfer all the information from the current question to another one located in the same Resource by finding and selecting the desired question in the search bar.
+Information completed in another question on the same Resource can be copied (cloned) by clicking on the Clone Answer button.
+
 Similar Request is a block that customers see when entering any response. Answers that are appropriate in meaning and logic are added here. For example, a user reads an answer about what Stocks are. It’s logical to add to the Similar Requests block questions that will incite the customer to go further: How to start investing? How to open an account? And so on.
   
 Keywords are how the customer searches for question on the site. For each keyword that was not found, the answer falls into the Search History section. Select the desired word and add it to the keywords. Next, in the Edit Response section, we can add this keyword to the desired response so that in the future it will meet this request from customers.
@@ -280,6 +297,6 @@ Tags are intended for quick and easy search of answers by users of the administr
 This is what editing a question and its description looks like after clicking on the edit button (Pencil).
 The edited data is saved immediately after pressing the “Enter” button.`,
 
-    langKey: 'EN',
-  },
+    langKey: 'EN'
+  }
 ];
