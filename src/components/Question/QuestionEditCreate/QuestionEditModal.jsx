@@ -21,6 +21,7 @@ const QuestionEditModal = ({ isModalOpen = false, handleModal, questionInfo, get
   };
 
   const { questionContents } = questionInfo;
+  console.log(questionInfo)
   const mergedCategories = initialQuestion?.map((initialCategory) => {
     const existingCategory = questionContents?.find(
       (item) => item.langKey === initialCategory.langKey,
@@ -52,6 +53,15 @@ const QuestionEditModal = ({ isModalOpen = false, handleModal, questionInfo, get
         onFinish={handleSubmit}
         autoComplete="off"
       >
+        <Form.Item label={i18n.t('code')}>
+          <Form.Item
+            initialValue={questionInfo?.code}
+            name={'code'}
+            rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
+          >
+            <Input placeholder={`${i18n.t('code')} ${questionInfo.code}`} />
+          </Form.Item>
+        </Form.Item>
         {finalContent.map((question, index) => (
           <Form.Item key={index} label={`Title ${question.langKey}`}>
             <Form.Item

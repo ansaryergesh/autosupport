@@ -145,6 +145,7 @@ export default {
     enterName: 'Аталуын жазыңыз',
   },
   rule: {
+    codeRequired: 'Код міндетті',
     nameRequired: 'Аталуы міндетті',
     lastNameRequired: 'Тегі міндетті',
     passwordRequired: 'Құпия сөзі міндетті',

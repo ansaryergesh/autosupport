@@ -145,6 +145,7 @@ export default {
     enterName: 'Enter name',
   },
   rule: {
+    codeRequired: 'Code is required',
     nameRequired: 'Name is required',
     lastNameRequired: 'Last name is required',
     passwordRequired: 'Password is required',

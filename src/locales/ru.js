@@ -145,6 +145,7 @@ export default {
     enterName: 'Введите наименование',
   },
   rule: {
+    codeRequired: 'Код обязателен',
     nameRequired: 'Наименование обязательно',
     lastNameRequired: 'Фамилия обязательна',
     passwordRequired: 'Пароль обязателен',
