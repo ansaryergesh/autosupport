@@ -14,28 +14,28 @@ const { RangePicker } = DatePicker;
 const rangePresets = [
   {
     label: 'Последние 7 дней',
-    value: [dayjs().subtract(7, 'd'), dayjs()],
+    value: [dayjs().subtract(7, 'd'), dayjs()]
   },
   {
     label: 'Последние 14 дней',
-    value: [dayjs().subtract(14, 'd'), dayjs()],
+    value: [dayjs().subtract(14, 'd'), dayjs()]
   },
   {
     label: 'Последний месяц',
-    value: [dayjs().subtract(1, 'M'), dayjs()],
+    value: [dayjs().subtract(1, 'M'), dayjs()]
   },
   {
     label: 'Последние 3 месяца',
-    value: [dayjs().subtract(3, 'M'), dayjs()],
+    value: [dayjs().subtract(3, 'M'), dayjs()]
   },
   {
     label: 'Последний год',
-    value: [dayjs().subtract(1, 'y'), dayjs()],
+    value: [dayjs().subtract(1, 'y'), dayjs()]
   },
   {
     label: 'За все время',
-    value: [dayjs(0), dayjs()],
-  },
+    value: [dayjs(0), dayjs()]
+  }
 ];
 
 const ReviewsList = () => {
@@ -50,8 +50,12 @@ const ReviewsList = () => {
 
   const exportFeedback = () =>
     getFeedbackExcel(
-      period?.[0] ? dayjs(period[0]).toISOString() : '2022-01-01',
-      period?.[1] ? dayjs(period[1]).toISOString() : dayjs().toISOString(),
+      period?.[0]
+        ? dayjs(period[0]).startOf('day').format('YYYY-MM-DD HH:mm:ss')
+        : '1970-01-01T00:00:00.000Z',
+      period?.[1]
+        ? dayjs(period[1]).endOf('day').format('YYYY-MM-DD HH:mm:ss')
+        : dayjs().toISOString()
     );
 
   const handleDateChange = (value) => {
@@ -67,14 +71,16 @@ const ReviewsList = () => {
 
   return (
     <div className={styles.box}>
-      <TypographyHead content={i18n.t('feedback.ListTitle')} type={TypoGraphyType.SECONDARY_HEAD} />
+      <TypographyHead
+        content={i18n.t('feedback.ListTitle')}
+        type={TypoGraphyType.SECONDARY_HEAD}
+      />
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          marginBottom: '16px',
-        }}
-      >
+          marginBottom: '16px'
+        }}>
         <RangePicker
           className={styles.datePicker}
           value={period}
@@ -84,25 +90,27 @@ const ReviewsList = () => {
         <Button
           type="primary"
           onClick={() => handleExport(exportFeedback, i18n.t('reviews'))}
-          className={styles.btnDownload}
-        >
+          className={styles.btnDownload}>
           {i18n.t('actions.downloadReviews')}
         </Button>
       </div>
       <Row justify={'center'} gutter={[0, 16]}>
         {data?.length === 0 ? (
           <Col span={24}>
-            <Empty imageStyle={{ height: '100%' }} description={i18n.t('noData')} />
+            <Empty
+              imageStyle={{ height: '100%' }}
+              description={i18n.t('noData')}
+            />
           </Col>
         ) : (
-          data?.map(
-            (q) =>
-              q.text?.length > 0 && (
-                <Col span={24} className={styles.questionBox} key={q.id}>
-                  <span>{q.text}</span>
-                </Col>
-              ),
-          )
+          data
+            ?.filter((item) => item.text?.length > 0)
+            .map((q) => (
+              <Col span={24} className={styles.questionBox} key={q.id}>
+                <span>{q.text}</span>
+              </Col>
+            ))
+            .slice(0, 5)
         )}
         {data?.length > 0 && (
           <>
