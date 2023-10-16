@@ -55,13 +55,17 @@ const ReviewsList = () => {
         : '1970-01-01T00:00:00.000Z',
       period?.[1]
         ? dayjs(period[1]).endOf('day').format('YYYY-MM-DD HH:mm:ss')
-        : dayjs().toISOString()
+        : dayjs().endOf('day').format('YYYY-MM-DD HH:mm:ss')
     );
 
   const handleDateChange = (value) => {
     setPeriod(value);
-    const startDate = value[0]?.toISOString();
-    const endDate = value[1]?.toISOString();
+    const startDate = dayjs(value[0])
+      ?.startOf('day')
+      .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+    const endDate = dayjs(value[1])
+      ?.endOf('day')
+      .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
     getReviewsList(startDate, endDate);
   };
 
