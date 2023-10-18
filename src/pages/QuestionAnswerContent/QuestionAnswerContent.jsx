@@ -299,8 +299,7 @@ const QuestionAnswerContent = () => {
   };
 
   const handleSubmit = (withPreview = true) => {
-    const similarQuestionsIds = selectedSimilarQuestion.map((item) => item?.id);
-
+    const similarQuestionsIds = selectedSimilarQuestion.map((item) => item?.questionId);
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
