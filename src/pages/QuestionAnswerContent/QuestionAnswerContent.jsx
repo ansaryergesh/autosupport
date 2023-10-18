@@ -80,16 +80,15 @@ const QuestionAnswerContent = () => {
       });
   }, [id]);
 
-  useEffect(() => {
-    getRelativeQuestions(id, activeResource?.id).then((res) => {
+  const getSimilarQuestions = (activeResourceId) => {
+    getRelativeQuestions(id, activeResourceId).then((res) => {
       setSelectedSimilarQuestion(
         res.data?.filter((item) =>
           item.questionContent.find((item2) => item2.langKey === getLocale())
         ) || []
       );
     });
-  }, [activeResource.id, id]);
-
+  }
   const menuResources = () => {
     return resources.map((resource) => {
       if (!selectedResources.some((selected) => selected.id === resource.id)) {
@@ -197,6 +196,7 @@ const QuestionAnswerContent = () => {
         setSelectedResources(res.data.resources || []);
         setQuestionInfo(res.data);
         res.data.resources && setActiveResource(res.data.resources[0]);
+        getSimilarQuestions(res.data.resources[0]?.id || null )
       })
       .finally(() => {
         setLoading(false);
