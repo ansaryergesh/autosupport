@@ -9,7 +9,7 @@ import { i18n } from '../../utils/i18next';
 const CardComponent = ({ data }) => {
   const { Text } = Typography;
   const questions = data?.questions;
-  const maxQuestionsToShow = 4; // Maximum number of questions to show without ellipsis
+  const maxQuestionsToShow = 4;
 
   return (
     <div className={styles.card}>
@@ -42,7 +42,8 @@ const CardComponent = ({ data }) => {
         {questions?.length > maxQuestionsToShow && (
           <Link to={`/category/${data?.id}`}>
             <Text className={styles.more}>
-              ... {i18n.t('more')} {questions.length - maxQuestionsToShow} {i18n.t('moreQuestions')}
+              ... {i18n.t('more')} {questions.length - maxQuestionsToShow}{' '}
+              {i18n.t('moreQuestions')}
             </Text>
           </Link>
         )}

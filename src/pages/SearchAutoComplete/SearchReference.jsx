@@ -1,14 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { AutoComplete, notification } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import TypographyHead from '../../components/Typography/TypographyHead.jsx';
-import { TypoGraphyType } from '../../components/Typography/constants.js';
+import TypographyHead from 'components/Typography/TypographyHead.jsx';
+import { TypoGraphyType } from 'components/Typography/constants.js';
 import styles from './index.module.less';
-import { i18n } from '../../utils/i18next.js';
-import Input from '../../components/Input/Input.jsx';
-import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
-import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
+import { i18n } from 'utils/i18next.js';
+import Input from 'components/Input/Input.jsx';
 
 const SearchReference = ({
   searchAction,
@@ -17,21 +14,20 @@ const SearchReference = ({
   keyItem,
   setQuestionInfo,
   questionInfo,
-  selectedLanguage,
+  selectedLanguage
 }) => {
   const [options, setOptions] = useState([]);
   const [langSelectedItem, setLangSelectedItem] = useState(
-    questionInfo.questionContents?.find((item) => item.langKey === selectedLanguage)[keyItem] || [],
+    questionInfo.questionContents?.find(
+      (item) => item.langKey === selectedLanguage
+    )[keyItem] || []
   );
   const getOptionsDefault = () => {
     searchAction().then((response) => {
-      setOptions(response?.data.map((item) => ({ value: item.text, id: item.id })));
+      setOptions(
+        response?.data.map((item) => ({ value: item.text, id: item.id }))
+      );
     });
-  };
-  const [focus, setFocus] = useState(false);
-
-  const handleFocus = (focused) => {
-    setFocus(focused);
   };
 
   useEffect(() => {
@@ -40,8 +36,9 @@ const SearchReference = ({
 
   useEffect(() => {
     setLangSelectedItem(
-      questionInfo.questionContents?.find((item) => item.langKey === selectedLanguage)[keyItem] ||
-        [],
+      questionInfo.questionContents?.find(
+        (item) => item.langKey === selectedLanguage
+      )[keyItem] || []
     );
   }, [questionInfo]);
 
@@ -49,34 +46,40 @@ const SearchReference = ({
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 20,
+      pageSize: 20
     };
     searchAction(params).then((response) => {
-      setOptions(response?.data.map((item) => ({ value: item.text, id: item.id })));
+      setOptions(
+        response?.data.map((item) => ({ value: item.text, id: item.id }))
+      );
     });
   };
 
   const handleSelect = (value, option) => {
     const selectedItem = { id: option.id, text: value };
-    const updatedQuestionContents = questionInfo.questionContents?.map((questionContent) => {
-      if (questionContent.langKey === selectedLanguage) {
-        // Update the tags and keyWords arrays for this questionContent
-        return {
-          ...questionContent,
-          [keyItem]: [...questionContent[keyItem], selectedItem],
-        };
+    const updatedQuestionContents = questionInfo.questionContents?.map(
+      (questionContent) => {
+        if (questionContent.langKey === selectedLanguage) {
+          return {
+            ...questionContent,
+            [keyItem]: [...questionContent[keyItem], selectedItem]
+          };
+        }
+        return questionContent;
       }
-      return questionContent; // Return unchanged questionContent for other langKeys
-    });
+    );
 
     if (langSelectedItem?.some((item) => item.id === selectedItem.id)) {
       notification.info({
-        message: keyItem === 'keyWords' ? i18n.t('alreadyKeyword') : i18n.t('alreadyTag'),
+        message:
+          keyItem === 'keyWords'
+            ? i18n.t('alreadyKeyword')
+            : i18n.t('alreadyTag')
       });
     } else {
       setQuestionInfo({
         ...questionInfo,
-        questionContents: updatedQuestionContents,
+        questionContents: updatedQuestionContents
       });
       setInputValue('');
       getOptionsDefault();
@@ -92,20 +95,21 @@ const SearchReference = ({
       if (options.length === 0) {
         addNewRecords({ id: null, text: inputValue }).then((res) => {
           selectedItem = res.data;
-          const updatedQuestionContents = questionInfo.questionContents.map((questionContent) => {
-            if (questionContent.langKey === selectedLanguage) {
-              // Update the tags and keyWords arrays for this questionContent
-              return {
-                ...questionContent,
-                [keyItem]: [...questionContent[keyItem], selectedItem],
-              };
+          const updatedQuestionContents = questionInfo.questionContents.map(
+            (questionContent) => {
+              if (questionContent.langKey === selectedLanguage) {
+                return {
+                  ...questionContent,
+                  [keyItem]: [...questionContent[keyItem], selectedItem]
+                };
+              }
+              return questionContent;
             }
-            return questionContent; // Return unchanged questionContent for other langKeys
-          });
+          );
 
           setQuestionInfo({
             ...questionInfo,
-            questionContents: updatedQuestionContents,
+            questionContents: updatedQuestionContents
           });
         });
       }
@@ -115,19 +119,20 @@ const SearchReference = ({
 
   const handleRemoveSelected = (id) => {
     const newData = langSelectedItem?.filter((item) => item.id !== id);
-    const updatedQuestionContents = questionInfo.questionContents.map((questionContent) => {
-      if (questionContent.langKey === selectedLanguage) {
-        // Update the tags and keyWords arrays for this questionContent
-        return {
-          ...questionContent,
-          [keyItem]: newData,
-        };
+    const updatedQuestionContents = questionInfo.questionContents.map(
+      (questionContent) => {
+        if (questionContent.langKey === selectedLanguage) {
+          return {
+            ...questionContent,
+            [keyItem]: newData
+          };
+        }
+        return questionContent;
       }
-      return questionContent; // Return unchanged questionContent for other langKeys
-    });
+    );
     setQuestionInfo({
       ...questionInfo,
-      questionContents: updatedQuestionContents,
+      questionContents: updatedQuestionContents
     });
   };
 
@@ -137,15 +142,12 @@ const SearchReference = ({
 
       <div className={styles.searchBox}>
         <AutoComplete
-          onFocus={() => handleFocus(true)}
-          onBlur={() => handleFocus(false)}
-          style={{ width: '100%', paddingTop: '16px' }}
+          className={styles.autoComplete}
           options={options}
           onSelect={handleSelect}
           onSearch={handleSearch}
           value={inputValue}
-          onChange={(value) => setInputValue(value)}
-        >
+          onChange={(value) => setInputValue(value)}>
           <Input.Search
             placeholder={i18n.t('search')}
             className={styles.searchInput}
@@ -158,16 +160,7 @@ const SearchReference = ({
         <div>
           {Array.isArray(langSelectedItem) &&
             langSelectedItem.map((item, index) => (
-              <div
-                key={item.id + '_' + index}
-                style={{
-                  display: 'flex',
-                  padding: '18px',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center',
-                }}
-              >
+              <div key={item.id + '_' + index} className={styles.selectedItems}>
                 <span key={item.id}>{item.text}</span>
                 <CloseOutlined
                   className={styles.xBtn}
