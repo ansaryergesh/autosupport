@@ -299,7 +299,7 @@ const QuestionAnswerContent = () => {
   };
 
   const handleSubmit = (withPreview = true) => {
-    const similarQuestionsIds = selectedSimilarQuestion.map((item) => item?.questionId);
+    const similarQuestionsIds = selectedSimilarQuestion.map((item) => item?.id);
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
@@ -584,7 +584,8 @@ const QuestionAnswerContent = () => {
                         searchAction={getQuestions}
                         selectedItems={selectedSimilarQuestion}
                         setSelectedItems={setSelectedSimilarQuestion}
-                        questionInfo={null}
+                        questionInfo={questionInfo}
+                        withoutQuestionInfo={true}
                       />
                     </div>
                   </Col>

@@ -13,7 +13,8 @@ const SearchReference = ({
   selectedItems,
   setSelectedItems,
   title,
-  questionInfo
+  questionInfo,
+  withoutQuestionInfo=false,
 }) => {
   const [options, setOptions] = useState([]);
 
@@ -34,7 +35,7 @@ const SearchReference = ({
   };
 
   useEffect(() => {
-    if (questionInfo) {
+    if (!withoutQuestionInfo) {
       setSelectedItems(
         questionInfo?.children?.filter((item) =>
           item.questionContents.find((item2) => item2.langKey === getLocale())
@@ -86,11 +87,6 @@ const SearchReference = ({
     setSelectedItems(newData);
   };
 
-  const handleRemoveRelated = (id) => {
-    const newData = selectedItems?.filter((item) => item.questionId !== id);
-    setSelectedItems(newData);
-  };
-
   return (
     <div>
       <TypographyHead type={TypoGraphyType.SUB_HEAD} content={title} />
@@ -126,11 +122,7 @@ const SearchReference = ({
                 </span>
                 <CloseOutlined
                   className={styles.xBtn}
-                  onClick={() => {
-                    item.questionId
-                      ? handleRemoveRelated(item.questionId)
-                      : handleRemoveSelected(item.id);
-                  }}
+                  onClick={() => {handleRemoveSelected(item.id);}}
                 />
               </div>
             ))}
