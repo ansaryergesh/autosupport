@@ -7,7 +7,12 @@ import { initialQuestion } from '../constants.js';
 import { editCategoryQuestion } from '../../../service/Question/index.js';
 import { i18n } from '../../../utils/i18next.js';
 
-const QuestionEditModal = ({ isModalOpen = false, handleModal, questionInfo, getCategoryAll }) => {
+const QuestionEditModal = ({
+  isModalOpen = false,
+  handleModal,
+  questionInfo,
+  getCategoryAll
+}) => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = (values) => {
     setLoading(true);
@@ -21,10 +26,9 @@ const QuestionEditModal = ({ isModalOpen = false, handleModal, questionInfo, get
   };
 
   const { questionContents } = questionInfo;
-  console.log(questionInfo)
   const mergedCategories = initialQuestion?.map((initialCategory) => {
     const existingCategory = questionContents?.find(
-      (item) => item.langKey === initialCategory.langKey,
+      (item) => item.langKey === initialCategory.langKey
     );
 
     if (existingCategory) {
@@ -32,7 +36,7 @@ const QuestionEditModal = ({ isModalOpen = false, handleModal, questionInfo, get
         ...initialCategory,
         title: existingCategory.title,
         stepDescription: existingCategory.stepDescription,
-        id: existingCategory.id,
+        id: existingCategory.id
       };
     }
 
@@ -45,42 +49,44 @@ const QuestionEditModal = ({ isModalOpen = false, handleModal, questionInfo, get
       confirmLoading={loading}
       open={isModalOpen}
       footer={null}
-      onCancel={handleModal}
-    >
+      onCancel={handleModal}>
       <Form
         layout="vertical"
         initialValues={{ finalContent }}
         onFinish={handleSubmit}
-        autoComplete="off"
-      >
+        autoComplete="off">
         {finalContent.map((question, index) => (
           <Form.Item key={index} label={`Title ${question.langKey}`}>
             <Form.Item
               initialValue={question?.title}
               name={['questionContents', index, 'title']}
-              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
-            >
-              <Input placeholder={`${i18n.t('menu.enterName')} ${question.langKey}`} />
+              rules={[
+                { required: true, message: i18n.t('rule.nameRequired') }
+              ]}>
+              <Input
+                placeholder={`${i18n.t('menu.enterName')} ${question.langKey}`}
+              />
             </Form.Item>
             <Form.Item
               initialValue={question?.stepDescription}
               name={['questionContents', index, 'stepDescription']}
-              rules={[{ required: true, message: i18n.t('rule.descriptionRequired') }]}
-            >
-              <Input placeholder={`${i18n.t('description')} ${question.langKey}`} />
+              rules={[
+                { required: true, message: i18n.t('rule.descriptionRequired') }
+              ]}>
+              <Input
+                placeholder={`${i18n.t('description')} ${question.langKey}`}
+              />
             </Form.Item>
             <Form.Item
               name={['questionContents', index, 'langKey']}
               initialValue={question.langKey}
-              style={{ display: 'none' }}
-            >
+              style={{ display: 'none' }}>
               <Input type="hidden" />
             </Form.Item>
             <Form.Item
               name={['questionContents', index, 'id']}
               initialValue={question.id}
-              style={{ display: 'none' }}
-            >
+              style={{ display: 'none' }}>
               <Input type="hidden" />
             </Form.Item>
           </Form.Item>
@@ -99,6 +105,6 @@ QuestionEditModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   questionInfo: PropTypes.object,
-  getCategoryAll: PropTypes.func,
+  getCategoryAll: PropTypes.func
 };
 export default QuestionEditModal;

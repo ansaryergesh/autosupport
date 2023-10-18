@@ -1,50 +1,44 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { AutoComplete, notification } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import TypographyHead from '../../components/Typography/TypographyHead.jsx';
-import { TypoGraphyType } from '../../components/Typography/constants.js';
+import TypographyHead from 'components/Typography/TypographyHead.jsx';
+import { TypoGraphyType } from 'components/Typography/constants.js';
 import styles from './index.module.less';
-import { findByLangKey } from '../../helpers/findByLangKey.js';
-import { getLocale, i18n } from '../../utils/i18next.js';
-import Input from '../../components/Input/Input.jsx';
-import { ReactComponent as SearchIcon } from 'images/SearchIcon.svg';
-import { ReactComponent as SearchIconFocus } from 'images/SearchIconFocus.svg';
+import { findByLangKey } from 'helpers/findByLangKey.js';
+import { getLocale, i18n } from 'utils/i18next.js';
+import Input from 'components/Input/Input.jsx';
 
 const SearchReference = ({
   searchAction,
   selectedItems,
   setSelectedItems,
   title,
-  questionInfo,
+  questionInfo
 }) => {
   const [options, setOptions] = useState([]);
 
   const getOptionsDefault = () => {
     searchAction().then((response) => {
       setOptions(
-        response?.data.map((item) => ({
-          value: findByLangKey(item?.questionContents)
-            ? findByLangKey(item?.questionContents).title
-            : '',
-          id: item.questionContents?.id,
-          itemValue: item,
-        })),
+        response?.data
+          .filter((option) => option.id !== questionInfo.id)
+          .map((item) => ({
+            value: findByLangKey(item?.questionContents)
+              ? findByLangKey(item?.questionContents).title
+              : '',
+            id: item.id,
+            itemValue: item
+          }))
       );
     });
-  };
-  const [focus, setFocus] = useState(false);
-
-  const handleFocus = (focused) => {
-    setFocus(focused);
   };
 
   useEffect(() => {
     if (questionInfo) {
       setSelectedItems(
         questionInfo?.children?.filter((item) =>
-          item.questionContents.find((item2) => item2.langKey === getLocale()),
-        ) || [],
+          item.questionContents.find((item2) => item2.langKey === getLocale())
+        ) || []
       );
     }
   }, []);
@@ -57,7 +51,7 @@ const SearchReference = ({
   const handleSearch = (value) => {
     const params = {
       query: value,
-      pageSize: 5,
+      pageSize: 5
     };
     searchAction(params).then((response) => {
       setOptions(
@@ -66,8 +60,8 @@ const SearchReference = ({
             ? findByLangKey(item?.questionContents).title
             : '',
           id: item.questionContents?.id,
-          itemValue: item,
-        })),
+          itemValue: item
+        }))
       );
     });
   };
@@ -77,7 +71,9 @@ const SearchReference = ({
     if (selectedItems?.some((item) => item.id === selectedItem.id)) {
       notification.info({ message: i18n.t('alreadySimilar') });
     } else {
-      setSelectedItems(selectedItems ? [...selectedItems, selectedItem] : [selectedItem]);
+      setSelectedItems(
+        selectedItems ? [...selectedItems, selectedItem] : [selectedItem]
+      );
 
       setInputValue('');
       getOptionsDefault();
@@ -85,9 +81,13 @@ const SearchReference = ({
     setInputValue('');
   };
 
-  // eslint-disable-next-line no-unused-vars
   const handleRemoveSelected = (id) => {
     const newData = selectedItems?.filter((item) => item.id !== id);
+    setSelectedItems(newData);
+  };
+
+  const handleRemoveRelated = (id) => {
+    const newData = selectedItems?.filter((item) => item.questionId !== id);
     setSelectedItems(newData);
   };
 
@@ -97,16 +97,16 @@ const SearchReference = ({
 
       <div className={styles.searchBox}>
         <AutoComplete
-          onFocus={() => handleFocus(true)}
-          onBlur={() => handleFocus(false)}
-          style={{ width: '100%', paddingTop: '16px', marginBottom: '15px' }}
+          className={styles.autoComplete}
           options={options}
           onSelect={handleSelect}
           onSearch={handleSearch}
           value={inputValue}
-          onChange={(value) => setInputValue(value)}
-        >
-          <Input.Search className={styles.searchInput} placeholder={i18n.t('search')} />
+          onChange={(value) => setInputValue(value)}>
+          <Input.Search
+            className={styles.searchInput}
+            placeholder={i18n.t('search')}
+          />
         </AutoComplete>
       </div>
 
@@ -114,22 +114,23 @@ const SearchReference = ({
         <div>
           {Array.isArray(selectedItems) &&
             selectedItems.map((item) => (
-              <div
-                key={item.id}
-                style={{
-                  display: 'flex',
-                  padding: '18px',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid #d9d9d9',
-                  alignItems: 'center',
-                }}
-              >
+              <div key={item.id} className={styles.selectedItems}>
                 <span key={item.id}>
-                  {item.questionContents?.find((item) => item.langKey === getLocale())?.title}
+                  {item.questionContents
+                    ? item.questionContents.find(
+                        (question) => question.langKey === getLocale()
+                      )?.title
+                    : item.questionContent.find(
+                        (question) => question.langKey === getLocale()
+                      )?.title}
                 </span>
                 <CloseOutlined
                   className={styles.xBtn}
-                  onClick={() => handleRemoveSelected(item.id)}
+                  onClick={() => {
+                    item.questionId
+                      ? handleRemoveRelated(item.questionId)
+                      : handleRemoveSelected(item.id);
+                  }}
                 />
               </div>
             ))}

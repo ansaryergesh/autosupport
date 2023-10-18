@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getResources } from '../../service/Resources/index.js';
-import Button from '../../components/Button/Button.jsx';
+import Button from 'components/Button/Button.jsx';
 import {
   editCategoryQuestion,
   getQuestionById,
   getQuestions,
+  getRelativeQuestions
 } from '../../service/Question/index.js';
-import JHeader from '../../components/JHeader/JHeader.jsx';
-import { initialQuestionDto } from '../../components/JHeader/constants.js';
+import JHeader from 'components/JHeader/JHeader.jsx';
+import { initialQuestionDto } from 'components/JHeader/constants.js';
 import Plus from 'images/plus.svg';
-import { Col, Dropdown, notification, Row, Menu, Empty, Typography, Popconfirm, Spin } from 'antd';
+import {
+  Col,
+  Dropdown,
+  notification,
+  Row,
+  Menu,
+  Empty,
+  Typography,
+  Popconfirm,
+  Spin
+} from 'antd';
 import SunEditor from './SunEditor.jsx';
 import styles from './index.module.less';
-// import TypographyHead from '../../components/Typography/TypographyHead.jsx';
-// import { TypoGraphyType } from '../../components/Typography/constants.js';
 import { INSTRUCTION_TYPE, LANG_KEY } from '../../constants/index.js';
-import { i18n } from '../../utils/i18next.js';
-import ImageUpload from '../../components/ImageUpload/ImageUpload.jsx';
-import { VideoInstruction } from '../../components/VideoInstruction/VideoInstruction';
+import { getLocale, i18n } from 'utils/i18next.js';
+import ImageUpload from 'components/ImageUpload/ImageUpload.jsx';
+import { VideoInstruction } from 'components/VideoInstruction/VideoInstruction';
 import { searchKeyWords, manageKeyword } from '../../service/Keywords/index.js';
 import SearchReference from '../SearchAutoComplete/SearchReference';
 import { manageTag, searchTags } from '../../service/Tags/index.js';
@@ -28,11 +37,11 @@ import {
   answerByQuestionAndResource,
   addAnswerToQuestion,
   editAnswerQuestion,
-  deleteAnswerById,
+  deleteAnswerById
 } from '../../service/Answer/index.js';
 import { useHistory } from 'react-router-dom';
 import { LocalStorageKeys } from '../../storage/localStorageKey.js';
-import CloneAnswerModal from '../../components/CloneAnswerModal/CloneAnswerModal.jsx';
+import CloneAnswerModal from 'components/CloneAnswerModal/CloneAnswerModal.jsx';
 
 const QuestionAnswerContent = () => {
   const { id } = useParams();
@@ -40,18 +49,23 @@ const QuestionAnswerContent = () => {
   const [selectedResources, setSelectedResources] = useState([]);
   const [activeResource, setActiveResource] = useState({});
   const [questionInfo, setQuestionInfo] = useState({ initialQuestionDto });
-  const [instructionType, setInstructionType] = useState(INSTRUCTION_TYPE.VISUAL);
-  const [selectedKeyWords, setSelectedKeyWords] = useState(questionInfo?.keyWords || []);
+  const [instructionType, setInstructionType] = useState(
+    INSTRUCTION_TYPE.VISUAL
+  );
+  const [selectedKeyWords, setSelectedKeyWords] = useState(
+    questionInfo?.keyWords || []
+  );
   const [isEdited, setIsEdited] = useState(false);
   const [selectedTags, setSelectedTags] = useState(questionInfo?.tags || []);
   const [selectedLanguage, setSelectedLanguage] = useState(LANG_KEY.RU);
   const [loading, setLoading] = useState(false);
 
-  const [answerFormData, setAnswerFormData] = useState(initialQuestionAnswerContent);
+  const [answerFormData, setAnswerFormData] = useState(
+    initialQuestionAnswerContent
+  );
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSimilarQuestion, setSelectedSimilarQuestion] = useState([]);
-  // const requiredCharacter = 25;
 
   useEffect(() => {
     setLoading(true);
@@ -66,6 +80,16 @@ const QuestionAnswerContent = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    getRelativeQuestions(id, activeResource?.id).then((res) => {
+      setSelectedSimilarQuestion(
+        res.data?.filter((item) =>
+          item.questionContent.find((item2) => item2.langKey === getLocale())
+        ) || []
+      );
+    });
+  }, [activeResource.id, id]);
+
   const menuResources = () => {
     return resources.map((resource) => {
       if (!selectedResources.some((selected) => selected.id === resource.id)) {
@@ -78,11 +102,11 @@ const QuestionAnswerContent = () => {
                 setActiveResource(finalResources);
               }
               setSelectedResources((prev) => [...prev, finalResources]);
-            }}
-          >
+            }}>
             {
-              resource.resourceContents.find((content) => content.langKey === selectedLanguage)
-                ?.name
+              resource.resourceContents.find(
+                (content) => content.langKey === selectedLanguage
+              )?.name
             }
           </Menu.Item>
         );
@@ -122,7 +146,7 @@ const QuestionAnswerContent = () => {
         setAnswerFormData((prev) => {
           const resultData = res.data.answerContents.map((item) => {
             const matchedPrevId = prev.answerContents.find(
-              (item2) => item.langKey === item2.langKey,
+              (item2) => item.langKey === item2.langKey
             )?.id;
             return { ...item, id: matchedPrevId };
           });
@@ -137,8 +161,7 @@ const QuestionAnswerContent = () => {
           key={resource.id}
           onClick={() => {
             handleDelete();
-          }}
-        >
+          }}>
           {i18n.t('actions.delete')}
         </Menu.Item>
 
@@ -150,10 +173,13 @@ const QuestionAnswerContent = () => {
                   key={res.id}
                   onClick={() => {
                     handleCopy(res.id);
-                  }}
-                >
+                  }}>
                   {`${i18n.t('questionAnswer.resourceClone')} 
-            "${res.resourceContents.find((item) => item.langKey === selectedLanguage)?.name}"`}
+            "${
+              res.resourceContents.find(
+                (item) => item.langKey === selectedLanguage
+              )?.name
+            }"`}
                 </Menu.Item>
               );
             }
@@ -161,8 +187,6 @@ const QuestionAnswerContent = () => {
       </>
     );
   };
-
-  console.log(selectedResources);
 
   const history = useHistory();
 
@@ -194,9 +218,9 @@ const QuestionAnswerContent = () => {
             {
               id: 0,
               langKey: 'EN',
-              name: '',
-            },
-          ],
+              name: ''
+            }
+          ]
         },
         questionContents: [
           {
@@ -207,22 +231,22 @@ const QuestionAnswerContent = () => {
             tags: [
               {
                 id: 0,
-                text: '',
-              },
+                text: ''
+              }
             ],
             keyWords: [
               {
                 id: 0,
-                text: '',
-              },
-            ],
-          },
-        ],
+                text: ''
+              }
+            ]
+          }
+        ]
       },
       resource: {
         id: 0,
         code: '',
-        name: '',
+        name: ''
       },
       answerContents: [
         {
@@ -230,24 +254,24 @@ const QuestionAnswerContent = () => {
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: [],
+          images: []
         },
         {
           langKey: 'RU',
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: [],
+          images: []
         },
         {
           langKey: 'KZ',
           stepDescription: '',
           videoUrl: '',
           videoDescription: '',
-          images: [],
-        },
+          images: []
+        }
       ],
-      status: null,
+      status: null
     });
     window.scrollTo(0, 0);
     if (activeResource?.id && !activeResource.isNew) {
@@ -270,22 +294,23 @@ const QuestionAnswerContent = () => {
   const saveNotification = () => {
     notification.success({
       message: i18n.t('questionAnswer.previewMessage'),
-      placement: 'top',
+      placement: 'top'
     });
   };
 
   const handleSubmit = (withPreview = true) => {
     const similarQuestionsIds = selectedSimilarQuestion.map((item) => item?.id);
+
     const finalDataAnswer = {
       ...answerFormData,
       question: { id: questionInfo.id },
       resource: activeResource,
-      similarQuestionsIds,
+      similarQuestionsIds
     };
 
     const finalQuestionInfo = {
       ...questionInfo,
-      children: selectedQuestions,
+      children: selectedQuestions
     };
     delete finalQuestionInfo.resources;
 
@@ -301,7 +326,8 @@ const QuestionAnswerContent = () => {
       delete finalDataAnswer['id'];
       addAnswerToQuestion(finalDataAnswer).then(() => {
         notification.info({ message: i18n.t('actions.edited') });
-        withPreview && history.push(`/question/preview/${id}/${activeResource.id}`);
+        withPreview &&
+          history.push(`/question/preview/${id}/${activeResource.id}`);
       });
     }
   };
@@ -312,13 +338,13 @@ const QuestionAnswerContent = () => {
     if (!isNaN(parsedCounter)) {
       const finalQuestion = {
         ...questionInfo,
-        counter: parsedCounter.toString(),
+        counter: parsedCounter.toString()
       };
       setQuestionInfo(finalQuestion);
     } else {
       const finalQuestion = {
         ...questionInfo,
-        counter: questionInfo.counter,
+        counter: questionInfo.counter
       };
       setQuestionInfo(finalQuestion);
     }
@@ -339,26 +365,31 @@ const QuestionAnswerContent = () => {
             padding: '12px 0',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-          }}
-        >
+            gap: '8px'
+          }}>
           {selectedResources.map((resource, index) => (
-            <Dropdown key={index} overlay={<Menu>{menu(resource)}</Menu>} trigger={'contextMenu'}>
+            <Dropdown
+              key={index}
+              overlay={<Menu>{menu(resource)}</Menu>}
+              trigger={'contextMenu'}>
               <Button
                 onClick={(e) => {
                   if (!isEdited && activeResource?.id !== resource.id) {
                     handleChangeResource(resource);
                   } else {
-                    e.preventDefault(); // Prevent the default click behavior
+                    e.preventDefault();
                   }
                 }}
-                type={activeResource?.id === resource.id ? 'default-active' : 'default'}
-              >
+                type={
+                  activeResource?.id === resource.id
+                    ? 'default-active'
+                    : 'default'
+                }>
                 {activeResource?.id === resource.id ? (
                   <p>
                     {
                       resource.resourceContents.find(
-                        (content) => content.langKey === selectedLanguage,
+                        (content) => content.langKey === selectedLanguage
                       )?.name
                     }
                   </p>
@@ -375,11 +406,10 @@ const QuestionAnswerContent = () => {
                       handleChangeResource(resource);
                     }}
                     okText={i18n.t('questionAnswer.okSwitch')}
-                    cancelText={i18n.t('questionAnswer.cancelSwitch')}
-                  >
+                    cancelText={i18n.t('questionAnswer.cancelSwitch')}>
                     {
                       resource.resourceContents.find(
-                        (content) => content.langKey === selectedLanguage,
+                        (content) => content.langKey === selectedLanguage
                       )?.name
                     }
                   </Popconfirm>
@@ -387,7 +417,7 @@ const QuestionAnswerContent = () => {
                   <p>
                     {
                       resource.resourceContents.find(
-                        (content) => content.langKey === selectedLanguage,
+                        (content) => content.langKey === selectedLanguage
                       )?.name
                     }
                   </p>
@@ -396,7 +426,9 @@ const QuestionAnswerContent = () => {
             </Dropdown>
           ))}
           {selectedResources.length < resources.length && (
-            <Dropdown overlay={<Menu>{menuResources()}</Menu>} trigger={'click'}>
+            <Dropdown
+              overlay={<Menu>{menuResources()}</Menu>}
+              trigger={'click'}>
               <img
                 title={i18n.t({ message: 'actions.addResource' })}
                 style={{ cursor: 'pointer' }}
@@ -411,23 +443,22 @@ const QuestionAnswerContent = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '16px',
-            justifyContent: 'space-between',
-          }}
-        >
+            justifyContent: 'space-between'
+          }}>
           <div
             style={{
               padding: '12px 0',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
-            }}
-          >
+              gap: '8px'
+            }}>
             {Object.values(LANG_KEY).map((item) => (
               <Button
                 key={item}
                 onClick={() => setSelectedLanguage(item)}
-                type={`${selectedLanguage === item ? 'default-active' : 'default'}`}
-              >
+                type={`${
+                  selectedLanguage === item ? 'default-active' : 'default'
+                }`}>
                 {item}
               </Button>
             ))}
@@ -435,8 +466,7 @@ const QuestionAnswerContent = () => {
             <Typography.Paragraph
               type="number"
               className={styles.counter}
-              editable={{ onChange: handleChangeCounter }}
-            >
+              editable={{ onChange: handleChangeCounter }}>
               {questionInfo?.counter}
             </Typography.Paragraph>
 
@@ -446,8 +476,7 @@ const QuestionAnswerContent = () => {
           <Button
             onClick={() => setIsModalOpen(!isModalOpen)}
             style={{ marginRight: '34px' }}
-            type="modal"
-          >
+            type="modal">
             {i18n.t('questionAnswer.cloneAnswer')}
           </Button>
 
@@ -465,20 +494,15 @@ const QuestionAnswerContent = () => {
           <>
             <Row
               style={{
-                marginRight: '24px',
+                marginRight: '24px'
               }}
-              gutter={[16, 24]}
-            >
+              gutter={[16, 24]}>
               <Col span={15}></Col>
 
               <Col span={15}>
                 <Row gutter={[16, 16]}>
                   <Col span={24}>
                     <div className={styles.card}>
-                      {/* <TypographyHead
-                        type={TypoGraphyType.SUB_HEAD}
-                        content={i18n.t('questionAnswer.descriptionTitle')}
-                      /> */}
                       <SunEditor
                         isNew={activeResource.isNew}
                         setIsEdited={setIsEdited}
@@ -505,8 +529,11 @@ const QuestionAnswerContent = () => {
                           <Button
                             key={item}
                             onClick={() => setInstructionType(item)}
-                            type={item === instructionType ? 'default-active' : 'default'}
-                          >
+                            type={
+                              item === instructionType
+                                ? 'default-active'
+                                : 'default'
+                            }>
                             {i18n.t(item)}
                           </Button>
                         ))}
