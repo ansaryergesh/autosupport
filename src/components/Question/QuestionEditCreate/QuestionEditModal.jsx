@@ -45,7 +45,7 @@ const QuestionEditModal = ({
   const finalContent = questionInfo !== {} ? mergedCategories : initialQuestion;
   return (
     <Modal
-      title={i18n.t('menu.editCategory')}
+      title={i18n.t('menu.editQuestion')}
       confirmLoading={loading}
       open={isModalOpen}
       footer={null}
@@ -56,7 +56,9 @@ const QuestionEditModal = ({
         onFinish={handleSubmit}
         autoComplete="off">
         {finalContent.map((question, index) => (
-          <Form.Item key={index} label={`Title ${question.langKey}`}>
+          <Form.Item
+            key={index}
+            label={`${i18n.t('questionAnswer.question')} ${question.langKey}`}>
             <Form.Item
               initialValue={question?.title}
               name={['questionContents', index, 'title']}
