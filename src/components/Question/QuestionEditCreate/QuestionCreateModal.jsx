@@ -9,13 +9,18 @@ import { useHistory } from 'react-router-dom';
 import { i18n } from '../../../utils/i18next.js';
 import { LANG_KEY } from '../../../constants/index.js';
 
-const QuestionCreateModal = ({ isModalOpen = false, handleModal, categoryId, getCategoryAll }) => {
+const QuestionCreateModal = ({
+  isModalOpen = false,
+  handleModal,
+  categoryId,
+  getCategoryAll
+}) => {
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState('');
   const [form] = Form.useForm();
   const history = useHistory();
   const handleSubmit = (values) => {
-    if(code) {
+    if (code) {
       createCategoryQuestion({ code, categorie: { id: categoryId }, ...values })
         .then((res) => {
           notification.success({ message: i18n.t('actions.added') });
@@ -28,19 +33,25 @@ const QuestionCreateModal = ({ isModalOpen = false, handleModal, categoryId, get
           setLoading(false);
         });
     } else {
-      notification.error({message: i18n.t('rule.codeRequired')})
+      notification.error({ message: i18n.t('rule.codeRequired') });
     }
-
   };
 
-  const handleGenerateCode = (e,question) => {
+  const handleGenerateCode = (e, question) => {
     const value = e.target.value;
 
-    const finalValue = value && value.toLowerCase().trim().replace(/[_*+#$@!%^&()=,/]/g, '-').split(' ').join('-');
-    if(question.langKey === LANG_KEY.EN) {
-      setCode(finalValue)
+    const finalValue =
+      value &&
+      value
+        .toLowerCase()
+        .trim()
+        .replace(/[_*?+#$@!%^&()=,/]/g, '-')
+        .split(' ')
+        .join('-');
+    if (question.langKey === LANG_KEY.EN) {
+      setCode(finalValue);
     }
-  }
+  };
   return (
     <Modal
       title={i18n.t('menu.addQuestion')}
@@ -50,40 +61,54 @@ const QuestionCreateModal = ({ isModalOpen = false, handleModal, categoryId, get
       onCancel={() => {
         handleModal();
         form.resetFields();
-      }}
-    >
+      }}>
       <Form
         form={form}
         layout="vertical"
         initialValues={{ initialQuestion }}
         onFinish={handleSubmit}
-        autoComplete="off"
-      >
-          {initialQuestion.map((question, index) => (
-          <Form.Item key={index} label={`${i18n.t('columns.name')} ${question.langKey}`}>
+        autoComplete="off">
+        {initialQuestion.map((question, index) => (
+          <Form.Item
+            key={index}
+            label={`${i18n.t('columns.name')} ${question.langKey}`}>
             <Form.Item
               name={['questionContents', index, 'title']}
-              rules={[{ required: true, message: i18n.t('rule.nameRequired') }]}
-            >
-              <Input placeholder={`${i18n.t('menu.enterName')} ${question.langKey}`} onChange={e=> handleGenerateCode(e,question)}/>
+              rules={[
+                { required: true, message: i18n.t('rule.nameRequired') }
+              ]}>
+              <Input
+                placeholder={`${i18n.t('menu.enterName')} ${question.langKey}`}
+                onChange={(e) => handleGenerateCode(e, question)}
+              />
             </Form.Item>
             <Form.Item
               name={['questionContents', index, 'stepDescription']}
-              rules={[{ required: true, message: i18n.t('rule.descriptionRequired') }]}
-            >
-              <Input placeholder={`${i18n.t('description')} ${question.langKey}`}  />
+              rules={[
+                { required: true, message: i18n.t('rule.descriptionRequired') }
+              ]}>
+              <Input
+                placeholder={`${i18n.t('description')} ${question.langKey}`}
+              />
             </Form.Item>
             <Form.Item
               name={['questionContents', index, 'langKey']}
               initialValue={question.langKey}
-              style={{ display: 'none' }}
-            >
+              style={{ display: 'none' }}>
               <Input type="hidden" />
             </Form.Item>
           </Form.Item>
         ))}
-        <Form.Item label={`${i18n.t('columns.code')}`} initialValue={code} required={true} rules={[{ required: true, message: i18n.t('rule.codeRequired') }]}>
-          <Input placeholder={i18n.t('columns.code')} value={code} onChange={e=>setCode(e.target.value)} />
+        <Form.Item
+          label={`${i18n.t('columns.code')}`}
+          initialValue={code}
+          required={true}
+          rules={[{ required: true, message: i18n.t('rule.codeRequired') }]}>
+          <Input
+            placeholder={i18n.t('columns.code')}
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
         </Form.Item>
         <Form.Item labelAlign={'right'}>
           <Button loading={loading} type="primary" htmlType="submit">
@@ -98,6 +123,6 @@ QuestionCreateModal.propTypes = {
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   categoryId: PropTypes.number,
-  getCategoryAll: PropTypes.func,
+  getCategoryAll: PropTypes.func
 };
 export default QuestionCreateModal;
