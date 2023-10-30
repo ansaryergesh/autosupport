@@ -287,7 +287,7 @@ const QuestionAnswerContent = () => {
           .finally(() => {
             setLoading(false);
           });
-      }, [500]);
+      }, 0);
     }
   }, [activeResource, id]);
 

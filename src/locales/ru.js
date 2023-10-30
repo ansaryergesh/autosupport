@@ -47,6 +47,8 @@ export default {
   passwordRecoveryTitle: 'Смена пароля',
   passwordRecovery: 'Введите новый пароль и подтвердите',
   passwordUpdated: 'Пароль обновлен',
+  upload: 'Загрузить',
+  mainImage: 'Главная картина',
   commons: {
     signIn: 'Вход',
     signOut: 'Выход',

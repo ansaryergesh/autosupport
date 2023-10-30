@@ -47,6 +47,8 @@ export default {
   passwordRecoveryTitle: 'Құпия сөзді ауыстыру',
   passwordRecovery: 'Жаңа құпия сөзді енгізіп, растаңыз',
   passwordUpdated: 'Құпия сөз жаңартылды',
+  upload: 'Жүктеу',
+  mainImage: 'Главная картина',
   commons: {
     signIn: 'Кіру',
     signOut: 'Шығу',

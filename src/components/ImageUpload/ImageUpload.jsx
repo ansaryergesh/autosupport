@@ -5,11 +5,15 @@ import { axiosInstanceWithHeader, originAddress } from '../../api/api.js';
 import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
 import Input from '../Input/Input.jsx';
+import ImageList from './ImageList.jsx';
 
 const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
+  console.log(answerFormData)
   const selectedLanguageItem = answerFormData.answerContents?.find(
     (item) => item.langKey === selectedLanguage,
   );
+  console.log(selectedLanguageItem)
+  console.log(selectedLanguageItem?.images)
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState(selectedLanguageItem?.images || []);
@@ -42,10 +46,11 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
 
   const displayFileList =
     Array.isArray(fileList) &&
-    fileList.map((file) => {
+    fileList.map((file,index) => {
       if (file.url) {
         return {
           ...file,
+          imageOrder: index+1,
           uid: file.id,
           url: `${domainName}${file.url}`, // Append domain name to the URL
         };
@@ -125,7 +130,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
   const uploadButton = (
     <div>
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div style={{ marginTop: 8 }}>{i18n.t('upload')}</div>
     </div>
   );
 
@@ -162,19 +167,21 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
 
   return (
     <div style={{ marginTop: '10px' }}>
+      <ImageList displayFileList={displayFileList} fileList={fileList} setFileList={setFileList} handleRemove={handleRemove} handlePreview={handlePreview} />
+
       <Upload
         multiple={true}
         accept={('image/jpeg', 'image/jpg', 'image/png')}
         maxCount={10}
+        fileList={[]}
         // action="//jsonplaceholder.typicode.com/posts/"
         customRequest={uploadImage}
         listType="picture-card"
-        fileList={displayFileList}
-        onPreview={handlePreview}
-        onRemove={handleRemove}
+
       >
         {uploadButton}
       </Upload>
+
       <Modal
         okButtonProps={{ className: 'button-modal' }}
         cancelButtonProps={{ className: 'button-default' }}
@@ -186,7 +193,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
       >
         <img
           alt="Preview"
-          style={{ width: '100%' }}
+          style={{ width: '100%', maxHeight:'400px' }}
           src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`}
         />
         <Input

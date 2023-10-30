@@ -3,8 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.module.less';
-// import ArrowRight from 'images/arrowRight.svg';
-// import ArrowDown from 'images/arrowDown.svg';
+
 import { SIDEBAR_BUTTON } from '../../../constants/index.js';
 import { MoreOutlined } from '@ant-design/icons';
 import { Dropdown, Menu, Popconfirm } from 'antd';
