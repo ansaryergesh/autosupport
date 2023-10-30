@@ -23,7 +23,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
   const domainName = originAddress;
   useEffect(() => {
     updateAnswerFormData();
-  }, [fileList, selectedLanguageItem?.images]);
+  }, [fileList]);
 
   useEffect(() => {
     setFileList(selectedLanguageItem?.images);
