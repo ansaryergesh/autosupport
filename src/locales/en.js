@@ -47,6 +47,7 @@ export default {
   passwordRecoveryTitle: 'Change Password',
   passwordRecovery: 'Enter your new password and confirm',
   passwordUpdated: 'Password is updated',
+  mainImage: 'Main image',
   commons: {
     signIn: 'Sign in',
     signOut: 'Sign out',

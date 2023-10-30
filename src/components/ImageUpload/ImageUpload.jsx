@@ -5,6 +5,7 @@ import { axiosInstanceWithHeader, originAddress } from '../../api/api.js';
 import { removeImage } from './index.js';
 import { i18n } from '../../utils/i18next.js';
 import Input from '../Input/Input.jsx';
+import ImageList from './ImageList.jsx';
 
 const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
   const selectedLanguageItem = answerFormData.answerContents?.find(
@@ -19,7 +20,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
   const domainName = originAddress;
   useEffect(() => {
     updateAnswerFormData();
-  }, [fileList]);
+  }, [fileList, selectedLanguageItem?.images]);
 
   useEffect(() => {
     setFileList(selectedLanguageItem?.images);
@@ -42,10 +43,11 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
 
   const displayFileList =
     Array.isArray(fileList) &&
-    fileList.map((file) => {
+    fileList.map((file,index) => {
       if (file.url) {
         return {
           ...file,
+          imageOrder: index+1,
           uid: file.id,
           url: `${domainName}${file.url}`, // Append domain name to the URL
         };
@@ -162,19 +164,21 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
 
   return (
     <div style={{ marginTop: '10px' }}>
+      <ImageList displayFileList={displayFileList} fileList={fileList} setFileList={setFileList} handleRemove={handleRemove} handlePreview={handlePreview} />
+
       <Upload
         multiple={true}
         accept={('image/jpeg', 'image/jpg', 'image/png')}
         maxCount={10}
+        fileList={[]}
         // action="//jsonplaceholder.typicode.com/posts/"
         customRequest={uploadImage}
         listType="picture-card"
-        fileList={displayFileList}
-        onPreview={handlePreview}
-        onRemove={handleRemove}
+
       >
         {uploadButton}
       </Upload>
+
       <Modal
         okButtonProps={{ className: 'button-modal' }}
         cancelButtonProps={{ className: 'button-default' }}
@@ -186,7 +190,7 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
       >
         <img
           alt="Preview"
-          style={{ width: '100%' }}
+          style={{ width: '100%', maxHeight:'400px' }}
           src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`}
         />
         <Input
