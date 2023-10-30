@@ -44,9 +44,8 @@ axiosInstance.interceptors.response.use(
         message: i18n.t('commons.notFound')
       });
     } else if (error.response) {
-      console.error(error.response.data.message);
       notification.error({
-        message: error.response.data.message || i18n.t('error.wrong')
+        message: i18n.t(error.response.data.code) || error.response.data.message || i18n.t('error.wrong')
       });
     }
 
@@ -72,13 +71,11 @@ axiosInstanceWithHeader.interceptors.response.use(
         message: i18n.t('commons.notFound')
       });
     } else {
-      notification.error({ message: error });
       if (error.response) {
-        console.error(error);
-        console.error('response');
+        console.log(error.response)
         if (error.response.data.code) {
-          const errorCode = error.response.data.code.replace('-', '_');
-          notification.error({ message: i18n(errorCode) });
+          const errorCode = error.response.data.code;
+          notification.error({ message: i18n.t(errorCode)});
         } else {
           notification.error({
             message: error.response.data.message || 'Error'

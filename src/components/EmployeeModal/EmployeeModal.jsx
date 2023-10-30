@@ -49,7 +49,6 @@ const EmployeeModal = ({
   const [form] = Form.useForm();
   const editPage = record.id;
   const [employeeData, setEmployeeData] = useState(initialData);
-
   useEffect(() => {
     form.setFieldsValue(employeeData);
   }, [employeeData, form]);
