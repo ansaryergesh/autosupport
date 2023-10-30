@@ -191,25 +191,28 @@ const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, se
         okText={i18n.t('actions.save')}
         onOk={() => handleSaveDescription(editingImage.description)}
       >
-        <img
-          alt="Preview"
-          style={{ width: '100%', maxHeight:'400px' }}
-          src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`}
-        />
-        <Input
-          placeHolder={i18n.t('description')}
-          value={editingImage ? editingImage.description : ''}
-          onChange={(e) => {
-            if (editingImage) {
-              const newEditingImage = {
-                ...editingImage,
-                description: e.target.value,
-              };
-              setEditingImage(newEditingImage);
-            }
-          }}
-          onPressEnter={() => handleSaveDescription(editingImage.description)}
-        />
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '20px', padding: '15px'}}>
+          <img
+            alt="Preview"
+            style={{ maxWidth: '100%', maxHeight:'400px', textAlign: 'center', margin:'auto' }}
+            src={previewImage?.includes('http') ? previewImage : `${domainName}${previewImage}`}
+          />
+          <Input
+            placeHolder={i18n.t('description')}
+            value={editingImage ? editingImage.description : ''}
+            onChange={(e) => {
+              if (editingImage) {
+                const newEditingImage = {
+                  ...editingImage,
+                  description: e.target.value,
+                };
+                setEditingImage(newEditingImage);
+              }
+            }}
+            onPressEnter={() => handleSaveDescription(editingImage.description)}
+          />
+        </div>
+
       </Modal>
       {progress > 0 ? <Progress percent={progress} /> : null}
     </div>
