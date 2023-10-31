@@ -45,7 +45,7 @@ const ImageSlider = ({ slides, sliderData }) => {
             className={index === current ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
           >
             {index === current && (
-              <div>
+              <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
                 <p className={styles.description}>
                   {`${current + 1}` + '. ' + `${slide.description || 'Нет описания'}`}
                 </p>
