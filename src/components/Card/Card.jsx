@@ -33,7 +33,7 @@ const CardComponent = ({ data }) => {
               <Text>
                 <TypographyHead
                   type={TypoGraphyType.LEVEL_2}
-                  content={q.questionContents[0].title}
+                  content={Array.isArray(q.questionContents) && q.questionContents[0].title || ""}
                 />
               </Text>
             </Link>
