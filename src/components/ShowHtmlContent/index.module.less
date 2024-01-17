@@ -70,11 +70,18 @@ pre code {
     color: @gray-color-1;
   }
 
-  img {
+  img:not(img[data-align='right'], img[data-align='right']) {
     display: block;
     margin: 0 auto;
     max-width: 100%;
-    max-height: 400px;
+  }
+
+  img[data-align='right'] {
+    float: right;
+  }
+
+  img[data-align='left'] {
+    float: left;
   }
 
   table,
