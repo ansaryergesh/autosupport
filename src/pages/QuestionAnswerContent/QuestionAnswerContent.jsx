@@ -189,13 +189,28 @@ const QuestionAnswerContent = () => {
 
   const history = useHistory();
 
+  const getActiveResource =  async (questionId, resourceId) => {
+    await answerByQuestionAndResource(questionId, resourceId)
+      .then((res) => {
+        setAnswerFormData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   useEffect(() => {
     setLoading(true);
     getQuestionById(id)
       .then((res) => {
         setSelectedResources(res.data.resources || []);
         setQuestionInfo(res.data);
-        res.data.resources && setActiveResource(res.data.resources[0]);
+        const activeResource = res.data.resources[0];
+        res.data.resources && setActiveResource(activeResource);
+        getActiveResource(id, activeResource?.id)
         getSimilarQuestions(res.data.resources[0]?.id || null )
       })
       .finally(() => {
@@ -277,16 +292,7 @@ const QuestionAnswerContent = () => {
     if (activeResource?.id && !activeResource.isNew) {
       setLoading(true);
       setTimeout(() => {
-        answerByQuestionAndResource(id, activeResource.id)
-          .then((res) => {
-            setAnswerFormData(res.data);
-          })
-          .catch((err) => {
-            console.error(err);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
+        getActiveResource(id, activeResource.id)
       }, 0);
     }
   }, [activeResource, id]);

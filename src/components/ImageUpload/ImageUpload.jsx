@@ -8,12 +8,9 @@ import Input from '../Input/Input.jsx';
 import ImageList from './ImageList.jsx';
 
 const ImageUploader = ({ answerFormData, setAnswerFormData, selectedLanguage, setIsEdited }) => {
-  console.log(answerFormData)
   const selectedLanguageItem = answerFormData.answerContents?.find(
     (item) => item.langKey === selectedLanguage,
   );
-  console.log(selectedLanguageItem)
-  console.log(selectedLanguageItem?.images)
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState(selectedLanguageItem?.images || []);
